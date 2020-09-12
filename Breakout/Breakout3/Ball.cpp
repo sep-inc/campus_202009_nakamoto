@@ -12,6 +12,12 @@
 		コンストラクター
 ****************************************************************/
 Ball::Ball():
+	m_CenterPosX(0.0f),
+	m_CenterPosY(0.0f),
+	m_MoveVecX(0.0f),
+	m_MoveVecY(0.0f),
+	m_NextPosX(0.0f),
+	m_NextPosY(0.0f),
 	m_Radius(BALL_RADIUS),
 	m_Speed(BALL_SPEED),
 	m_Type(ObjectType::ObjectBall),
