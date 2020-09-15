@@ -1,4 +1,4 @@
-#ifndef GLOBALOBJECT_H_
+ï»¿#ifndef GLOBALOBJECT_H_
 #define GLOBALOBJECT_H_
 
 /****************************************************
@@ -13,115 +13,115 @@
 	define
 *****************************************************/
 
-/*------------ ƒXƒe[ƒW -----------------*/
-// ƒXƒe[ƒW‚Ì‰¡•
+/*------------ ã‚¹ãƒ†ãƒ¼ã‚¸ -----------------*/
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®æ¨ªå¹…
 #define STAGE_WIDTH  17
 
-// ƒXƒe[ƒW‚Ì‚‚³
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®é«˜ã•
 #define STAGE_HEIGHT 26
 
-// ƒXƒe[ƒW‚Ì¶’[
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®å·¦ç«¯
 #define STAGE_MIN_X 0
 
-// ƒXƒe[ƒW‚Ì‰E’[
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®å³ç«¯
 #define STAGE_MAX_X 15
 
-// ƒXƒe[ƒW‚Ìã
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®ä¸Š
 #define STAGE_MIN_Y 0
 
-// ƒXƒe[ƒW‚Ì‰º
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®ä¸‹
 #define STAGE_MAX_Y 24
 
-/*------------ ƒ{[ƒ‹ -------------------*/
-// ‰ŠúXÀ•W
+/*------------ ãƒœãƒ¼ãƒ« -------------------*/
+// åˆæœŸXåº§æ¨™
 #define BALL_INIT_POS_X  7.5f
 
-// ‰ŠúYÀ•W
+// åˆæœŸYåº§æ¨™
 #define BALL_INIT_POS_Y  19.5f
 
-// ƒ{[ƒ‹‚Ì”¼Œa
+// ãƒœãƒ¼ãƒ«ã®åŠå¾„
 #define BALL_RADIUS		 0.5f
 
-// ƒ{[ƒ‹‚Ì‘¬“x(1/60ƒtƒŒ[ƒ€)
+// ãƒœãƒ¼ãƒ«ã®é€Ÿåº¦(1/60ãƒ•ãƒ¬ãƒ¼ãƒ )
 #define BALL_SPEED		 0.5f
 
-// ‰Šú‚Ìƒ{[ƒ‹‚ÌŠp“x
+// åˆæœŸã®ãƒœãƒ¼ãƒ«ã®è§’åº¦
 #define BALL_INIT_ANGLE  60.0f
 
 
-/*------------ ƒuƒƒbƒN -------------------*/
-// ¶ãƒuƒƒbƒN‚Ì‰Šú’l
+/*------------ ãƒ–ãƒ­ãƒƒã‚¯ -------------------*/
+// å·¦ä¸Šãƒ–ãƒ­ãƒƒã‚¯ã®åˆæœŸå€¤
 #define BLOCK_INIT_X  4
 
-// ¶ãƒuƒƒbƒN‚Ì‰Šú’l
+// å·¦ä¸Šãƒ–ãƒ­ãƒƒã‚¯ã®åˆæœŸå€¤
 #define BLOCK_INIT_Y  4
 
-// ƒuƒƒbƒN1ŒÂ‚Ì‰¡•
+// ãƒ–ãƒ­ãƒƒã‚¯1å€‹ã®æ¨ªå¹…
 #define BLOCK_WIDTH   1
 
-// ƒuƒƒbƒN1ŒÂ‚Ìc•
+// ãƒ–ãƒ­ãƒƒã‚¯1å€‹ã®ç¸¦å¹…
 #define BLOCK_HEIGHT  1
 
-// ƒuƒƒbƒN‚ÌXŽ²‚Ì”
+// ãƒ–ãƒ­ãƒƒã‚¯ã®Xè»¸ã®æ•°
 #define BLOCK_NUM_X   7
 
-// ƒuƒƒbƒN‚ÌYŽ²‚Ì”
+// ãƒ–ãƒ­ãƒƒã‚¯ã®Yè»¸ã®æ•°
 #define BLOCK_NUM_Y   3
 
 
-/*------------ ƒpƒhƒ‹ -------------------*/
-// ƒpƒhƒ‹‚ÌXÀ•W‚Ì‰Šú’l
+/*------------ ãƒ‘ãƒ‰ãƒ« -------------------*/
+// ãƒ‘ãƒ‰ãƒ«ã®Xåº§æ¨™ã®åˆæœŸå€¤
 #define PADDLE_INIT_X 7.0f
 
-// ƒpƒhƒ‹‚ÌYÀ•W‚Ì‰Šú’l
+// ãƒ‘ãƒ‰ãƒ«ã®Yåº§æ¨™ã®åˆæœŸå€¤
 #define PADDLE_INIT_Y 21.0f
 
-// ƒpƒhƒ‹‚Ì‘¬“x(1/60ƒtƒŒ[ƒ€)
+// ãƒ‘ãƒ‰ãƒ«ã®é€Ÿåº¦(1/60ãƒ•ãƒ¬ãƒ¼ãƒ )
 #define PADDLE_SPEED  0.5f
 
-// ƒpƒhƒ‹‚Ì‰¡•
+// ãƒ‘ãƒ‰ãƒ«ã®æ¨ªå¹…
 #define PADDLE_WIDTH  3
 
-// ƒpƒhƒ‹‚Ìc•
+// ãƒ‘ãƒ‰ãƒ«ã®ç¸¦å¹…
 #define PADDLE_HEIGHT 1
 
-/*------------ •Ç -------------------*/
-// ¶•Ç
+/*------------ å£ -------------------*/
+// å·¦å£
 #define WALL_MIN_X  1
 
-// ‰E•Ç
+// å³å£
 #define WALL_MAX_X  14
 
-// ã•Ç
+// ä¸Šå£
 #define WALL_MIN_Y  1
 
-// ‰º•Ç
+// ä¸‹å£
 #define WALL_MAX_Y  23
 
-// •Ç‚Ì‰¡•
+// å£ã®æ¨ªå¹…
 #define WALL_WIDTH  15
 
-// •Ç‚Ìc•
+// å£ã®ç¸¦å¹…
 #define WALL_HEIGHT 24
 
 /****************************************************
 	extern
 *****************************************************/
 
-// [ƒ{[ƒ‹]ƒIƒuƒWƒFƒN‚ÌƒgƒCƒ“ƒXƒ^ƒ“ƒX
+// [ãƒœãƒ¼ãƒ«]ã‚ªãƒ–ã‚¸ã‚§ã‚¯ã®ãƒˆã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 extern Ball g_Ball;
 
-// [•Ç]ƒIƒuƒWƒFƒNƒg‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+// [å£]ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 extern Wall g_Wall;
 
-// [ƒuƒƒbƒN]ƒIƒuƒWƒFƒNƒg‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+// [ãƒ–ãƒ­ãƒƒã‚¯]ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 extern Block g_Block[BLOCK_NUM_Y][BLOCK_NUM_X];
 
-// [ƒpƒhƒ‹]ƒIƒuƒWƒFƒNƒg‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+// [ãƒ‘ãƒ‰ãƒ«]ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 extern Paddle g_Paddle;
 
-// ƒQ[ƒ€I—¹ƒtƒ‰ƒO
-// true‚È‚çƒQ[ƒ€I—¹
+// ã‚²ãƒ¼ãƒ çµ‚äº†ãƒ•ãƒ©ã‚°
+// trueãªã‚‰ã‚²ãƒ¼ãƒ çµ‚äº†
 extern bool g_IsGameOver;
 
 

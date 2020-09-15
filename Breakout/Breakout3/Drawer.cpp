@@ -1,4 +1,4 @@
-/****************************************************
+ï»¿/****************************************************
 	header
 *****************************************************/
 #include "Drawer.h"
@@ -8,14 +8,14 @@
 #include <string.h>
 
 /****************************************************
-	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 *****************************************************/
 Drawer::Drawer()
 {
-	// ‘S‚Ä‚ğ0‚Å‰Šú‰»‚·‚é
+	// å…¨ã¦ã‚’0ã§åˆæœŸåŒ–ã™ã‚‹
 	memset(m_ClearBuffer, 0, sizeof(m_ClearBuffer));
 
-	// ü‚è‚ğƒuƒƒbƒN‚ğ‚Å–„‚ß‚é
+	// å‘¨ã‚Šã‚’ãƒ–ãƒ­ãƒƒã‚¯ã‚’ã§åŸ‹ã‚ã‚‹
 	for (int x = 0; x < STAGE_WIDTH; ++x) {
 		m_ClearBuffer[0][x] = (__int8)ObjectType::ObjectWall;
 		m_ClearBuffer[STAGE_HEIGHT - 1][x] = (__int8)ObjectType::ObjectWall;
@@ -29,7 +29,7 @@ Drawer::Drawer()
 }
 
 /****************************************************
-		ƒoƒbƒtƒ@‚ÌƒNƒŠƒAŠÖ”
+		ãƒãƒƒãƒ•ã‚¡ã®ã‚¯ãƒªã‚¢é–¢æ•°
 *****************************************************/
 void Drawer::ClearBuffer()
 {
@@ -37,7 +37,7 @@ void Drawer::ClearBuffer()
 }
 
 /****************************************************
-	ƒoƒbƒtƒ@‚É‘‚«‚ŞŠÖ”
+	ãƒãƒƒãƒ•ã‚¡ã«æ›¸ãè¾¼ã‚€é–¢æ•°
 *****************************************************/
 void Drawer::WriteBuffer(float posX_, float posY_, __int8 objectType_)
 {
@@ -45,7 +45,7 @@ void Drawer::WriteBuffer(float posX_, float posY_, __int8 objectType_)
 }
 
 /****************************************************
-	ƒoƒbƒtƒ@‚É‘‚«‚ŞŠÖ”
+	ãƒãƒƒãƒ•ã‚¡ã«æ›¸ãè¾¼ã‚€é–¢æ•°
 *****************************************************/
 void Drawer::WriteBuffer(float posX_, float posY_, float width_, float height_, __int8 objectType_)
 {
@@ -57,11 +57,11 @@ void Drawer::WriteBuffer(float posX_, float posY_, float width_, float height_, 
 }
 
 /****************************************************
-		ƒoƒbƒtƒ@‚Ì•`‰æŠÖ”
+		ãƒãƒƒãƒ•ã‚¡ã®æç”»é–¢æ•°
 *****************************************************/
 void Drawer::DrawBuffer()
 {
-	char str_buffer[STAGE_HEIGHT * STAGE_WIDTH * sizeof("@")] = { "\0" };
+	char str_buffer[STAGE_HEIGHT * STAGE_WIDTH * sizeof("ã€€")] = { "\0" };
 
 	for (int y = 0; y < STAGE_HEIGHT; ++y) {
 		for (int x = 0; x < STAGE_WIDTH; ++x) {
@@ -69,23 +69,23 @@ void Drawer::DrawBuffer()
 			switch (m_DrawBuffer[y][x])
 			{
 			case ObjectType::ObjectBall:
-				strcat_s(str_buffer, "œ");
+				strcat_s(str_buffer, "â—");
 				break;
 
 			case ObjectType::ObjectBlock:
-				strcat_s(str_buffer, " ");
+				strcat_s(str_buffer, "â–¡");
 				break;
 
 			case ObjectType::ObjectPaddle:
-				strcat_s(str_buffer, "[");
+				strcat_s(str_buffer, "ãƒ¼");
 				break;
 
 			case ObjectType::ObjectWall:
-				strcat_s(str_buffer, "¡");
+				strcat_s(str_buffer, "â– ");
 				break;
 
 			default:
-				strcat_s(str_buffer, "@");
+				strcat_s(str_buffer, "ã€€");
 				break;
 			}
 		}

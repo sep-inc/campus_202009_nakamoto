@@ -1,14 +1,14 @@
-#ifndef CALCULATION_H_
+ï»¿#ifndef CALCULATION_H_
 #define CALCULATION_H_
 
 #define PI 3.14159265359
 
-/* ŒvZ‹@ƒNƒ‰ƒX */
+/* è¨ˆç®—æ©Ÿã‚¯ãƒ©ã‚¹ */
 class Calculation
 {
 public:
 	/****************************
-	@“x‚ğƒ‰ƒWƒAƒ“‚É•ÏŠ·‚·‚éŠÖ”
+	ã€€åº¦ã‚’ãƒ©ã‚¸ã‚¢ãƒ³ã«å¤‰æ›ã™ã‚‹é–¢æ•°
 	******************************/
 	inline static float ToRadian(float degree_) { return degree_ * PI / 180.0f; }
 

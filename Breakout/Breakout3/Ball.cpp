@@ -1,4 +1,4 @@
-/****************************************************
+﻿/****************************************************
 	header
 *****************************************************/
 #include "Ball.h"
@@ -9,7 +9,7 @@
 #include <math.h>
 
 /***************************************************************
-		�R���X�g���N�^�[
+		コンストラクター
 ****************************************************************/
 Ball::Ball():
 	m_CenterPosX(0.0f),
@@ -25,46 +25,46 @@ Ball::Ball():
 {}
 
 /***************************************************************
-	�X�e�b�v���X�V����֐�
+	ステップを更新する関数
 ****************************************************************/
 void Ball::StepUpdate()
 {
-	// ���݂̃X�e�b�v���m�F����
+	// 現在のステップを確認する
 	switch (m_CurrentStep)
 	{
 	case BallStep::InitStep:
-		// ���������s��
+		// 初期化を行う
 		this->Initializ();
 
-		// ���������I�������X�e�b�v��i�߂�
+		// 初期化が終わったらステップを進める
 		m_CurrentStep = BallStep::DrawStep;
 
 		break;
 
 
 	case BallStep::DrawStep:
-		// ���̍��W���v�Z����
+		// 次の座標を計算する
 		this->CalcNextPos();
 
-		// �ǂƂ̓����蔻����s��
+		// 壁との当たり判定を行う
 		this->HitWall();
 
-		// �p�h���Ƃ̓����蔻����s��
+		// パドルとの当たり判定を行う
 		this->HitPaddle();
 
-		// �u���b�N�Ƃ̓����蔻����s��
+		// ブロックとの当たり判定を行う
 		this->HitBlock();
 		
-		// �ړ�����
+		// 移動処理
 		this->Move();
 
-		// �����Q�[���I�[�o�[�Ȃ�X�e�b�v��i�߂�
+		// もしゲームオーバーならステップを進める
 		if (g_IsGameOver) {
 			m_CurrentStep = BallStep::ReleaseStep;
 			return;
 		}
 
-		// �`�揈��
+		// 描画処理
 		//this->Draw();
 
 		break;
@@ -80,7 +80,7 @@ void Ball::StepUpdate()
 
 
 /***************************************************************
-	�������֐�
+	初期化関数
 ****************************************************************/
 void Ball::Initializ()
 {
@@ -94,7 +94,7 @@ void Ball::Initializ()
 
 
 /***************************************************************
-	�`��֐�
+	描画関数
 ****************************************************************/
 void Ball::Draw()
 {
@@ -103,7 +103,7 @@ void Ball::Draw()
 
 
 /***************************************************************
-	�ړ��֐�
+	移動関数
 ****************************************************************/
 void Ball::Move()
 {
@@ -113,7 +113,7 @@ void Ball::Move()
 
 
 /***************************************************************
-	���Ɉړ�������W�����߂�֐�
+	次に移動する座標を求める関数
 ****************************************************************/
 void Ball::CalcNextPos()
 {
@@ -123,24 +123,24 @@ void Ball::CalcNextPos()
 
 
 /***************************************************************
-	���Ɉړ�������W���ǂƓ������Ă��邩�𔻒肷��֐�
+	次に移動する座標が壁と当たっているかを判定する関数
 ****************************************************************/
 void Ball::HitWall()
 {
-	// �����ǂ̍����ɓ������Ă��邩�������͉E�ǂɓ������Ă�����
-	// �ړ��x�N�g����X���𔽓]������
+	// もし壁の左側に当たっているかもしくは右壁に当たっていたら
+	// 移動ベクトルのX軸を反転させる
 	if (HitLeftWall() || HitRightWall())
 	{
 		m_MoveVecX *= -1;
 	}
-	// �����ǂ̏㑤�ɓ������Ă�����
-	// �ړ��x�N�g����Y���𔽓]������
+	// もし壁の上側に当たっていたら
+	// 移動ベクトルのY軸を反転させる
 	else if (HitTopWall())
 	{
 		m_MoveVecY *= -1;
 	}
-	// �����ǂ̉����ɓ������Ă�����
-	// �Q�[���I�[�o�[�t���O��true�ɂ��ăX�e�b�v��i�߂�
+	// もし壁の下側に当たっていたら
+	// ゲームオーバーフラグをtrueにしてステップを進める
 	else if (HitBottomWall())
 	{
 		g_IsGameOver = true;
@@ -150,11 +150,11 @@ void Ball::HitWall()
 
 
 /***************************************************************
-	���Ɉړ�������W���p�h���Ɠ������Ă��邩�𔻒肷��֐�
+	次に移動する座標がパドルと当たっているかを判定する関数
 ****************************************************************/
 void Ball::HitPaddle()
 {
-	// �p�h�����O�ɕ�����
+	// パドルを三つに分ける
 	float paddle_x[3] = { 0,0,0 };
 	float paddle_y[3] = { 0,0,0 };
 	for (int i = 0; i < g_Paddle.GetWidth(); ++i) {
@@ -162,42 +162,42 @@ void Ball::HitPaddle()
 		paddle_y[i] = g_Paddle.GetPosY();
 	}
 
-	// �p�h����̉���
+	// パドル一つの横幅
 	__int8 paddle_width = g_Paddle.GetWidth() / 3;
 
-	// ���p�h��
+	// 左パドル
 	const __int8 paddle_left = 0;
-	// �^�񒆃p�h��
+	// 真ん中パドル
 	const __int8 paddle_center = 1;
-	// �E�p�h��
+	// 右パドル
 	const __int8 paddle_right = 2;
 
 
-	// �ǂ̃p�h���ɓ����������ɂ���ăx�N�g���̕�����ς���
+	// どのパドルに当たったかによってベクトルの方向を変える
 	for (int i = 0; i < 3; ++i)
 	{
 		if ((g_Ball.m_NextPosX >= paddle_x[i]) && (g_Ball.m_NextPosX <= paddle_x[i] + paddle_width)
 			&& (g_Ball.m_NextPosY >= paddle_y[i] - g_Ball.m_Radius) && (g_Ball.m_NextPosY <= paddle_y[i] + g_Paddle.GetHeight() + g_Ball.m_Radius == true))
 		{
-			// �{�[���̃x�N�g�����擾
+			// ボールのベクトルを取得
 			float ball_vec_x = g_Ball.m_MoveVecX;
 			float ball_vec_y = g_Ball.m_MoveVecY;
 
 			switch (i)
 			{
-				// ���̃p�h���̎�
+				// 左のパドルの時
 			case paddle_left:
 				g_Ball.m_MoveVecX = 1 * cosf(Calculation::ToRadian(110.0f)) - 0 * sinf(Calculation::ToRadian(110.0f));
 				g_Ball.m_MoveVecY = 1 * sinf(Calculation::ToRadian(110.0f)) + 0 * cosf(Calculation::ToRadian(110.0f));
 				break;
 
-				// �^�񒆂̃p�h���̎�
+				// 真ん中のパドルの時
 			case paddle_center:
 				g_Ball.m_MoveVecX = 1 * cosf(Calculation::ToRadian(90.0f)) - 0 * sinf(Calculation::ToRadian(90.0f));
 				g_Ball.m_MoveVecY = 1 * sinf(Calculation::ToRadian(90.0f)) + 0 * cosf(Calculation::ToRadian(90.0f));
 				break;
 
-				// �E�̃p�h���̎�
+				// 右のパドルの時
 			case paddle_right:
 				g_Ball.m_MoveVecX = 1 * cosf(Calculation::ToRadian(90.0f)) - 0 * sinf(Calculation::ToRadian(90.0f));
 				g_Ball.m_MoveVecY = 1 * sinf(Calculation::ToRadian(90.0f)) + 0 * cosf(Calculation::ToRadian(90.0f));
@@ -207,7 +207,7 @@ void Ball::HitPaddle()
 				break;
 			}
 
-			// 1�ł�����������for���𔲂���
+			// 1つでも当たったらfor分を抜ける
 			break;
 		}
 	}
@@ -217,16 +217,16 @@ void Ball::HitPaddle()
 
 
 /***************************************************************
-	���Ɉړ�������W���ǂƓ������Ă��邩�𔻒肷��֐�
+	次に移動する座標が壁と当たっているかを判定する関数
 ****************************************************************/
 void Ball::HitBlock()
 {
-	// �����u���b�N�̏ォ���ɂ������Ă�����Y���x�N�g���𔽓]������
+	// もしブロックの上か下にあたっていたらY軸ベクトルを反転させる
 	if (HitBlockTopOrBottom())
 	{
 		m_MoveVecY *= -1;
 	}
-	// �����u���b�N�̍��E�ɓ������Ă�����X���x�N�g���𔽓]������
+	// もしブロックの左右に当たっていたらX軸ベクトルを反転させる
 	else if (HitBlockLeftOrRight())
 	{
 		m_MoveVecX *= -1;
@@ -236,11 +236,11 @@ void Ball::HitBlock()
 
 
 /***************************************************************
-	�ǂ̏㑤�Ɠ������Ă��邩�𔻒肷��ϐ�
+	壁の上側と当たっているかを判定する変数
 ****************************************************************/
 bool Ball::HitTopWall()
 {
-	// �ǂƓ������Ă�����
+	// 壁と当たっていたら
 	if ((m_NextPosY - m_Radius) < (STAGE_MIN_Y))
 	{
 		return true;
@@ -251,11 +251,11 @@ bool Ball::HitTopWall()
 
 
 /***************************************************************
-	�ǂ̉����Ɠ������Ă��邩�𔻒肷��ϐ�
+	壁の下側と当たっているかを判定する変数
 ****************************************************************/
 bool Ball::HitBottomWall()
 {
-	// �ǂƓ������Ă�����
+	// 壁と当たっていたら
 	if ((m_NextPosY + m_Radius) > (STAGE_MAX_Y))
 	{
 		return true;
@@ -266,11 +266,11 @@ bool Ball::HitBottomWall()
 
 
 /***************************************************************
-	�ǂ̉E���Ɠ������Ă��邩�𔻒肷��ϐ�
+	壁の右側と当たっているかを判定する変数
 ****************************************************************/
 bool Ball::HitRightWall()
 {
-	// �ǂƓ������Ă�����
+	// 壁と当たっていたら
 	if ((m_NextPosX + m_Radius) >= (STAGE_MAX_X))
 	{
 		return true;
@@ -281,11 +281,11 @@ bool Ball::HitRightWall()
 
 
 /***************************************************************
-	�ǂ̍����Ɠ������Ă��邩�𔻒肷��ϐ�
+	壁の左側と当たっているかを判定する変数
 ****************************************************************/
 bool Ball::HitLeftWall()
 {
-	// �ǂƓ������Ă�����
+	// 壁と当たっていたら
 	if ((m_NextPosX - m_Radius) < (STAGE_MIN_X))
 	{
 		return true;
@@ -296,7 +296,7 @@ bool Ball::HitLeftWall()
 
 
 /***************************************************************
-	�u���b�N�̏ォ���Ɠ������Ă��邩�𔻒肷��֐�
+	ブロックの上か下と当たっているかを判定する関数
 ****************************************************************/
 bool Ball::HitBlockTopOrBottom()
 {
@@ -307,7 +307,7 @@ bool Ball::HitBlockTopOrBottom()
 			if ((this->m_NextPosX >= g_Block[y][x].GetPosX()) && (this->m_NextPosX <= g_Block[y][x].GetPosX() + g_Block[y][x].GetWidth())
 				&& (this->m_NextPosY >= g_Block[y][x].GetPosY() - this->m_Radius) && (this->m_NextPosY <= g_Block[y][x].GetPosY() + g_Block[y][x].GetHeight() + this->m_Radius))
 			{
-				// �������Ă�����u���b�N������
+				// 当たっていたらブロックを消す
 				g_Block[y][x].Dead();
 
 				return true;
@@ -320,7 +320,7 @@ bool Ball::HitBlockTopOrBottom()
 
 
 /***************************************************************
-	�u���b�N�̍����E�Ɠ������Ă��邩�𔻒肷��֐�
+	ブロックの左か右と当たっているかを判定する関数
 ****************************************************************/
 bool Ball::HitBlockLeftOrRight()
 {
@@ -331,7 +331,7 @@ bool Ball::HitBlockLeftOrRight()
 			if ((this->m_NextPosX >= g_Block[y][x].GetPosX() - this->m_Radius) && (this->m_NextPosX <= g_Block[y][x].GetPosX() + g_Block[y][x].GetWidth() + this->m_Radius)
 				&& (this->m_NextPosY >= g_Block[y][x].GetPosY()) && (this->m_NextPosY <= g_Block[y][x].GetPosY() + g_Block[y][x].GetHeight()))
 			{
-				// �������Ă�����u���b�N������
+				// 当たっていたらブロックを消す
 				g_Block[y][x].Dead();
 				return true;
 			}

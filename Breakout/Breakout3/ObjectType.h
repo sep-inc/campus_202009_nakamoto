@@ -1,16 +1,16 @@
-#ifndef OBJECTTYPE_H_
+ï»¿#ifndef OBJECTTYPE_H_
 #define OBJECTTYPE_H_
 
 
 /*
-	ƒIƒuƒWƒFƒNƒg‚Ìí—Ş
+	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç¨®é¡
 */
 enum ObjectType
 {
-	ObjectBall = 1, // ‹…
-	ObjectBlock,	// ƒuƒƒbƒN
-	ObjectPaddle,	// ƒpƒhƒ‹
-	ObjectWall,		// •Ç
+	ObjectBall = 1, // çƒ
+	ObjectBlock,	// ãƒ–ãƒ­ãƒƒã‚¯
+	ObjectPaddle,	// ãƒ‘ãƒ‰ãƒ«
+	ObjectWall,		// å£
 };
 
 

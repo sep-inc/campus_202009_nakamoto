@@ -1,4 +1,4 @@
-#include "GlobalObject.h"
+ï»¿#include "GlobalObject.h"
 #include "Drawer.h"
 #include "BlockArray.h"
 #include "System.h"
@@ -10,34 +10,34 @@ int main()
 {
 	BlockArray block_array;
 
-	/////////// ƒQ[ƒ€ƒ‹[ƒv ////////////
+	/////////// ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ— ////////////
 	while (!g_IsGameOver)
 	{
 		getchar();
 		system("cls");
 
 
-		// ƒIƒuƒWƒFƒNƒg‚²‚Æ‚ÉƒXƒeƒbƒvˆ—‚ğs‚¤
+		// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã”ã¨ã«ã‚¹ãƒ†ãƒƒãƒ—å‡¦ç†ã‚’è¡Œã†
 		g_Wall.StepUpdate();
 		g_Paddle.StepUpdate();
 		block_array.StepUpdate();
 		g_Ball.StepUpdate();
 
-		// ƒoƒbƒtƒ@‚ÌƒNƒŠƒA
+		// ãƒãƒƒãƒ•ã‚¡ã®ã‚¯ãƒªã‚¢
 		g_Drawer.ClearBuffer();
 
-		// •`‰æ‚·‚éƒIƒuƒWƒFƒNƒg‚ğƒoƒbƒtƒ@‚É“`‚¦‚é
+		// æç”»ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ãƒãƒƒãƒ•ã‚¡ã«ä¼ãˆã‚‹
 		g_Wall.Draw();
 		g_Paddle.Draw();
 		block_array.Draw();
 		g_Ball.Draw();
 
-		// ƒoƒbƒtƒ@‚Ì•`‰æ
+		// ãƒãƒƒãƒ•ã‚¡ã®æç”»
 		g_Drawer.DrawBuffer();
 	}
 
 	system("cls");
-	printf("ƒQ[ƒ€ƒI[ƒo[\n");
+	printf("ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼\n");
 
 	return 0;
 }
