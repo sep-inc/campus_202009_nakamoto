@@ -9,6 +9,10 @@
 	コンストラクタ
 *****************************************************/
 Paddle::Paddle():
+	m_PosX(0.0f),
+	m_PosY(0.0f),
+	m_NextPosX(0.0f),
+	m_MoveVecX(0.0f),
 	m_Speed(PADDLE_SPEED),
 	m_Width(PADDLE_WIDTH),
 	m_Height(PADDLE_HEIGHT),
