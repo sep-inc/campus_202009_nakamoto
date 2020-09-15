@@ -1,219 +1,219 @@
-#include "YamanoteLineDB.h"
+ï»¿#include "YamanoteLineDB.h"
 #include <stdio.h>
 #include <string.h>
 
 int main()
 {
-	// æÔ‚·‚é‰w–¼‚ğ•Û‘¶‚·‚é•Ï”
+	// ä¹—è»Šã™ã‚‹é§…åã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 	char entry_station_name[MAX_STATION_NAME_LENGTH] = { '\0' };
 
-	// æÔ‰w‚Ì—v‘f”Ô†‚ğ•Û‘¶‚·‚é•Ï”
+	// ä¹—è»Šé§…ã®è¦ç´ ç•ªå·ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 	__int8  entry_station_index = 0;
 
-	// ~Ô‚·‚é‰w–¼‚ğ•Û‘¶‚·‚é•Ï”
+	// é™è»Šã™ã‚‹é§…åã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 	char exit_station_name[MAX_STATION_NAME_LENGTH] = { '\0' };
 
-	// ~Ô‰w‚Ì—v‘f‚ğ•Û‘¶‚·‚é•Ï”
+	// é™è»Šé§…ã®è¦ç´ ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 	__int8  exit_station_index = 0;
 
-	// ‰w‚ªŒ©‚Â‚©‚Á‚½‚©‚Ç‚¤‚©‚ğ•Û‚·‚é•Ï”
+	// é§…ãŒè¦‹ã¤ã‹ã£ãŸã‹ã©ã†ã‹ã‚’ä¿æŒã™ã‚‹å¤‰æ•°
 	bool found_station = false;
 
-	// Rèü‚Ìˆêü‚ÌŠÔ
+	// å±±æ‰‹ç·šã®ä¸€å‘¨ã®æ™‚é–“
 	__int8 yamanote_total_time = 0;
 
-	// ‰E‰ñ‚è‚Ì‡ŒvŠÔ (•ª)
+	// å³å›ã‚Šã®åˆè¨ˆæ™‚é–“ (åˆ†)
 	__int8 right_total_time = 0;
 
-	// ¶‰ñ‚è‚Ì‡ŒvŠÔ (•ª)
+	// å·¦å›ã‚Šã®åˆè¨ˆæ™‚é–“ (åˆ†)
 	__int8 left_total_time = 0;
 
-	// ’†‰›ü‚ğ—˜—p‚µ‚½‰E‰ñ‚è‚É‚©‚©‚éŠÔ(•ª)
+	// ä¸­å¤®ç·šã‚’åˆ©ç”¨ã—ãŸå³å›ã‚Šã«ã‹ã‹ã‚‹æ™‚é–“(åˆ†)
 	__int8 chuo_right_total_time = 0;
 
-	// ’†‰›ü‚ğ—˜—p‚µ‚½¶‰ñ‚è‚É‚©‚©‚éŠÔ(•ª)
+	// ä¸­å¤®ç·šã‚’åˆ©ç”¨ã—ãŸå·¦å›ã‚Šã«ã‹ã‹ã‚‹æ™‚é–“(åˆ†)
 	__int8 chuo_left_total_time = 0;
 
 
 
-	// Rèü‚ÌæÔ‰w‚©‚ç‰EŒü‚«‚Ìƒe[ƒuƒ‹
+	// å±±æ‰‹ç·šã®ä¹—è»Šé§…ã‹ã‚‰å³å‘ãã®ãƒ†ãƒ¼ãƒ–ãƒ«
 	Station yamanote_right_table[YAMANOTE_STATION_NUM] = { 0 };
 
-	// Rèü‚ÌæÔ‰w‚©‚ç‚Ì¶Œü‚«‚Ìƒe[ƒuƒ‹
+	// å±±æ‰‹ç·šã®ä¹—è»Šé§…ã‹ã‚‰ã®å·¦å‘ãã®ãƒ†ãƒ¼ãƒ–ãƒ«
 	Station yamanote_left_table[YAMANOTE_STATION_NUM] = { 0 };
 
-	// Rèü‚ÌæÔ‰w‚©‚ç¶‰ñ‚è‚Å‚©‚Â’†‰›ü‚ğ’Ê‚éƒe[ƒuƒ‹
+	// å±±æ‰‹ç·šã®ä¹—è»Šé§…ã‹ã‚‰å·¦å›ã‚Šã§ã‹ã¤ä¸­å¤®ç·šã‚’é€šã‚‹ãƒ†ãƒ¼ãƒ–ãƒ«
 	Station yamanote_left_through_chuo_table[YAMANOTE_STATION_NUM + CHUO_STATION_NUM] = { 0 };
 
-	// Rèü‚ÌæÔ‰w‚©‚ç‰E‰ñ‚è‚Å‚©‚Â’†‰›ü‚ğ’Ê‚éƒe[ƒuƒ‹
+	// å±±æ‰‹ç·šã®ä¹—è»Šé§…ã‹ã‚‰å³å›ã‚Šã§ã‹ã¤ä¸­å¤®ç·šã‚’é€šã‚‹ãƒ†ãƒ¼ãƒ–ãƒ«
 	Station yamanote_right_through_chuo_table[YAMANOTE_STATION_NUM + CHUO_STATION_NUM] = { 0 };
 
 
-	////////// æÔ‰wŠm”F /////////////////////
+	////////// ä¹—è»Šé§…ç¢ºèª /////////////////////
 	while (true)
 	{
-		printf("æÔ‰w‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢\n");
+		printf("ä¹—è»Šé§…ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„\n");
 
-		// æÔ‚·‚é‰w‚ğ“ü—Í
+		// ä¹—è»Šã™ã‚‹é§…ã‚’å…¥åŠ›
 		scanf_s("%s", entry_station_name, MAX_STATION_NAME_LENGTH);
 
 
 		for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 		{
-			// DB‚É‰w‚ª‚ ‚Á‚½‚ç
+			// DBã«é§…ãŒã‚ã£ãŸã‚‰
 			if (!strcmp(g_YamanoteDB[i].m_StationName, entry_station_name)) {
-				printf("æÔ‰w -> %s \n", &entry_station_name);
+				printf("ä¹—è»Šé§… -> %s \n", &entry_station_name);
 				found_station = true;
 
-				// —v‘f‚ğ•Û‘¶
+				// è¦ç´ ã‚’ä¿å­˜
 				entry_station_index = i;
 				break;
 			}
 		}
 
-		// ‚à‚µŒ©‚Â‚©‚Á‚½‚çƒ‹[ƒv‚ğ”²‚¯‚é
+		// ã‚‚ã—è¦‹ã¤ã‹ã£ãŸã‚‰ãƒ«ãƒ¼ãƒ—ã‚’æŠœã‘ã‚‹
 		if (found_station)break;
 
-		printf("Œ©‚Â‚©‚è‚Ü‚¹‚ñB‚à‚¤ˆê“x“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B\n");
+		printf("è¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚ã‚‚ã†ä¸€åº¦å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚\n");
 	}
 
 
-	////////// ~Ô‰wŠm”F /////////////////////
+	////////// é™è»Šé§…ç¢ºèª /////////////////////
 	found_station = false;
 	while (true)
 	{
-		printf("~Ô‰w‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢\n");
+		printf("é™è»Šé§…ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„\n");
 
-		// ~Ô‚·‚é‰w‚ğ“ü—Í
+		// é™è»Šã™ã‚‹é§…ã‚’å…¥åŠ›
 		scanf_s("%s", exit_station_name, MAX_STATION_NAME_LENGTH);
 
 		for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 		{
-			// æÔ‰wƒe[ƒuƒ‹‚©‚ç‚Ì~Ô‰w‚ğ’T‚·
+			// ä¹—è»Šé§…ãƒ†ãƒ¼ãƒ–ãƒ«ã‹ã‚‰ã®é™è»Šé§…ã‚’æ¢ã™
 			if (!strcmp(g_YamanoteDB[i].m_StationName, exit_station_name)) {
-				printf("~Ô‰w -> %s \n", &exit_station_name);
+				printf("é™è»Šé§… -> %s \n", &exit_station_name);
 				found_station = true;
 
-				// —v‘f‚ğ•Û‘¶
+				// è¦ç´ ã‚’ä¿å­˜
 				exit_station_index = i;
 				break;
 			}
 		}
-		// ‚à‚µŒ©‚Â‚©‚Á‚½‚çƒ‹[ƒv‚ğ”²‚¯‚é
+		// ã‚‚ã—è¦‹ã¤ã‹ã£ãŸã‚‰ãƒ«ãƒ¼ãƒ—ã‚’æŠœã‘ã‚‹
 		if (found_station)break;
 
-		// else ‚à‚¤ˆê“x“ü—Í
-		printf("Œ©‚Â‚©‚è‚Ü‚¹‚ñB‚à‚¤ˆê“x“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B \n");
+		// else ã‚‚ã†ä¸€åº¦å…¥åŠ›
+		printf("è¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã€‚ã‚‚ã†ä¸€åº¦å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚ \n");
 	}
 
 
 
 
-	////////////////////////////////// Šeƒe[ƒuƒ‹‚ğì¬ /////////////////////////////////////////////
+	////////////////////////////////// å„ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ /////////////////////////////////////////////
 	
-	/////////////////////////////////// ‰E‰ñ‚è‚Ìƒe[ƒuƒ‹‚ğì¬ //////////////////////////////////////////
+	/////////////////////////////////// å³å›ã‚Šã®ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ //////////////////////////////////////////
 	__int8 current_station_index = entry_station_index;
 	for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 	{
-		// ‚à‚µ–Ú“I’n‚È‚çƒe[ƒuƒ‹ì¬I—¹
+		// ã‚‚ã—ç›®çš„åœ°ãªã‚‰ãƒ†ãƒ¼ãƒ–ãƒ«ä½œæˆçµ‚äº†
 		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
 
 		yamanote_right_table[i] = g_YamanoteDB[current_station_index];
 		
 		current_station_index++;
-		// Œ»İ‚Ì—v‘f”‚ªDB‚Ì—v‘f”‚ğ’´‚¦‚½ê‡0‚É‚·‚é
+		// ç¾åœ¨ã®è¦ç´ æ•°ãŒDBã®è¦ç´ æ•°ã‚’è¶…ãˆãŸå ´åˆ0ã«ã™ã‚‹
 		if (current_station_index >= YAMANOTE_STATION_NUM) current_station_index = 0;
 	}
 
 
-	/////////////////////////////////// ¶‰ñ‚è‚Ìƒe[ƒuƒ‹‚ğì¬ //////////////////////////////////////////
+	/////////////////////////////////// å·¦å›ã‚Šã®ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ //////////////////////////////////////////
 	current_station_index = entry_station_index;
 	for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 	{
-		// ‚à‚µ–Ú“I’n‚È‚çƒe[ƒuƒ‹ì¬I—¹
+		// ã‚‚ã—ç›®çš„åœ°ãªã‚‰ãƒ†ãƒ¼ãƒ–ãƒ«ä½œæˆçµ‚äº†
 		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
 
 		yamanote_left_table[i] = g_YamanoteDB[current_station_index];
 
 
 		current_station_index--;
-		// Œ»İ‚Ì—v‘f”‚ª0‚æ‚è‚à‰º‚É‚È‚Á‚½‚çDB‚ÌÅŒã‚Ì—v‘f‚É‚·‚é
+		// ç¾åœ¨ã®è¦ç´ æ•°ãŒ0ã‚ˆã‚Šã‚‚ä¸‹ã«ãªã£ãŸã‚‰DBã®æœ€å¾Œã®è¦ç´ ã«ã™ã‚‹
 		if (current_station_index < 0) current_station_index = YAMANOTE_INDEX_NUM;
 	}
 
 	
-	//////////////////////////////////////// ’†‰›ü‚ğ—˜—p‚µ‚½‰E‰ñ‚è‚Ìƒe[ƒuƒ‹‚ğì¬ //////////////////////////////////////////
+	//////////////////////////////////////// ä¸­å¤®ç·šã‚’åˆ©ç”¨ã—ãŸå³å›ã‚Šã®ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ //////////////////////////////////////////
 
-	// Œ»İ‚Ì‰w‚ÌƒCƒ“ƒfƒbƒNƒX‚ğ•Û‚·‚é•Ï”
+	// ç¾åœ¨ã®é§…ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ä¿æŒã™ã‚‹å¤‰æ•°
 	current_station_index = entry_station_index;
 
-	// V‚µ‚­ì‚éƒe[ƒuƒ‹‚Ì—v‘f
+	// æ–°ã—ãä½œã‚‹ãƒ†ãƒ¼ãƒ–ãƒ«ã®è¦ç´ 
 	__int8 new_table_index = 0;
 
-	// ’†‰›ü‚ğ”²‚¯‚½Œã‚É‰E‚©¶‚Ì‚Ç‚¿‚ç‚É‚¢‚­‚©‚ğ•Û‘¶‚·‚é•Ï”
-	// true -> ‰E    false -> ¶
+	// ä¸­å¤®ç·šã‚’æŠœã‘ãŸå¾Œã«å³ã‹å·¦ã®ã©ã¡ã‚‰ã«ã„ãã‹ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
+	// true -> å³    false -> å·¦
 	bool is_right = true;
 
 	while (true)
 	{
-		// ‚à‚µ–Ú“I’n‚È‚çƒe[ƒuƒ‹ì¬I—¹
+		// ã‚‚ã—ç›®çš„åœ°ãªã‚‰ãƒ†ãƒ¼ãƒ–ãƒ«ä½œæˆçµ‚äº†
 		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
 
-		// ƒe[ƒuƒ‹‚ÉŒ»İ‚Ì‰w‚ğ’Ç‰Á‚·‚é
+		// ãƒ†ãƒ¼ãƒ–ãƒ«ã«ç¾åœ¨ã®é§…ã‚’è¿½åŠ ã™ã‚‹
 		yamanote_right_through_chuo_table[new_table_index] = g_YamanoteDB[current_station_index];
 		new_table_index++;
 		
-		/////////////////// Œ»İ‚Ì‰w‚ªVh‚È‚ç
-		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, "Vh"))
+		/////////////////// ç¾åœ¨ã®é§…ãŒæ–°å®¿ãªã‚‰
+		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, "æ–°å®¿"))
 		{
 			for (int i = 0; i < CHUO_STATION_NUM; ++i)
 			{
-				// ’†‰›ü‚Ì_“c‚Ü‚Å‚«‚½‚ç
-				if (!strcmp(g_ChuoLine[i].m_StationName, "_“c"))
+				// ä¸­å¤®ç·šã®ç¥ç”°ã¾ã§ããŸã‚‰
+				if (!strcmp(g_ChuoLine[i].m_StationName, "ç¥ç”°"))
 				{
-					// Rèü‚Ì_“c‚ğƒe[ƒuƒ‹‚É’Ç‰Á‚·‚é
+					// å±±æ‰‹ç·šã®ç¥ç”°ã‚’ãƒ†ãƒ¼ãƒ–ãƒ«ã«è¿½åŠ ã™ã‚‹
 					yamanote_right_through_chuo_table[new_table_index] = g_YamanoteDB[g_ChuoLine[i].m_StationId];
 					new_table_index++;
 
-					// Œ»İ‚Ì‰w‚ğ_“c‚Éİ’è‚·‚é
+					// ç¾åœ¨ã®é§…ã‚’ç¥ç”°ã«è¨­å®šã™ã‚‹
 					current_station_index = g_ChuoLine[i].m_StationId;
 					break;
 				}
 
-				// ’†‰›ü‚Ì‰w‚ğ’Ç‰Á‚·‚é
+				// ä¸­å¤®ç·šã®é§…ã‚’è¿½åŠ ã™ã‚‹
 				yamanote_right_through_chuo_table[new_table_index] = g_ChuoLine[i];
 				new_table_index++;
 			}
 			
-			// Œ»İ‚Ì‰w‚ğˆê•Û‘¶‚·‚é
+			// ç¾åœ¨ã®é§…ã‚’ä¸€æ™‚ä¿å­˜ã™ã‚‹
 			__int8 temp_current_index = current_station_index;
-			// ’†‰›ü‚ğ”²‚¯‚½‚ ‚ÆA‰E‰ñ‚è‚©¶‰ñ‚è‚©‚ğÅ’Z‹——£‚ÅŒˆ‚ß‚é
+			// ä¸­å¤®ç·šã‚’æŠœã‘ãŸã‚ã¨ã€å³å›ã‚Šã‹å·¦å›ã‚Šã‹ã‚’æœ€çŸ­è·é›¢ã§æ±ºã‚ã‚‹
 			for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 			{
 				temp_current_index += i;
 
-				// Œ»İ‚Ì‰w‚ªRèüDB‚Ì—v‘f‚ğ’´‚¦‚½‚ç0‚É–ß‚·B
+				// ç¾åœ¨ã®é§…ãŒå±±æ‰‹ç·šDBã®è¦ç´ ã‚’è¶…ãˆãŸã‚‰0ã«æˆ»ã™ã€‚
 				if (temp_current_index >= YAMANOTE_STATION_NUM) temp_current_index = 0;
 
-				// æÔ‰w‚É—ˆ‚½‚ç
+				// ä¹—è»Šé§…ã«æ¥ãŸã‚‰
 				if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, entry_station_name))
 				{
-					// ¶‰ñ‚è‚É~Ô‰w‚ª‚ ‚é
+					// å·¦å›ã‚Šã«é™è»Šé§…ãŒã‚ã‚‹
 					is_right = false;
 					current_station_index--;
 
-					// Œ»İ‚Ì‰w‚ªRèüDB‚Ì—v‘f‚ğ‰º‰ñ‚Á‚½‚ç—v‘f‚ÌÅ‘å‚É–ß‚·
+					// ç¾åœ¨ã®é§…ãŒå±±æ‰‹ç·šDBã®è¦ç´ ã‚’ä¸‹å›ã£ãŸã‚‰è¦ç´ ã®æœ€å¤§ã«æˆ»ã™
 					if (current_station_index < 0)current_station_index = YAMANOTE_INDEX_NUM;
 					break;
 				}
-				// ~Ô‰w‚É—ˆ‚½‚ç
+				// é™è»Šé§…ã«æ¥ãŸã‚‰
 				else if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, exit_station_name))
 				{
-					// ‰E‰ñ‚è‚É~Ô‰w‚ª
+					// å³å›ã‚Šã«é™è»Šé§…ãŒ
 					is_right = true;
 					current_station_index++;
 
-					// Œ»İ‚Ì‰w‚ªRèüDB‚Ì—v‘f‚ğ’´‚¦‚½‚ç0‚É–ß‚·B
+					// ç¾åœ¨ã®é§…ãŒå±±æ‰‹ç·šDBã®è¦ç´ ã‚’è¶…ãˆãŸã‚‰0ã«æˆ»ã™ã€‚
 					if (current_station_index >= YAMANOTE_STATION_NUM) current_station_index = 0;
 					break;
 				}
@@ -222,57 +222,57 @@ int main()
 		}
 
 
-		////////////// Œ»İ‚Ì‰w‚ª_“c‚È‚ç
-		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, "_“c"))
+		////////////// ç¾åœ¨ã®é§…ãŒç¥ç”°ãªã‚‰
+		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, "ç¥ç”°"))
 		{
 			for (int i = 3; i >= 0; --i)
 			{
-				// ’†‰›ü‚ÌVh‚Ü‚Å‚«‚½‚ç
-				if (!strcmp(g_ChuoLine[i].m_StationName, "Vh"))
+				// ä¸­å¤®ç·šã®æ–°å®¿ã¾ã§ããŸã‚‰
+				if (!strcmp(g_ChuoLine[i].m_StationName, "æ–°å®¿"))
 				{
-					// Rèü‚ÌVh‚ğƒe[ƒuƒ‹‚É’Ç‰Á‚·‚é
+					// å±±æ‰‹ç·šã®æ–°å®¿ã‚’ãƒ†ãƒ¼ãƒ–ãƒ«ã«è¿½åŠ ã™ã‚‹
 					yamanote_right_through_chuo_table[new_table_index] = g_YamanoteDB[g_ChuoLine[i].m_StationId];
 					new_table_index++;
 
-					// Œ»İ‚Ì‰w‚ğVh‚Éİ’è‚·‚é
+					// ç¾åœ¨ã®é§…ã‚’æ–°å®¿ã«è¨­å®šã™ã‚‹
 					current_station_index = g_ChuoLine[i].m_StationId;
 					break;
 				}
 
-				// ’†‰›ü‚Ì‰w‚ğ’Ç‰Á‚·‚é
+				// ä¸­å¤®ç·šã®é§…ã‚’è¿½åŠ ã™ã‚‹
 				yamanote_right_through_chuo_table[new_table_index] = g_ChuoLine[i];
 				new_table_index++;
 			}
 
-			// Œ»İ‚Ì‰w‚ğˆê•Û‘¶‚·‚é
+			// ç¾åœ¨ã®é§…ã‚’ä¸€æ™‚ä¿å­˜ã™ã‚‹
 			__int8 temp_current_index = current_station_index;
-			// ’†‰›ü‚ğ”²‚¯‚½‚ ‚ÆA‰E‰ñ‚è‚©¶‰ñ‚è‚©‚ğÅ’Z‹——£‚ÅŒˆ‚ß‚é
+			// ä¸­å¤®ç·šã‚’æŠœã‘ãŸã‚ã¨ã€å³å›ã‚Šã‹å·¦å›ã‚Šã‹ã‚’æœ€çŸ­è·é›¢ã§æ±ºã‚ã‚‹
 			for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 			{
 				temp_current_index += i;
 
-				// Œ»İ‚Ì‰w‚ªRèüDB‚Ì—v‘f‚ğ’´‚¦‚½‚ç0‚É–ß‚·B
+				// ç¾åœ¨ã®é§…ãŒå±±æ‰‹ç·šDBã®è¦ç´ ã‚’è¶…ãˆãŸã‚‰0ã«æˆ»ã™ã€‚
 				if (temp_current_index >= YAMANOTE_STATION_NUM) temp_current_index = 0;;
 
-				// æÔ‰w‚É—ˆ‚½‚ç
+				// ä¹—è»Šé§…ã«æ¥ãŸã‚‰
 				if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, entry_station_name))
 				{
-					// ¶‰ñ‚è‚É~Ô‰w‚ª‚ ‚é
+					// å·¦å›ã‚Šã«é™è»Šé§…ãŒã‚ã‚‹
 					is_right = false;
 					current_station_index--;
 
-					// Œ»İ‚Ì‰w‚ªRèüDB‚Ì—v‘f‚ğ‰º‰ñ‚Á‚½‚ç—v‘f‚ÌÅ‘å‚É–ß‚·
+					// ç¾åœ¨ã®é§…ãŒå±±æ‰‹ç·šDBã®è¦ç´ ã‚’ä¸‹å›ã£ãŸã‚‰è¦ç´ ã®æœ€å¤§ã«æˆ»ã™
 					if (current_station_index < 0)current_station_index = YAMANOTE_STATION_NUM - 1;
 					break;
 				}
-				// ~Ô‰w‚É—ˆ‚½‚ç
+				// é™è»Šé§…ã«æ¥ãŸã‚‰
 				else if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, exit_station_name))
 				{
-					// ‰E‰ñ‚è‚É~Ô‰w‚ª
+					// å³å›ã‚Šã«é™è»Šé§…ãŒ
 					is_right = true;
 					current_station_index++;
 
-					// Œ»İ‚Ì‰w‚ªRèüDB‚Ì—v‘f‚ğ’´‚¦‚½‚ç0‚É–ß‚·B
+					// ç¾åœ¨ã®é§…ãŒå±±æ‰‹ç·šDBã®è¦ç´ ã‚’è¶…ãˆãŸã‚‰0ã«æˆ»ã™ã€‚
 					if (current_station_index >= YAMANOTE_STATION_NUM) current_station_index = 0;
 					break;
 				}
@@ -280,10 +280,10 @@ int main()
 			}
 		}
 
-		// ‚à‚µ–Ú“I’n‚È‚çƒe[ƒuƒ‹ì¬I—¹
+		// ã‚‚ã—ç›®çš„åœ°ãªã‚‰ãƒ†ãƒ¼ãƒ–ãƒ«ä½œæˆçµ‚äº†
 		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
 
-		// ‰w‚ği‚ß‚é
+		// é§…ã‚’é€²ã‚ã‚‹
 		if (is_right == true) {
 			current_station_index++;
 		}
@@ -291,80 +291,80 @@ int main()
 			current_station_index--;
 		}
 
-		// Œ»İ‚Ì‰w‚ªRèüDB‚Ì—v‘f‚ğ’´‚¦‚½‚ç0‚É–ß‚·B
+		// ç¾åœ¨ã®é§…ãŒå±±æ‰‹ç·šDBã®è¦ç´ ã‚’è¶…ãˆãŸã‚‰0ã«æˆ»ã™ã€‚
 		if (current_station_index >= YAMANOTE_STATION_NUM) current_station_index = 0;
 
-		// Œ»İ‚Ì‰w‚ªRèüDB‚Ì—v‘f‚ğ‰º‰ñ‚Á‚½‚ç—v‘f‚ÌÅ‘å‚É–ß‚·
+		// ç¾åœ¨ã®é§…ãŒå±±æ‰‹ç·šDBã®è¦ç´ ã‚’ä¸‹å›ã£ãŸã‚‰è¦ç´ ã®æœ€å¤§ã«æˆ»ã™
 		if (current_station_index < 0)current_station_index = YAMANOTE_INDEX_NUM;
 
 	}
 
 
-	////////////////////////////////////// ’†‰›ü‚ğ—˜—p‚µ‚½¶‰ñ‚è‚Ìƒe[ƒuƒ‹‚ğì¬ //////////////////////////////////////////
+	////////////////////////////////////// ä¸­å¤®ç·šã‚’åˆ©ç”¨ã—ãŸå·¦å›ã‚Šã®ãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆ //////////////////////////////////////////
 
-	// Œ»İ‚Ì‰w‚ÌƒCƒ“ƒfƒbƒNƒX‚ğ•Û‚·‚é•Ï”
+	// ç¾åœ¨ã®é§…ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’ä¿æŒã™ã‚‹å¤‰æ•°
 	current_station_index = entry_station_index;
 
-	// V‚µ‚­ì‚éƒe[ƒuƒ‹‚Ì—v‘f
+	// æ–°ã—ãä½œã‚‹ãƒ†ãƒ¼ãƒ–ãƒ«ã®è¦ç´ 
 	new_table_index = 0;
 
-	// ’†‰›ü‚ğ”²‚¯‚½Œã‚É‰E‚©¶‚Ì‚Ç‚¿‚ç‚É‚¢‚­‚©‚ğ•Û‘¶‚·‚é•Ï”
-	// true -> ‰E    false -> ¶
+	// ä¸­å¤®ç·šã‚’æŠœã‘ãŸå¾Œã«å³ã‹å·¦ã®ã©ã¡ã‚‰ã«ã„ãã‹ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
+	// true -> å³    false -> å·¦
 	is_right = false;
 	while (true)
 	{
 
-		// ‚à‚µ–Ú“I’n‚È‚çƒe[ƒuƒ‹ì¬I—¹
+		// ã‚‚ã—ç›®çš„åœ°ãªã‚‰ãƒ†ãƒ¼ãƒ–ãƒ«ä½œæˆçµ‚äº†
 		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
 
-		// ƒe[ƒuƒ‹‚ÉŒ»İ‚Ì‰w‚ğ’Ç‰Á‚·‚é
+		// ãƒ†ãƒ¼ãƒ–ãƒ«ã«ç¾åœ¨ã®é§…ã‚’è¿½åŠ ã™ã‚‹
 		yamanote_left_through_chuo_table[new_table_index] = g_YamanoteDB[current_station_index];
 		new_table_index++;
 
 
-		/////////////////// Œ»İ‚Ì‰w‚ªVh‚È‚ç
-		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, "Vh"))
+		/////////////////// ç¾åœ¨ã®é§…ãŒæ–°å®¿ãªã‚‰
+		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, "æ–°å®¿"))
 		{
 			for (int i = 0; i < CHUO_STATION_NUM; ++i)
 			{
-				// ’†‰›ü‚Ì_“c‚Ü‚Å‚«‚½‚ç
-				if (!strcmp(g_ChuoLine[i].m_StationName, "_“c"))
+				// ä¸­å¤®ç·šã®ç¥ç”°ã¾ã§ããŸã‚‰
+				if (!strcmp(g_ChuoLine[i].m_StationName, "ç¥ç”°"))
 				{
-					// Rèü‚Ì_“c‚ğƒe[ƒuƒ‹‚É’Ç‰Á‚·‚é
+					// å±±æ‰‹ç·šã®ç¥ç”°ã‚’ãƒ†ãƒ¼ãƒ–ãƒ«ã«è¿½åŠ ã™ã‚‹
 					yamanote_left_through_chuo_table[new_table_index] = g_YamanoteDB[g_ChuoLine[i].m_StationId];
 					new_table_index++;
 
-					// Œ»İ‚Ì‰w‚ğ_“c‚Éİ’è‚·‚é
+					// ç¾åœ¨ã®é§…ã‚’ç¥ç”°ã«è¨­å®šã™ã‚‹
 					current_station_index = g_ChuoLine[i].m_StationId;
 					break;
 				}
 
-				// ’†‰›ü‚Ì‰w‚ğ’Ç‰Á‚·‚é
+				// ä¸­å¤®ç·šã®é§…ã‚’è¿½åŠ ã™ã‚‹
 				yamanote_left_through_chuo_table[new_table_index] = g_ChuoLine[i];
 				new_table_index++;
 			}
 
-			// Œ»İ‚Ì‰w‚ğˆê•Û‘¶‚·‚é
+			// ç¾åœ¨ã®é§…ã‚’ä¸€æ™‚ä¿å­˜ã™ã‚‹
 			__int8 temp_current_index = current_station_index;
-			// ’†‰›ü‚ğ”²‚¯‚½‚ ‚ÆA‰E‰ñ‚è‚©¶‰ñ‚è‚©‚ğÅ’Z‹——£‚ÅŒˆ‚ß‚é
+			// ä¸­å¤®ç·šã‚’æŠœã‘ãŸã‚ã¨ã€å³å›ã‚Šã‹å·¦å›ã‚Šã‹ã‚’æœ€çŸ­è·é›¢ã§æ±ºã‚ã‚‹
 			for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 			{
 				temp_current_index += i;
 
-				// Œ»İ‚Ì‰w‚ªRèüDB‚Ì—v‘f‚ğ’´‚¦‚½‚ç0‚É–ß‚·B
+				// ç¾åœ¨ã®é§…ãŒå±±æ‰‹ç·šDBã®è¦ç´ ã‚’è¶…ãˆãŸã‚‰0ã«æˆ»ã™ã€‚
 				if (temp_current_index >= YAMANOTE_STATION_NUM) temp_current_index = 0;;
 
-				// æÔ‰w‚É—ˆ‚½‚ç
+				// ä¹—è»Šé§…ã«æ¥ãŸã‚‰
 				if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, entry_station_name))
 				{
-					// ¶‰ñ‚è‚É~Ô‰w‚ª‚ ‚é
+					// å·¦å›ã‚Šã«é™è»Šé§…ãŒã‚ã‚‹
 					is_right = false;
 					break;
 				}
-				// ~Ô‰w‚É—ˆ‚½‚ç
+				// é™è»Šé§…ã«æ¥ãŸã‚‰
 				else if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, exit_station_name))
 				{
-					// ‰E‰ñ‚è‚É~Ô‰w‚ª
+					// å³å›ã‚Šã«é™è»Šé§…ãŒ
 					is_right = true;
 					break;
 				}
@@ -373,49 +373,49 @@ int main()
 		}
 
 
-		////////////// Œ»İ‚Ì‰w‚ª_“c‚È‚ç
-		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, "_“c"))
+		////////////// ç¾åœ¨ã®é§…ãŒç¥ç”°ãªã‚‰
+		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, "ç¥ç”°"))
 		{
 			for (int i = CHUO_INDEX_NUM; i >= 0; --i)
 			{
-				// ’†‰›ü‚ÌVh‚Ü‚Å‚«‚½‚ç
-				if (!strcmp(g_ChuoLine[i].m_StationName, "Vh"))
+				// ä¸­å¤®ç·šã®æ–°å®¿ã¾ã§ããŸã‚‰
+				if (!strcmp(g_ChuoLine[i].m_StationName, "æ–°å®¿"))
 				{
-					// Rèü‚ÌVh‚ğƒe[ƒuƒ‹‚É’Ç‰Á‚·‚é
+					// å±±æ‰‹ç·šã®æ–°å®¿ã‚’ãƒ†ãƒ¼ãƒ–ãƒ«ã«è¿½åŠ ã™ã‚‹
 					yamanote_left_through_chuo_table[new_table_index] = g_YamanoteDB[g_ChuoLine[i].m_StationId];
 					new_table_index++;
 
-					// Œ»İ‚Ì‰w‚ğVh‚Éİ’è‚·‚é
+					// ç¾åœ¨ã®é§…ã‚’æ–°å®¿ã«è¨­å®šã™ã‚‹
 					current_station_index = g_ChuoLine[i].m_StationId;
 					break;
 				}
 
-				// ’†‰›ü‚Ì‰w‚ğ’Ç‰Á‚·‚é
+				// ä¸­å¤®ç·šã®é§…ã‚’è¿½åŠ ã™ã‚‹
 				yamanote_left_through_chuo_table[new_table_index] = g_ChuoLine[i];
 				new_table_index++;
 			}
 
-			// Œ»İ‚Ì‰w‚ğˆê•Û‘¶‚·‚é
+			// ç¾åœ¨ã®é§…ã‚’ä¸€æ™‚ä¿å­˜ã™ã‚‹
 			__int8 temp_current_index = current_station_index;
-			// ’†‰›ü‚ğ”²‚¯‚½‚ ‚ÆA‰E‰ñ‚è‚©¶‰ñ‚è‚©‚ğÅ’Z‹——£‚ÅŒˆ‚ß‚é
+			// ä¸­å¤®ç·šã‚’æŠœã‘ãŸã‚ã¨ã€å³å›ã‚Šã‹å·¦å›ã‚Šã‹ã‚’æœ€çŸ­è·é›¢ã§æ±ºã‚ã‚‹
 			for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 			{
 				temp_current_index += i;
 
-				// Œ»İ‚Ì‰w‚ªRèüDB‚Ì—v‘f‚ğ’´‚¦‚½‚ç0‚É–ß‚·B
+				// ç¾åœ¨ã®é§…ãŒå±±æ‰‹ç·šDBã®è¦ç´ ã‚’è¶…ãˆãŸã‚‰0ã«æˆ»ã™ã€‚
 				if (temp_current_index >= YAMANOTE_STATION_NUM) temp_current_index = 0;;
 
-				// æÔ‰w‚É—ˆ‚½‚ç
+				// ä¹—è»Šé§…ã«æ¥ãŸã‚‰
 				if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, entry_station_name))
 				{
-					// ¶‰ñ‚è‚É~Ô‰w‚ª‚ ‚é
+					// å·¦å›ã‚Šã«é™è»Šé§…ãŒã‚ã‚‹
 					is_right = false;
 					break;
 				}
-				// ~Ô‰w‚É—ˆ‚½‚ç
+				// é™è»Šé§…ã«æ¥ãŸã‚‰
 				else if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, exit_station_name))
 				{
-					// ‰E‰ñ‚è‚É~Ô‰w‚ª
+					// å³å›ã‚Šã«é™è»Šé§…ãŒ
 					is_right = true;
 
 					break;
@@ -424,10 +424,10 @@ int main()
 			}
 		}
 
-		// ‚à‚µ–Ú“I’n‚È‚çƒe[ƒuƒ‹ì¬I—¹
+		// ã‚‚ã—ç›®çš„åœ°ãªã‚‰ãƒ†ãƒ¼ãƒ–ãƒ«ä½œæˆçµ‚äº†
 		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
 
-		// ‰w‚ği‚ß‚é
+		// é§…ã‚’é€²ã‚ã‚‹
 		if (is_right == true) {
 			current_station_index++;
 		}
@@ -435,48 +435,48 @@ int main()
 			current_station_index--;
 		}
 
-		// Œ»İ‚Ì‰w‚ªRèüDB‚Ì—v‘f‚ğ’´‚¦‚½‚ç0‚É–ß‚·B
+		// ç¾åœ¨ã®é§…ãŒå±±æ‰‹ç·šDBã®è¦ç´ ã‚’è¶…ãˆãŸã‚‰0ã«æˆ»ã™ã€‚
 		if (current_station_index >= YAMANOTE_STATION_NUM) current_station_index = 0;
 
-		// Œ»İ‚Ì‰w‚ªRèüDB‚Ì—v‘f‚ğ‰º‰ñ‚Á‚½‚ç—v‘f‚ÌÅ‘å‚É–ß‚·
+		// ç¾åœ¨ã®é§…ãŒå±±æ‰‹ç·šDBã®è¦ç´ ã‚’ä¸‹å›ã£ãŸã‚‰è¦ç´ ã®æœ€å¤§ã«æˆ»ã™
 		if (current_station_index < 0)current_station_index = YAMANOTE_INDEX_NUM;
 
 	}
 
 
 
-	////////////////////////////////////////////// Šeƒe[ƒuƒ‹‚É‚©‚©‚éŠÔ‚ğZo /////////////////////////////////////////////////////
+	////////////////////////////////////////////// å„ãƒ†ãƒ¼ãƒ–ãƒ«ã«ã‹ã‹ã‚‹æ™‚é–“ã‚’ç®—å‡º /////////////////////////////////////////////////////
 
-	// ‰E‰ñ‚è‚ÌŠÔ‚ğZo
+	// å³å›ã‚Šã®æ™‚é–“ã‚’ç®—å‡º
 	for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 	{
 		right_total_time += yamanote_right_table[i].m_NextStationCost;
 	}
 
-	// ¶‰ñ‚è‚ÌŠÔ‚ğo—Í
+	// å·¦å›ã‚Šã®æ™‚é–“ã‚’å‡ºåŠ›
 	for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 	{
 		left_total_time += yamanote_left_table[i].m_NextStationCost;
 	}
 
-	// ‰E‰ñ‚è‚Ì’†‰›ü‚ğ’Ê‚éŠÔ
+	// å³å›ã‚Šã®ä¸­å¤®ç·šã‚’é€šã‚‹æ™‚é–“
 	for (int i = 0; i < YAMANOTE_STATION_NUM + CHUO_STATION_NUM; ++i)
 	{
 		chuo_right_total_time += yamanote_right_through_chuo_table[i].m_NextStationCost;
 	}
 
-	// ¶‰ñ‚è‚Ì’†‰›ü‚ğ’Ê‚éŠÔ
+	// å·¦å›ã‚Šã®ä¸­å¤®ç·šã‚’é€šã‚‹æ™‚é–“
 	for (int i = 0; i < YAMANOTE_STATION_NUM + CHUO_STATION_NUM; ++i)
 	{
 		chuo_left_total_time += yamanote_left_through_chuo_table[i].m_NextStationCost;
 	}
 
-	// ‚»‚ê‚¼‚ê‚ğo—Í
-	printf("%s  ->  %s  ‚É‚©‚©‚éŠÔ\n", entry_station_name, exit_station_name);
-	printf("‰E‰ñ‚è‚É‚©‚©‚éŠÔ‚Í %d ‚Å‚·B\n", right_total_time);
-	printf("¶‰ñ‚è‚É‚©‚©‚éŠÔ‚Í %d ‚Å‚·B\n", left_total_time);
-	printf("’†‰›ü‚ğ—˜—p‚µ‚½‰E‰ñ‚è‚É‚©‚©‚éŠÔ‚Í %d ‚Å‚·B\n", chuo_right_total_time);
-	printf("’†‰›ü‚ğ—˜—p‚µ‚½¶‰ñ‚è‚É‚©‚©‚éŠÔ‚Í %d ‚Å‚·B\n", chuo_left_total_time);
+	// ãã‚Œãã‚Œã‚’å‡ºåŠ›
+	printf("%s  ->  %s  ã«ã‹ã‹ã‚‹æ™‚é–“\n", entry_station_name, exit_station_name);
+	printf("å³å›ã‚Šã«ã‹ã‹ã‚‹æ™‚é–“ã¯ %d ã§ã™ã€‚\n", right_total_time);
+	printf("å·¦å›ã‚Šã«ã‹ã‹ã‚‹æ™‚é–“ã¯ %d ã§ã™ã€‚\n", left_total_time);
+	printf("ä¸­å¤®ç·šã‚’åˆ©ç”¨ã—ãŸå³å›ã‚Šã«ã‹ã‹ã‚‹æ™‚é–“ã¯ %d ã§ã™ã€‚\n", chuo_right_total_time);
+	printf("ä¸­å¤®ç·šã‚’åˆ©ç”¨ã—ãŸå·¦å›ã‚Šã«ã‹ã‹ã‚‹æ™‚é–“ã¯ %d ã§ã™ã€‚\n", chuo_left_total_time);
 
 
 	return 0;

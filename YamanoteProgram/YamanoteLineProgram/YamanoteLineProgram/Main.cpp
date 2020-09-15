@@ -1,125 +1,125 @@
-#include "YamanoteLineDB.h"
+﻿#include "YamanoteLineDB.h"
 #include <stdio.h>
 #include <string.h>
 
 int main()
 {
-	// ��Ԃ���w����ۑ�����ϐ�
+	// 乗車する駅名を保存する変数
 	char entry_station_name[MAX_STATION_NAME_LENGTH] = { '\0' };
 
-	// ��ԉw�̗v�f�ԍ���ۑ�����ϐ�
+	// 乗車駅の要素番号を保存する変数
 	__int8  entry_station_index = 0;
 
-	// �~�Ԃ���w����ۑ�����ϐ�
+	// 降車する駅名を保存する変数
 	char exit_station_name[MAX_STATION_NAME_LENGTH] = { '\0' };
 
-	// �~�ԉw�̗v�f��ۑ�����ϐ�
+	// 降車駅の要素を保存する変数
 	__int8  exit_station_index = 0;
 
-	// �w�������������ǂ�����ێ�����ϐ�
+	// 駅が見つかったかどうかを保持する変数
 	bool found_station = false;
 
-	// �R����̈���̎���
+	// 山手線の一周の時間
 	__int8 yamanote_total_time = 0;
 
-	// �E����̍��v���� (��)
+	// 右周りの合計時間 (分)
 	__int8 right_total_time = 0;
 
-	// ������̍��v���� (��)
+	// 左周りの合計時間 (分)
 	__int8 left_total_time = 0;
 
-	// �R����̏�ԉw����E�����̃e�[�u��
+	// 山手線の乗車駅から右向きのテーブル
 	Station yamanote_right_table[YAMANOTE_STATION_NUM];
 
-	// �R����̏�ԉw����̍������̃e�[�u��
+	// 山手線の乗車駅からの左向きのテーブル
 	Station yamanote_left_table[YAMANOTE_STATION_NUM];
 
 	
-	/* ��ԉw�m�F */
+	/* 乗車駅確認 */
 	while (true)
 	{
-		printf("��ԉw����͂��Ă�������\n");
+		printf("乗車駅を入力してください\n");
 
-		// ��Ԃ���w�����
+		// 乗車する駅を入力
 		scanf_s("%s", entry_station_name, MAX_STATION_NAME_LENGTH);
 
 
 		for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 		{
-			// DB�ɉw����������
+			// DBに駅があったら
 			if (!strcmp(g_YamanoteDB[i].m_StationName, entry_station_name)) {
-				printf("��ԉw -> %s \n", &entry_station_name);
+				printf("乗車駅 -> %s \n", &entry_station_name);
 				found_station = true;
 
-				// �v�f��ۑ�
+				// 要素を保存
 				entry_station_index = i;
 				break;
 			}
 		}
 
-		// �������������烋�[�v�𔲂���
+		// もし見つかったらループを抜ける
 		if (found_station)break;
 
-		printf("������܂���B������x���͂��Ă��������B\n");
+		printf("見つかりません。もう一度入力してください。\n");
 	}
 
 
-	/* �~�ԉw�m�F */
-		////////// �~�ԉw�m�F /////////////////////
+	/* 降車駅確認 */
+		////////// 降車駅確認 /////////////////////
 	found_station = false;
 	while (true)
 	{
-		printf("�~�ԉw����͂��Ă�������\n");
+		printf("降車駅を入力してください\n");
 
-		// �~�Ԃ���w�����
+		// 降車する駅を入力
 		scanf_s("%s", exit_station_name, MAX_STATION_NAME_LENGTH);
 
 		for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 		{
-			// DB�ɉw����������
+			// DBに駅があったら
 			if (!strcmp(g_YamanoteDB[i].m_StationName, exit_station_name)) {
-				printf("�~�ԉw -> %s \n", &exit_station_name);
+				printf("降車駅 -> %s \n", &exit_station_name);
 				found_station = true;
 
-				// �v�f��ۑ�
+				// 要素を保存
 				exit_station_index = i;
 				break;
 			}
 		}
-		// �������������烋�[�v�𔲂���
+		// もし見つかったらループを抜ける
 		if (found_station)break;
 
-		// else ������x����
-		printf("������܂���B������x���͂��Ă��������B \n");
+		// else もう一度入力
+		printf("見つかりません。もう一度入力してください。 \n");
 	}
 
 
-	// ��ԉw����̉E���̃e�[�u�������
-	// ��ԉw�̗v�f���擾
+	// 乗車駅からの右回りのテーブルを作る
+	// 乗車駅の要素を取得
 	__int8 index = entry_station_index;
 	for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 	{
 		yamanote_right_table[i] = g_YamanoteDB[index];
 
 		index++;
-		// ���݂̗v�f����DB�̗v�f���𒴂����ꍇ0�ɂ���
+		// 現在の要素数がDBの要素数を超えた場合0にする
 		if (index >= YAMANOTE_STATION_NUM) index = 0;
 	}
 
-	// ��ԉw����̍����̃e�[�u�������
-	// ��ԉw�̗v�f���擾
+	// 乗車駅からの左回りのテーブルを作る
+	// 乗車駅の要素を取得
 	index = entry_station_index;
 	for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 	{
 		yamanote_left_table[i] = g_YamanoteDB[index];
 
 		index--;
-		// ���݂̗v�f����0�������ɂȂ�����DB�̍Ō�̗v�f�ɂ���
+		// 現在の要素数が0よりも下になったらDBの最後の要素にする
 		if (index < 0) index = YAMANOTE_STATION_NUM - 1;
 	}
 
 
-	// �E���̎��Ԃ��v��
+	// 右回りの時間を計測
 	for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 	{
 		if (!strcmp(yamanote_right_table[i].m_StationName, exit_station_name))
@@ -130,7 +130,7 @@ int main()
 		right_total_time += yamanote_right_table[i].m_NectStationCost;
 	}
 
-	// �����̎��Ԃ��v��
+	// 左回りの時間を計測
 	for (int i = 1; i < YAMANOTE_STATION_NUM; ++i)
 	{
 		left_total_time += yamanote_left_table[i].m_NectStationCost;
@@ -142,12 +142,12 @@ int main()
 	}
 
 
-	// ���ʂ��o��
+	// 結果を出力
 	printf("%s -> %s\n", entry_station_name, exit_station_name);
-	printf("�E���ɂ����鎞�Ԃ�[ %d ]���ł�\n", right_total_time);
-	printf("�����ɂ����鎞�Ԃ�[ %d ]���ł�\n", left_total_time);
+	printf("右回りにかかる時間は[ %d ]分です\n", right_total_time);
+	printf("左回りにかかる時間は[ %d ]分です\n", left_total_time);
 
 
-	// �v���O�����I��
+	// プログラム終了
 	return 0;
 }
