@@ -115,10 +115,10 @@ int main()
 	__int8 current_station_index = entry_station_index;
 	for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 	{
+		yamanote_right_table[i] = g_YamanoteDB[current_station_index];
+
 		// もし目的地ならテーブル作成終了
 		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
-
-		yamanote_right_table[i] = g_YamanoteDB[current_station_index];
 		
 		current_station_index++;
 		// 現在の要素数がDBの要素数を超えた場合0にする
@@ -130,11 +130,10 @@ int main()
 	current_station_index = entry_station_index;
 	for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 	{
-		// もし目的地ならテーブル作成終了
-		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
-
 		yamanote_left_table[i] = g_YamanoteDB[current_station_index];
 
+		// もし目的地ならテーブル作成終了
+		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
 
 		current_station_index--;
 		// 現在の要素数が0よりも下になったらDBの最後の要素にする
@@ -154,17 +153,31 @@ int main()
 	// true -> 右    false -> 左
 	bool is_right = true;
 
+	// 次の駅が+なのか-なのかを判別するための変数
+	__int8 next_station = 1;
+	
+	// 次の駅の要素を保存する変数
+	__int8 next_station_index = 0;
+
 	while (true)
 	{
-		// もし目的地ならテーブル作成終了
-		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
-
 		// テーブルに現在の駅を追加する
 		yamanote_right_through_chuo_table[new_table_index] = g_YamanoteDB[current_station_index];
 		new_table_index++;
+
+		// もし目的地ならテーブル作成終了
+		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
+
 		
-		/////////////////// 現在の駅が新宿なら
-		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, "新宿"))
+		/////////////////// 次の駅が新宿なら
+		next_station_index = current_station_index + next_station;
+		// 次の駅が山手線DBの要素を超えたら0に戻す。
+		if (next_station_index >= YAMANOTE_STATION_NUM) next_station_index = 0;
+
+		// 次の駅が山手線DBの要素を下回ったら要素の最大に戻す
+		else if (next_station_index < 0)next_station_index = YAMANOTE_INDEX_NUM;
+
+		if (!strcmp(g_YamanoteDB[next_station_index].m_StationName, "新宿"))
 		{
 			for (int i = 0; i < CHUO_STATION_NUM; ++i)
 			{
@@ -190,7 +203,7 @@ int main()
 			// 中央線を抜けたあと、右回りか左回りかを最短距離で決める
 			for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 			{
-				temp_current_index += i;
+				temp_current_index ++;
 
 				// 現在の駅が山手線DBの要素を超えたら0に戻す。
 				if (temp_current_index >= YAMANOTE_STATION_NUM) temp_current_index = 0;
@@ -199,8 +212,7 @@ int main()
 				if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, entry_station_name))
 				{
 					// 左回りに降車駅がある
-					is_right = false;
-					current_station_index--;
+					next_station = -1;
 
 					// 現在の駅が山手線DBの要素を下回ったら要素の最大に戻す
 					if (current_station_index < 0)current_station_index = YAMANOTE_INDEX_NUM;
@@ -210,8 +222,7 @@ int main()
 				else if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, exit_station_name))
 				{
 					// 右回りに降車駅が
-					is_right = true;
-					current_station_index++;
+					next_station = 1;
 
 					// 現在の駅が山手線DBの要素を超えたら0に戻す。
 					if (current_station_index >= YAMANOTE_STATION_NUM) current_station_index = 0;
@@ -222,10 +233,17 @@ int main()
 		}
 
 
-		////////////// 現在の駅が神田なら
-		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, "神田"))
+		////////////// 次の駅が神田なら
+		next_station_index = current_station_index + next_station;
+		// 次の駅が山手線DBの要素を超えたら0に戻す。
+		if (next_station_index >= YAMANOTE_STATION_NUM) next_station_index = 0;
+
+		// 次の駅が山手線DBの要素を下回ったら要素の最大に戻す
+		else if (next_station_index < 0)next_station_index = YAMANOTE_INDEX_NUM;
+
+		if (!strcmp(g_YamanoteDB[next_station_index].m_StationName, "神田"))
 		{
-			for (int i = 3; i >= 0; --i)
+			for (int i = 3; i > 0; --i)
 			{
 				// 中央線の新宿まできたら
 				if (!strcmp(g_ChuoLine[i].m_StationName, "新宿"))
@@ -249,7 +267,7 @@ int main()
 			// 中央線を抜けたあと、右回りか左回りかを最短距離で決める
 			for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 			{
-				temp_current_index += i;
+				temp_current_index++;
 
 				// 現在の駅が山手線DBの要素を超えたら0に戻す。
 				if (temp_current_index >= YAMANOTE_STATION_NUM) temp_current_index = 0;;
@@ -258,8 +276,7 @@ int main()
 				if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, entry_station_name))
 				{
 					// 左回りに降車駅がある
-					is_right = false;
-					current_station_index--;
+					next_station = -1;
 
 					// 現在の駅が山手線DBの要素を下回ったら要素の最大に戻す
 					if (current_station_index < 0)current_station_index = YAMANOTE_STATION_NUM - 1;
@@ -269,8 +286,7 @@ int main()
 				else if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, exit_station_name))
 				{
 					// 右回りに降車駅が
-					is_right = true;
-					current_station_index++;
+					next_station = 1;
 
 					// 現在の駅が山手線DBの要素を超えたら0に戻す。
 					if (current_station_index >= YAMANOTE_STATION_NUM) current_station_index = 0;
@@ -284,12 +300,7 @@ int main()
 		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
 
 		// 駅を進める
-		if (is_right == true) {
-			current_station_index++;
-		}
-		else {
-			current_station_index--;
-		}
+		current_station_index += next_station;
 
 		// 現在の駅が山手線DBの要素を超えたら0に戻す。
 		if (current_station_index >= YAMANOTE_STATION_NUM) current_station_index = 0;
@@ -308,22 +319,30 @@ int main()
 	// 新しく作るテーブルの要素
 	new_table_index = 0;
 
-	// 中央線を抜けた後に右か左のどちらにいくかを保存する変数
-	// true -> 右    false -> 左
-	is_right = false;
+	// 次の駅が右か左なのかを保存する変数
+	next_station = -1;
+	// 次の駅の要素を保存する変数
+	next_station_index = 0;
+
 	while (true)
 	{
-
-		// もし目的地ならテーブル作成終了
-		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
-
 		// テーブルに現在の駅を追加する
 		yamanote_left_through_chuo_table[new_table_index] = g_YamanoteDB[current_station_index];
 		new_table_index++;
 
+		// もし目的地ならテーブル作成終了
+		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
 
-		/////////////////// 現在の駅が新宿なら
-		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, "新宿"))
+
+		/////////////////// 次の駅が新宿なら
+		next_station_index = current_station_index + next_station;
+		// 次の駅が山手線DBの要素を超えたら0に戻す。
+		if (next_station_index >= YAMANOTE_STATION_NUM) next_station_index = 0;
+
+		// 次の駅が山手線DBの要素を下回ったら要素の最大に戻す
+		else if (next_station_index < 0)next_station_index = YAMANOTE_INDEX_NUM;
+
+		if (!strcmp(g_YamanoteDB[next_station_index].m_StationName, "新宿"))
 		{
 			for (int i = 0; i < CHUO_STATION_NUM; ++i)
 			{
@@ -349,23 +368,23 @@ int main()
 			// 中央線を抜けたあと、右回りか左回りかを最短距離で決める
 			for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 			{
-				temp_current_index += i;
+				temp_current_index++;
 
 				// 現在の駅が山手線DBの要素を超えたら0に戻す。
-				if (temp_current_index >= YAMANOTE_STATION_NUM) temp_current_index = 0;;
+				if (temp_current_index >= YAMANOTE_STATION_NUM) temp_current_index = 0;
 
 				// 乗車駅に来たら
 				if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, entry_station_name))
 				{
 					// 左回りに降車駅がある
-					is_right = false;
+					next_station = -1;
 					break;
 				}
 				// 降車駅に来たら
 				else if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, exit_station_name))
 				{
 					// 右回りに降車駅が
-					is_right = true;
+					next_station = 1;
 					break;
 				}
 
@@ -373,8 +392,15 @@ int main()
 		}
 
 
-		////////////// 現在の駅が神田なら
-		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, "神田"))
+		////////////// 次の駅が神田なら
+		next_station_index = current_station_index + next_station;
+		// 次の駅が山手線DBの要素を超えたら0に戻す。
+		if (next_station_index >= YAMANOTE_STATION_NUM) next_station_index = 0;
+
+		// 次の駅が山手線DBの要素を下回ったら要素の最大に戻す
+		else if (next_station_index < 0)next_station_index = YAMANOTE_INDEX_NUM;
+
+		if (!strcmp(g_YamanoteDB[next_station_index].m_StationName, "神田"))
 		{
 			for (int i = CHUO_INDEX_NUM; i >= 0; --i)
 			{
@@ -400,7 +426,7 @@ int main()
 			// 中央線を抜けたあと、右回りか左回りかを最短距離で決める
 			for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 			{
-				temp_current_index += i;
+				temp_current_index++;
 
 				// 現在の駅が山手線DBの要素を超えたら0に戻す。
 				if (temp_current_index >= YAMANOTE_STATION_NUM) temp_current_index = 0;;
@@ -409,15 +435,14 @@ int main()
 				if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, entry_station_name))
 				{
 					// 左回りに降車駅がある
-					is_right = false;
+					next_station = -1;
 					break;
 				}
 				// 降車駅に来たら
 				else if (!strcmp(g_YamanoteDB[temp_current_index].m_StationName, exit_station_name))
 				{
 					// 右回りに降車駅が
-					is_right = true;
-
+					next_station = 1;
 					break;
 				}
 
@@ -428,12 +453,7 @@ int main()
 		if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
 
 		// 駅を進める
-		if (is_right == true) {
-			current_station_index++;
-		}
-		else {
-			current_station_index--;
-		}
+		current_station_index += next_station;
 
 		// 現在の駅が山手線DBの要素を超えたら0に戻す。
 		if (current_station_index >= YAMANOTE_STATION_NUM) current_station_index = 0;
@@ -446,37 +466,107 @@ int main()
 
 
 	////////////////////////////////////////////// 各テーブルにかかる時間を算出 /////////////////////////////////////////////////////
+	__int8 short_distance = 127;
+	char short_root[16]   = "\0";
 
+
+	printf("\n------------------------------------ 右回り ---------------------------------------------\n\n");
 	// 右回りの時間を算出
 	for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 	{
+		// テーブルに駅がなくなったら終了
+		if (!strcmp(yamanote_right_table[i].m_StationName, ""))break;
+
+		// 現在の駅名を出力
+		printf("%s -> ", yamanote_right_table[i].m_StationName);
+
+		// 時間を足していく
 		right_total_time += yamanote_right_table[i].m_NextStationCost;
 	}
 
+	if (right_total_time < short_distance) {
+		short_distance = right_total_time;
+		strcpy_s(short_root, 16, "右回り");
+	}
+
+	printf("\n右回りにかかる時間は %d です。\n", right_total_time);
+
+	printf("\n-----------------------------------------------------------------------------------------\n");
+
+
+	printf("\n------------------------------------ 左回り ---------------------------------------------\n\n");
 	// 左回りの時間を出力
 	for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 	{
-		left_total_time += yamanote_left_table[i].m_NextStationCost;
+		// テーブルに駅がなくなったら終了
+		if (!strcmp(yamanote_left_table[i].m_StationName, ""))break;
+
+		// 現在の駅名を出力
+		printf("%s -> ", yamanote_left_table[i].m_StationName);
+
+		// 始めの1ループ目は足さない
+		if (i != 0)left_total_time += yamanote_left_table[i].m_NextStationCost;
 	}
 
+	if (left_total_time < short_distance) {
+		short_distance = left_total_time;
+		strcpy_s(short_root, 16, "左回り");
+	}
+
+	printf("\n左回りにかかる時間は %d です。\n", left_total_time);
+
+	printf("\n-----------------------------------------------------------------------------------------\n");
+
+
+	printf("\n------------------------------------ 右回り中央線 ---------------------------------------\n\n");
 	// 右回りの中央線を通る時間
 	for (int i = 0; i < YAMANOTE_STATION_NUM + CHUO_STATION_NUM; ++i)
 	{
+		// テーブルに駅がなくなったら終了
+		if (!strcmp(yamanote_right_through_chuo_table[i].m_StationName, ""))break;
+
+		// 現在の駅名を出力
+		printf("%s -> ", yamanote_right_through_chuo_table[i].m_StationName);
+
+		// 時間を足していく
 		chuo_right_total_time += yamanote_right_through_chuo_table[i].m_NextStationCost;
 	}
 
+	if (chuo_right_total_time < short_distance) {
+		short_distance = chuo_right_total_time;
+		strcpy_s(short_root, 16,  "右回り中央線");
+	}
+
+	printf("\n右回り中央線にかかる時間は %d です。\n", chuo_right_total_time);
+
+	printf("\n-----------------------------------------------------------------------------------------\n");
+
+
+	printf("\n------------------------------------ 左回り中央線 ---------------------------------------\n\n");
 	// 左回りの中央線を通る時間
 	for (int i = 0; i < YAMANOTE_STATION_NUM + CHUO_STATION_NUM; ++i)
 	{
+		// テーブルに駅がなくなったら終了
+		if (!strcmp(yamanote_left_through_chuo_table[i].m_StationName, ""))break;
+
+		// 現在の駅名を出力
+		printf("%s -> ", yamanote_left_through_chuo_table[i].m_StationName);
+
+		// 時間を足していく
 		chuo_left_total_time += yamanote_left_through_chuo_table[i].m_NextStationCost;
 	}
+	printf("\n左回り中央線にかかる時間は %d です。\n", chuo_left_total_time);
 
-	// それぞれを出力
-	printf("%s  ->  %s  にかかる時間\n", entry_station_name, exit_station_name);
-	printf("右回りにかかる時間は %d です。\n", right_total_time);
-	printf("左回りにかかる時間は %d です。\n", left_total_time);
-	printf("中央線を利用した右回りにかかる時間は %d です。\n", chuo_right_total_time);
-	printf("中央線を利用した左回りにかかる時間は %d です。\n", chuo_left_total_time);
+	if (chuo_left_total_time < short_distance) {
+		short_distance = chuo_left_total_time;
+		strcpy_s(short_root, 16, "左回り中央線");
+	}
+
+	printf("\n-----------------------------------------------------------------------------------------\n");
+
+
+	// 最短ルートを表示
+	printf("最短ルートは %s です。\n", short_root);
 
 
 	return 0;

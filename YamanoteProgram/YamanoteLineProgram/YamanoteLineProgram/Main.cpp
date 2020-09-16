@@ -131,6 +131,7 @@ int main()
 	}
 
 	// 左回りの時間を計測
+	// i = 1 にすることで次の乗車駅の次の駅から時間を足していく
 	for (int i = 1; i < YAMANOTE_STATION_NUM; ++i)
 	{
 		left_total_time += yamanote_left_table[i].m_NectStationCost;
