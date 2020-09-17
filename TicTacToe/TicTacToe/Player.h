@@ -26,6 +26,9 @@ public:
 	// デストラクタ
 	~Player(){}
 
+	// 初期化関数
+	void Init() override;
+
 	// ステップの更新関数
 	void StepUpdate() override;
 

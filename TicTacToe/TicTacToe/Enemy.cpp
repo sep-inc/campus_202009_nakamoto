@@ -2,6 +2,7 @@
 #include "GrobalObject.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 
 // ステップの更新関数
 void Enemy::StepUpdate()
@@ -25,8 +26,8 @@ void Enemy::StepUpdate()
 			return;
 		}
 
-		// もしプレイヤーの番じゃなければ
-		if (g_WhosTurn != ObjectType::TYPE_PlAYER) return;
+		// もしエネミーの番じゃなければ
+		if (g_WhosTurn != ObjectType::TYPE_ENEMY) return;
 
 		// もし前のフレームで選ばれたいた場合
 		if (m_Selected == true) {
@@ -51,6 +52,13 @@ void Enemy::StepUpdate()
 
 }
 
+// 初期化関数
+void Enemy::Init()
+{
+	m_CurrentStep = EnemyStep::STEP_INIT;
+	m_Selected = false;
+}
+
 // どのマスに置くかを選ぶ関数
 void Enemy::Select()
 {
@@ -66,6 +74,7 @@ void Enemy::Select()
 
 		// 置けるかを調べる
 		if (g_Grid.Select(m_SelectX, m_SelectY, m_ObjectType) == true) {
+			Sleep(500);
 			m_Selected = true;
 			break;
 		}

@@ -1,19 +1,13 @@
 ﻿#include "GrobalObject.h"
 
 // ゲームが終了したかどうかを保存する変数
-bool g_IsGameOver = false;
+bool g_IsGameOver;
 
 // 誰の番なのかを保存する変数
-ObjectType g_WhosTurn = ObjectType::TYPE_PlAYER;
+ObjectType g_WhosTurn;
 
 // 誰が勝利したか保存する変数
-ObjectType g_WhosWon = ObjectType::TYPE_EMPTY;
-
-// プレイヤー
-Player g_Player;
-
-// エネミー
-Enemy  g_Enemy;
+ObjectType g_WhosWon;
 
 // グリッド
-Grid   g_Grid;
+Grid g_Grid;

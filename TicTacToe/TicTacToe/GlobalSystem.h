@@ -4,6 +4,8 @@
 #include "Input.h"
 #include "Drawer.h"
 
+// 終了するかどうか
+extern bool g_Quit;
 
 // インプット
 extern Input g_Input;

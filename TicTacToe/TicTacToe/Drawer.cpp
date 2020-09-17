@@ -1,6 +1,7 @@
 ﻿#include "Drawer.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 // コンストラクタ
 Drawer::Drawer()
@@ -128,6 +129,7 @@ void Drawer::SetDrawBuffer(__int8 x_, __int8 y_, ObjectType type_)
 
 void Drawer::ClearBuffer()
 {
+	system("cls");
 	// バッファのクリア
 	memcpy(m_DrawBuffer, m_BlankBuffer, sizeof(m_BlankBuffer));
 }

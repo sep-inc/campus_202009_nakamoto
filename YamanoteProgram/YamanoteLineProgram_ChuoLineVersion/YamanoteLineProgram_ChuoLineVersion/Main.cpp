@@ -346,14 +346,16 @@ int main()
 		// 右回りの時間を算出
 		for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 		{
-			// テーブルに駅がなくなったら終了
+			// テーブルに駅がなくなったら---
 			if (!strcmp(yamanote_right_table[i].m_StationName, ""))break;
 
 			// 現在の駅名を出力
 			printf("%s -> ", yamanote_right_table[i].m_StationName);
 
 			// 時間を足していく
-			right_total_time += yamanote_right_table[i].m_NextStationCost;
+			if (i != YAMANOTE_INDEX_NUM) {
+				right_total_time += yamanote_right_table[i].m_NextStationCost;
+			}
 		}
 
 		if (right_total_time < short_distance) {

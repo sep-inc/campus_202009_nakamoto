@@ -15,14 +15,8 @@ extern ObjectType g_WhosTurn;
 // 誰が勝利したか保存する変数
 extern ObjectType g_WhosWon;
 
-// プレイヤー
-extern Player g_Player;
-
-// エネミー
-extern Enemy  g_Enemy;
-
 // グリッド
-extern Grid   g_Grid;
+extern Grid g_Grid;
 
 
 #endif
