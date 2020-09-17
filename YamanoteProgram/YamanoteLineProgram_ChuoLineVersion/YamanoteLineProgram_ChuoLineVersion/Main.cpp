@@ -442,11 +442,11 @@ int main()
 
 
 		printf("もう一度続ける\t   Return\n");
-		printf("終了\t\t   ESC\t\n");
+		printf("終了\t\t   ESC or ^C\t\n");
 
 		int key = _getch();
-		// もしESCキーが押されたら
-		if (key == 27) {
+		// もしESCキーまたは^Cが押されたら
+		if (key == 27 || key == 3) {
 			break;
 		}
 	}
