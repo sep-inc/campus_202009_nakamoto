@@ -1,5 +1,7 @@
 #include "YamanoteLineDB.h"
 
+#define YAMANOTE_AROUND_TIME 59
+
 // 山手線DB
 const Station g_YamanoteDB[YAMANOTE_STATION_NUM] =
 {
@@ -45,3 +47,34 @@ const Station g_ChuoLine[CHUO_STATION_NUM] =
 		{30,	"御茶ノ水",		2},
 		{8,		"神田",			2},
 };
+
+
+// 左右のどちらに進むのかを決める関数
+// entry_に出発地、exit_に目的地を引数に入れる
+// 戻り値 1が右 -1が左
+int WhichWay(__int8 entryId_, __int8 exitId_)
+{
+	if (entryId_ == exitId_) return 1;
+
+	__int8 right_cost = 0;
+	__int8 left_const = 0;
+	__int8 index = entryId_;
+
+	for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
+	{
+		// もし現在の駅と目的地が同じになったら終了
+		if (g_YamanoteDB[index].m_StationId == g_YamanoteDB[exitId_].m_StationId) break;
+
+		right_cost += g_YamanoteDB[index].m_NextStationCost;
+
+		index++;
+		// 現在の駅が山手線DBの要素を以上になったら0に戻す。
+		if (index >= YAMANOTE_STATION_NUM) index = 0;
+	}
+
+	// 全体から右向きにかかる時間を引いて左向きにかかる時間を算出する
+	left_const = YAMANOTE_AROUND_TIME - right_cost;
+	
+
+	return right_cost < left_const ? 1 : -1;
+}

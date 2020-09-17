@@ -38,4 +38,10 @@ extern const Station g_YamanoteDB[YAMANOTE_STATION_NUM];
 // 中央線DB
 extern const Station g_ChuoLine[CHUO_STATION_NUM];
 
+
+// 左右のどちらに進むのかを決める関数
+// entry_に出発地、exit_に目的地を引数に入れる
+// 戻り値 1が右 -1が左
+int WhichWay(__int8 entryId_, __int8 exitId_);
+
 #endif
