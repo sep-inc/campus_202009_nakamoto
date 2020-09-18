@@ -126,6 +126,7 @@ int main()
 		for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 		{
 			yamanote_right_table[i] = g_YamanoteDB[current_station_index];
+			right_total_time += g_YamanoteDB[current_station_index].m_NextStationCost;
 
 			// もし目的地ならテーブル作成終了
 			if (!strcmp(g_YamanoteDB[current_station_index].m_StationName, exit_station_name)) break;
@@ -148,6 +149,7 @@ int main()
 			current_station_index--;
 			// 現在の要素数が0よりも下になったらDBの最後の要素にする
 			if (current_station_index < 0) current_station_index = YAMANOTE_INDEX_NUM;
+			left_total_time += g_YamanoteDB[current_station_index].m_NextStationCost;
 		}
 
 
@@ -186,6 +188,8 @@ int main()
 						current_station_index = g_ChuoLine[i].m_StationId;
 						break;
 					}
+				
+					chuo_right_total_time += g_ChuoLine[i].m_NextStationCost;
 
 					// 中央線の駅を追加する
 					yamanote_right_through_chuo_table[new_table_index] = g_ChuoLine[i];
@@ -201,13 +205,15 @@ int main()
 			{
 				for (int i = 0; i < CHUO_STATION_NUM; ++i)
 				{
-					// 中央線の東京まできたら
-					if (!strcmp(g_ChuoLine[CHUO_INDEX_NUM - i].m_StationName, "東京"))
+					// 中央線の新宿まできたら
+					if (!strcmp(g_ChuoLine[CHUO_INDEX_NUM - i].m_StationName, "新宿"))
 					{
-						// 現在の駅を東京に設定する
+						// 現在の駅を新宿に設定する
 						current_station_index = g_ChuoLine[CHUO_INDEX_NUM - i].m_StationId;
 						break;
 					}
+
+					chuo_right_total_time += g_ChuoLine[(CHUO_INDEX_NUM - i) - 1].m_NextStationCost;
 
 					// 中央線の駅を追加する
 					yamanote_right_through_chuo_table[new_table_index] = g_ChuoLine[i];
@@ -230,6 +236,7 @@ int main()
 			new_table_index++;
 
 			// 駅を進める
+			if (next_station_direction == 1) chuo_right_total_time += g_YamanoteDB[current_station_index].m_NextStationCost;
 			current_station_index += next_station_direction;
 
 			// 現在の駅が山手線DBの要素を超えたら0に戻す。
@@ -237,6 +244,8 @@ int main()
 
 			// 現在の駅が山手線DBの要素を下回ったら要素の最大に戻す
 			if (current_station_index < 0)current_station_index = YAMANOTE_INDEX_NUM;
+
+			if (next_station_direction == -1) chuo_right_total_time += g_YamanoteDB[current_station_index].m_NextStationCost;
 
 		}
 		//=====================================================================================//
@@ -280,6 +289,8 @@ int main()
 						break;
 					}
 
+					chuo_left_total_time += g_ChuoLine[i].m_NextStationCost;
+
 					// 中央線の駅を追加する
 					yamanote_left_through_chuo_table[new_table_index] = g_ChuoLine[i];
 					new_table_index++;
@@ -294,16 +305,18 @@ int main()
 			{
 				for (int i = 0; i < CHUO_STATION_NUM; ++i)
 				{
-					// 中央線の東京まできたら
-					if (!strcmp(g_ChuoLine[CHUO_INDEX_NUM - i].m_StationName, "東京"))
+					// 中央線の新宿まできたら
+					if (!strcmp(g_ChuoLine[CHUO_INDEX_NUM - i].m_StationName, "新宿"))
 					{
-						// 現在の駅を東京に設定する
+						// 現在の駅を新宿に設定する
 						current_station_index = g_ChuoLine[CHUO_INDEX_NUM - i].m_StationId;
 						break;
 					}
 
+					chuo_left_total_time += g_ChuoLine[(CHUO_INDEX_NUM - i) - 1].m_NextStationCost;
+
 					// 中央線の駅を追加する
-					yamanote_left_through_chuo_table[new_table_index] = g_ChuoLine[i];
+					yamanote_left_through_chuo_table[new_table_index] = g_ChuoLine[CHUO_INDEX_NUM - i];
 					new_table_index++;
 				}
 
@@ -323,6 +336,7 @@ int main()
 			new_table_index++;
 
 			// 駅を進める
+			if (next_station_direction == 1) chuo_left_total_time += g_YamanoteDB[current_station_index].m_NextStationCost;
 			current_station_index += next_station_direction;
 
 			// 現在の駅が山手線DBの要素を超えたら0に戻す。
@@ -330,6 +344,7 @@ int main()
 
 			// 現在の駅が山手線DBの要素を下回ったら要素の最大に戻す
 			if (current_station_index < 0)current_station_index = YAMANOTE_INDEX_NUM;
+			if (next_station_direction == -1) chuo_left_total_time += g_YamanoteDB[current_station_index].m_NextStationCost;
 
 		}
 		//=====================================================================================//
@@ -351,9 +366,6 @@ int main()
 
 			// 現在の駅名を出力
 			printf("%s -> ", yamanote_right_table[i].m_StationName);
-
-			// 時間を足していく
-			right_total_time += yamanote_right_table[i].m_NextStationCost;
 		}
 
 		if (right_total_time < short_distance) {
@@ -375,9 +387,6 @@ int main()
 
 			// 現在の駅名を出力
 			printf("%s -> ", yamanote_left_table[i].m_StationName);
-
-			// 始めの1ループ目は足さない
-			if (i != 0)left_total_time += yamanote_left_table[i].m_NextStationCost;
 		}
 
 		if (left_total_time < short_distance) {
@@ -400,8 +409,6 @@ int main()
 			// 現在の駅名を出力
 			printf("%s -> ", yamanote_right_through_chuo_table[i].m_StationName);
 
-			// 時間を足していく
-			chuo_right_total_time += yamanote_right_through_chuo_table[i].m_NextStationCost;
 		}
 
 		if (chuo_right_total_time < short_distance) {
@@ -423,9 +430,6 @@ int main()
 
 			// 現在の駅名を出力
 			printf("%s -> ", yamanote_left_through_chuo_table[i].m_StationName);
-
-			// 時間を足していく
-			chuo_left_total_time += yamanote_left_through_chuo_table[i].m_NextStationCost;
 		}
 		printf("\n左回り中央線にかかる時間は %d です。\n", chuo_left_total_time);
 
