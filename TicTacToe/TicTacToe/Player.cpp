@@ -3,12 +3,15 @@
 #include "GlobalSystem.h"
 #include <stdio.h>
 
+
 void Player::StepUpdate()
 {
 	// 現在のステップを確認
 	switch (m_CurrentStep)
 	{
 	case PlayerStep::STEP_INIT:
+
+		this->Init();
 
 		// ステップを進める
 		m_CurrentStep = PlayerStep::STEP_UPDATE;
@@ -30,7 +33,7 @@ void Player::StepUpdate()
 		// もし前のフレームで選ばれたいた場合
 		if (m_Selected == true) {
 			m_Selected = false;
-			g_WhosTurn = ObjectType::TYPE_PlAYER;
+			g_WhosTurn = ObjectType::TYPE_ENEMY;
 			return;
 		}
 
@@ -41,6 +44,8 @@ void Player::StepUpdate()
 		break;
 
 	case PlayerStep::STEP_RELEASE:
+		
+		
 		// 解放
 		break;
 
@@ -49,6 +54,16 @@ void Player::StepUpdate()
 	}
 }
 
+
+// 初期化関数
+void Player::Init()
+{
+	m_CurrentStep = PlayerStep::STEP_INIT;
+	m_Selected = false;
+}
+
+
+// どのマスに置くかを選ぶ関数
 void Player::Select()
 {
 	while (true)

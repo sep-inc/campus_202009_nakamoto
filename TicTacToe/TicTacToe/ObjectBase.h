@@ -13,13 +13,16 @@ public:
 	// コンストラクタ
 	ObjectBase(ObjectType type_):
 		m_ObjectType(type_),
-		m_Selected(true),
+		m_Selected(false),
 		m_SelectX(0),
 		m_SelectY(0)
 	{}
 
 	// デストラクタ
 	virtual ~ObjectBase(){}
+
+	// 初期化関数
+	virtual void Init() = 0;
 
 	// ステップの更新関数
 	virtual void StepUpdate() = 0;
@@ -44,6 +47,8 @@ protected:
 
 	// 置かれた場所の縦軸を保存する変数
 	__int8 m_SelectY;
+
+	// グリッド参照用変数
 
 	// オブジェクトを識別するための変数
 	const ObjectType m_ObjectType;

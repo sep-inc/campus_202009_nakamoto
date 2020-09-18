@@ -22,14 +22,15 @@ public:
 	Grid():
 		m_Grid(),
 		m_CurrentStep(GRID_STEP::STEP_INIT)
-	{}
+	{
+		Init();
+	}
 
 	// デストラクタ
 	~Grid(){}
 
-	// ステップ更新関数
-	void StepUpdate();
-
+	// 初期化関数
+	void Init();
 	
 	// どのマスに置くのかを決める関数
 	// true  成功
@@ -41,11 +42,9 @@ public:
 	void Draw();
 
 private:
-	// 初期化関数
-	void Init();
-
 	// 勝敗判定関数
-	bool WinOrlossJudgment();
+	// 引数のオブジェクトが勝っているかどうか
+	bool JudgmentWinner(ObjectType type_);
 
 	// 引き分けかを調べる関数
 	bool DrawJudgment();

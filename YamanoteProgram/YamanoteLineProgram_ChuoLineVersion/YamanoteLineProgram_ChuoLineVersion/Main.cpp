@@ -361,7 +361,7 @@ int main()
 		// 右回りの時間を算出
 		for (int i = 0; i < YAMANOTE_STATION_NUM; ++i)
 		{
-			// テーブルに駅がなくなったら終了
+			// テーブルに駅がなくなったら---
 			if (!strcmp(yamanote_right_table[i].m_StationName, ""))break;
 
 			// 現在の駅名を出力

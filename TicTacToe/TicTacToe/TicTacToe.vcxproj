@@ -141,7 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Drawer.cpp" />
     <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="TicTacToeGame.cpp" />
     <ClCompile Include="GlobalSystem.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GrobalObject.cpp" />
@@ -152,7 +152,7 @@
   <ItemGroup>
     <ClInclude Include="Drawer.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="TicTacToeGame.h" />
     <ClInclude Include="ObjectDefinition.h" />
     <ClInclude Include="GlobalSystem.h" />
     <ClInclude Include="Grid.h" />
