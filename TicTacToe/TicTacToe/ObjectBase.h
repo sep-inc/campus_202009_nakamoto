@@ -30,7 +30,7 @@ public:
 
 protected:
 	// どのマスに置くかを選ぶ関数
-	virtual void Select() = 0;
+	void Select();
 
 	// どのマスの横軸に置くかを決める関数
 	virtual __int8 SelectHorizontal() = 0;

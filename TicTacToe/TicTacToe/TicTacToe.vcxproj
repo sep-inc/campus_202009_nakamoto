@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="Drawer.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="ObjectBase.cpp" />
     <ClCompile Include="TicTacToeGame.cpp" />
     <ClCompile Include="GlobalSystem.cpp" />
     <ClCompile Include="Grid.cpp" />

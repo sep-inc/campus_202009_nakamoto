@@ -33,9 +33,6 @@ public:
 	void StepUpdate() override;
 
 private:
-	// どのマスに置くかを選ぶ関数
-	void Select() override;
-
 	// どのマスの横軸に置くかを決める関数
 	__int8 SelectHorizontal() override;
 

@@ -62,30 +62,6 @@ void Player::Init()
 	m_Selected = false;
 }
 
-
-// どのマスに置くかを選ぶ関数
-void Player::Select()
-{
-	while (true)
-	{
-		// 横軸を選ぶ
-		m_SelectX = SelectHorizontal();
-		if (m_SelectX == -1) continue;
-
-		// 縦軸を選ぶ
-		m_SelectY = SelectVertical();
-		if (m_SelectY == -1) continue;
-
-		if (g_Grid.Select(m_SelectX, m_SelectY, m_ObjectType) == true) {
-			m_Selected = true;
-			break;
-		}
-		else {
-			printf("もう一度入力してください\n");
-		}
-	}
-}
-
 // どのマスの横軸に置くかを決める関数
 __int8 Player::SelectHorizontal()
 {
