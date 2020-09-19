@@ -120,6 +120,7 @@ bool Grid::DrawJudgment()
 				|| m_Grid[y][1] == ObjectType::TYPE_PlAYER
 				|| m_Grid[y][2] == ObjectType::TYPE_PlAYER)
 			{
+				break;
 			}
 			else return false;
 		}
@@ -139,6 +140,7 @@ bool Grid::DrawJudgment()
 				|| m_Grid[1][x] == ObjectType::TYPE_PlAYER
 				|| m_Grid[2][x] == ObjectType::TYPE_PlAYER)
 			{
+				break;
 			}
 			else return false;
 		}
@@ -152,8 +154,8 @@ bool Grid::DrawJudgment()
 		|| m_Grid[2][2] == ObjectType::TYPE_PlAYER)
 	{
 		if (m_Grid[0][0] == ObjectType::TYPE_ENEMY
-			&& m_Grid[1][1] == ObjectType::TYPE_ENEMY
-			&& m_Grid[2][2] == ObjectType::TYPE_ENEMY)
+			|| m_Grid[1][1] == ObjectType::TYPE_ENEMY
+			|| m_Grid[2][2] == ObjectType::TYPE_ENEMY)
 		{
 		}
 		else return false;
