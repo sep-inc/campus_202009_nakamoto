@@ -3,7 +3,6 @@
 
 /**
 * @brief   円盤クラス
-* @details
 */
 class Disk
 {
@@ -68,7 +67,7 @@ public:
 private:
 	/**
 	* @brief   どの列を選ばれたかを返す関数
-	* @return  __int8 戻り値の説明
+	* @return  __int8 選択されたの列の番号
 	* @details キー入力を行いどの列が選ばれたかを返す。1,2,3以外は返らない。
 	*/
 	__int8 SelectColumn();
