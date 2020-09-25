@@ -6,7 +6,7 @@
 /**
 * @brief エネミークラス
 */
-class Enemy : public CharacterBase
+class CharacterEnemy : public CharacterBase
 {
 	/**
 	* @enum Enum
@@ -22,7 +22,7 @@ public:
 	* @brief コンストラクタ
 	* @param[in] stage_　ステージクラスのアドレス
 	*/
-	Enemy(Stage* stage_) :
+	CharacterEnemy(Stage* stage_) :
 		CharacterBase      { stage_, ObjectType::TYPE_ENEMY },
 		m_MovableDirectionNum{ 0 },
 		m_MovableDirection   { Direction ::DIRECTION_DOWN},
@@ -32,7 +32,7 @@ public:
 	/**
 	* @brief デストラクタ
 	*/
-	~Enemy(){}
+	~CharacterEnemy(){}
 
 	/**
 	* @brief   初期化関数

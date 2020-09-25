@@ -67,16 +67,16 @@ private:
 
 private:
 	//! プレイヤー変数
-	Player       m_Player;
+	CharacterPlayer m_Player;
 
 	//! エネミー変数
-	Enemy        m_Enemy;
+	CharacterEnemy  m_Enemy;
 
 	//! ステージ変数
-	Stage        m_Stage;
+	Stage           m_Stage;
 
 	//! 現在のステップを保存する変数
-	GameTronStep m_CurrentStep;
+	GameTronStep    m_CurrentStep;
 };
 
 #endif

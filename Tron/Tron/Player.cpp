@@ -1,7 +1,7 @@
 ﻿#include "Player.h"
 #include "System.h"
 
-void Player::Init()
+void CharacterPlayer::Init()
 {
 	m_PosX    = 1;
 	m_PosY    = STAGE_HEIGHT / 2;
@@ -10,19 +10,19 @@ void Player::Init()
 	m_RefStage->SetStage(m_PosX, m_PosY, m_Type);
 }
 
-void Player::Update()
+void CharacterPlayer::Update()
 {
 	// 現在のステップを確認
 	switch (m_CurrentStep)
 	{
-	case Player::PlayerStep::STEP_INIT:
+	case CharacterPlayer::PlayerStep::STEP_INIT:
 		// 初期化ステップ
 		
 		this->Init();
 		m_CurrentStep = PlayerStep::STEP_UPDATE;
 
 		break;
-	case Player::PlayerStep::STEP_UPDATE:
+	case CharacterPlayer::PlayerStep::STEP_UPDATE:
 		// 更新ステップ
 		
 		// 勝敗が決まっていた場合下の処理は行わない
@@ -52,7 +52,7 @@ void Player::Update()
 	}
 }
 
-void Player::DecideDirection()
+void CharacterPlayer::DecideDirection()
 {
 	while (true)
 	{
@@ -85,7 +85,7 @@ void Player::DecideDirection()
 	}
 }
 
-bool Player::CheckHitObject()
+bool CharacterPlayer::CheckHitObject()
 {
 	if (m_RefStage->GetStageObject(m_PosX, m_PosY) != ObjectType::TYPE_EMPTY) {
 		return true;

@@ -6,7 +6,7 @@
 /**
 * @brief プレイヤークラス
 */
-class Player : public CharacterBase
+class CharacterPlayer : public CharacterBase
 {
 	/**
 	* @enum Enum
@@ -23,7 +23,7 @@ public:
 	* @brief コンストラクタ
 	* @param[in] stage_　ステージクラスのアドレス
 	*/
-	Player(Stage* stage_) :
+	CharacterPlayer(Stage* stage_) :
 		CharacterBase{ stage_, ObjectType::TYPE_PLAYRE } ,
 		m_CurrentStep{ PlayerStep::STEP_INIT }
 	{}

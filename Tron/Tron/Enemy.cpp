@@ -1,7 +1,7 @@
 ﻿#include "Enemy.h"
 #include <stdlib.h>
 
-void Enemy::Init()
+void CharacterEnemy::Init()
 {
 	m_PosX    = STAGE_WIDTH - 2;
 	m_PosY    = STAGE_HEIGHT / 2;
@@ -10,19 +10,19 @@ void Enemy::Init()
 	m_RefStage->SetStage(m_PosX, m_PosY, m_Type);
 }
 
-void Enemy::Update()
+void CharacterEnemy::Update()
 {
 	// 現在のステップを確認する
 	switch (m_CurrentStep)
 	{
-	case Enemy::EnemyStep::STEP_INIT:
+	case CharacterEnemy::EnemyStep::STEP_INIT:
 		// 初期化ステップ
 		
 		this->Init();
 		m_CurrentStep = EnemyStep::STEP_UPDATE;
 
 		break;
-	case Enemy::EnemyStep::STEP_UPDATE:
+	case CharacterEnemy::EnemyStep::STEP_UPDATE:
 		// 更新ステップ
 
 		// 勝敗が決まっていた場合下の処理は行わない
@@ -54,7 +54,7 @@ void Enemy::Update()
 	}
 }
 
-void Enemy::SerchDirecttion()
+void CharacterEnemy::SerchDirecttion()
 {
 	m_MovableDirectionNum = 0;
 
@@ -83,7 +83,7 @@ void Enemy::SerchDirecttion()
 	}
 }
 
-void Enemy::DecideDirection()
+void CharacterEnemy::DecideDirection()
 {
 	m_Direction = m_MovableDirection[rand() % m_MovableDirectionNum];
 }
