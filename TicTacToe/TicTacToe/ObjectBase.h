@@ -13,7 +13,6 @@ public:
 	// コンストラクタ
 	ObjectBase(ObjectType type_):
 		m_ObjectType(type_),
-		m_Selected(false),
 		m_SelectX(0),
 		m_SelectY(0)
 	{}
@@ -39,16 +38,11 @@ protected:
 	virtual __int8 SelectVertical()   = 0;
 
 protected:
-	// どのマスに置くか決めたかどうかを保存する変数
-	bool m_Selected;
-
 	// 置かれた場所の横軸を保存する変数
 	__int8 m_SelectX;
 
 	// 置かれた場所の縦軸を保存する変数
 	__int8 m_SelectY;
-
-	// グリッド参照用変数
 
 	// オブジェクトを識別するための変数
 	const ObjectType m_ObjectType;

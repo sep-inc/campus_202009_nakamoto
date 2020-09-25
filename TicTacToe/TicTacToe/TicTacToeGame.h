@@ -19,7 +19,8 @@ class TicTacToeGame
 public:
 	// コンストラクタ
 	TicTacToeGame():
-		m_CurrentStep(TicTacToeGameStep::STEP_INIT)
+		m_CurrentStep(TicTacToeGameStep::STEP_INIT),
+		m_TurnCount(0)
 	{}
 
 	// デストラクタ
@@ -45,6 +46,9 @@ private:
 
 	// 現在のステップ
 	TicTacToeGameStep m_CurrentStep;
+
+	// ターンをカウントする変数
+	int m_TurnCount;
 
 };
 

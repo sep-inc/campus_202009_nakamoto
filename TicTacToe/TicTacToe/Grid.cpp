@@ -23,7 +23,7 @@ bool Grid::Select(__int8 x_, __int8 y_, ObjectType type_)
 			g_IsGameOver = true;
 			g_WhosWon = type_;
 		}
-		if (DrawJudgment() == true) {
+		else if (DrawJudgment() == true) {
 			g_IsGameOver = true;
 			g_WhosWon = ObjectType::TYPE_EMPTY;
 		}
@@ -120,7 +120,7 @@ bool Grid::DrawJudgment()
 				|| m_Grid[y][1] == ObjectType::TYPE_PlAYER
 				|| m_Grid[y][2] == ObjectType::TYPE_PlAYER)
 			{
-				break;
+				continue;
 			}
 			else return false;
 		}
@@ -140,7 +140,7 @@ bool Grid::DrawJudgment()
 				|| m_Grid[1][x] == ObjectType::TYPE_PlAYER
 				|| m_Grid[2][x] == ObjectType::TYPE_PlAYER)
 			{
-				break;
+				continue;
 			}
 			else return false;
 		}

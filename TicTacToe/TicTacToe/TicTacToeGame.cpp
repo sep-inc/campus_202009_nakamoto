@@ -20,15 +20,25 @@ void TicTacToeGame::Update()
 		g_Grid.Init();
 		
 		m_CurrentStep = TicTacToeGame::TicTacToeGameStep::STEP_UPDATE;
+		m_TurnCount = 0;
 
 		break;
 	case TicTacToeGame::TicTacToeGameStep::STEP_UPDATE:
 
-		m_Player.StepUpdate();
-
-		m_Enemy.StepUpdate();
-
+		// 決着がついていたらステップを進める
 		if (g_IsGameOver) m_CurrentStep = TicTacToeGame::TicTacToeGameStep::STEP_RELEASE;
+
+		// ターンを進める
+		m_TurnCount++;
+		
+		// ターン数が奇数ならプレイヤーの更新を行う
+		if (m_TurnCount % 2 == 1) {
+			m_Player.StepUpdate();
+		}
+		// 奇数ならエネミーの更新を行う
+		else {
+			m_Enemy.StepUpdate();
+		}		
 		
 		break;
 

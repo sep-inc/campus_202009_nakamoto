@@ -26,16 +26,6 @@ void Enemy::StepUpdate()
 			return;
 		}
 
-		// もしエネミーの番じゃなければ
-		if (g_WhosTurn != ObjectType::TYPE_ENEMY) return;
-
-		// もし前のフレームで選ばれたいた場合
-		if (m_Selected == true) {
-			m_Selected = false;
-			g_WhosTurn = ObjectType::TYPE_PlAYER;
-			return;
-		}
-
 		// どこに置くのかを選ぶ
 		this->Select();
 
@@ -56,7 +46,6 @@ void Enemy::StepUpdate()
 void Enemy::Init()
 {
 	m_CurrentStep = EnemyStep::STEP_INIT;
-	m_Selected = false;
 }
 
 // どのマスの横軸に置くかを決める関数

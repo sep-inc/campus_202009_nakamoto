@@ -15,7 +15,6 @@ void ObjectBase::Select()
 
 		// ’u‚¯‚é‚©‚ð’²‚×‚é
 		if (g_Grid.Select(m_SelectX, m_SelectY, m_ObjectType) == true) {
-			m_Selected = true;
 			break;
 		}
 	}
