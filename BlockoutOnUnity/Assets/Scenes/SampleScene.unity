@@ -27030,10 +27030,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 429466794}
   bar: {fileID: 2145573132}
-  RemainNum: 3
+  remainNum: 3
   result_text: {fileID: 2014402435}
   start_text: {fileID: 317119434}
-  Block_Num: 0
+  block_array: []
+  block_num: 0
 --- !u!4 &2052765159
 Transform:
   m_ObjectHideFlags: 0
@@ -27546,7 +27547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3390181957778897208, guid: 2d69b9705979b7747aac2b99cf6ad222, type: 3}
       propertyPath: m_CollisionDetection
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3390181957778897209, guid: 2d69b9705979b7747aac2b99cf6ad222, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27608,6 +27609,10 @@ PrefabInstance:
       propertyPath: game_controller
       value: 
       objectReference: {fileID: 2052765157}
+    - target: {fileID: 3390181957778897211, guid: 2d69b9705979b7747aac2b99cf6ad222, type: 3}
+      propertyPath: speed
+      value: 600
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d69b9705979b7747aac2b99cf6ad222, type: 3}
 --- !u!1001 &2094033007
@@ -28645,7 +28650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2b494ae6ff856e4e882c05f8179a056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 200
+  speed: 200
   move_range_min: -80
   move_range_max: 125
 --- !u!1001 &1472138897542685566

@@ -25,33 +25,33 @@ public class GameController : MonoBehaviour
     [SerializeField]
     GameObject start_text  = null;
 
+   public GameObject[] block_array;
+
     // ブロックの数を保存する変数
-    public int block_Num;
+    public int block_num;
 
     // ボールが発射されたかどうかを保存する変数
     bool is_ball_start;
-
-    // ゲームオーバー変数
-    public bool game_over { get; set; }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        game_over = false;
-
         is_ball_start = false;
         start_text.SetActive(true);
 
         // ブロックの数をタグをみて保存する
-        block_Num = GameObject.FindGameObjectsWithTag("Block").Length;
+        block_num = GameObject.FindGameObjectsWithTag("Block").Length;
+
+        // ブロックの配列を初期化
+        block_array = GameObject.FindGameObjectsWithTag("Block");
     }   
 
     // Update is called once per frame
     void Update()
     {
         // ブロックが0になったらゲームクリア
-        if (block_Num == 0)
+        if (block_num == 0)
         {
             Text text = result_text.GetComponent<Text>();
             text.text = "ゲームクリア!!";
@@ -69,7 +69,17 @@ public class GameController : MonoBehaviour
             Text text = result_text.GetComponent<Text>();
             text.text = "ゲームオーバー";
             result_text.SetActive(true);
-            game_over = true;
+            
+            for(int i = 0; i < block_array.Length; ++i)
+            {
+                if (block_array[i] == null)
+                {
+                    continue;
+                }
+
+                Block block_component = block_array[i].GetComponent<Block>();
+                block_component.NotifyGameOver();
+            }
 
             return;
         }
@@ -117,6 +127,6 @@ public class GameController : MonoBehaviour
     public void NotifyBlockDead()
     {
         // ブロックの数を減らす
-        block_Num--;
+        block_num--;
     }
 }

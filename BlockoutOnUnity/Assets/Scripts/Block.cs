@@ -17,16 +17,17 @@ public class Block : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // もしゲームオーバーになっていたら
-        if (controller_component.GameOver)
-        {
-            Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
-            rigidbody.isKinematic = false;
-            rigidbody.useGravity = true;
-            rigidbody.constraints = RigidbodyConstraints.None;
-        }
     }
 
+    // ゲームオーバーの通知を受け取った時の処理
+    public void NotifyGameOver()
+    {
+        // このオブジェクトを消す
+        Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
+        rigidbody.isKinematic = false;
+        rigidbody.useGravity = true;
+        rigidbody.constraints = RigidbodyConstraints.None;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
