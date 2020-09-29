@@ -62,12 +62,13 @@ public class Ball : MonoBehaviour
                 once = true;
             }
         }
+    }
 
-        // クリアしたらこのオブジェクトを消す
-        if (controller_component.GameClear)
-        {
-            Destroy(gameObject);
-        }
+    // ゲームクリア通知を受け取った時の処理
+    public void NotifyGameClear()
+    {
+        // このオブジェクトを消す
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -84,6 +85,5 @@ public class Ball : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 
 }

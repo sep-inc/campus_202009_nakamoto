@@ -57,7 +57,6 @@ public class GameController : MonoBehaviour
             GameOver = true;
         }
 
-
         // もしゲームオーバーの場合ゲームオーバーと表示する
         if (GameOver)
         {
@@ -74,7 +73,8 @@ public class GameController : MonoBehaviour
             text.text = "ゲームクリア!!";
             result_text.SetActive(true);
 
-            
+            Ball ball_script = ball.GetComponent<Ball>();
+            ball_script.NotifyGameClear();
 
             return;
         }
@@ -87,12 +87,12 @@ public class GameController : MonoBehaviour
     {
         // 残機を減らす
         RemainNum--;
-        // 残機が0になったらゲームオーバー
+        // 残機が0じゃなければボールを生成
         if (RemainNum != 0)
         {
             Vector3 pos = bar.transform.position;
             pos.y += bar.transform.localScale.y;
-            Instantiate(ball, pos, Quaternion.identity);
+            ball = Instantiate(ball, pos, Quaternion.identity);
         }
     }
 
