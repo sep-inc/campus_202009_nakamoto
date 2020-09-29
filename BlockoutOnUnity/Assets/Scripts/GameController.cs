@@ -45,6 +45,12 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // ブロックが0になったらゲームクリア
+        if (Block_Num == 0)
+        {
+            GameClear = true;
+        }
+
         // もしゲームオーバーの場合ゲームオーバーと表示する
         if (GameOver)
         {
@@ -94,11 +100,5 @@ public class GameController : MonoBehaviour
     {
         // ブロックの数を減らす
         Block_Num--;
-
-        // ブロックが0になったらゲームクリア
-        if (Block_Num == 0)
-        {
-            GameClear = true;
-        }
     }
 }
