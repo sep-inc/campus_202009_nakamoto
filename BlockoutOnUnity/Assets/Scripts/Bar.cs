@@ -8,6 +8,14 @@ public class Bar : MonoBehaviour
     [SerializeField]
     float Speed = 0;
 
+    // 移動範囲の左端
+    [SerializeField]
+    float move_range_min = 0;
+
+    // 移動範囲の右端
+    [SerializeField]
+    float move_range_max = 0;
+
     new Rigidbody rigidbody;
     
     // Start is called before the first frame update
@@ -24,10 +32,10 @@ public class Bar : MonoBehaviour
         {
             transform.Translate(Speed * Time.deltaTime, 0, 0);
 
-            if (transform.position.x >= 85)
+            if (transform.position.x >= move_range_max)
             {
                 Vector3 vector = transform.position;
-                vector.x = 85;
+                vector.x = move_range_max;
                 transform.position = vector;
             }
         }
@@ -37,10 +45,10 @@ public class Bar : MonoBehaviour
         {
             transform.Translate(-Speed * Time.deltaTime, 0, 0);
 
-            if (transform.position.x <= -90)
+            if (transform.position.x <= move_range_min)
             {
                 Vector3 vector = transform.position;
-                vector.x = -90;
+                vector.x = move_range_min;
                 transform.position = vector;
             }
         }

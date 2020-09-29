@@ -28646,6 +28646,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 200
+  move_range_min: -80
+  move_range_max: 125
 --- !u!1001 &1472138897542685566
 PrefabInstance:
   m_ObjectHideFlags: 0
