@@ -19,24 +19,29 @@ public class GameController : MonoBehaviour
 
     // 結果を表示するためのtextオブジェクト
     [SerializeField]
-    GameObject result_text;
+    GameObject result_text = null;
+
+    // ボールの発射キーを表示するためのtextオブジェクト
+    [SerializeField]
+    GameObject start_text  = null;
 
     // ブロックの数を保存する変数
     public int Block_Num;
 
+    // ボールが発射されたかどうかを保存する変数
+    bool is_ball_start;
+
     // ゲームオーバー変数
     public bool GameOver { get; set; }
-
-    // ゲームクリア変数
-    public bool GameClear { get; set; }
-
 
 
     // Start is called before the first frame update
     void Start()
     {
         GameOver = false;
-        GameClear = false;
+
+        is_ball_start = false;
+        start_text.SetActive(true);
 
         // ブロックの数をタグをみて保存する
         Block_Num = GameObject.FindGameObjectsWithTag("Block").Length;
@@ -48,27 +53,6 @@ public class GameController : MonoBehaviour
         // ブロックが0になったらゲームクリア
         if (Block_Num == 0)
         {
-            GameClear = true;
-        }
-
-        // 残機が0になったらゲームオーバー
-        if (RemainNum == 0)
-        {
-            GameOver = true;
-        }
-
-        // もしゲームオーバーの場合ゲームオーバーと表示する
-        if (GameOver)
-        {
-            Text text = result_text.GetComponent<Text>();
-            text.text = "ゲームオーバー";
-            result_text.SetActive(true);
-            return;
-        }
-
-        // もしゲームクリアの場合ゲームクリアと表示する
-        if (GameClear)
-        {
             Text text = result_text.GetComponent<Text>();
             text.text = "ゲームクリア!!";
             result_text.SetActive(true);
@@ -79,6 +63,35 @@ public class GameController : MonoBehaviour
             return;
         }
 
+        // 残機が0になったらゲームオーバー
+        if (RemainNum == 0)
+        {
+            Text text = result_text.GetComponent<Text>();
+            text.text = "ゲームオーバー";
+            result_text.SetActive(true);
+            GameOver = true;
+
+            return;
+        }
+
+
+        // もしボールが発射されていなければ
+        if (is_ball_start == false)
+        {
+            // 発射テキストを表示
+            start_text.SetActive(true);
+
+            // スペースキーが押されたら
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                // 発射通知をボールに送る
+                Ball ball_component = ball.GetComponent<Ball>();
+                ball_component.NotifyFire();
+                is_ball_start = true;
+
+                start_text.SetActive(false);
+            }
+        }
     }
     
 
@@ -90,6 +103,9 @@ public class GameController : MonoBehaviour
         // 残機が0じゃなければボールを生成
         if (RemainNum != 0)
         {
+            is_ball_start = false;
+            start_text.SetActive(true);
+
             Vector3 pos = bar.transform.position;
             pos.y += bar.transform.localScale.y;
             ball = Instantiate(ball, pos, Quaternion.identity);

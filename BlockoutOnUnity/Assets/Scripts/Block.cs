@@ -5,7 +5,7 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     [SerializeField]
-    GameObject game_controller;
+    GameObject game_controller = null;
     private GameController controller_component;
 
     // Start is called before the first frame update

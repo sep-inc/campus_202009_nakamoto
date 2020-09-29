@@ -13,10 +13,6 @@ public class Ball : MonoBehaviour
     [SerializeField]
     GameObject bar;
 
-    private bool once;
-
-    private GameObject start_text;
-
     new Rigidbody rigidbody;
 
     private GameObject game_controller;
@@ -28,12 +24,8 @@ public class Ball : MonoBehaviour
         // Rigidbodyを取得
         rigidbody = GetComponent<Rigidbody>();
 
-        once = false;
-
         // バーオブジェクトを探す
         bar = GameObject.Find("Bar");
-
-        start_text = GameObject.Find("StartText");
         
         // バーと親子関係にする
         transform.parent = bar.gameObject.transform;
@@ -45,24 +37,16 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 始めの一度だけ
-        if (once == false)
-        {
-            // スペースキーが押されたら
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                // textを削除
-                start_text.SetActive(false);
+    }
 
-                // バーとの親子関係を解消する
-                transform.parent = null;
+    // ボールの発射通知がきたら発射する
+    public void NotifyFire()
+    {
+        // バーとの親子関係を解消する
+        transform.parent = null;
 
-                // 右斜めに力を加える
-                rigidbody.AddForce(new Vector3(10f, 10f, 0f) * Speed);
-
-                once = true;
-            }
-        }
+        // 右斜めに力を加える
+        rigidbody.AddForce(new Vector3(10f, 10f, 0f) * Speed);
     }
 
     // ゲームクリア通知を受け取った時の処理
@@ -80,7 +64,6 @@ public class Ball : MonoBehaviour
 
             // ボールが死んだことをゲーム管理クラスに伝える
             controller_component.NotifyBallDead();
-            start_text.SetActive(true);
 
             // このオブジェクトを削除
             Destroy(gameObject);
