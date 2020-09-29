@@ -51,6 +51,13 @@ public class GameController : MonoBehaviour
             GameClear = true;
         }
 
+        // 残機が0になったらゲームオーバー
+        if (RemainNum == 0)
+        {
+            GameOver = true;
+        }
+
+
         // もしゲームオーバーの場合ゲームオーバーと表示する
         if (GameOver)
         {
@@ -81,13 +88,8 @@ public class GameController : MonoBehaviour
         // 残機を減らす
         RemainNum--;
         // 残機が0になったらゲームオーバー
-        if (RemainNum == 0)
+        if (RemainNum != 0)
         {
-            GameOver = true;
-        }
-        else
-        {
-            // 残機が残っている場合ボールを生成する
             Vector3 pos = bar.transform.position;
             pos.y += bar.transform.localScale.y;
             Instantiate(ball, pos, Quaternion.identity);
