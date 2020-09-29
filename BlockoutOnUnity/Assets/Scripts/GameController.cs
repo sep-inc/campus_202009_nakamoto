@@ -25,13 +25,14 @@ public class GameController : MonoBehaviour
     [SerializeField]
     GameObject start_text  = null;
 
-   public GameObject[] block_array;
+    // ブロック配列
+    private GameObject[] block_array;
 
     // ブロックの数を保存する変数
-    public int block_num;
+    private int block_num;
 
     // ボールが発射されたかどうかを保存する変数
-    bool is_ball_start;
+    private bool is_ball_start;
 
 
     // Start is called before the first frame update
@@ -57,11 +58,11 @@ public class GameController : MonoBehaviour
             text.text = "ゲームクリア!!";
             result_text.SetActive(true);
 
-            Ball ball_script = ball.GetComponent<Ball>();
-            ball_script.NotifyGameClear();
-
+            // ボールに通知する
+            ball.GetComponent<Ball>().NotifyGameClear();
             return;
         }
+
 
         // 残機が0になったらゲームオーバー
         if (remainNum == 0)
@@ -70,6 +71,7 @@ public class GameController : MonoBehaviour
             text.text = "ゲームオーバー";
             result_text.SetActive(true);
             
+            // 生きているブロックに通知する
             for(int i = 0; i < block_array.Length; ++i)
             {
                 if (block_array[i] == null)
@@ -77,8 +79,7 @@ public class GameController : MonoBehaviour
                     continue;
                 }
 
-                Block block_component = block_array[i].GetComponent<Block>();
-                block_component.NotifyGameOver();
+                block_array[i].GetComponent<Block>().NotifyGameOver();
             }
 
             return;
@@ -119,6 +120,7 @@ public class GameController : MonoBehaviour
             Vector3 pos = bar.transform.position;
             pos.y += bar.transform.localScale.y;
             ball = Instantiate(ball, pos, Quaternion.identity);
+            ball.GetComponent<Ball>().SetGameObject(gameObject, bar);
         }
     }
 

@@ -13,30 +13,32 @@ public class Ball : MonoBehaviour
     [SerializeField]
     GameObject bar;
 
-    new Rigidbody rigidbody;
+    [SerializeField]
+    GameObject game_controller;
 
-    private GameObject game_controller;
-    private GameController controller_component;
+    new Rigidbody rigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
         // Rigidbodyを取得
         rigidbody = GetComponent<Rigidbody>();
-
-        // バーオブジェクトを探す
-        bar = GameObject.Find("Bar");
         
         // バーと親子関係にする
         transform.parent = bar.gameObject.transform;
-
-        game_controller = GameObject.Find("GameController");
-        controller_component = game_controller.GetComponent<GameController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+    }
+
+
+    // ボール生成直後にゲームコントローラーとバーをセットするための関数
+    public void SetGameObject(GameObject gameController_, GameObject bar_)
+    {
+        game_controller = gameController_;
+        bar = bar_;
     }
 
     // ボールの発射通知がきたら発射する
@@ -63,7 +65,7 @@ public class Ball : MonoBehaviour
         {
 
             // ボールが死んだことをゲーム管理クラスに伝える
-            controller_component.NotifyBallDead();
+            game_controller.GetComponent<GameController>().NotifyBallDead();
 
             // このオブジェクトを削除
             Destroy(gameObject);
