@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour
 {
     // 速度　1秒間ですすむ速度
     [SerializeField]
-    float Speed = 0f;
+    float speed = 0f;
 
     [SerializeField]
     GameObject bar;
@@ -46,7 +46,7 @@ public class Ball : MonoBehaviour
         transform.parent = null;
 
         // 右斜めに力を加える
-        rigidbody.AddForce(new Vector3(10f, 10f, 0f) * Speed);
+        rigidbody.AddForce(new Vector3(10f, 10f, 0f) * speed);
     }
 
     // ゲームクリア通知を受け取った時の処理

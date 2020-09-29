@@ -6,7 +6,7 @@ public class Bar : MonoBehaviour
 {
     
     [SerializeField]
-    float Speed = 0;
+    float speed = 0;
 
     // 移動範囲の左端
     [SerializeField]
@@ -30,7 +30,7 @@ public class Bar : MonoBehaviour
         // 右キーが入力されたら
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.Translate(Speed * Time.deltaTime, 0, 0);
+            transform.Translate(speed * Time.deltaTime, 0, 0);
 
             if (transform.position.x >= move_range_max)
             {
@@ -43,7 +43,7 @@ public class Bar : MonoBehaviour
         // 左キーが入力されたら
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.Translate(-Speed * Time.deltaTime, 0, 0);
+            transform.Translate(-speed * Time.deltaTime, 0, 0);
 
             if (transform.position.x <= move_range_min)
             {

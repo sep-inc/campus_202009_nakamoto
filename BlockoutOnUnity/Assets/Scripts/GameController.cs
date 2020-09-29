@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
 
     // 残機
     [SerializeField]
-    int RemainNum = 0;
+    int remainNum = 0;
 
     // 結果を表示するためのtextオブジェクト
     [SerializeField]
@@ -26,32 +26,32 @@ public class GameController : MonoBehaviour
     GameObject start_text  = null;
 
     // ブロックの数を保存する変数
-    public int Block_Num;
+    public int block_Num;
 
     // ボールが発射されたかどうかを保存する変数
     bool is_ball_start;
 
     // ゲームオーバー変数
-    public bool GameOver { get; set; }
+    public bool game_over { get; set; }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        GameOver = false;
+        game_over = false;
 
         is_ball_start = false;
         start_text.SetActive(true);
 
         // ブロックの数をタグをみて保存する
-        Block_Num = GameObject.FindGameObjectsWithTag("Block").Length;
+        block_Num = GameObject.FindGameObjectsWithTag("Block").Length;
     }   
 
     // Update is called once per frame
     void Update()
     {
         // ブロックが0になったらゲームクリア
-        if (Block_Num == 0)
+        if (block_Num == 0)
         {
             Text text = result_text.GetComponent<Text>();
             text.text = "ゲームクリア!!";
@@ -64,12 +64,12 @@ public class GameController : MonoBehaviour
         }
 
         // 残機が0になったらゲームオーバー
-        if (RemainNum == 0)
+        if (remainNum == 0)
         {
             Text text = result_text.GetComponent<Text>();
             text.text = "ゲームオーバー";
             result_text.SetActive(true);
-            GameOver = true;
+            game_over = true;
 
             return;
         }
@@ -99,9 +99,9 @@ public class GameController : MonoBehaviour
     public void NotifyBallDead()
     {
         // 残機を減らす
-        RemainNum--;
+        remainNum--;
         // 残機が0じゃなければボールを生成
-        if (RemainNum != 0)
+        if (remainNum != 0)
         {
             is_ball_start = false;
             start_text.SetActive(true);
@@ -117,6 +117,6 @@ public class GameController : MonoBehaviour
     public void NotifyBlockDead()
     {
         // ブロックの数を減らす
-        Block_Num--;
+        block_Num--;
     }
 }
