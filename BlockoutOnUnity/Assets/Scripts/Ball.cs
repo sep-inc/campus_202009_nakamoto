@@ -10,9 +10,10 @@ public class Ball : MonoBehaviour
     [SerializeField]
     float Speed = 0f;
 
-    private bool once;
+    [SerializeField]
+    GameObject bar;
 
-    private GameObject bar;
+    private bool once;
 
     private GameObject start_text;
 

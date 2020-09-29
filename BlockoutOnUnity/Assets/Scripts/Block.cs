@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    private GameObject game_controller;
+    [SerializeField]
+    GameObject game_controller;
     private GameController controller_component;
 
     // Start is called before the first frame update
     void Start()
     {
-        game_controller = GameObject.Find("GameController");
         controller_component = game_controller.GetComponent<GameController>();
     }
 

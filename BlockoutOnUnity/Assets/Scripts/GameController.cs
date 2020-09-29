@@ -17,6 +17,10 @@ public class GameController : MonoBehaviour
     [SerializeField]
     int RemainNum = 0;
 
+    // 結果を表示するためのtextオブジェクト
+    [SerializeField]
+    GameObject result_text;
+
     // ブロックの数を保存する変数
     public int Block_Num;
 
@@ -26,8 +30,6 @@ public class GameController : MonoBehaviour
     // ゲームクリア変数
     public bool GameClear { get; set; }
 
-    // 結果を表示するためのtextオブジェクト
-    private GameObject result_text;
 
 
     // Start is called before the first frame update
@@ -38,8 +40,6 @@ public class GameController : MonoBehaviour
 
         // ブロックの数をタグをみて保存する
         Block_Num = GameObject.FindGameObjectsWithTag("Block").Length;
-
-        result_text = GameObject.Find("ResultText");
     }   
 
     // Update is called once per frame
