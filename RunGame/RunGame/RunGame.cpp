@@ -1,16 +1,16 @@
-#include "RunGame.h"
+ï»¿#include "RunGame.h"
 #include "System.h"
 #include <iostream>
 
 /*=============================================*/
-/*@@@@@@@@@XVŠÖ”     @@@@@@@*/
+/*ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€æ›´æ–°é–¢æ•°     ã€€ã€€ã€€ã€€ã€€ã€€ã€€*/
 /*=============================================*/
 void RunGame::Update()
 {
 	switch (m_CurrentStep)
 	{
 	case RunGame::RunGameStep::STEP_INT:
-		// ‰Šú‰»ƒXƒeƒbƒv
+		// åˆæœŸåŒ–ã‚¹ãƒ†ãƒƒãƒ—
 		g_GameEnd   = false;
 		g_GameClear = false;
 
@@ -22,7 +22,7 @@ void RunGame::Update()
 
 	case RunGame::RunGameStep::STEP_UPDATE:
 		
-		// ƒQ[ƒ€‚ªI—¹‚µ‚Ä‚¢‚½‚çƒXƒeƒbƒv‚ği‚ß‚é
+		// ã‚²ãƒ¼ãƒ ãŒçµ‚äº†ã—ã¦ã„ãŸã‚‰ã‚¹ãƒ†ãƒƒãƒ—ã‚’é€²ã‚ã‚‹
 		if (g_GameEnd) {
 			m_CurrentStep = RunGameStep::STEP_RELEASE;
 			return;
@@ -34,10 +34,10 @@ void RunGame::Update()
 		break;
 
 	case RunGame::RunGameStep::STEP_RELEASE:
-		// Œ‹‰Ê‚ğo—Í‚·‚é
+		// çµæœã‚’å‡ºåŠ›ã™ã‚‹
 		PrintResult();
 
-		// ‘±‚¯‚é‚©‚Ç‚¤‚©‚ğŒˆ‚ß‚é
+		// ç¶šã‘ã‚‹ã‹ã©ã†ã‹ã‚’æ±ºã‚ã‚‹
 		if (SelectContinue() == true) {
 			m_CurrentStep = RunGameStep::STEP_INT;
 
@@ -54,7 +54,7 @@ void RunGame::Update()
 }
 
 /*=============================================*/
-/*@@@@@@@@@•`‰æŠÖ”     @@@@@@@*/
+/*ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€æç”»é–¢æ•°     ã€€ã€€ã€€ã€€ã€€ã€€ã€€*/
 /*=============================================*/
 void RunGame::Draw()
 {
@@ -63,36 +63,36 @@ void RunGame::Draw()
 }
 
 /*=============================================*/
-/*@@@@@Œ‹‰Ê‚ğo—Í‚·‚éŠÖ”     @@@@@@*/
+/*ã€€ã€€ã€€ã€€ã€€çµæœã‚’å‡ºåŠ›ã™ã‚‹é–¢æ•°     ã€€ã€€ã€€ã€€ã€€ã€€*/
 /*=============================================*/
 void RunGame::PrintResult()
 {
-	// ƒNƒŠƒAƒtƒ‰ƒO‚ğ‚İ‚ÄŒ‹‰Ê‚ğo—Í‚·‚é
+	// ã‚¯ãƒªã‚¢ãƒ•ãƒ©ã‚°ã‚’ã¿ã¦çµæœã‚’å‡ºåŠ›ã™ã‚‹
 	if (g_GameClear == true) {
-		std::cout << "ƒNƒŠƒA!!" << std::endl;
+		std::cout << "ã‚¯ãƒªã‚¢!!" << std::endl;
 	}
 	else {
-		std::cout << "¸”s!!" << std::endl;
+		std::cout << "å¤±æ•—!!" << std::endl;
 	}
 }
 
 /*=============================================*/
-/* ƒQ[ƒ€I—¹‚É‘±‚¯‚é‚©‚Ç‚¤‚©‚ğ‘I‘ğ‚·‚éŠÖ”  */
+/* ã‚²ãƒ¼ãƒ çµ‚äº†æ™‚ã«ç¶šã‘ã‚‹ã‹ã©ã†ã‹ã‚’é¸æŠã™ã‚‹é–¢æ•°  */
 /*=============================================*/
 bool RunGame::SelectContinue()
 {
-	std::cout << "‘±‚¯‚Ü‚·‚©H"  << std::endl;
-	std::cout << "‘±‚¯‚é\tEnter" << std::endl;
-	std::cout << "‚â‚ß‚é\tESC"   << std::endl;
+	std::cout << "ç¶šã‘ã¾ã™ã‹ï¼Ÿ"  << std::endl;
+	std::cout << "ç¶šã‘ã‚‹\tEnter" << std::endl;
+	std::cout << "ã‚„ã‚ã‚‹\tESC"   << std::endl;
 
 	while (true)
 	{
-		// ƒGƒ“ƒ^[ƒL[‚ª‰Ÿ‚³‚ê‚½‚ç
+		// ã‚¨ãƒ³ã‚¿ãƒ¼ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã‚‰
 		if (g_Input.GetKey() == 13) {
 			return true;
 		}
 
-		// ƒGƒXƒP[ƒv‚ª‰Ÿ‚³‚ê‚½‚ç
+		// ã‚¨ã‚¹ã‚±ãƒ¼ãƒ—ãŒæŠ¼ã•ã‚ŒãŸã‚‰
 		if (g_Input.GetKey() == 27) {
 			return false;
 		}

@@ -1,16 +1,16 @@
-#ifndef RUNGAME_H_
+ï»¿#ifndef RUNGAME_H_
 #define RUNGAME_H_
 #include "Player.h"
 #include "Stage.h"
 
 /**
-* @brief RunƒQ[ƒ€ƒNƒ‰ƒX
+* @brief Runã‚²ãƒ¼ãƒ ã‚¯ãƒ©ã‚¹
 */
 class RunGame
 {
 	/**
 	* @enum Enum
-	* RunƒQ[ƒ€‚ÌƒXƒeƒbƒv
+	* Runã‚²ãƒ¼ãƒ ã®ã‚¹ãƒ†ãƒƒãƒ—
 	*/
 	enum class RunGameStep : unsigned char
 	{
@@ -21,8 +21,8 @@ class RunGame
 
 public:
 	/**
-	* @brief   ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	* @details •K—v‚Èî•ñ‚ğ‰Šú‰»‚·‚é
+	* @brief   ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	* @details å¿…è¦ãªæƒ…å ±ã‚’åˆæœŸåŒ–ã™ã‚‹
 	*/
 	RunGame() :
 		m_Player{ &m_Stage },
@@ -30,43 +30,43 @@ public:
 	{}
 
 	/**
-	* @brief   ƒfƒXƒgƒ‰ƒNƒ^
+	* @brief   ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	*/
 	~RunGame(){}
 
 	/**
-	* @brief @XVŠÖ”
-	* @details 1ƒtƒŒ[ƒ€‚Éˆê“x‚¾‚¯ŒÄ‚Ô
+	* @brief ã€€æ›´æ–°é–¢æ•°
+	* @details 1ãƒ•ãƒ¬ãƒ¼ãƒ ã«ä¸€åº¦ã ã‘å‘¼ã¶
 	*/
 	void Update();
 
 	/**
-	* @brief   •`‰æŠÖ”
-	* @details ŠeƒIƒuƒWƒFƒNƒg‚Ì•`‰æ‚ğs‚¤
+	* @brief   æç”»é–¢æ•°
+	* @details å„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æç”»ã‚’è¡Œã†
 	*/
 	void Draw();
 
 private:
 	/**
-	* @brief @Œ‹‰Ê‚ğo—Í‚·‚éŠÖ”
-	* @details ƒQ[ƒ€I—¹‚ÉŒ‹‰Ê‚ğQÆ‚µ‚Äo—Í‚·‚é
+	* @brief ã€€çµæœã‚’å‡ºåŠ›ã™ã‚‹é–¢æ•°
+	* @details ã‚²ãƒ¼ãƒ çµ‚äº†æ™‚ã«çµæœã‚’å‚ç…§ã—ã¦å‡ºåŠ›ã™ã‚‹
 	*/
 	void PrintResult();
 
 	/**
-	* @brief   ƒQ[ƒ€I—¹‚É‘±‚¯‚é‚©‚Ç‚¤‚©‚ğ‘I‘ğ‚·‚éŠÖ”
-	* @return  bool ‘±‚¯‚é‚È‚çtrue‚ğ•Ô‚·
+	* @brief   ã‚²ãƒ¼ãƒ çµ‚äº†æ™‚ã«ç¶šã‘ã‚‹ã‹ã©ã†ã‹ã‚’é¸æŠã™ã‚‹é–¢æ•°
+	* @return  bool ç¶šã‘ã‚‹ãªã‚‰trueã‚’è¿”ã™
 	*/
 	bool SelectContinue();
 
 private:
-	//! ƒvƒŒƒCƒ„[•Ï”
+	//! ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¤‰æ•°
 	Player m_Player;
 
-	//! ƒXƒe[ƒW•Ï”
+	//! ã‚¹ãƒ†ãƒ¼ã‚¸å¤‰æ•°
 	Stage m_Stage;
 	
-	//! Œ»İ‚ÌƒXƒeƒbƒv‚ğ•Û‘¶‚·‚é•Ï”
+	//! ç¾åœ¨ã®ã‚¹ãƒ†ãƒƒãƒ—ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 	RunGameStep m_CurrentStep;
 };
 

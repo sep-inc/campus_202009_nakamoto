@@ -1,18 +1,18 @@
-#ifndef STAGE_H_
+ï»¿#ifndef STAGE_H_
 #define STAGE_H_
 
 #include "Definition.h"
 #include "Vec2.h"
 
 /**
-* @brief ƒXƒe[ƒWƒNƒ‰ƒX
+* @brief ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒ©ã‚¹
 */
 class Stage
 {
 public:
 	/**
-	* @brief   ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	* @details •K—v‚Èî•ñ‚ğ‰Šú‰»‚·‚é
+	* @brief   ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+	* @details å¿…è¦ãªæƒ…å ±ã‚’åˆæœŸåŒ–ã™ã‚‹
 	*/
 	Stage() :
 		m_Stage{ 0 },
@@ -21,60 +21,60 @@ public:
 	{}
 
 	/**
-	* @brief   ƒfƒXƒgƒ‰ƒNƒ^
+	* @brief   ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	*/
 	~Stage(){}
 
 	/**
-	* @brief   ‰Šú‰»ŠÖ”
-	* @details ƒQ[ƒ€‚Ì‰Šú‰»‚É1“x‚¾‚¯ŒÄ‚Ô
+	* @brief   åˆæœŸåŒ–é–¢æ•°
+	* @details ã‚²ãƒ¼ãƒ ã®åˆæœŸåŒ–æ™‚ã«1åº¦ã ã‘å‘¼ã¶
 	*/
 	void Init();
 
 	/**
-	* @brief   •`‰æŠÖ”ŠÖ”
-	* @details ƒXƒe[ƒW‚É•Û‘¶‚·‚é
+	* @brief   æç”»é–¢æ•°é–¢æ•°
+	* @details ã‚¹ãƒ†ãƒ¼ã‚¸ã«ä¿å­˜ã™ã‚‹
 	*/
 	void Draw();
  
 	/**
-	* @brief   “–‚½‚è”»’èŠÖ”ŠÖ”
-	* @details ƒvƒŒƒCƒ„[‚Ì‰E‚Ì•Ó‚ÆƒuƒƒbƒN‚Ì¶‚Ì•Ó‚Æ‚Ì“–‚½‚è”»’è
+	* @brief   å½“ãŸã‚Šåˆ¤å®šé–¢æ•°é–¢æ•°
+	* @details ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å³ã®è¾ºã¨ãƒ–ãƒ­ãƒƒã‚¯ã®å·¦ã®è¾ºã¨ã®å½“ãŸã‚Šåˆ¤å®š
 	*/
 
 	/**
-	* @brief     ƒvƒŒƒCƒ„[‚Ì‰E‚Ì•Ó‚ÆƒuƒƒbƒN‚Ì¶‚Ì•Ó‚Æ‚Ì“–‚½‚è”»’è‚ğs‚¤ŠÖ”
-	* @param[in] pos_    ƒvƒŒƒCƒ„[‚ÌÀ•W
-	* @param[in] width_  ‰¡•
-	* @param[in] height_ c•
-	* @return  bool “–‚½‚Á‚Ä‚¢‚½‚çTrue‚ğ•Ô‚·
+	* @brief     ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å³ã®è¾ºã¨ãƒ–ãƒ­ãƒƒã‚¯ã®å·¦ã®è¾ºã¨ã®å½“ãŸã‚Šåˆ¤å®šã‚’è¡Œã†é–¢æ•°
+	* @param[in] pos_    ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åº§æ¨™
+	* @param[in] width_  æ¨ªå¹…
+	* @param[in] height_ ç¸¦å¹…
+	* @return  bool å½“ãŸã£ã¦ã„ãŸã‚‰Trueã‚’è¿”ã™
 	*/
 	bool HitPlyaerAndBlockLeftEdge(Vec2 pos_, __int8 width_, __int8 height_);
 
 	/**
-	* @brief     ƒvƒŒƒCƒ„[‚Ì‰º‚Ì•Ó‚ÆƒuƒƒbƒN‚Ìã‚Ì•Ó‚Æ‚Ì“–‚½‚è”»’è‚ğs‚¤ŠÖ”
-	* @param[in]  pos_        ƒvƒŒƒCƒ„[‚ÌÀ•W
-	* @param[in]  width_      ‰¡•
-	* @param[in]  height_     c•
-	* @param[out] contactPos_ “–‚½‚Á‚½Y²‚ÌÀ•W‚ğ•Ô‚·
-	* @return  bool “–‚½‚Á‚Ä‚¢‚½‚çTrue‚ğ•Ô‚·
+	* @brief     ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä¸‹ã®è¾ºã¨ãƒ–ãƒ­ãƒƒã‚¯ã®ä¸Šã®è¾ºã¨ã®å½“ãŸã‚Šåˆ¤å®šã‚’è¡Œã†é–¢æ•°
+	* @param[in]  pos_        ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åº§æ¨™
+	* @param[in]  width_      æ¨ªå¹…
+	* @param[in]  height_     ç¸¦å¹…
+	* @param[out] contactPos_ å½“ãŸã£ãŸYè»¸ã®åº§æ¨™ã‚’è¿”ã™
+	* @return  bool å½“ãŸã£ã¦ã„ãŸã‚‰Trueã‚’è¿”ã™
 	*/
 	bool HitPlayerAndBlockTopEdge(Vec2 pos_, __int8 width_, __int8 height_, float* contactPos_);
 	
 	/**
-	* @brief      ƒXƒe[ƒW‚ÉƒZƒbƒg‚·‚éŠÖ”
-	* @param[in]  pos_     À•W
+	* @brief      ã‚¹ãƒ†ãƒ¼ã‚¸ã«ã‚»ãƒƒãƒˆã™ã‚‹é–¢æ•°
+	* @param[in]  pos_     åº§æ¨™
 	*/
 	void SetStage(Vec2 pos_);
 
 private:
-	//! ƒXƒe[ƒW‚ğ•Û‘¶‚·‚é•Ï”
+	//! ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 	int m_Stage[STAGE_HEIGHT][STAGE_WIDTH];
 
-	//! •`‰æ”ÍˆÍ‚Ì¶’[‚ğ•Û‘¶‚·‚é•Ï”
+	//! æç”»ç¯„å›²ã®å·¦ç«¯ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 	int m_Draw_Range_Min;
 
-	//! •`‰æ”ÍˆÍ‚Ì‰E’[‚ğ•Û‘¶‚·‚é•Ï”
+	//! æç”»ç¯„å›²ã®å³ç«¯ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 	int m_Draw_Range_Max;
 
 };

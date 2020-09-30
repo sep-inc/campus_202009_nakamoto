@@ -1,16 +1,16 @@
-#ifndef SYSTEM_H_
+ï»¿#ifndef SYSTEM_H_
 #define SYSTEM_H_
 
 #include "Drawer.h"
 #include "Input.h"
 
-//! •`‰æƒVƒXƒeƒ€
+//! æç”»ã‚·ã‚¹ãƒ†ãƒ 
 extern Drawer g_Drawer;
 
-//! “ü—ÍƒVƒXƒeƒ€
+//! å…¥åŠ›ã‚·ã‚¹ãƒ†ãƒ 
 extern Input g_Input;
 
-//! I—¹‚·‚é‚©‚Ç‚¤‚©‚ğ•Û‘¶‚·‚é•Ï”
+//! çµ‚äº†ã™ã‚‹ã‹ã©ã†ã‹ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 extern bool g_Quit;
 
 

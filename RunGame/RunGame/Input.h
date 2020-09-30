@@ -1,11 +1,11 @@
-#ifndef INPUT_H_
+ï»¿#ifndef INPUT_H_
 #define INPUT_H_
 
 #include <Windows.h>
 
 /**
 * @enum Enum
-* “ü—Í‚É‚Â‚©‚¤ƒL[î•ñ
+* å…¥åŠ›ã«ã¤ã‹ã†ã‚­ãƒ¼æƒ…å ±
 */
 enum class KeyList : int
 {
@@ -16,24 +16,24 @@ enum class KeyList : int
 };
 
 /**
-* @brief   ƒCƒ“ƒvƒbƒgƒNƒ‰ƒX
-* @details “ü—Í‚ğŠÇ—‚·‚éƒNƒ‰ƒX
+* @brief   ã‚¤ãƒ³ãƒ—ãƒƒãƒˆã‚¯ãƒ©ã‚¹
+* @details å…¥åŠ›ã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
 */
 class Input
 {
 public:
 	/**
-	* @brief       “ü—ÍŠÖ”
-	* @return int  ASCIIƒR[ƒh•\‚É‘Î‰‚·‚é10i”‚ª•Ô‚é
-	* @details     “ü—Í‚³‚ê‚½•¶š‚ÌASCIIƒR[ƒh•\‚É‘Î‰‚·‚é10i”‚ğ•Ô‚·
+	* @brief       å…¥åŠ›é–¢æ•°
+	* @return int  ASCIIã‚³ãƒ¼ãƒ‰è¡¨ã«å¯¾å¿œã™ã‚‹10é€²æ•°ãŒè¿”ã‚‹
+	* @details     å…¥åŠ›ã•ã‚ŒãŸæ–‡å­—ã®ASCIIã‚³ãƒ¼ãƒ‰è¡¨ã«å¯¾å¿œã™ã‚‹10é€²æ•°ã‚’è¿”ã™
 	*/
 	int GetKey();
 
 	/**
-	* @brief       “ü—ÍŠÖ”
-	* @param[in]   key_@KeyList‚É—ñ‹“‚³‚ê‚Ä‚¢‚éƒL[î•ñ
-	* @return bool ‰Ÿ‚³‚ê‚Ä‚¢‚½‚çtrue‚ğ•Ô‚·
-	* @details     ˆø”‚ÌƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚éŠÔtrue‚ğ•Ô‚·
+	* @brief       å…¥åŠ›é–¢æ•°
+	* @param[in]   key_ã€€KeyListã«åˆ—æŒ™ã•ã‚Œã¦ã„ã‚‹ã‚­ãƒ¼æƒ…å ±
+	* @return bool æŠ¼ã•ã‚Œã¦ã„ãŸã‚‰trueã‚’è¿”ã™
+	* @details     å¼•æ•°ã®ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹é–“trueã‚’è¿”ã™
 	*/
 	bool GetKey(KeyList key_);
 	

@@ -1,4 +1,4 @@
-#include "Stage.h"
+ï»¿#include "Stage.h"
 #include "System.h"
 #include <string.h>
 
@@ -17,7 +17,7 @@ const int g_Stage[STAGE_HEIGHT][STAGE_WIDTH]
 };
 
 /*=============================================*/
-/*@@@@@@@@‰Šú‰»ŠÖ”     @@@@@@  */
+/*ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€åˆæœŸåŒ–é–¢æ•°     ã€€ã€€ã€€ã€€ã€€ã€€  */
 /*=============================================*/
 void Stage::Init()
 {
@@ -26,7 +26,7 @@ void Stage::Init()
 
 
 /*=============================================*/
-/*@@@@@@@@@•`‰æŠÖ”ŠÖ”     @@@@@*/
+/*ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€æç”»é–¢æ•°é–¢æ•°     ã€€ã€€ã€€ã€€ã€€*/
 /*=============================================*/
 void Stage::Draw()
 {
@@ -41,15 +41,15 @@ void Stage::Draw()
 				break;
 
 			case 1:
-				stage_souce += "¡";
+				stage_souce += "â– ";
 				break;
 
 			case 2:
-				stage_souce += "Z";
+				stage_souce += "ã€‡";
 				break;
 
 			case 3:
-				stage_souce += "¤";
+				stage_souce += "â–½";
 				break;
 
 			default:
@@ -59,24 +59,24 @@ void Stage::Draw()
 		stage_souce += "\n";
 	}
 
-	stage_souce += "RƒL[‚ÅƒWƒƒƒ“ƒvI\n";
+	stage_souce += "Rã‚­ãƒ¼ã§ã‚¸ãƒ£ãƒ³ãƒ—ï¼\n";
 
 	g_Drawer.SetDrawBuffer(stage_souce);
 }
 
 
 /*=================================================================*/
-/*@ƒvƒŒƒCƒ„[‚Ì‰E‚Ì•Ó‚ÆƒuƒƒbƒN‚Ì¶‚Ì•Ó‚Æ‚Ì“–‚½‚è”»’è‚ğs‚¤ŠÖ”   */
+/*ã€€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å³ã®è¾ºã¨ãƒ–ãƒ­ãƒƒã‚¯ã®å·¦ã®è¾ºã¨ã®å½“ãŸã‚Šåˆ¤å®šã‚’è¡Œã†é–¢æ•°   */
 /*=================================================================*/
 bool Stage::HitPlyaerAndBlockLeftEdge(Vec2 pos_, __int8 width_, __int8 height_)
 {
-	// ƒvƒŒƒCƒ„[‚Ì‰E‚Ì•Ó‚ğì¬
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å³ã®è¾ºã‚’ä½œæˆ
 	Vec2 player_right_edge[2] = {
 		{pos_.m_X + width_, pos_.m_Y},
 		{pos_.m_X + width_, pos_.m_Y + height_},
 	};
 
-	// ƒuƒƒbƒN‚É“–‚½‚Á‚Ä‚¢‚é‚©‚ğ’²‚×‚é
+	// ãƒ–ãƒ­ãƒƒã‚¯ã«å½“ãŸã£ã¦ã„ã‚‹ã‹ã‚’èª¿ã¹ã‚‹
 	for (int y = player_right_edge[0].m_Y; y < player_right_edge[1].m_Y; ++y) {
 		for (int x = player_right_edge[0].m_X; x < player_right_edge[1].m_X; ++x) {
 			if (g_Stage[y][x] == 1) {
@@ -90,17 +90,17 @@ bool Stage::HitPlyaerAndBlockLeftEdge(Vec2 pos_, __int8 width_, __int8 height_)
 
 
 /*=================================================================*/
-/*@ƒvƒŒƒCƒ„[‚Ì‰º‚Ì•Ó‚ÆƒuƒƒbƒN‚Ìã‚Ì•Ó‚Æ‚Ì“–‚½‚è”»’è‚ğs‚¤ŠÖ”   */
+/*ã€€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä¸‹ã®è¾ºã¨ãƒ–ãƒ­ãƒƒã‚¯ã®ä¸Šã®è¾ºã¨ã®å½“ãŸã‚Šåˆ¤å®šã‚’è¡Œã†é–¢æ•°   */
 /*=================================================================*/
 bool Stage::HitPlayerAndBlockTopEdge(Vec2 pos_, __int8 width_, __int8 height_, float* contactPos_)
 {
-	// ƒvƒŒƒCƒ„[‚Ì‰º‚Ì•Ó‚ğì¬
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä¸‹ã®è¾ºã‚’ä½œæˆ
 	Vec2 player_bottom_edge[2] = {
 		{pos_.m_X, pos_.m_Y + height_},
 		{pos_.m_X + width_, pos_.m_Y + height_},
 	};
 
-	// ƒvƒŒƒCƒ„[‚Ì‰º‚Ì•Ó‚ÉƒuƒƒbƒN‚ª“–‚½‚Á‚Ä‚é‚©‚ğ’²‚×‚é
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä¸‹ã®è¾ºã«ãƒ–ãƒ­ãƒƒã‚¯ãŒå½“ãŸã£ã¦ã‚‹ã‹ã‚’èª¿ã¹ã‚‹
 	for (int y = player_bottom_edge[0].m_Y; y < player_bottom_edge[1].m_Y; ++y) {
 		for (int x = player_bottom_edge[0].m_X; x < player_bottom_edge[1].m_X; ++x) {
 			if (g_Stage[y][x] == 1) {
@@ -115,14 +115,14 @@ bool Stage::HitPlayerAndBlockTopEdge(Vec2 pos_, __int8 width_, __int8 height_, f
 
 
 /*=============================================*/
-/*@@@@ƒXƒe[ƒW‚ÉƒZƒbƒg‚·‚éŠÖ”     @@@@*/
+/*ã€€ã€€ã€€ã€€ã‚¹ãƒ†ãƒ¼ã‚¸ã«ã‚»ãƒƒãƒˆã™ã‚‹é–¢æ•°     ã€€ã€€ã€€ã€€*/
 /*=============================================*/
 void Stage::SetStage(Vec2 pos_)
 {
-	// ƒXƒe[ƒW‚ğƒNƒŠƒA‚·‚é
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
 	memcpy(&m_Stage, g_Stage, sizeof(g_Stage));
 
-	// ƒXƒe[ƒW‚É‘‚«‚Ş
+	// ã‚¹ãƒ†ãƒ¼ã‚¸ã«æ›¸ãè¾¼ã‚€
 	m_Stage[static_cast<int>(pos_.m_Y)][static_cast<int>(pos_.m_X)]   = 2;
 	m_Stage[static_cast<int>(pos_.m_Y)+1][static_cast<int>(pos_.m_X)] = 3;
 

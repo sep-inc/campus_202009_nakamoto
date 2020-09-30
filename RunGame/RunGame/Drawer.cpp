@@ -1,38 +1,38 @@
-#include "Drawer.h"
+﻿#include "Drawer.h"
 #include <string.h>
 #include <stdlib.h>
 #include <iostream>
 
 /*=============================================*/
-/*    ����resouce_���o�b�t�@�ɏ������ފ֐�     */
+/*    引数resouce_をバッファに書き込む関数     */
 /*                                             */
-/* �����񂪊i�[����o�͂����̂ŉ��s�R�[�h��  */
-/* �܂ߓn���K�v������                          */
+/* 文字列が格納され出力されるので改行コードも  */
+/* 含め渡す必要がある                          */
 /*=============================================*/
 void Drawer::SetDrawBuffer(std::string resouce_)
 {
-	// �o�b�t�@�ɃR�s�[����
+	// バッファにコピーする
 	m_DrawBuffer = resouce_;
 }
 
 
 /*=======================================*/
-/*�@�@�@�@�o�b�t�@���N���A����֐�     �@*/
+/*　　　　バッファをクリアする関数     　*/
 /*=======================================*/
 void Drawer::ClearBuffer()
 {
-	// �R�}���h���C���ɏo�͂���Ă��镶��������
+	// コマンドラインに出力されている文字を消す
 	system("cls");
-	// �o�b�t�@�����Z�b�g����
+	// バッファをリセットする
 	m_DrawBuffer = "\0";
 }
 
 
 /*=====================================*/
-/*�@�@�@  �o�b�t�@��`�悷��֐�  �@   */
+/*　　　  バッファを描画する関数  　   */
 /*=====================================*/
 void Drawer::DrawBuffer()
 {
-	// �o�b�t�@�Ɋi�[���Ă��镶������o�͂�
+	// バッファに格納している文字列を出力す
 	std::cout << m_DrawBuffer << std::endl;
 }

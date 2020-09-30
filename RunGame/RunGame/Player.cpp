@@ -1,15 +1,15 @@
-#include "Player.h"
+﻿#include "Player.h"
 #include "System.h"
 
 /*============================*/
-/*�@�@�@�@�@�X�V�֐�        �@*/
+/*　　　　　更新関数        　*/
 /*============================*/
 void Player::Update()
 {
 	switch (m_CurrentStep)
 	{
 	case Player::PlayerStep::STEP_INIT:
-		// �������X�e�b�v
+		// 初期化ステップ
 		Init();
 		m_CurrentStep = PlayerStep::STEP_UPDATE;
 		
@@ -18,22 +18,22 @@ void Player::Update()
 	{
 		if (g_GameEnd == true) { return; }
 
-		// �X�V�X�e�b�v
+		// 更新ステップ
 		m_Vertical = 0.f;
 
-		// �W�����v
+		// ジャンプ
 		this->Jump();
 
-		// ����
+		// 落下
 		this->Fall();
 
-		// ����
+		// 判定
 		this->ChecHitBlock();
 
-		// ���݂̍��W��ۑ�����
+		// 現在の座標を保存する
 		m_OldPos = m_Pos;
 
-		// �����S�[���n�_�܂ł�����N���A
+		// もしゴール地点まできたらクリア
 		if (m_Pos.m_X >= GOAL_POS) {
 			g_GameClear = true;
 			g_GameEnd   = true;
@@ -48,7 +48,7 @@ void Player::Update()
 
 
 /*===========================*/
-/*�@�@�@�@  �������֐�     �@*/
+/*　　　　  初期化関数     　*/
 /*===========================*/
 void Player::Init()
 {
@@ -59,7 +59,7 @@ void Player::Init()
 
 
 /*===============================*/
-/*�@�@�@�@  �`��֐��֐�     �@  */
+/*　　　　  描画関数関数     　  */
 /*===============================*/
 void Player::Draw()
 {
@@ -68,7 +68,7 @@ void Player::Draw()
 
 
 /*===========================*/
-/*�@�@�@�@�W�����v�֐�     �@*/
+/*　　　　ジャンプ関数     　*/
 /*===========================*/
 void Player::Jump()
 {
@@ -81,7 +81,7 @@ void Player::Jump()
 
 
 /*==========================*/
-/*�@�@�@�@   �����֐�     �@*/
+/*　　　　   落下関数     　*/
 /*==========================*/
 void Player::Fall()
 {
@@ -97,14 +97,14 @@ void Player::Fall()
 
 
 /*===============================================*/
-/*�@�@�@�u���b�N�Ɠ������Ă��邩�𒲂ׂ�֐�     */
+/*　　　ブロックと当たっているかを調べる関数     */
 /*===============================================*/
 void Player::ChecHitBlock()
 {
-	// �O�̍��W�̃v���C���[�̉E�̕ӂƃu���b�N�̍��̕ӂ��������Ă��邩�𒲂ׂ�
+	// 前の座標のプレイヤーの右の辺とブロックの左の辺が当たっているかを調べる
 	if (m_RefStege->HitPlyaerAndBlockLeftEdge(m_OldPos, m_Width, m_Height) == true)
 	{
-		// �������Ă����ꍇ���S
+		// 当たっていた場合死亡
 		g_GameEnd = true;
 	}
 	else {
@@ -115,18 +115,18 @@ void Player::ChecHitBlock()
 	Vec2 move_vertical_next_pos = m_Pos;
 	move_vertical_next_pos.m_Y += m_Vertical;
 
-	// �ӂ̂ǂ̍��W�ɓ������������󂯎��ϐ�
+	// 辺のどの座標に当たったかを受け取る変数
 	float contact_pos;
 
-	// �v���C���[�̉��̕ӂƃu���b�N�̏�̕ӂ��������Ă��邩�𒲂ׂ�
+	// プレイヤーの下の辺とブロックの上の辺が当たっているかを調べる
 	if (m_RefStege->HitPlayerAndBlockTopEdge(move_vertical_next_pos, m_Width, m_Height, &contact_pos) == true)
 	{
-		// �������Ă����ꍇ�������Ă��Ȃ��ꏊ�܂ňʒu��␳����
+		// 当たっていた場合当たっていない場所まで位置を補正する
 		m_Pos.m_Y = contact_pos - m_Height;
 		m_OnGround = true;
 	}
 	else {
-		// �������Ă��Ȃ�������v���C���[��Y����������
+		// 当たっていなかったらプレイヤーのY軸を下げる
 		m_Pos.m_Y += m_Vertical;
 		m_OnGround = false;
 	}
