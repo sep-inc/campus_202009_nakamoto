@@ -1,40 +1,40 @@
-#ifndef DEFINITION_H_
+ï»¿#ifndef DEFINITION_H_
 #define DEFINITION_H_
 
-// d—Í
-#define GRAVITY           0.07
-// ‰‘¬“x
+// é‡åŠ›
+#define GRAVITY           0.1
+// åˆé€Ÿåº¦
 #define INITIAL_VELOCITY  0.6
 
-// ƒvƒŒƒCƒ„[‘¬“x
-#define PLAYER_SPEED      0.2
-// ƒvƒŒƒCƒ„[‰ŠúXÀ•W
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼é€Ÿåº¦
+#define PLAYER_SPEED      0.3
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åˆæœŸXåº§æ¨™
 #define PLAYER_INIT_POS_X 1.0
-// ƒvƒŒƒCƒ„[‚Ì‰¡•
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ¨ªå¹…
 #define PLAYER_WIDTH      1
-// ƒvƒŒƒCƒ„[‚Ìc•
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç¸¦å¹…
 #define PLAYER_HEIGHT     2
 
-// ƒS[ƒ‹’n“_
+// ã‚´ãƒ¼ãƒ«åœ°ç‚¹
 #define GOAL_POS          300.0
 
-// ƒuƒƒbƒN‚ÌƒTƒCƒY(³•ûŒ`)
+// ãƒ–ãƒ­ãƒƒã‚¯ã®ã‚µã‚¤ã‚º(æ­£æ–¹å½¢)
 #define BLCOK_SIZE        1
-// ƒXƒe[ƒW‚Ì‰¡‚Ì’·‚³
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®æ¨ªã®é•·ã•
 #define STAGE_WIDTH       320
-// ƒXƒe[ƒW‚Ìc‚Ì’·‚³
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®ç¸¦ã®é•·ã•
 #define STAGE_HEIGHT      10
 
-// ƒXƒe[ƒW‚Ì‰¡‚Ì•`‰æ”ÍˆÍ
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®æ¨ªã®æç”»ç¯„å›²
 #define DRAW_RANGE_WIDTH  11
-// ƒXƒe[ƒW‚Ìc‚Ì•`‰æ”ÍˆÍ
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®ç¸¦ã®æç”»ç¯„å›²
 #define DRAW_RANGE_HEIGHT 10
 
 
-//! ƒQ[ƒ€‚ªI—¹‚µ‚½‚©‚Ç‚¤‚©‚ð•Û‘¶‚·‚é•Ï”
+//! ã‚²ãƒ¼ãƒ ãŒçµ‚äº†ã—ãŸã‹ã©ã†ã‹ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 extern bool g_GameEnd;
 
-//! ƒQ[ƒ€‚ðƒNƒŠƒA‚µ‚½‚©‚Ç‚¤‚©‚ð•Û‘¶‚·‚é•Ï”
+//! ã‚²ãƒ¼ãƒ ã‚’ã‚¯ãƒªã‚¢ã—ãŸã‹ã©ã†ã‹ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 extern bool g_GameClear;
 
 #endif

@@ -1,13 +1,18 @@
 #ifndef INPUT_H_
 #define INPUT_H_
 
+#include <Windows.h>
+
 /**
 * @enum Enum
 * “ü—Í‚É‚Â‚©‚¤ƒL[î•ñ
 */
 enum class KeyList : int
 {
-	R_KEY = 'R',
+	R_KEY   = 'R',
+	C_KEY   = 'C',
+	ESC_KEY = VK_ESCAPE,
+	CONTROL_KEY = VK_CONTROL, 
 };
 
 /**

@@ -1,7 +1,7 @@
-#include "Definition.h"
+ï»¿#include "Definition.h"
 
-//! ƒQ[ƒ€‚ªI—¹‚µ‚½‚©‚Ç‚¤‚©‚ð•Û‘¶‚·‚é•Ï”
+//! ã‚²ãƒ¼ãƒ ãŒçµ‚äº†ã—ãŸã‹ã©ã†ã‹ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 bool g_GameEnd = false;
 
-//! ƒQ[ƒ€‚ðƒNƒŠƒA‚µ‚½‚©‚Ç‚¤‚©‚ð•Û‘¶‚·‚é•Ï”
+//! ã‚²ãƒ¼ãƒ ã‚’ã‚¯ãƒªã‚¢ã—ãŸã‹ã©ã†ã‹ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 bool g_GameClear = false;
