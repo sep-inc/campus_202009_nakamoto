@@ -25,14 +25,20 @@ public:
 	* @details 必要な情報を初期化する
 	*/
 	RunGame() :
-		m_Player{ &m_Stage },
 		m_CurrentStep{ RunGameStep::STEP_INT }
-	{}
+	{
+		m_Stage  = new Stage();
+		m_Player = new Player(m_Stage);
+	}
 
 	/**
 	* @brief   デストラクタ
 	*/
-	~RunGame(){}
+	~RunGame()
+	{
+		delete m_Player;
+		delete m_Stage;
+	}
 
 	/**
 	* @brief 　更新関数
@@ -61,10 +67,10 @@ private:
 
 private:
 	//! プレイヤー変数
-	Player m_Player;
+	Player* m_Player;
 
 	//! ステージ変数
-	Stage m_Stage;
+	Stage* m_Stage;
 	
 	//! 現在のステップを保存する変数
 	RunGameStep m_CurrentStep;

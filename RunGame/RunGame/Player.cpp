@@ -63,7 +63,7 @@ void Player::Init()
 /*===============================*/
 void Player::Draw()
 {
-	m_RefStege->SetStage(m_Pos);
+	if (m_RefStege)m_RefStege->SetStage(m_Pos);
 }
 
 

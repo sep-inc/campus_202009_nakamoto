@@ -14,8 +14,8 @@ void RunGame::Update()
 		g_GameEnd   = false;
 		g_GameClear = false;
 
-		m_Stage.Init();
-		m_Player.Init();
+		m_Stage->Init();
+		m_Player->Init();
 
 		m_CurrentStep = RunGameStep::STEP_UPDATE;
 		break;
@@ -28,7 +28,7 @@ void RunGame::Update()
 			return;
 		}
 
-		m_Player.Update();
+		m_Player->Update();
 		
 
 		break;
@@ -58,8 +58,8 @@ void RunGame::Update()
 /*=============================================*/
 void RunGame::Draw()
 {
-	m_Player.Draw();
-	m_Stage.Draw();
+	m_Player->Draw();
+	m_Stage->Draw();
 }
 
 /*=============================================*/
