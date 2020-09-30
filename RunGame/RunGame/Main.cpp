@@ -7,12 +7,21 @@
 #include <stdexcept>
 
 
+void CallbackSingnalControl(int sig) {
+	if (sig == SIGINT) {
+		
+		signal(SIGINT, CallbackSingnalControl);
+		exit(1);
+	}
+}
 
 /*============================*/
 /*　　　　　  MAIN          　*/
 /*============================*/
 int main()
 {
+	signal(SIGINT, CallbackSingnalControl);
+
 	clock_t start_frame_time = 0, frame_time = 0;
 
 	// ゲームクラス
