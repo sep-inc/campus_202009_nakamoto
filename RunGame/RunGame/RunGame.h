@@ -24,21 +24,13 @@ public:
 	* @brief   コンストラクタ
 	* @details 必要な情報を初期化する
 	*/
-	RunGame() :
-		m_CurrentStep{ RunGameStep::STEP_INT }
-	{
-		m_Stage  = new Stage();
-		m_Player = new Player(m_Stage);
-	}
+	RunGame();
 
 	/**
 	* @brief   デストラクタ
 	*/
-	~RunGame()
-	{
-		delete m_Player;
-		delete m_Stage;
-	}
+	~RunGame();
+
 
 	/**
 	* @brief 　更新関数

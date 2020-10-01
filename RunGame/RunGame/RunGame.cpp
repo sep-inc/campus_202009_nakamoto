@@ -2,6 +2,19 @@
 #include "System.h"
 #include <iostream>
 
+RunGame::RunGame():
+	m_Player(nullptr),m_Stage (nullptr)
+{
+	m_Stage  = new Stage();
+	m_Player = new Player(m_Stage);
+}
+
+RunGame::~RunGame()
+{
+	delete m_Player;
+	delete m_Stage;
+}
+
 /*=============================================*/
 /*　　　　　　　　　更新関数     　　　　　　　*/
 /*=============================================*/
@@ -11,12 +24,16 @@ void RunGame::Update()
 	{
 	case RunGame::RunGameStep::STEP_INT:
 		// 初期化ステップ
+
+		// フラグを初期化
 		g_GameEnd   = false;
 		g_GameClear = false;
 
-		m_Stage->Init();
-		m_Player->Init();
+		// 各オブジェクトの初期化
+		if (m_Stage) m_Stage->Init();
+		if (m_Player)m_Player->Init();
 
+		// ステップを進める
 		m_CurrentStep = RunGameStep::STEP_UPDATE;
 		break;
 
@@ -28,7 +45,8 @@ void RunGame::Update()
 			return;
 		}
 
-		m_Player->Update();
+		// 各オブジェクトの更新
+		if (m_Player)m_Player->Update();
 		
 
 		break;
@@ -58,8 +76,9 @@ void RunGame::Update()
 /*=============================================*/
 void RunGame::Draw()
 {
-	m_Player->Draw();
-	m_Stage->Draw();
+	// 各オブジェクトの描画
+	if (m_Player)m_Player->Draw();
+	if (m_Stage) m_Stage->Draw();
 }
 
 /*=============================================*/
