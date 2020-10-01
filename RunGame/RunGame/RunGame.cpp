@@ -3,7 +3,7 @@
 #include <iostream>
 
 RunGame::RunGame():
-	m_Player(nullptr),m_Stage (nullptr)
+	m_Player(nullptr),m_Stage (nullptr),m_CurrentStep(RunGameStep::STEP_INT)
 {
 	m_Stage  = new Stage();
 	m_Player = new Player(m_Stage);
