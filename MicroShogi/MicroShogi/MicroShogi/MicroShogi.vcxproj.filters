@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{6d461dcc-96bf-4293-a8ee-4722029cc662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{9808d3dd-dad2-4c03-9622-918a69d59b4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShogiPiece">
+      <UniqueIdentifier>{fb4d16ef-edf6-4195-92c8-b2b3f8aa4840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShogiPiece\Pawn">
+      <UniqueIdentifier>{73787a50-d388-46a8-96b2-0161d43557ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShogiPiece\Gold">
+      <UniqueIdentifier>{9a063e72-0538-474e-8052-88ee8395fb8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShogiPiece\King">
+      <UniqueIdentifier>{d47f6be1-7731-4f9a-8921-1f3fe66416de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShogiPiece\Knight">
+      <UniqueIdentifier>{68807559-9d91-432b-b296-6722266c533b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShogiObject">
+      <UniqueIdentifier>{dde88baa-5437-44d1-bde6-66bafb7ca3aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShogiObject\ShogiBord">
+      <UniqueIdentifier>{d39b1b18-7907-430f-b513-2eb13eabf629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShogiObject\ShogiPlayer">
+      <UniqueIdentifier>{8355af0d-acf9-4e3f-8325-339ba205096d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShogiScene">
+      <UniqueIdentifier>{6d185a9f-0591-4b5e-b3b3-e6ad345a9f1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShogiScene\GameScene">
+      <UniqueIdentifier>{df25bd8b-69f8-414d-8025-d85312a56647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShogiScene\SelectScene">
+      <UniqueIdentifier>{f9d59e7d-4302-4f4f-84e4-9951e8849f7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShogiScene\ResultScene">
+      <UniqueIdentifier>{0a30fda4-a55c-465b-ac45-262565783d2b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawer.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="ShogiGame.cpp">
+      <Filter>ShogiScene</Filter>
+    </ClCompile>
+    <ClCompile Include="ShogiGameScene.cpp">
+      <Filter>ShogiScene\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="ShogiResultScene.cpp">
+      <Filter>ShogiScene\ResultScene</Filter>
+    </ClCompile>
+    <ClCompile Include="ShogiSelectScene.cpp">
+      <Filter>ShogiScene\SelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="ShogiPiecePawn.cpp">
+      <Filter>ShogiPiece\Pawn</Filter>
+    </ClCompile>
+    <ClCompile Include="ShogiPieceKnight.cpp">
+      <Filter>ShogiPiece\Knight</Filter>
+    </ClCompile>
+    <ClCompile Include="ShogiPieceKing.cpp">
+      <Filter>ShogiPiece\King</Filter>
+    </ClCompile>
+    <ClCompile Include="ShogiPieceGold.cpp">
+      <Filter>ShogiPiece\Gold</Filter>
+    </ClCompile>
+    <ClCompile Include="PieceOfBoard.cpp">
+      <Filter>ShogiObject\ShogiBord</Filter>
+    </ClCompile>
+    <ClCompile Include="ShogiPlayerBase.cpp">
+      <Filter>ShogiObject\ShogiPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="ShogiPlayerNPC.cpp">
+      <Filter>ShogiObject\ShogiPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="ShogiPlayerPC.cpp">
+      <Filter>ShogiObject\ShogiPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="ShogiBoard.cpp">
+      <Filter>ShogiObject\ShogiBord</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Drawer.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="ShogiSceneBase.h">
+      <Filter>ShogiScene</Filter>
+    </ClInclude>
+    <ClInclude Include="ShogiGame.h">
+      <Filter>ShogiScene</Filter>
+    </ClInclude>
+    <ClInclude Include="ShogiGameScene.h">
+      <Filter>ShogiScene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="ShogiResultScene.h">
+      <Filter>ShogiScene\ResultScene</Filter>
+    </ClInclude>
+    <ClInclude Include="ShogiSelectScene.h">
+      <Filter>ShogiScene\SelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="ShogiPieceBase.h">
+      <Filter>ShogiPiece</Filter>
+    </ClInclude>
+    <ClInclude Include="IVec2.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ShogiPiecePawn.h">
+      <Filter>ShogiPiece\Pawn</Filter>
+    </ClInclude>
+    <ClInclude Include="ShogiPieceKnight.h">
+      <Filter>ShogiPiece\Knight</Filter>
+    </ClInclude>
+    <ClInclude Include="ShogiPieceKing.h">
+      <Filter>ShogiPiece\King</Filter>
+    </ClInclude>
+    <ClInclude Include="ShogiPieceGold.h">
+      <Filter>ShogiPiece\Gold</Filter>
+    </ClInclude>
+    <ClInclude Include="PieceOfBoard.h">
+      <Filter>ShogiObject\ShogiBord</Filter>
+    </ClInclude>
+    <ClInclude Include="ShogiPlayerBase.h">
+      <Filter>ShogiObject\ShogiPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShogiPlayerNPC.h">
+      <Filter>ShogiObject\ShogiPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShogiPlayerPC.h">
+      <Filter>ShogiObject\ShogiPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="Definition.h">
+      <Filter>ShogiObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ShogiBoard.h">
+      <Filter>ShogiObject\ShogiBord</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
