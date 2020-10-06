@@ -1,7 +1,7 @@
 #include "ShogiPieceKing.h"
 #include <string.h>
 
-const bool ShogiPieceKing::m_MovableRange[4][3] = {
+const bool ShogiPieceKing::m_MovableRangeDB[4][3] = {
 	{0,0,0},
 	{1,1,1},
 	{1,0,1},
@@ -10,7 +10,7 @@ const bool ShogiPieceKing::m_MovableRange[4][3] = {
 
 ShogiPieceKing::ShogiPieceKing()
 {
-	memcpy(ShogiPieceBase::m_MovableRange, this->m_MovableRange, sizeof(this->m_MovableRange));
+	memcpy(m_MovableRange, m_MovableRangeDB, sizeof(m_MovableRangeDB));
 }
 
 

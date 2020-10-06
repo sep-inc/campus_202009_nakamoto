@@ -2,6 +2,7 @@
 #define SHOGIPLAYERNPC_H_
 
 #include "../ShogiPlayerBase.h"
+#include <vector>
 
 /**
 * @brief 【棋士】NPCクラス
@@ -13,9 +14,7 @@ public:
 	* @brief   コンストラクタ
 	* @details 必要な情報を初期化する
 	*/
-	ShogiPlayerNPC(ShogiBoard* board_, MoveTrun id_) :
-		ShogiPlayerBase{ board_, id_ }
-	{}
+	ShogiPlayerNPC(ShogiBoard* board_, MoveTrun id_);
 
 	/**
 	* @brief   デストラクタ
@@ -35,7 +34,15 @@ private:
 	*/
 	bool SelectDest() override;
 
+private:
+	MoveTrun m_EnemyId;
 
+	std::vector<IVec2> m_PiecePos;
+	
+	std::vector<IVec2> m_EnemyPiecePos;
+
+	//! 
+	__int8 m_Priority;
 };
 
 #endif

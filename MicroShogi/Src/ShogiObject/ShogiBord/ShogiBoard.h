@@ -4,6 +4,7 @@
 #include "../ShogiPiece/ShogiPieceBase.h"
 #include "PieceOfBoard.h"
 #include "../Definition.h"
+#include <vector>
 
 /**
 * @brief ボードクラス
@@ -35,10 +36,26 @@ public:
 	* @param[in] moveSource_    移動元座標
 	* @param[in] moveDest_  　　移動先座標
 	* @param[in] id_　　　　　　先手か後手かの情報
+	* @param[in] isTake_　　　　移動可能状態の時に移動するかどうか
 	* @return  bool移動可能ならtrueを返し移動する
 	*/
-	bool IsAblePutOnTheBoard(IVec2 moveSource_, IVec2 moveDest_, MoveTrun id_);
-	
+	bool IsAblePutOnTheBoard(IVec2 moveSource_, IVec2 moveDest_, MoveTrun id_, bool isTake_ = true);
+
+	/**
+	* @brief     指定駒の座標をvectorに詰めて返す関数
+	* @param[out] outPos_    駒の座標を受けとるvector
+	* @param[in]  id_　　　　先手か後手かのどちら
+	*/
+	void GetPiecePos(std::vector<IVec2>* outPos_, MoveTrun id_);
+
+	/**
+	* @brief     指定した駒の座標を返す関数
+	* @param[out] outPos_    駒の座標を返す
+	* @param[in]  piece_  　 どの駒を返すか
+	* @param[in]  id_　　　　先手か後手かのどちら
+	*/
+	void GetPiecePos(IVec2* outPos_, ShogiPiece piece_, MoveTrun id_);
+
 	/**
 	* @brief     　　王がとられたかどうかを返す関数
 	* @return  bool　王がとられていたらtrueを返す

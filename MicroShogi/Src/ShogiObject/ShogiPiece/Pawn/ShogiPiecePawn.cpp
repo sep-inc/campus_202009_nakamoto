@@ -1,7 +1,7 @@
 ﻿#include "ShogiPiecePawn.h"
 #include <string.h>
 
-const bool ShogiPiecePawn::m_MovableRange[4][3] = {
+const bool ShogiPiecePawn::m_MovableRangeDB[4][3] = {
 	{0,0,0},
 	{0,1,0},
 	{0,0,0},
@@ -10,7 +10,7 @@ const bool ShogiPiecePawn::m_MovableRange[4][3] = {
 
 ShogiPiecePawn::ShogiPiecePawn()
 {
-	memcpy(ShogiPieceBase::m_MovableRange, this->m_MovableRange, sizeof(this->m_MovableRange));
+	memcpy(m_MovableRange, m_MovableRangeDB, sizeof(m_MovableRangeDB));
 }
 
 

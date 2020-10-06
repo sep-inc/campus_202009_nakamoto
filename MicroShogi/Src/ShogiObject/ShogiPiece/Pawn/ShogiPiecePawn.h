@@ -34,7 +34,7 @@ public:
 
 private:
 	//! 移動可能範囲を保存する変数
-	static const bool m_MovableRange[4][3];
+	static const bool m_MovableRangeDB[4][3];
 
 };
 

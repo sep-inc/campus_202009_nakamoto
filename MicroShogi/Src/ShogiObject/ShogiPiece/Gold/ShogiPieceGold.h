@@ -35,7 +35,7 @@ public:
 
 private:
 	//! ˆÚ“®‰Â”\”ÍˆÍ‚ğ•Û‘¶‚·‚é•Ï”
-	static const bool m_MovableRange[4][3];
+	static const bool m_MovableRangeDB[4][3];
 
 };
 

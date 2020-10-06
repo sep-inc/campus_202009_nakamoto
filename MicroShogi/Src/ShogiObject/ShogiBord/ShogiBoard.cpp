@@ -145,10 +145,12 @@ bool ShogiBoard::IsAbleSelectPiece(IVec2 pos_, MoveTrun id_)
 /*=================================================*/
 /*　選択した場所に移動可能かどうかを判定する関数   */
 /*=================================================*/
-bool ShogiBoard::IsAblePutOnTheBoard(IVec2 moveSource_, IVec2 moveDest_, MoveTrun id_)
+bool ShogiBoard::IsAblePutOnTheBoard(IVec2 moveSource_, IVec2 moveDest_, MoveTrun id_, bool isTake_)
 {
-	const int board_width_end  = BOARD_WIDTH  - 1;
-	const int board_height_end = BOARD_HEIGHT - 1;
+	if (moveDest_.m_X < 0) return false;
+	if (moveDest_.m_X >= BOARD_WIDTH) return false;
+	if (moveDest_.m_Y < 0) return false;
+	if (moveDest_.m_X >= BOARD_HEIGHT) return false;
 
 	// 移動元を保存する変数
 	IVec2 select_source = moveSource_;
@@ -172,6 +174,9 @@ bool ShogiBoard::IsAblePutOnTheBoard(IVec2 moveSource_, IVec2 moveDest_, MoveTru
 	// 駒に移動できるかを問い合わせる
 	if (m_Board[select_source.m_Y][select_source.m_X].m_Piece->IsAbleMove(move_vec) == false) return false;
 	
+	// ここまできたら移動可能だが、isTake_がfalseなら移動を行わずにtrueを返す
+	if (isTake_ == false) return true;
+
 	// 移動先が王なら王がとられたフラグをオンにする
 	if (m_Board[select_dest.m_Y][select_dest.m_X].m_Piece != nullptr) {
 		if (m_Board[select_dest.m_Y][select_dest.m_X].m_Piece->GetShogiPiece() == ShogiPiece::PIECE_KING) m_KingWasTake = true;
@@ -185,6 +190,36 @@ bool ShogiBoard::IsAblePutOnTheBoard(IVec2 moveSource_, IVec2 moveDest_, MoveTru
 	m_Board[select_source.m_Y][select_source.m_X].m_WhosePiece = MoveTrun::MOVE_NON;
 
 	return true;
+}
+
+void ShogiBoard::GetPiecePos(std::vector<IVec2>* outPos_, MoveTrun id_)
+{
+	std::vector<IVec2> out_vec;
+
+	for (int y = 0; y < BOARD_HEIGHT; ++y) {
+		for (int x = 0; x < BOARD_WIDTH; ++x) {
+			// もし誰の駒なのかの情報があっていたら配列に追加する
+			if (m_Board[y][x].m_WhosePiece == id_) {
+				out_vec.push_back(IVec2(x, y));
+			}
+		}
+	}
+
+	*outPos_ = out_vec;
+}
+
+void ShogiBoard::GetPiecePos(IVec2* outPos_, ShogiPiece piece_, MoveTrun id_)
+{
+	for (int y = 0; y < BOARD_HEIGHT; ++y) {
+		for (int x = 0; x < BOARD_WIDTH; ++x) {
+			// もしピースの種類と誰の駒なのかがあっていたら保存する
+			if (m_Board[y][x].m_WhosePiece == id_ && m_Board[y][x].m_Piece->GetShogiPiece() == piece_) {
+				outPos_->m_X = x;
+				outPos_->m_Y = y;
+				return;
+			}
+		}
+	}
 }
 
 
