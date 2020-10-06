@@ -23,11 +23,11 @@ void ShogiSelectScene::Update()
 {
 
 	if (*m_FirstMovePlayer == ShogiPlayerType::TYPE_UNKNOWN) {
-		m_DrawStr = "先手を選択してください\n";
+		m_DrawStr = "先攻の棋士の種類を選択してください\n";
 		SelectPlayer(m_FirstMovePlayer);
 	}
 	else if (*m_SecondMovePlayer == ShogiPlayerType::TYPE_UNKNOWN) {
-		m_DrawStr = "後手を選択してください\n";
+		m_DrawStr = "後攻の棋士の種類を選択してください\n";
 		SelectPlayer(m_SecondMovePlayer);
 	}
 	else if (IsConfirm() == true) {
@@ -47,14 +47,14 @@ void ShogiSelectScene::SelectPlayer(ShogiPlayerType* player_)
 
 	if (m_Onece) {
 		// 出力用
-		m_DrawStr += "↑↓キーで選ぶ  Spaceで確定\n";
+		m_DrawStr += "十字キーで選択  Spaceで確定\n";
 		if (is_pc) {
-			m_DrawStr += "->PC\n";
-			m_DrawStr += "  NPC\n";
+			m_DrawStr += "->プレイヤー\n";
+			m_DrawStr += "  コンピューター\n";
 		}
 		else {
-			m_DrawStr += "  PC\n";
-			m_DrawStr += "->NPC\n";
+			m_DrawStr += "  プレイヤー\n";
+			m_DrawStr += "->コンピューター\n";
 		}
 
 		m_Onece = false;
@@ -74,14 +74,14 @@ void ShogiSelectScene::SelectPlayer(ShogiPlayerType* player_)
 	}
 
 	// 出力用
-	m_DrawStr += "↑↓キーで選ぶ  Spaceで確定\n";
+	m_DrawStr += "十字キーで選択  Spaceで確定\n";
 	if (is_pc) {
-		m_DrawStr += "->PC\n";
-		m_DrawStr += "  NPC\n";
+		m_DrawStr += "->プレイヤー\n";
+		m_DrawStr += "  コンピューター\n";
 	}
 	else {
-		m_DrawStr += "  PC\n";
-		m_DrawStr += "->NPC\n";
+		m_DrawStr += "  プレイヤー\n";
+		m_DrawStr += "->コンピューター\n";
 	}
 }
 
@@ -95,9 +95,16 @@ bool ShogiSelectScene::IsConfirm()
 
 	// 確定かどうかを保存する変数
 	static bool confirm = true;
+	std::string first;
+	std::string second;
+	first  = *m_FirstMovePlayer  == ShogiPlayerType::TYPE_PC ? "プレイヤー\n" : "コンピューター\n";
+	second = *m_SecondMovePlayer == ShogiPlayerType::TYPE_PC ? "プレイヤー\n" : "コンピューター\n";
 
 	if (m_Onece) {
-		m_DrawStr = "↑↓キーで選ぶ  Spaceで確定\n";
+		m_DrawStr = "先攻 -> " + first;
+		m_DrawStr += "後攻 -> " + second;
+		m_DrawStr += "選択を確定してよろしいですか？\n";
+		m_DrawStr += "十字キーで選択  Spaceで確定\n";
 		if (confirm) {
 			m_DrawStr += "->はい\n";
 			m_DrawStr += "  いいえ\n";
@@ -136,7 +143,10 @@ bool ShogiSelectScene::IsConfirm()
 	}
 
 	// 出力用
-	m_DrawStr = "↑↓キーで選ぶ  Spaceで確定\n";
+	m_DrawStr  = "先攻 -> " + first;
+	m_DrawStr += "後攻 -> " + second;
+	m_DrawStr += "選択を確定してよろしいですか？\n";
+	m_DrawStr += "十字キーで選択  Spaceで確定\n";
 	if (confirm) {
 		m_DrawStr += "->はい\n";
 		m_DrawStr += "  いいえ\n";
