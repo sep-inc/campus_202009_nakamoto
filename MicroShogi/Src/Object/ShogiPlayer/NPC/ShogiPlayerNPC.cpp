@@ -57,6 +57,7 @@ bool ShogiPlayerNPC::SelectDest()
 
 		for (int i = 0; i < m_PiecePos.size(); ++i) {
 			if (m_RefBoard->IsAblePutOnTheBoard(m_PiecePos[i], enemy_king_pos, m_Id) == true) {
+				Sleep(3000);
 				return true;
 			}
 		}
@@ -74,6 +75,7 @@ bool ShogiPlayerNPC::SelectDest()
 				// 自身の王がその敵を取れるかを調べ取れるなら取る
 				if (m_RefBoard->IsAblePutOnTheBoard(king_pos, m_EnemyPiecePos[i], m_Id) == true) {
 					m_Priority = 1;
+					Sleep(3000);
 					return true;
 				}
 				else {
@@ -84,6 +86,7 @@ bool ShogiPlayerNPC::SelectDest()
 						IVec2 king_move{ king_pos.m_X + (rand() % 3 - 1), king_pos.m_Y + (rand() % 3 - 1) };
 						if (m_RefBoard->IsAblePutOnTheBoard(king_pos, king_move, m_Id) == true) {
 							m_Priority = 1;
+							Sleep(3000);
 							return true;
 						}
 					}
@@ -100,6 +103,7 @@ bool ShogiPlayerNPC::SelectDest()
 				if (m_RefBoard->IsAblePutOnTheBoard(m_PiecePos[p], m_EnemyPiecePos[e], m_Id) == true)
 				{
 					m_Priority = 1;
+					Sleep(3000);
 					return true;
 				}
 			}
@@ -110,6 +114,7 @@ bool ShogiPlayerNPC::SelectDest()
 	{
 		if (m_RefBoard->IsAblePutOnTheBoard(m_MoveSource, IVec2(rand() % BOARD_WIDTH, rand() % BOARD_HEIGHT), m_Id) == true) {
 			m_Priority = 1;
+			Sleep(3000);
 			return true;
 		}
 		return false;
