@@ -7,8 +7,8 @@
 /*===================*/
 /*　コンストラクタ   */
 /*===================*/
-ShogiGameScene::ShogiGameScene(const ShogiPlayerType* first_, const ShogiPlayerType* second_, MoveTrun* whoseWin_):
-	m_ShogiPlayer{nullptr}, m_WhoseWin{ whoseWin_ }, m_TrunCount{0}
+ShogiGameScene::ShogiGameScene(const ShogiPlayerType* first_, const ShogiPlayerType* second_, MoveTrun* whoseWin_) :
+	m_ShogiPlayer{ nullptr }, m_WhoseWin{ whoseWin_ }, CurrentTurn{ MoveTrun::MOVE_FIRST }
 {
 	m_Board = new ShogiBoard();
 
@@ -47,22 +47,18 @@ ShogiGameScene::~ShogiGameScene()
 /*=====================*/
 void ShogiGameScene::Update()
 {
-	m_TrunCount++;
-
-	// 奇数なら先手の更新
-	if (m_TrunCount % 2 == 1) {
-		if (m_ShogiPlayer[(int)MoveTrun::MOVE_FIRST]) m_ShogiPlayer[(int)MoveTrun::MOVE_FIRST]->Update();
-	}
-	// 偶数なら後手の更新
-	else {
-		if (m_ShogiPlayer[(int)MoveTrun::MOVE_SECOND]) m_ShogiPlayer[(int)MoveTrun::MOVE_SECOND]->Update();
-	}
+	// 現在のターンの棋士の更新を行う
+	if (m_ShogiPlayer[(int)CurrentTurn]) m_ShogiPlayer[(int)CurrentTurn]->Update();
 
 	// 王が取られていたらそのターン行動していた側の勝利
 	if (m_Board->KingWasTake() == true) {
-		*m_WhoseWin = m_TrunCount % 2 == 1 ? MoveTrun::MOVE_FIRST : MoveTrun::MOVE_SECOND;
+		*m_WhoseWin = CurrentTurn;
+		// リザルトシーンに切り替える
 		ShogiGame::GetInstance().ChangeScene(ShogiSceneList::SCENE_RESULT);
 	}
+
+	// ターンを切り替える
+	CurrentTurn = (CurrentTurn == MoveTrun::MOVE_FIRST) ? MoveTrun::MOVE_SECOND : MoveTrun::MOVE_FIRST;
 }
 
 
@@ -71,14 +67,5 @@ void ShogiGameScene::Update()
 /*=====================*/
 void ShogiGameScene::Draw()
 {
-	if (m_Board) {
-		if (m_TrunCount % 2 == 1) {
-			// 先手ターンなら後手を描画
-			m_Board->Draw(MoveTrun::MOVE_SECOND);
-		}
-		else {
-			// 後手ターンなら先手を描画
-			m_Board->Draw(MoveTrun::MOVE_FIRST);
-		}
-	}
+	if (m_Board) m_Board->Draw();
 }

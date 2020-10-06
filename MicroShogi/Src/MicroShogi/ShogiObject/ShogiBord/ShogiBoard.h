@@ -49,7 +49,7 @@ public:
 	* @brief     ボードを描画用文字列に変換しバッファにセットする関数
 	* @param[in] id_  先手か後手かの情報
 	*/
-	void Draw(MoveTrun id_);
+	void Draw();
 
 private:
 	//! 初期化用の駒の初期位置を保存する変数

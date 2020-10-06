@@ -191,7 +191,7 @@ bool ShogiBoard::IsAblePutOnTheBoard(IVec2 moveSource_, IVec2 moveDest_, MoveTru
 /*=========================================================*/
 /*　 ボードを描画用文字列に変換しバッファにセットする関数  */
 /*=========================================================*/
-void ShogiBoard::Draw(MoveTrun id_)
+void ShogiBoard::Draw()
 {
 	std::string draw_str;
 

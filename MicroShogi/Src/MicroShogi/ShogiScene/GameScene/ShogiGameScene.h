@@ -42,8 +42,8 @@ private:
 	//! ボード
 	ShogiBoard* m_Board;
 
-	//! どちらの番なのかを判定するためのカウント変数
-	int m_TrunCount;
+	//! どちらの番なのかを保存する変数
+	MoveTrun CurrentTurn;
 
 	//! 誰が勝利したかを保存する変数
 	MoveTrun* m_WhoseWin;
