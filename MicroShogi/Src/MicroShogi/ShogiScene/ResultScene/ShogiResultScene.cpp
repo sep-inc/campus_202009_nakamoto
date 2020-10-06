@@ -103,11 +103,11 @@ bool ShogiResultScene::SelectContinue()
 	int key = Input::GetKey();
 
 	// もし↑キーなら
-	if (key == 72) menu--;
+	if (key == KEY_UP) menu--;
 	// もし↓キーなら
-	else if (key == 80) menu++;
+	else if (key == KEY_DOWN) menu++;
 	// もしSpaceキーなら現在の情報を保存する
-	else if (key == 32) return true;
+	else if (key == KEY_SPACE) return true;
 
 	// 最小値を下回ったら戻す
 	if (menu < static_cast<unsigned __int8>(ResultMenuList::MENU_SELECT)) menu = static_cast<unsigned __int8>(ResultMenuList::MENU_SELECT);

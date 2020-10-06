@@ -64,11 +64,11 @@ void ShogiSelectScene::SelectPlayer(ShogiPlayerType* player_)
 	int key = Input::GetKey();
 
 	// もし↑キーならPCが選ばれている
-	if (key == 72) is_pc = true;
+	if (key == KEY_UP) is_pc = true;
 	// もし↓キーなら
-	else if (key == 80) is_pc = false;
+	else if (key == KEY_DOWN) is_pc = false;
 	// もしSpaceキーなら現在の情報を保存する
-	else if (key == 32) {
+	else if (key == KEY_SPACE) {
 		*player_ = is_pc ? ShogiPlayerType::TYPE_PC : ShogiPlayerType::TYPE_NPC;
 		m_Onece = true;
 	}
@@ -123,11 +123,11 @@ bool ShogiSelectScene::IsConfirm()
 	int key = Input::GetKey();
 
 	// もし↑キーならはいが選ばれている
-	if (key == 72) confirm = true;
+	if (key == KEY_UP) confirm = true;
 	// もし↓キーならいいえが選ばれている
-	else if (key == 80) confirm = false;
+	else if (key == KEY_DOWN) confirm = false;
 	// もしSpaceキーなら
-	else if (key == 32) {
+	else if (key == KEY_SPACE) {
 		// 確定かどうかを調べる
 		if (confirm) {
 			// 確定ならtrueを返す

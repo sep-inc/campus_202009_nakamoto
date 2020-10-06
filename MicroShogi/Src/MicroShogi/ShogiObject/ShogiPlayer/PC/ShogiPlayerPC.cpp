@@ -11,27 +11,30 @@ bool ShogiPlayerPC::SelectSource()
 	printf("【移動元の入力】\n");
 
 	IVec2 select_unit(0, 0);
+	const int board_width_end  = BOARD_WIDTH  - 1;
+	const int board_height_end = BOARD_HEIGHT - 1;
 
 	while (true)
 	{
 		COORD cursor_pos{ select_unit.m_X * 4 + 4, select_unit.m_Y * 2 + 2 };
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor_pos);
+
 		int key = Input::GetKey();
 
-		if (key == 77)      { select_unit.m_X++; }
-		else if (key == 75) { select_unit.m_X--; }
-		else if (key == 80) { select_unit.m_Y++; }
-		else if (key == 72) { select_unit.m_Y--; }
-		else if (key == 32) {
+		if (key == KEY_RIGHT)      { select_unit.m_X++; }
+		else if (key == KEY_LEFT)  { select_unit.m_X--; }
+		else if (key == KEY_DOWN)  { select_unit.m_Y++; }
+		else if (key == KEY_UP)    { select_unit.m_Y--; }
+		else if (key == KEY_SPACE) {
 			m_MoveSource.m_X = select_unit.m_X;
 			m_MoveSource.m_Y = select_unit.m_Y;
 			break;
 		}
 
-		if (select_unit.m_X < 0) select_unit.m_X = 0;
-		if (select_unit.m_X > 3) select_unit.m_X = 3;
-		if (select_unit.m_Y < 0) select_unit.m_Y = 0;
-		if (select_unit.m_Y > 4) select_unit.m_Y = 4;
+		if (select_unit.m_X < 0)				select_unit.m_X = 0;
+		if (select_unit.m_X > board_width_end)  select_unit.m_X = board_width_end;
+		if (select_unit.m_Y < 0)				select_unit.m_Y = 0;
+		if (select_unit.m_Y > board_height_end) select_unit.m_Y = board_height_end;
 	}
 
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), { 0,BOARD_FRAME_HEIGHT + 1 });
@@ -48,6 +51,8 @@ bool ShogiPlayerPC::SelectDest()
 	printf("移動元->横[%c],縦[%c]\n", 'A' + m_MoveSource.m_X, '1' + m_MoveSource.m_Y);
 	printf("【移動先の入力】\n");
 	IVec2 select_unit{ 0,0 };
+	const int board_width_end  = BOARD_WIDTH - 1;
+	const int board_height_end = BOARD_HEIGHT - 1;
 
 	while (true)
 	{
@@ -55,18 +60,18 @@ bool ShogiPlayerPC::SelectDest()
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor_pos);
 		int key = Input::GetKey();
 
-		if (key == 77) { select_unit.m_X++; }
-		else if (key == 75) { select_unit.m_X--; }
-		else if (key == 80) { select_unit.m_Y++; }
-		else if (key == 72) { select_unit.m_Y--; }
-		else if (key == 32) {
+		if (key == KEY_RIGHT)      { select_unit.m_X++; }
+		else if (key == KEY_LEFT)  { select_unit.m_X--; }
+		else if (key == KEY_DOWN)  { select_unit.m_Y++; }
+		else if (key == KEY_UP)    { select_unit.m_Y--; }
+		else if (key == KEY_SPACE) {
 			break;
 		}
 
-		if (select_unit.m_X < 0) select_unit.m_X = 0;
-		if (select_unit.m_X > 3) select_unit.m_X = 3;
-		if (select_unit.m_Y < 0) select_unit.m_Y = 0;
-		if (select_unit.m_Y > 4) select_unit.m_Y = 4;
+		if (select_unit.m_X < 0)				select_unit.m_X = 0;
+		if (select_unit.m_X > board_width_end)  select_unit.m_X = board_width_end;
+		if (select_unit.m_Y < 0)				select_unit.m_Y = 0;
+		if (select_unit.m_Y > board_height_end) select_unit.m_Y = board_height_end;
 	}
 
 
