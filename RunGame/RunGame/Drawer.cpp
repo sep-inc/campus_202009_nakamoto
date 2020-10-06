@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <iostream>
+#include <Windows.h>
 
 /*=============================================*/
 /*    引数resouce_をバッファに書き込む関数     */
@@ -21,8 +22,9 @@ void Drawer::SetDrawBuffer(std::string resouce_)
 /*=======================================*/
 void Drawer::ClearBuffer()
 {
-	// コマンドラインに出力されている文字を消す
-	system("cls");
+	// カーソルを0,0にセットする
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ 0,0 });
+
 	// バッファをリセットする
 	m_DrawBuffer = "\0";
 }
