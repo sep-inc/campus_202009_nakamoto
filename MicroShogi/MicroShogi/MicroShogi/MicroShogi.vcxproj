@@ -147,6 +147,7 @@
     <ClCompile Include="ShogiObject\ShogiPiece\King\ShogiPieceKing.cpp" />
     <ClCompile Include="ShogiObject\ShogiPiece\Knight\ShogiPieceKnight.cpp" />
     <ClCompile Include="ShogiObject\ShogiPiece\Pawn\ShogiPiecePawn.cpp" />
+    <ClCompile Include="ShogiObject\ShogiPiece\ShogiPieceBase.cpp" />
     <ClCompile Include="ShogiObject\ShogiPlayer\NPC\ShogiPlayerNPC.cpp" />
     <ClCompile Include="ShogiObject\ShogiPlayer\PC\ShogiPlayerPC.cpp" />
     <ClCompile Include="ShogiObject\ShogiPlayer\ShogiPlayerBase.cpp" />

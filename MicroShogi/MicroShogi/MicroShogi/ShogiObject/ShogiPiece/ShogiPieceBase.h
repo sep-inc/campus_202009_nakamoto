@@ -13,7 +13,9 @@ public:
 	/**
 	* @brief   コンストラクタ
 	*/
-	ShogiPieceBase(){}
+	ShogiPieceBase() :
+		m_MovableRange{ false }
+	{}
 
 	/**
 	* @brief   デストラクタ
@@ -25,7 +27,7 @@ public:
 	* @param[in] moveVec_ 駒の移動ベクトル
 	* @return  bool 可能 : true   不可能 : false
 	*/
-	virtual bool IsAbleMove(IVec2 moveVec_) const = 0;
+	bool IsAbleMove(IVec2 moveVec_) const;
 
 	/**
 	* @brief 自身の駒の情報を返す関数
@@ -39,6 +41,9 @@ public:
 	* @return  const char* 駒の描画用文字列が返る
 	*/
 	virtual const char* GetResouce(MoveTrun id_) const = 0;
+
+protected:
+	bool m_MovableRange[4][3];
 
 };
 

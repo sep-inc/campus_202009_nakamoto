@@ -1,21 +1,16 @@
 ﻿#include "ShogiPiecePawn.h"
+#include <string.h>
 
-const bool ShogiPiecePawn::m_MovableRange[3][3] = {
+const bool ShogiPiecePawn::m_MovableRange[4][3] = {
+	{0,0,0},
 	{0,1,0},
 	{0,0,0},
 	{0,0,0},
 };
 
-/*===================================*/
-/*　移動可能かどうかを判定する関数   */
-/*===================================*/
-bool ShogiPiecePawn::IsAbleMove(IVec2 moveVec_) const
+ShogiPiecePawn::ShogiPiecePawn()
 {
-	// 移動可能範囲を超えていたら移動できない
-	if (moveVec_.m_X > 1 || moveVec_.m_X < -1) { return false; }
-	if (moveVec_.m_Y > 1 || moveVec_.m_Y < -1) { return false; }
-
-	return ShogiPiecePawn::m_MovableRange[1 + moveVec_.m_Y][1 + moveVec_.m_X];
+	memcpy(ShogiPieceBase::m_MovableRange, this->m_MovableRange, sizeof(this->m_MovableRange));
 }
 
 

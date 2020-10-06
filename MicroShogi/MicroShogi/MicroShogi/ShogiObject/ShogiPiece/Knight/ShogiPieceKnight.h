@@ -12,19 +12,13 @@ public:
 	/**
 	* @brief   コンストラクタ
 	*/
-	ShogiPieceKnight() {}
+	ShogiPieceKnight();
 
 	/**
 	* @brief   デストラクタ
 	*/
 	~ShogiPieceKnight() {}
 
-	/**
-	* @brief 移動可能かどうかを判定する関数
-	* @param[in] moveVec_ 駒の移動ベクトル
-	* @return  bool 可能 : true   不可能 : false
-	*/
-	bool IsAbleMove(IVec2 moveVec_) const override;
 
 	/**
 	* @brief 自身の駒の情報を返す関数
@@ -41,7 +35,7 @@ public:
 
 private:
 	//! 移動可能範囲を保存する変数
-	static const bool m_MovableRange[3][3];
+	static const bool m_MovableRange[4][3];
 
 };
 

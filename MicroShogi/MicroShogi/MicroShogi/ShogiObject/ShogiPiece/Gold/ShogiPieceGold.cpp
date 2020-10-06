@@ -1,21 +1,16 @@
 #include "ShogiPieceGold.h"
+#include <string.h>
 
-const bool ShogiPieceGold::m_MovableRange[3][3] = {
+const bool ShogiPieceGold::m_MovableRange[4][3] = {
+	{0,0,0},
 	{1,1,1},
 	{1,0,1},
 	{0,1,0},
 };
 
-/*===================================*/
-/*@ˆÚ“®‰Â”\‚©‚Ç‚¤‚©‚ð”»’è‚·‚éŠÖ”   */
-/*===================================*/
-bool ShogiPieceGold::IsAbleMove(IVec2 moveVec_) const
+ShogiPieceGold::ShogiPieceGold()
 {
-	// ˆÚ“®‰Â”\”ÍˆÍ‚ð’´‚¦‚Ä‚¢‚½‚çˆÚ“®‚Å‚«‚È‚¢
-	if (moveVec_.m_X > 1 || moveVec_.m_X < -1) { return false; }
-	if (moveVec_.m_Y > 1 || moveVec_.m_Y < -1) { return false; }
-
-	return ShogiPieceGold::m_MovableRange[1 + moveVec_.m_Y][1 + moveVec_.m_X];
+	memcpy(ShogiPieceBase::m_MovableRange, this->m_MovableRange, sizeof(this->m_MovableRange));
 }
 
 

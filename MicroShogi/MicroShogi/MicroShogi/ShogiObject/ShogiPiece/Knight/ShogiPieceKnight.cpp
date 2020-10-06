@@ -1,21 +1,16 @@
 ﻿#include "ShogiPieceKnight.h"
+#include <string.h>
 
-const bool ShogiPieceKnight::m_MovableRange[3][3] = {
+const bool ShogiPieceKnight::m_MovableRange[4][3] = {
 	{1,0,1},
+	{0,0,0},
 	{0,0,0},
 	{0,0,0},
 };
 
-/*===================================*/
-/*　移動可能かどうかを判定する関数   */
-/*===================================*/
-bool ShogiPieceKnight::IsAbleMove(IVec2 moveVec_) const
+ShogiPieceKnight::ShogiPieceKnight()
 {
-	// 移動可能範囲を超えていたら移動できない
-	if (moveVec_.m_X > 1 || moveVec_.m_X < -1) { return false; }
-	if (moveVec_.m_Y > 0 || moveVec_.m_Y < -2) { return false; }
-
-	return ShogiPieceKnight::m_MovableRange[2 + moveVec_.m_Y][1 + moveVec_.m_X];
+	memcpy(ShogiPieceBase::m_MovableRange, this->m_MovableRange, sizeof(this->m_MovableRange));
 }
 
 
