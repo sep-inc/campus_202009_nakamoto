@@ -56,10 +56,7 @@ private:
 	static const PieceOfBoard m_BlankBoard[BOARD_HEIGHT][BOARD_WIDTH];
 
 	//! 先攻のボード
-	PieceOfBoard  m_FirstBoard[BOARD_HEIGHT][BOARD_WIDTH];
-
-	//! 後行のボード
-	PieceOfBoard* m_SecondBoard[BOARD_HEIGHT][BOARD_WIDTH];
+	PieceOfBoard  m_Board[BOARD_HEIGHT][BOARD_WIDTH];
 	
 	//! キングが取られたかどうかを保存する変数
 	bool m_KingWasTake;
