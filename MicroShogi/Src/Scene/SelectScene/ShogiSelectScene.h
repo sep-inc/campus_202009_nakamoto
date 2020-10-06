@@ -2,7 +2,7 @@
 #define SHOGI_SELECT_SCENE_H_
 
 #include "../ShogiSceneBase.h"
-#include "../../ShogiObject/Definition.h"
+#include "../../Object/Definition.h"
 
 /**
 * @brief 将棋のセレクトシーン

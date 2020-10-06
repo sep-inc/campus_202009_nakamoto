@@ -2,9 +2,9 @@
 #define SHOGI_GAME_SCENE_H_
 
 #include "../ShogiSceneBase.h"
-#include "../../ShogiObject/Definition.h"
-#include "../../ShogiObject/ShogiPlayer/ShogiPlayerBase.h"
-#include "../../ShogiObject/ShogiBord/ShogiBoard.h"
+#include "../../Object/Definition.h"
+#include "../../Object/ShogiPlayer/ShogiPlayerBase.h"
+#include "../../Object/Bord/ShogiBoard.h"
 
 /**
 * @brief 将棋のゲームシーンクラス

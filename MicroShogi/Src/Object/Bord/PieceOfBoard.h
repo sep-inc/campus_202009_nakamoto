@@ -1,6 +1,6 @@
 ﻿#ifndef PIECEOFBOARD_H
 #define PIECEOFBOARD_H
-#include "../ShogiPiece/ShogiPieceBase.h"
+#include "../Piece/ShogiPieceBase.h"
 
 /**
 * @brief   ボードに置かれる駒の情報をまとめた構造体

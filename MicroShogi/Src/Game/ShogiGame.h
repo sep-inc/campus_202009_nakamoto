@@ -1,8 +1,8 @@
 ﻿#ifndef SHOGI_GAME_H_
 #define SHOGI_GAME_H_
 
-#include "../ShogiObject/Definition.h"
-#include "../ShogiScene/ShogiSceneBase.h"
+#include "../Object/Definition.h"
+#include "../Scene/ShogiSceneBase.h"
 
 /**
 * @brief 将棋ゲームを管理するクラス

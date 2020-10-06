@@ -1,7 +1,7 @@
 ﻿#ifndef SHOGI_BOARD_H_
 #define SHOGI_BOARD_H_
 
-#include "../ShogiPiece/ShogiPieceBase.h"
+#include "../Piece/ShogiPieceBase.h"
 #include "PieceOfBoard.h"
 #include "../Definition.h"
 #include <vector>
