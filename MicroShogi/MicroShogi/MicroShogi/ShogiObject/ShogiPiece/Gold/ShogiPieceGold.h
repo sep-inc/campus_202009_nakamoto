@@ -1,7 +1,7 @@
 #ifndef SHOGIPIECEGOLD_H_
 #define SHOGIPIECEGOLD_H_
 
-#include "ShogiPieceBase.h"
+#include "../ShogiPieceBase.h"
 
 /**
 * @brief ÅyãÓÅzã‡ÉNÉâÉX

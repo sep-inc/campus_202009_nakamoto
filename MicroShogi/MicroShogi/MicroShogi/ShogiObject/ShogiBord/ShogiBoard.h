@@ -1,9 +1,9 @@
 ﻿#ifndef SHOGI_BOARD_H_
 #define SHOGI_BOARD_H_
 
-#include "ShogiPieceBase.h"
+#include "../ShogiPiece/ShogiPieceBase.h"
 #include "PieceOfBoard.h"
-#include "Definition.h"
+#include "../Definition.h"
 
 /**
 * @brief ボードクラス

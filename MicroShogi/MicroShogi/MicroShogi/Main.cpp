@@ -1,6 +1,5 @@
-﻿#include "Drawer.h"
-#include "ShogiGame.h"
-#include "Drawer.h"
+﻿#include "System/Drawer.h"
+#include "Game/ShogiGame.h"
 #include <stdlib.h>
 #include <time.h>
 #include <signal.h>

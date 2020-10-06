@@ -1,8 +1,8 @@
 ﻿#ifndef SHOGI_RESULT_SCENE_H_
 #define SHOGI_RESULT_SCENE_H_
 
-#include "ShogiSceneBase.h"
-#include "Definition.h"
+#include "../ShogiSceneBase.h"
+#include "../../ShogiObject/Definition.h"
 
 /**
 * @brief 将棋のリザルトシーン

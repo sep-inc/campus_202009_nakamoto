@@ -1,8 +1,8 @@
 #include "PieceOfBoard.h"
-#include "ShogiPieceGold.h"
-#include "ShogiPieceKing.h"
-#include "ShogiPieceKnight.h"
-#include "ShogiPiecePawn.h"
+#include "../ShogiPiece/Gold/ShogiPieceGold.h"
+#include "../ShogiPiece/King/ShogiPieceKing.h"
+#include "../ShogiPiece/Knight/ShogiPieceKnight.h"
+#include "../ShogiPiece/Pawn/ShogiPiecePawn.h"
 
 
 /*===================*/

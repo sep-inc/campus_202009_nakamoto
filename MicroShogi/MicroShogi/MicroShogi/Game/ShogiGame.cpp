@@ -1,7 +1,7 @@
 ﻿#include "ShogiGame.h"
-#include "ShogiSelectScene.h"
-#include "ShogiGameScene.h"
-#include "ShogiResultScene.h"
+#include "../ShogiScene/SelectScene/ShogiSelectScene.h"
+#include "../ShogiScene/GameScene/ShogiGameScene.h"
+#include "../ShogiScene/ResultScene/ShogiResultScene.h"
 
 /*===================*/
 /*　コンストラクタ   */

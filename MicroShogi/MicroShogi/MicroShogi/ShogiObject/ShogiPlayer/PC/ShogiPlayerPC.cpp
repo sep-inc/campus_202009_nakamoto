@@ -1,5 +1,5 @@
 ﻿#include "ShogiPlayerPC.h"
-#include "Input.h"
+#include "../../../System/Input.h"
 #include <stdio.h>
 
 /*=========================*/

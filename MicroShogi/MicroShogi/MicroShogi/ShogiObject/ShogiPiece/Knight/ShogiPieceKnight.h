@@ -1,7 +1,7 @@
 ﻿#ifndef SHOGIPIECEKNIGHT_H_
 #define SHOGIPIECEKNIGHT_H_
 
-#include "ShogiPieceBase.h"
+#include "../ShogiPieceBase.h"
 
 /**
 * @brief 【駒】桂馬クラス

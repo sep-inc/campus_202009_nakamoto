@@ -52,109 +52,71 @@
     <ClCompile Include="Main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Drawer.cpp">
-      <Filter>System</Filter>
+    <ClCompile Include="Game\ShogiGame.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>System</Filter>
+    <ClCompile Include="ShogiObject\ShogiBord\PieceOfBoard.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ShogiGame.cpp">
-      <Filter>ShogiScene</Filter>
+    <ClCompile Include="ShogiObject\ShogiBord\ShogiBoard.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ShogiGameScene.cpp">
-      <Filter>ShogiScene\GameScene</Filter>
+    <ClCompile Include="ShogiObject\ShogiPiece\Gold\ShogiPieceGold.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ShogiResultScene.cpp">
-      <Filter>ShogiScene\ResultScene</Filter>
+    <ClCompile Include="ShogiObject\ShogiPiece\King\ShogiPieceKing.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ShogiSelectScene.cpp">
-      <Filter>ShogiScene\SelectScene</Filter>
+    <ClCompile Include="ShogiObject\ShogiPiece\Knight\ShogiPieceKnight.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ShogiPiecePawn.cpp">
-      <Filter>ShogiPiece\Pawn</Filter>
+    <ClCompile Include="ShogiObject\ShogiPiece\Pawn\ShogiPiecePawn.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ShogiPieceKnight.cpp">
-      <Filter>ShogiPiece\Knight</Filter>
+    <ClCompile Include="ShogiObject\ShogiPlayer\NPC\ShogiPlayerNPC.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ShogiPieceKing.cpp">
-      <Filter>ShogiPiece\King</Filter>
+    <ClCompile Include="ShogiObject\ShogiPlayer\PC\ShogiPlayerPC.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ShogiPieceGold.cpp">
-      <Filter>ShogiPiece\Gold</Filter>
+    <ClCompile Include="ShogiObject\ShogiPlayer\ShogiPlayerBase.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="PieceOfBoard.cpp">
-      <Filter>ShogiObject\ShogiBord</Filter>
+    <ClCompile Include="ShogiScene\GameScene\ShogiGameScene.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ShogiPlayerBase.cpp">
-      <Filter>ShogiObject\ShogiPlayer</Filter>
+    <ClCompile Include="ShogiScene\ResultScene\ShogiResultScene.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ShogiPlayerNPC.cpp">
-      <Filter>ShogiObject\ShogiPlayer</Filter>
+    <ClCompile Include="ShogiScene\SelectScene\ShogiSelectScene.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ShogiPlayerPC.cpp">
-      <Filter>ShogiObject\ShogiPlayer</Filter>
+    <ClCompile Include="System\Drawer.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ShogiBoard.cpp">
-      <Filter>ShogiObject\ShogiBord</Filter>
+    <ClCompile Include="System\Input.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Drawer.h">
-      <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>System</Filter>
-    </ClInclude>
-    <ClInclude Include="ShogiSceneBase.h">
-      <Filter>ShogiScene</Filter>
-    </ClInclude>
-    <ClInclude Include="ShogiGame.h">
-      <Filter>ShogiScene</Filter>
-    </ClInclude>
-    <ClInclude Include="ShogiGameScene.h">
-      <Filter>ShogiScene\GameScene</Filter>
-    </ClInclude>
-    <ClInclude Include="ShogiResultScene.h">
-      <Filter>ShogiScene\ResultScene</Filter>
-    </ClInclude>
-    <ClInclude Include="ShogiSelectScene.h">
-      <Filter>ShogiScene\SelectScene</Filter>
-    </ClInclude>
-    <ClInclude Include="ShogiPieceBase.h">
-      <Filter>ShogiPiece</Filter>
-    </ClInclude>
-    <ClInclude Include="IVec2.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="ShogiPiecePawn.h">
-      <Filter>ShogiPiece\Pawn</Filter>
-    </ClInclude>
-    <ClInclude Include="ShogiPieceKnight.h">
-      <Filter>ShogiPiece\Knight</Filter>
-    </ClInclude>
-    <ClInclude Include="ShogiPieceKing.h">
-      <Filter>ShogiPiece\King</Filter>
-    </ClInclude>
-    <ClInclude Include="ShogiPieceGold.h">
-      <Filter>ShogiPiece\Gold</Filter>
-    </ClInclude>
-    <ClInclude Include="PieceOfBoard.h">
-      <Filter>ShogiObject\ShogiBord</Filter>
-    </ClInclude>
-    <ClInclude Include="ShogiPlayerBase.h">
-      <Filter>ShogiObject\ShogiPlayer</Filter>
-    </ClInclude>
-    <ClInclude Include="ShogiPlayerNPC.h">
-      <Filter>ShogiObject\ShogiPlayer</Filter>
-    </ClInclude>
-    <ClInclude Include="ShogiPlayerPC.h">
-      <Filter>ShogiObject\ShogiPlayer</Filter>
-    </ClInclude>
-    <ClInclude Include="Definition.h">
-      <Filter>ShogiObject</Filter>
-    </ClInclude>
-    <ClInclude Include="ShogiBoard.h">
-      <Filter>ShogiObject\ShogiBord</Filter>
-    </ClInclude>
+    <ClInclude Include="Game\ShogiGame.h" />
+    <ClInclude Include="ShogiObject\ShogiBord\PieceOfBoard.h" />
+    <ClInclude Include="ShogiObject\ShogiBord\ShogiBoard.h" />
+    <ClInclude Include="ShogiObject\ShogiPiece\Gold\ShogiPieceGold.h" />
+    <ClInclude Include="ShogiObject\ShogiPiece\King\ShogiPieceKing.h" />
+    <ClInclude Include="ShogiObject\ShogiPiece\Knight\ShogiPieceKnight.h" />
+    <ClInclude Include="ShogiObject\ShogiPiece\Pawn\ShogiPiecePawn.h" />
+    <ClInclude Include="ShogiObject\ShogiPiece\ShogiPieceBase.h" />
+    <ClInclude Include="ShogiObject\ShogiPlayer\NPC\ShogiPlayerNPC.h" />
+    <ClInclude Include="ShogiObject\ShogiPlayer\PC\ShogiPlayerPC.h" />
+    <ClInclude Include="ShogiObject\ShogiPlayer\ShogiPlayerBase.h" />
+    <ClInclude Include="ShogiObject\Definition.h" />
+    <ClInclude Include="ShogiScene\GameScene\ShogiGameScene.h" />
+    <ClInclude Include="ShogiScene\ResultScene\ShogiResultScene.h" />
+    <ClInclude Include="ShogiScene\SelectScene\ShogiSelectScene.h" />
+    <ClInclude Include="ShogiScene\ShogiSceneBase.h" />
+    <ClInclude Include="System\Drawer.h" />
+    <ClInclude Include="System\Input.h" />
+    <ClInclude Include="Utility\IVec2.h" />
   </ItemGroup>
 </Project>

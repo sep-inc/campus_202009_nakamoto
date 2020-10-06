@@ -1,7 +1,7 @@
 ﻿#include "ShogiSelectScene.h"
-#include "ShogiGame.h"
-#include "Input.h"
-#include "Drawer.h"
+#include "../../Game/ShogiGame.h"
+#include "../../System/Input.h"
+#include "../../System/Drawer.h"
 
 /*===================*/
 /*　コンストラクタ   */

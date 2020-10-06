@@ -1,7 +1,7 @@
 ﻿#include "ShogiGameScene.h"
-#include "ShogiGame.h"
-#include "ShogiPlayerPC.h"
-#include "ShogiPlayerNPC.h"
+#include "../../Game/ShogiGame.h"
+#include "../../ShogiObject/ShogiPlayer/PC/ShogiPlayerPC.h"
+#include "../../ShogiObject/ShogiPlayer/NPC/ShogiPlayerNPC.h"
 
 
 /*===================*/

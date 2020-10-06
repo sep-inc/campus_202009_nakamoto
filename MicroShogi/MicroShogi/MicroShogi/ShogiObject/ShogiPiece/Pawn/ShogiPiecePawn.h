@@ -1,44 +1,47 @@
-﻿#ifndef SHOGIPIECEBASE_H_
-#define SHOGIPIECEBASE_H_
+﻿#ifndef SHOGIPIECEPAWN_H_
+#define SHOGIPIECEPAWN_H_
 
-#include "Definition.h"
-#include "IVec2.h"
+#include "../ShogiPieceBase.h"
 
 /**
-* @brief 将棋の駒の基底クラス
+* @brief 【駒】歩クラス
 */
-class ShogiPieceBase
+class ShogiPiecePawn : public ShogiPieceBase
 {
 public:
 	/**
 	* @brief   コンストラクタ
 	*/
-	ShogiPieceBase(){}
+	ShogiPiecePawn() {}
 
 	/**
 	* @brief   デストラクタ
 	*/
-	~ShogiPieceBase(){}
+	~ShogiPiecePawn() {}
 
 	/**
 	* @brief 移動可能かどうかを判定する関数
 	* @param[in] moveVec_ 駒の移動ベクトル
 	* @return  bool 可能 : true   不可能 : false
 	*/
-	virtual bool IsAbleMove(IVec2 moveVec_) const = 0;
+	bool IsAbleMove(IVec2 moveVec_) const override;
 
 	/**
 	* @brief 自身の駒の情報を返す関数
 	* @return  const ShogiPiece　自身の駒の種類
 	*/
-	virtual inline const ShogiPiece GetShogiPiece() const = 0;
+	inline const ShogiPiece GetShogiPiece() const override { return ShogiPiece::PIECE_PAWN; }
 
 	/**
 	* @brief 駒の描画に必要なリソースを返す関数
 	* @param[in] id_ 先手か後手の情報
 	* @return  const char* 駒の描画用文字列が返る
 	*/
-	virtual const char* GetResouce(MoveTrun id_) const = 0;
+	virtual const char* GetResouce(MoveTrun id_) const override;
+
+private:
+	//! 移動可能範囲を保存する変数
+	static const bool m_MovableRange[3][3];
 
 };
 

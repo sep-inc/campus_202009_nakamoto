@@ -1,5 +1,5 @@
 ﻿#include "ShogiBoard.h"
-#include "Drawer.h"
+#include "../../System/Drawer.h"
 #include <string.h>
 
 using SP = ShogiPiece;

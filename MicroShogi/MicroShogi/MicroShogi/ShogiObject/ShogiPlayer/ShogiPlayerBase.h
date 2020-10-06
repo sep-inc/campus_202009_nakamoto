@@ -1,9 +1,8 @@
 ﻿#ifndef ShogiPlayerBase_H_
 #define ShogiPlayerBase_H_
 
-#include "Definition.h"
-#include "IVec2.h"
-#include "ShogiBoard.h"
+#include "../Definition.h"
+#include "../ShogiBord/ShogiBoard.h"
 
 /**
 * @brief 棋士の基底クラス

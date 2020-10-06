@@ -1,8 +1,8 @@
 ﻿#ifndef SHOGI_SELECT_SCENE_H_
 #define SHOGI_SELECT_SCENE_H_
 
-#include "ShogiSceneBase.h"
-#include "Definition.h"
+#include "../ShogiSceneBase.h"
+#include "../../ShogiObject/Definition.h"
 
 /**
 * @brief 将棋のセレクトシーン

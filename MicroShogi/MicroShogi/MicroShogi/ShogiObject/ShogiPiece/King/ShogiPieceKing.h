@@ -1,7 +1,7 @@
 #ifndef SHOGIPIECEKING_H_
 #define SHOGIPIECEKING_H_
 
-#include "ShogiPieceBase.h"
+#include "../ShogiPieceBase.h"
 
 /**
 * @brief ÅyãÓÅzâ§ÉNÉâÉX

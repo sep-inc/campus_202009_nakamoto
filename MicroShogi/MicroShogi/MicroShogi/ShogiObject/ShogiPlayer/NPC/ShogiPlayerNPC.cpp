@@ -1,5 +1,4 @@
 ﻿#include "ShogiPlayerNPC.h"
-#include "Definition.h"
 #include <stdlib.h>
 #include <windows.h>
 
