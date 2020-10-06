@@ -7,7 +7,7 @@
 /*=========================*/
 bool ShogiPlayerPC::SelectSource()
 {
-	printf("十字キーで選択\n");
+	printf("十字キーで選択  Enterで確定\n");
 	printf("【移動元の入力】\n");
 
 	IVec2 select_unit(0, 0);
@@ -47,7 +47,7 @@ bool ShogiPlayerPC::SelectSource()
 /*=========================*/
 bool ShogiPlayerPC::SelectDest()
 {
-	printf("十字キーで選択\n");
+	printf("十字キーで選択  Enterで確定\n");
 	printf("移動元->横[%c],縦[%c]\n", 'A' + m_MoveSource.m_X, '1' + m_MoveSource.m_Y);
 	printf("【移動先の入力】\n");
 	IVec2 select_unit{ 0,0 };
