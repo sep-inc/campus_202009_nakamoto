@@ -9,16 +9,14 @@
 */
 class ShogiResultScene : public ShogiSceneBase
 {
-	/**
-	* @enum Enum
-	* 結果出力後どのシーンに遷移するかのメニューリスト
-	*/
-	enum class ResultMenuList : unsigned char
+	enum class ResultMenuList: unsigned char
 	{
-		MENU_SELECT,		// 選択シーン
-		MENU_CONTINUE,		// もう一度
-		MENU_END,			// ゲーム終了
+		MENU_SELECT,
+		MENU_CONTINUE,
+		MENU_END,
+		MENU_MAX,
 	};
+
 public:
 	/**
 	* @brief   コンストラクタ
@@ -50,14 +48,21 @@ private:
 	bool SelectContinue();
 
 private:
-	//! 現在どの項目が選択されているかを保存する変数
-	ResultMenuList m_CurrentSelectMenu;
-
 	//! 誰が勝利したかを文字列で保存する変数
 	std::string m_WhoseWin;
 
 	//! 一度だけ行いたい処理を管理するための変数
 	bool m_Onece;
+
+	//! 次に遷移するシーンの情報を保存する変数
+	ShogiSceneList m_NextScene;
+
+	__int8 CurrentSelectMenu;
+
+	//! セレクト
+	std::string SelectStr;
+	std::string ContinueStr;
+	std::string EndStr;
 
 };
 

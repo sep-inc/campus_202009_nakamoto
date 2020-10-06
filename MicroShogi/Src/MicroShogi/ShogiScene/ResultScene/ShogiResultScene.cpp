@@ -6,10 +6,8 @@
 /*===================*/
 /*　コンストラクタ   */
 /*===================*/
-ShogiResultScene::ShogiResultScene(const MoveTrun* whoseWin_):
-	m_CurrentSelectMenu{ ResultMenuList::MENU_CONTINUE },
-	m_WhoseWin {"\0"						   },
-	m_Onece    {true                           }
+ShogiResultScene::ShogiResultScene(const MoveTrun* whoseWin_) :
+	m_WhoseWin{ "\0" }, m_Onece{ true }, CurrentSelectMenu{ 0 }, m_NextScene{ ShogiSceneList::SCENE_SELECT }
 {
 	switch (*whoseWin_)
 	{
@@ -32,29 +30,20 @@ ShogiResultScene::ShogiResultScene(const MoveTrun* whoseWin_):
 void ShogiResultScene::Update()
 {
 	// 結果を書き込む
-	m_DrawStr = m_WhoseWin;
+	m_DrawStr   = m_WhoseWin;
+	SelectStr   = "  セレクト\n";
+	ContinueStr = "  もう一度\n";
+	EndStr      = "  終了\n";
 
 	// 続けるかどうかを選択する
 	if (SelectContinue() == true) {
-
-		switch (m_CurrentSelectMenu)
-		{
-		case ResultMenuList::MENU_SELECT:
-			ShogiGame::GetInstance().ChangeScene(ShogiSceneList::SCENE_SELECT);
-			break;
-
-		case ResultMenuList::MENU_CONTINUE:
-			ShogiGame::GetInstance().ChangeScene(ShogiSceneList::SCENE_GAME);
-			break;
-
-		case ResultMenuList::MENU_END:
+		// 終了が選ばれたらプログラムを終了させる
+		if (m_NextScene == ShogiSceneList::SCENE_UNKNOWN) {
 			exit(0);
-			break;
-
-		default:
-			break;
 		}
 
+		// 選択されたシーンへ遷移する
+		ShogiGame::GetInstance().ChangeScene(m_NextScene);
 	}
 	
 }
@@ -74,27 +63,15 @@ void ShogiResultScene::Draw()
 /*=================================================*/
 bool ShogiResultScene::SelectContinue()
 {
-	// 何が選択されているかを保存する変数
-	static __int8 menu;
-
 	if (m_Onece) {
 		// 出力用
 		m_DrawStr += "↑↓キーで選ぶ  Spaceで確定\n";
-		if (m_CurrentSelectMenu == ResultMenuList::MENU_SELECT) {
-			m_DrawStr += "->セレクト\n";
-			m_DrawStr += "  もう一度\n";
-			m_DrawStr += "  終了\n";
-		}
-		else if (m_CurrentSelectMenu == ResultMenuList::MENU_CONTINUE) {
-			m_DrawStr += "　セレクト\n";
-			m_DrawStr += "->もう一度\n";
-			m_DrawStr += "  終了\n";
-		}
-		else {
-			m_DrawStr += "  セレクト\n";
-			m_DrawStr += "  もう一度\n";
-			m_DrawStr += "->終了\n";
-		}
+
+		if      (CurrentSelectMenu == (__int8)ResultMenuList::MENU_SELECT)   { SelectStr   = "->セレクト\n"; }
+		else if (CurrentSelectMenu == (__int8)ResultMenuList::MENU_CONTINUE) { ContinueStr = "->もう一度\n"; }
+		else if (CurrentSelectMenu == (__int8)ResultMenuList::MENU_END)      { EndStr      = "->終了\n";     }
+
+		m_DrawStr += SelectStr + ContinueStr + EndStr;
 
 		m_Onece = false;
 		return false;
@@ -103,36 +80,29 @@ bool ShogiResultScene::SelectContinue()
 	int key = Input::GetKey();
 
 	// もし↑キーなら
-	if (key == KEY_UP) menu--;
+	if (key == KEY_UP) CurrentSelectMenu--;
 	// もし↓キーなら
-	else if (key == KEY_DOWN) menu++;
+	else if (key == KEY_DOWN) CurrentSelectMenu++;
 	// もしSpaceキーなら現在の情報を保存する
 	else if (key == KEY_SPACE) return true;
 
 	// 最小値を下回ったら戻す
-	if (menu < static_cast<unsigned __int8>(ResultMenuList::MENU_SELECT)) menu = static_cast<unsigned __int8>(ResultMenuList::MENU_SELECT);
+	if (CurrentSelectMenu < 0) CurrentSelectMenu = 0;
 	// 最大値を上回ったら戻す
-	if (menu > static_cast<unsigned __int8>(ResultMenuList::MENU_END))    menu = static_cast<unsigned __int8>(ResultMenuList::MENU_END);
+	if (CurrentSelectMenu > 2) CurrentSelectMenu = 2;
 
-	m_CurrentSelectMenu = static_cast<ResultMenuList>(menu);
+	if (CurrentSelectMenu      == (__int8)ResultMenuList::MENU_SELECT)	 { m_NextScene = ShogiSceneList::SCENE_SELECT;  }
+	else if (CurrentSelectMenu == (__int8)ResultMenuList::MENU_CONTINUE) { m_NextScene = ShogiSceneList::SCENE_GAME;    }
+	else if (CurrentSelectMenu == (__int8)ResultMenuList::MENU_END)		 { m_NextScene = ShogiSceneList::SCENE_UNKNOWN; }
 
 	// 出力用
 	m_DrawStr += "↑↓キーで選ぶ  Spaceで確定\n";
-	if (m_CurrentSelectMenu == ResultMenuList::MENU_SELECT) {
-		m_DrawStr += "->セレクト\n";
-		m_DrawStr += "  もう一度\n";
-		m_DrawStr += "  終了\n";
-	}
-	else if (m_CurrentSelectMenu == ResultMenuList::MENU_CONTINUE){
-		m_DrawStr += "　セレクト\n";
-		m_DrawStr += "->もう一度\n";
-		m_DrawStr += "  終了\n";
-	}
-	else {
-		m_DrawStr += "  セレクト\n";
-		m_DrawStr += "  もう一度\n";
-		m_DrawStr += "->終了\n";
-	}
+
+	if (CurrentSelectMenu      == (__int8)ResultMenuList::MENU_SELECT)   { SelectStr = "->セレクト\n";   }
+	else if (CurrentSelectMenu == (__int8)ResultMenuList::MENU_CONTINUE) { ContinueStr = "->もう一度\n"; }
+	else if (CurrentSelectMenu == (__int8)ResultMenuList::MENU_END)      { EndStr = "->終了\n";          }
+
+	m_DrawStr += SelectStr + ContinueStr + EndStr;
 
 	return false;
 }

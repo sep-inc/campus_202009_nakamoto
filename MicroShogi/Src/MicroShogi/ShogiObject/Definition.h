@@ -50,6 +50,7 @@ enum class ShogiPlayerType : unsigned char
 */
 enum class ShogiSceneList : unsigned char
 {
+	SCENE_UNKNOWN,
 	SCENE_SELECT,	// セレクトシーン
 	SCENE_GAME,		// ゲームシーン
 	SCENE_RESULT,	// 結果シーン
