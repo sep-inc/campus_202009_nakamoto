@@ -45,22 +45,6 @@ void ShogiSelectScene::SelectPlayer(ShogiPlayerType* player_)
 	// どちらが選ばれているかを保存する変数
 	static bool is_pc = true;
 
-	if (m_Onece) {
-		// 出力用
-		m_DrawStr += "十字キーで選択  Spaceで確定\n";
-		if (is_pc) {
-			m_DrawStr += "->プレイヤー\n";
-			m_DrawStr += "  コンピューター\n";
-		}
-		else {
-			m_DrawStr += "  プレイヤー\n";
-			m_DrawStr += "->コンピューター\n";
-		}
-
-		m_Onece = false;
-		return;
-	}
-
 	int key = Input::GetKey();
 
 	// もし↑キーならPCが選ばれている
@@ -100,25 +84,6 @@ bool ShogiSelectScene::IsConfirm()
 	first  = *m_FirstMovePlayer  == ShogiPlayerType::TYPE_PC ? "プレイヤー\n" : "コンピューター\n";
 	second = *m_SecondMovePlayer == ShogiPlayerType::TYPE_PC ? "プレイヤー\n" : "コンピューター\n";
 
-	if (m_Onece) {
-		m_DrawStr = "先攻 -> " + first;
-		m_DrawStr += "後攻 -> " + second;
-		m_DrawStr += "選択を確定してよろしいですか？\n";
-		m_DrawStr += "十字キーで選択  Spaceで確定\n";
-		if (confirm) {
-			m_DrawStr += "->はい\n";
-			m_DrawStr += "  いいえ\n";
-		}
-		else {
-			m_DrawStr += "  はい\n";
-			m_DrawStr += "->いいえ\n";
-		}
-
-		m_Onece = false;
-		return false;
-	}
-
-
 	// キー入力
 	int key = Input::GetKey();
 
@@ -138,12 +103,15 @@ bool ShogiSelectScene::IsConfirm()
 			*m_FirstMovePlayer  = ShogiPlayerType::TYPE_UNKNOWN;
 			*m_SecondMovePlayer = ShogiPlayerType::TYPE_UNKNOWN;
 			m_Onece = true;
+			m_DrawStr = "";
+			system("cls");
 			return false;
 		}
 	}
 
 	// 出力用
 	m_DrawStr  = "先攻 -> " + first;
+	m_DrawStr += "\r                                    \r";
 	m_DrawStr += "後攻 -> " + second;
 	m_DrawStr += "選択を確定してよろしいですか？\n";
 	m_DrawStr += "十字キーで選択  Spaceで確定\n";

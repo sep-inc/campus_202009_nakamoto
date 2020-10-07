@@ -28,7 +28,7 @@ public:
 	/**
 	* @brief   更新関数
 	*/
-	void Update();
+	bool Update();
 
 protected:
 	/**
@@ -41,7 +41,7 @@ protected:
 	* @brief   移動先を選択する関数
 	* @return  bool 選択可能ならtrueを返す
 	*/
-	virtual bool SelectDest() = 0;
+	virtual bool SelectDest(bool* selected_ = nullptr) = 0;
 	
 protected:
 	//! ボードクラス参照用変数
@@ -52,6 +52,11 @@ protected:
 
 	//! 駒の移動元を保存する変数
 	IVec2 m_MoveSource;
+
+private:
+
+	//! 移動元を選択したかどうかを保存する変数
+	bool SelectedMoveSource;
 };
 
 #endif

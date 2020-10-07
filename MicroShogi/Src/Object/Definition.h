@@ -1,6 +1,8 @@
 ﻿#ifndef DEFINITION_H_
 #define DEFINITION_H_
 
+#define CURSOR_FLASH_TIME 20
+
 // セーフデリート
 #define SAFE_DELETE(p) {delete p; p = nullptr;}
 // ボードの横幅

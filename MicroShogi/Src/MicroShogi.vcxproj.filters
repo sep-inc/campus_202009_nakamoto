@@ -121,5 +121,6 @@
     <ClInclude Include="Scene\ShogiSceneBase.h" />
     <ClInclude Include="Scene\SelectScene\ShogiSelectScene.h" />
     <ClInclude Include="Game\ShogiGame.h" />
+    <ClInclude Include="Object\Cursor.h" />
   </ItemGroup>
 </Project>

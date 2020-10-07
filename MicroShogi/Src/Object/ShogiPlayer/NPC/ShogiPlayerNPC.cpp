@@ -45,7 +45,7 @@ bool ShogiPlayerNPC::SelectSource()
 /*=========================*/
 /*　移動先を選択する関数   */
 /*=========================*/
-bool ShogiPlayerNPC::SelectDest()
+bool ShogiPlayerNPC::SelectDest(bool* selected_)
 {
 	switch (m_Priority)
 	{
@@ -117,6 +117,7 @@ bool ShogiPlayerNPC::SelectDest()
 			Sleep(3000);
 			return true;
 		}
+		if (selected_)*selected_ = true;
 		return false;
 	}
 	break;

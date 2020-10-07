@@ -161,6 +161,7 @@
     <ClInclude Include="Game\ShogiGame.h" />
     <ClInclude Include="Object\Bord\PieceOfBoard.h" />
     <ClInclude Include="Object\Bord\ShogiBoard.h" />
+    <ClInclude Include="Object\Cursor.h" />
     <ClInclude Include="Object\Definition.h" />
     <ClInclude Include="Object\Piece\Gold\ShogiPieceGold.h" />
     <ClInclude Include="Object\Piece\King\ShogiPieceKing.h" />

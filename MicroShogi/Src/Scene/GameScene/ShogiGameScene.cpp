@@ -6,7 +6,7 @@
 
 /*===================*/
 /*　コンストラクタ   */
-/*===================*/
+/*===================*/ 
 ShogiGameScene::ShogiGameScene(const ShogiPlayerType* first_, const ShogiPlayerType* second_, MoveTrun* whoseWin_) :
 	m_ShogiPlayer{ nullptr }, m_WhoseWin{ whoseWin_ }, CurrentTurn{ MoveTrun::MOVE_FIRST }
 {
@@ -47,8 +47,12 @@ ShogiGameScene::~ShogiGameScene()
 /*=====================*/
 void ShogiGameScene::Update()
 {
+	bool turn_end = false;
+
 	// 現在のターンの棋士の更新を行う
-	if (m_ShogiPlayer[(int)CurrentTurn]) m_ShogiPlayer[(int)CurrentTurn]->Update();
+	if (m_ShogiPlayer[(int)CurrentTurn]) {
+		turn_end = m_ShogiPlayer[(int)CurrentTurn]->Update();
+	}
 
 	// 王が取られていたらそのターン行動していた側の勝利
 	if (m_Board->KingWasTake() == true) {
@@ -58,7 +62,7 @@ void ShogiGameScene::Update()
 	}
 
 	// ターンを切り替える
-	CurrentTurn = (CurrentTurn == MoveTrun::MOVE_FIRST) ? MoveTrun::MOVE_SECOND : MoveTrun::MOVE_FIRST;
+	if (turn_end)CurrentTurn = (CurrentTurn == MoveTrun::MOVE_FIRST) ? MoveTrun::MOVE_SECOND : MoveTrun::MOVE_FIRST;
 }
 
 

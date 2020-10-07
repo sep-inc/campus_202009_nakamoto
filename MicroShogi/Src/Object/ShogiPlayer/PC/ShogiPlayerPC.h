@@ -2,6 +2,7 @@
 #define SHOGI_PLAYER_PC_H_
 
 #include "../ShogiPlayerBase.h"
+#include "../../Cursor.h"
 #include <string>
 
 /**
@@ -32,11 +33,14 @@ private:
 	* @brief   移動元を選択する関数
 	* @return  bool 選択可能ならtrueを返す
 	*/
-	bool SelectDest() override;
+	bool SelectDest(bool* selected_ = nullptr) override;
 
-private:
+private:	
 	//! 先手か後手かを文字列で保存する変数
 	std::string m_Name;
+
+	//! どこを選択しているかを保存する変数
+	Cursor m_SelectCursor;
 
 };
 

@@ -3,12 +3,22 @@
 /*=============*/
 /*　更新関数   */
 /*=============*/
-void ShogiPlayerBase::Update()
+bool ShogiPlayerBase::Update()
 {
-	while (true)
-	{
-		if (SelectSource() == false) continue;
+	static bool selected = false;
 
-		if (SelectDest() == true) break;
+	if (SelectedMoveSource == false) {
+		SelectedMoveSource = SelectSource();
 	}
+	else if (SelectDest(&selected) == false) {
+		if (selected == true) {
+			SelectedMoveSource = false;
+		}
+	}
+	else {
+		SelectedMoveSource = false;
+		return true;
+	}
+
+	return false;
 }

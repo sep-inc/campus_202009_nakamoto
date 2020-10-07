@@ -37,16 +37,19 @@ void ShogiGame::ChangeScene(ShogiSceneList scene_)
 		m_FirstMovePlayer  = ShogiPlayerType::TYPE_UNKNOWN;
 		m_SecondMovePlayer = ShogiPlayerType::TYPE_UNKNOWN;
 		m_CurrentScene     = new ShogiSelectScene(&m_FirstMovePlayer, &m_SecondMovePlayer);
+		system("cls");
 		break;
 
 	case ShogiSceneList::SCENE_GAME:
 		SAFE_DELETE(m_CurrentScene);
 		m_CurrentScene = new ShogiGameScene(&m_FirstMovePlayer, &m_SecondMovePlayer, &m_WhoseWin);
+		system("cls");
 		break;
 
 	case ShogiSceneList::SCENE_RESULT:
 		SAFE_DELETE(m_CurrentScene);
 		m_CurrentScene = new ShogiResultScene(&m_WhoseWin);
+		system("cls");
 		break;
 
 	default:

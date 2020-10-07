@@ -63,6 +63,12 @@ public:
 	inline bool KingWasTake() const { return m_KingWasTake; }
 
 	/**
+	* @brief      指定した座標にカーソルを合わせる関数
+	* @param[in]  pos_　カーソルの座標
+	*/
+	inline void SetCursorPos(IVec2 pos_) { m_SelectCursor = pos_; }
+
+	/**
 	* @brief     ボードを描画用文字列に変換しバッファにセットする関数
 	* @param[in] id_  先手か後手かの情報
 	*/
@@ -83,7 +89,10 @@ private:
 	
 	//! ボードの描画用変数
 	char m_DrawBoard[BOARD_FRAME_HEIGHT][BOARD_FRAME_WIDTH][CHAR_SIZE];
-	
+
+	//! カーソルがどこに置かれているかを保存する変数
+	IVec2 m_SelectCursor;
+
 };
 
 #endif

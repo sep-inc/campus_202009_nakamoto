@@ -23,7 +23,9 @@ void Drawer::SetDrawBuffer(std::string resouce_)
 void Drawer::ClearBuffer()
 {
 	// コマンドラインに出力されている文字を消す
-	system("cls");
+	//system("cls");
+
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ 0,0 });
 
 	// バッファをリセットする
 	m_DrawBuffer = "\0";

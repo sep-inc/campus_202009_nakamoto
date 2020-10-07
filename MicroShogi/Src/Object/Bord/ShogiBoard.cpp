@@ -19,7 +19,7 @@ const PieceOfBoard ShogiBoard::m_BlankBoard[BOARD_HEIGHT][BOARD_WIDTH] =
 /*　コンストラクタ  */
 /*==================*/
 ShogiBoard::ShogiBoard() :
-	m_Board{}, m_KingWasTake{ false }, m_DrawBoard{ 0 }
+	m_Board{}, m_KingWasTake{ false }, m_DrawBoard{ 0 }, m_SelectCursor{ 0,0 }
 {
 	// 先手のボードを初期化
 	memcpy(&m_Board, m_BlankBoard, sizeof(m_BlankBoard));
@@ -33,32 +33,32 @@ ShogiBoard::ShogiBoard() :
 
 			// xが奇数、yが1
 			if (x % 2 == 1 && y == 1) {
-				strcpy_s(m_DrawBlankBoard[y][x], CHAR_SIZE, "┳ ");
+				strcpy_s(m_DrawBlankBoard[y][x], CHAR_SIZE, "┬ ");
 			}
 
 			// xが奇数、yがフレームの下段
 			else if (x % 2 == 1 && y == BOARD_FRAME_MAX_Y) {
-				strcpy_s(m_DrawBlankBoard[y][x], CHAR_SIZE, "┻ ");
+				strcpy_s(m_DrawBlankBoard[y][x], CHAR_SIZE, "┴ ");
 			}
 
 			// xが左端、yが奇数の時
 			else if (x == 1 && y % 2 == 1) {
-				strcpy_s(m_DrawBlankBoard[y][x], CHAR_SIZE, "┣ ");
+				strcpy_s(m_DrawBlankBoard[y][x], CHAR_SIZE, "├ ");
 			}
 
 			// xが右端、yが奇数の時
 			else if (x == BOARD_FRAME_MAX_X && y % 2 == 1) {
-				strcpy_s(m_DrawBlankBoard[y][x], CHAR_SIZE, "┫ ");
+				strcpy_s(m_DrawBlankBoard[y][x], CHAR_SIZE, "┤ ");
 			}
 
 			// xが偶数yが奇数なら
 			else if (x % 2 == 0 && y % 2 == 1) {
-				strcpy_s(m_DrawBlankBoard[y][x], CHAR_SIZE, "━ ");
+				strcpy_s(m_DrawBlankBoard[y][x], CHAR_SIZE, "─ ");
 			}
 
 			// xが奇数yが偶数なら
 			else if (x % 2 == 1 && y % 2 == 0) {
-				strcpy_s(m_DrawBlankBoard[y][x], CHAR_SIZE, "┃ ");
+				strcpy_s(m_DrawBlankBoard[y][x], CHAR_SIZE, "│ ");
 			}
 
 			// xもyも偶数なら空白
@@ -68,17 +68,17 @@ ShogiBoard::ShogiBoard() :
 
 			// xもyも奇数なら
 			else if (x % 2 == 1 && y % 2 == 1) {
-				strcpy_s(m_DrawBlankBoard[y][x], CHAR_SIZE, "╋ ");
+				strcpy_s(m_DrawBlankBoard[y][x], CHAR_SIZE, "┼ ");
 			}
 		}
 
 	}
 
 	// 角
-	strcpy_s(m_DrawBlankBoard[BOARD_FRAME_MIN_Y][BOARD_FRAME_MIN_X], CHAR_SIZE, "┏ ");
-	strcpy_s(m_DrawBlankBoard[BOARD_FRAME_MIN_Y][BOARD_FRAME_MAX_X], CHAR_SIZE, "┓ ");
-	strcpy_s(m_DrawBlankBoard[BOARD_FRAME_MAX_Y][BOARD_FRAME_MIN_X], CHAR_SIZE, "┗ ");
-	strcpy_s(m_DrawBlankBoard[BOARD_FRAME_MAX_Y][BOARD_FRAME_MAX_X], CHAR_SIZE, "┛ ");
+	strcpy_s(m_DrawBlankBoard[BOARD_FRAME_MIN_Y][BOARD_FRAME_MIN_X], CHAR_SIZE, "┌ ");
+	strcpy_s(m_DrawBlankBoard[BOARD_FRAME_MIN_Y][BOARD_FRAME_MAX_X], CHAR_SIZE, "┐ ");
+	strcpy_s(m_DrawBlankBoard[BOARD_FRAME_MAX_Y][BOARD_FRAME_MIN_X], CHAR_SIZE, "└ ");
+	strcpy_s(m_DrawBlankBoard[BOARD_FRAME_MAX_Y][BOARD_FRAME_MAX_X], CHAR_SIZE, "┘ ");
 
 
 	// X軸に対するカウント
@@ -241,6 +241,22 @@ void ShogiBoard::Draw()
 			strcpy_s(m_DrawBoard[y * 2 + 2][x * 2 + 2], m_Board[y][x].m_Piece->GetResouce(m_Board[y][x].m_WhosePiece));
 		}
 	}
+
+	static int flush_count = 0;
+
+	static bool is_flush = true;
+	if (is_flush) {
+		strcpy_s(m_DrawBoard[m_SelectCursor.m_Y * 2 + 2 + 1][m_SelectCursor.m_X * 2 + 2], "━ ");
+		strcpy_s(m_DrawBoard[m_SelectCursor.m_Y * 2 + 2 - 1][m_SelectCursor.m_X * 2 + 2], "━ ");
+		strcpy_s(m_DrawBoard[m_SelectCursor.m_Y * 2 + 2][m_SelectCursor.m_X * 2 + 2 + 1], "┃ ");
+		strcpy_s(m_DrawBoard[m_SelectCursor.m_Y * 2 + 2][m_SelectCursor.m_X * 2 + 2 - 1], "┃ ");		
+	}
+	
+	flush_count++;
+	if (flush_count % CURSOR_FLASH_TIME == 0) {
+		is_flush = !is_flush;
+	}
+
 
 	// string型に変換する
 	for (int y = 0; y < BOARD_FRAME_HEIGHT; ++y) {
