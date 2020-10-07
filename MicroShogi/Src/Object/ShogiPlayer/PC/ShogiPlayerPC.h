@@ -2,6 +2,7 @@
 #define SHOGI_PLAYER_PC_H_
 
 #include "../ShogiPlayerBase.h"
+#include <string>
 
 /**
 * @brief 【棋士】PCクラス
@@ -13,9 +14,7 @@ public:
 	* @brief   コンストラクタ
 	* @details 必要な情報を初期化する
 	*/
-	ShogiPlayerPC(ShogiBoard* board_, MoveTrun id_) :
-		ShogiPlayerBase{ board_, id_ }
-	{}
+	ShogiPlayerPC(ShogiBoard* board_, MoveTrun id_);
 
 	/**
 	* @brief   デストラクタ
@@ -34,6 +33,10 @@ private:
 	* @return  bool 選択可能ならtrueを返す
 	*/
 	bool SelectDest() override;
+
+private:
+	//! 先手か後手かを文字列で保存する変数
+	std::string m_Name;
 
 };
 

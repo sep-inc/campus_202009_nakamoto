@@ -7,7 +7,6 @@
 void CallbackSingnalControl(int sig) {
 	if (sig == SIGINT) {
 
-		signal(SIGINT, CallbackSingnalControl);
 		exit(1);
 	}
 }
