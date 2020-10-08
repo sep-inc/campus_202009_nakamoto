@@ -7,9 +7,8 @@
 class Cursor
 {
 public:
-	Cursor(IVec2 initPos_) :
-		m_CursorPos{ initPos_ }
-	{}
+	Cursor(IVec2 initPos_);
+
 
 	inline void SetCursorPos(IVec2 pos_) { m_CursorPos = pos_; }
 

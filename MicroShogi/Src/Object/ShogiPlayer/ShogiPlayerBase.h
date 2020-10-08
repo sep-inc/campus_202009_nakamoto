@@ -14,11 +14,7 @@ public:
 	* @brief   コンストラクタ
 	* @details 必要な情報を初期化する
 	*/
-	ShogiPlayerBase(ShogiBoard* board_, MoveTrun id_) :
-		m_RefBoard  { board_ },
-		m_Id        { id_    },
-		m_MoveSource{ 0,0    }
-	{}
+	ShogiPlayerBase(ShogiBoard* board_, MoveTrun id_);
 
 	/**
 	* @brief   デストラクタ

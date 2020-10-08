@@ -7,7 +7,7 @@
 /*　コンストラクタ   */
 /*===================*/
 ShogiResultScene::ShogiResultScene(const MoveTrun* whoseWin_) :
-	m_WhoseWin{ "\0" }, m_Onece{ true }, CurrentSelectMenu{ 0 }, m_NextScene{ ShogiSceneList::SCENE_SELECT }
+	m_WhoseWin{ "\0" }, CurrentSelectMenu{ 0 }, m_NextScene{ ShogiSceneList::SCENE_SELECT }
 {
 	switch (*whoseWin_)
 	{
@@ -63,20 +63,6 @@ void ShogiResultScene::Draw()
 /*=================================================*/
 bool ShogiResultScene::SelectContinue()
 {
-	if (m_Onece) {
-		// 出力用
-		m_DrawStr += "↑↓キーで選ぶ  Spaceで確定\n";
-
-		if      (CurrentSelectMenu == (__int8)ResultMenuList::MENU_SELECT)   { SelectStr   = "->セレクト\n"; }
-		else if (CurrentSelectMenu == (__int8)ResultMenuList::MENU_CONTINUE) { ContinueStr = "->もう一度\n"; }
-		else if (CurrentSelectMenu == (__int8)ResultMenuList::MENU_END)      { EndStr      = "->終了\n";     }
-
-		m_DrawStr += SelectStr + ContinueStr + EndStr;
-
-		m_Onece = false;
-		return false;
-	}
-
 	int key = Input::GetKey();
 
 	// もし↑キーなら

@@ -1,5 +1,17 @@
 ﻿#include "ShogiPlayerBase.h"
 
+
+/*====================*/
+/*　 コンストラクタ   */
+/*====================*/
+ShogiPlayerBase::ShogiPlayerBase(ShogiBoard* board_, MoveTrun id_) :
+	m_RefBoard	{ board_ },
+	m_Id		{ id_	 },
+	m_MoveSource{ 0,0	 },
+	SelectedMoveSource{ false }
+{}
+
+
 /*=============*/
 /*　更新関数   */
 /*=============*/

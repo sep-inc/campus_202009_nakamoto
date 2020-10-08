@@ -1,6 +1,7 @@
 ﻿#ifndef IVEC2_H_
 #define IVEC2_H_
 
+
 struct IVec2
 {
 	IVec2()
@@ -21,7 +22,7 @@ struct IVec2
 		this->m_Y = vec_.m_Y;
 	}
 
-
+	
 	//! X値
 	__int8 m_X;
 	//! Y値

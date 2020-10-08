@@ -8,6 +8,14 @@
 /*===================*/
 /*　コンストラクタ   */
 /*===================*/
+PieceOfBoard::PieceOfBoard() :
+	m_Piece{ nullptr }, m_WhosePiece{ MoveTrun::MOVE_NON }
+{}
+
+
+/*===================*/
+/*　コンストラクタ   */
+/*===================*/
 PieceOfBoard::PieceOfBoard(ShogiPiece piece_, MoveTrun id_):
 	m_Piece{ nullptr }, m_WhosePiece{ id_ }
 {
@@ -32,6 +40,7 @@ PieceOfBoard::PieceOfBoard(ShogiPiece piece_, MoveTrun id_):
 		break;
 	}
 }
+
 
 /*===================*/
 /*　　デストラクタ   */

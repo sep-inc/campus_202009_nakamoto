@@ -143,6 +143,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Object\Bord\PieceOfBoard.cpp" />
     <ClCompile Include="Object\Bord\ShogiBoard.cpp" />
+    <ClCompile Include="Object\Cursor.cpp" />
     <ClCompile Include="Object\Piece\Gold\ShogiPieceGold.cpp" />
     <ClCompile Include="Object\Piece\King\ShogiPieceKing.cpp" />
     <ClCompile Include="Object\Piece\Knight\ShogiPieceKnight.cpp" />

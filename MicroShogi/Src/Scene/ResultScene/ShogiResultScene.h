@@ -51,9 +51,6 @@ private:
 	//! 誰が勝利したかを文字列で保存する変数
 	std::string m_WhoseWin;
 
-	//! 一度だけ行いたい処理を管理するための変数
-	bool m_Onece;
-
 	//! 次に遷移するシーンの情報を保存する変数
 	ShogiSceneList m_NextScene;
 

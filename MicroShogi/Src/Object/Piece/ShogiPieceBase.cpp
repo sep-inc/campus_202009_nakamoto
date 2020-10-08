@@ -1,5 +1,9 @@
 #include "ShogiPieceBase.h"
 
+ShogiPieceBase::ShogiPieceBase() :
+	m_MovableRange{ false }
+{}
+
 /*===================================*/
 /*@ˆÚ“®‰Â”\‚©‚Ç‚¤‚©‚ğ”»’è‚·‚éŠÖ”   */
 /*===================================*/

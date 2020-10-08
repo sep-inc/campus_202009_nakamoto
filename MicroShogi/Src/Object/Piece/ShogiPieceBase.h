@@ -13,9 +13,7 @@ public:
 	/**
 	* @brief   コンストラクタ
 	*/
-	ShogiPieceBase() :
-		m_MovableRange{ false }
-	{}
+	ShogiPieceBase();
 
 	/**
 	* @brief   デストラクタ

@@ -11,9 +11,7 @@ struct PieceOfBoard
 	* @brief   コンストラクタ
 	* @details 必要な情報を初期化する
 	*/
-	PieceOfBoard():
-		m_Piece{ nullptr }, m_WhosePiece{ MoveTrun::MOVE_NON }
-	{}
+	PieceOfBoard();
 	
 	/**
 	* @brief デストラクタ

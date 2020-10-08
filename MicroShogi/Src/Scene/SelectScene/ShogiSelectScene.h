@@ -53,9 +53,6 @@ private:
 	//! 後手のプレイヤーを保存する変数
 	ShogiPlayerType* m_SecondMovePlayer;
 
-	//! 一度だけ行いたい処理を管理するための変数
-	bool m_Onece;
-
 };
 
 #endif
