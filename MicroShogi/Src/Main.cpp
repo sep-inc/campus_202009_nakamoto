@@ -33,7 +33,7 @@ int main()
 	// 計測開始時の
 	LARGE_INTEGER time_start;
 
-	// 計測
+	// 計測時間終了時の
 	LARGE_INTEGER time_end;
 
 
