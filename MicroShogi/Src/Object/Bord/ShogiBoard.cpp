@@ -2,17 +2,17 @@
 #include "../../System/Drawer.h"
 #include <string.h>
 
-using SP = ShogiPiece;
-using MT = MoveTrun;
+using SP = PieceType;
+using MT = AttackTurn;
 
 // 初期化用の駒の初期位置を保存する変数
 const PieceOfBoard ShogiBoard::m_BlankBoard[BOARD_HEIGHT][BOARD_WIDTH] =
 {
-	{{SP::PIECE_EMPTY, MT::MOVE_NON   },{SP::PIECE_KING, MT::MOVE_SECOND},{SP::PIECE_GOLD, MT::MOVE_SECOND},{SP::PIECE_KNIGHT,MT::MOVE_SECOND}},
-	{{SP::PIECE_PAWN,  MT::MOVE_SECOND},{SP::PIECE_PAWN, MT::MOVE_SECOND},{SP::PIECE_PAWN, MT::MOVE_SECOND},{SP::PIECE_PAWN, MT::MOVE_SECOND }},
-	{{SP::PIECE_EMPTY, MT::MOVE_NON   },{SP::PIECE_EMPTY,MT::MOVE_NON   },{SP::PIECE_EMPTY,MT::MOVE_NON   },{SP::PIECE_EMPTY,MT::MOVE_NON    }},
-	{{SP::PIECE_PAWN,  MT::MOVE_FIRST },{SP::PIECE_PAWN, MT::MOVE_FIRST },{SP::PIECE_PAWN, MT::MOVE_FIRST },{SP::PIECE_PAWN, MT::MOVE_FIRST  }},
-	{{SP::PIECE_KNIGHT,MT::MOVE_FIRST },{SP::PIECE_GOLD, MT::MOVE_FIRST },{SP::PIECE_KING, MT::MOVE_FIRST },{SP::PIECE_EMPTY,MT::MOVE_NON    }},
+	{{SP::PIECE_EMPTY, MT::ATTACK_NONE   },{SP::PIECE_KING, MT::ATTACK_SECOND},{SP::PIECE_GOLDGENERAL, MT::ATTACK_SECOND},{SP::PIECE_KNIGHT,MT::ATTACK_SECOND}},
+	{{SP::PIECE_PAWN,  MT::ATTACK_SECOND},{SP::PIECE_PAWN, MT::ATTACK_SECOND},{SP::PIECE_PAWN, MT::ATTACK_SECOND},{SP::PIECE_PAWN, MT::ATTACK_SECOND }},
+	{{SP::PIECE_EMPTY, MT::ATTACK_NONE   },{SP::PIECE_EMPTY,MT::ATTACK_NONE   },{SP::PIECE_EMPTY,MT::ATTACK_NONE   },{SP::PIECE_EMPTY,MT::ATTACK_NONE    }},
+	{{SP::PIECE_PAWN,  MT::ATTACK_FIRST },{SP::PIECE_PAWN, MT::ATTACK_FIRST },{SP::PIECE_PAWN, MT::ATTACK_FIRST },{SP::PIECE_PAWN, MT::ATTACK_FIRST  }},
+	{{SP::PIECE_KNIGHT,MT::ATTACK_FIRST },{SP::PIECE_GOLDGENERAL, MT::ATTACK_FIRST },{SP::PIECE_KING, MT::ATTACK_FIRST },{SP::PIECE_EMPTY,MT::ATTACK_NONE    }},
 };
 
 /*==================*/
@@ -23,6 +23,16 @@ ShogiBoard::ShogiBoard() :
 {
 	// 先手のボードを初期化
 	memcpy(&m_Board, m_BlankBoard, sizeof(m_BlankBoard));
+
+	for (int y = 0; y < BOARD_HEIGHT; ++y) {
+		for (int x = 0; x < BOARD_WIDTH; ++x) {
+			m_piece_param[y][x].m_attack_turn = m_Board[y][x].m_WhosePiece;
+			if (m_Board[y][x].m_Piece == nullptr) {
+				m_piece_param[y][x].m_piece_type = PieceType::PIECE_EMPTY;
+			}
+			else m_piece_param[y][x].m_piece_type  = m_Board[y][x].m_Piece->GetShogiPiece();
+		}
+	}
 
 #pragma region 描画用ボードの初期化
 
@@ -131,7 +141,7 @@ ShogiBoard::ShogiBoard() :
 /*=================================================*/
 /*　選択した駒が選択できるかどうかを判定する関数   */
 /*=================================================*/
-bool ShogiBoard::IsAbleSelectPiece(IVec2 pos_, MoveTrun id_)
+bool ShogiBoard::IsAbleSelectPiece(IVec2 pos_, AttackTurn id_) const
 {	
 	// もし選んだ駒が自分の駒以外なら選べない
 	if (m_Board[pos_.m_Y][pos_.m_X].m_WhosePiece != id_) {
@@ -145,7 +155,7 @@ bool ShogiBoard::IsAbleSelectPiece(IVec2 pos_, MoveTrun id_)
 /*=================================================*/
 /*　選択した場所に移動可能かどうかを判定する関数   */
 /*=================================================*/
-bool ShogiBoard::IsAblePutOnTheBoard(IVec2 moveSource_, IVec2 moveDest_, MoveTrun id_, bool isTake_)
+bool ShogiBoard::IsAblePutOnTheBoard(IVec2 moveSource_, IVec2 moveDest_, AttackTurn id_)
 {
 	if (moveDest_.m_X < 0) return false;
 	if (moveDest_.m_X >= BOARD_WIDTH) return false;
@@ -166,33 +176,35 @@ bool ShogiBoard::IsAblePutOnTheBoard(IVec2 moveSource_, IVec2 moveDest_, MoveTru
 	move_vec.m_Y = select_dest.m_Y - select_source.m_Y;
 
 	// 後手なら移動ベクトルを反転させる
-	if (id_ == MoveTrun::MOVE_SECOND) {
+	if (id_ == AttackTurn::ATTACK_SECOND) {
 		move_vec.m_X = -move_vec.m_X;
 		move_vec.m_Y = -move_vec.m_Y;
 	}
 
 	// 駒に移動できるかを問い合わせる
 	if (m_Board[select_source.m_Y][select_source.m_X].m_Piece->IsAbleMove(move_vec) == false) return false;
-	
-	// ここまできたら移動可能だが、isTake_がfalseなら移動を行わずにtrueを返す
-	if (isTake_ == false) return true;
+
 
 	// 移動先が王なら王がとられたフラグをオンにする
 	if (m_Board[select_dest.m_Y][select_dest.m_X].m_Piece != nullptr) {
-		if (m_Board[select_dest.m_Y][select_dest.m_X].m_Piece->GetShogiPiece() == ShogiPiece::PIECE_KING) m_KingWasTake = true;
+		if (m_Board[select_dest.m_Y][select_dest.m_X].m_Piece->GetShogiPiece() == PieceType::PIECE_KING) m_KingWasTake = true;
 	}
 	
 	// 移動先に移動元情報を保存する
-	m_Board[select_dest.m_Y][select_dest.m_X] = m_Board[select_source.m_Y][select_source.m_X];
+	m_Board[select_dest.m_Y][select_dest.m_X]       = m_Board[select_source.m_Y][select_source.m_X];
+	m_piece_param[select_dest.m_Y][select_dest.m_X] = m_piece_param[select_source.m_Y][select_source.m_X];
 
 	// 移動元情報をクリアする
 	m_Board[select_source.m_Y][select_source.m_X].m_Piece      = nullptr;
-	m_Board[select_source.m_Y][select_source.m_X].m_WhosePiece = MoveTrun::MOVE_NON;
+	m_Board[select_source.m_Y][select_source.m_X].m_WhosePiece = AttackTurn::ATTACK_NONE;
+
+	m_piece_param[select_source.m_Y][select_source.m_X].m_piece_type  = PieceType::PIECE_EMPTY;
+	m_piece_param[select_source.m_Y][select_source.m_X].m_attack_turn = AttackTurn::ATTACK_NONE;
 
 	return true;
 }
 
-void ShogiBoard::GetPiecePos(std::vector<IVec2>* outPos_, MoveTrun id_)
+void ShogiBoard::GetPiecePos(std::vector<IVec2>* outPos_, AttackTurn id_)
 {
 	std::vector<IVec2> out_vec;
 
@@ -208,7 +220,7 @@ void ShogiBoard::GetPiecePos(std::vector<IVec2>* outPos_, MoveTrun id_)
 	*outPos_ = out_vec;
 }
 
-void ShogiBoard::GetPiecePos(IVec2* outPos_, ShogiPiece piece_, MoveTrun id_)
+void ShogiBoard::GetPiecePos(IVec2* outPos_, PieceType piece_, AttackTurn id_)
 {
 	for (int y = 0; y < BOARD_HEIGHT; ++y) {
 		for (int x = 0; x < BOARD_WIDTH; ++x) {
@@ -268,4 +280,47 @@ void ShogiBoard::Draw()
 
 	// 描画クラスのバッファに保存する
 	Drawer::GetInstance().SetDrawBuffer(draw_str);
+}
+
+bool ShogiBoard::CanMove(IVec2 souce_, IVec2 dest_, AttackTurn turn_) const
+{
+	if (m_Board[souce_.m_Y][souce_.m_X].m_Piece == nullptr) {
+		return false;
+	}
+
+	if (m_Board[dest_.m_Y][dest_.m_X].m_WhosePiece == turn_) {
+		return false;
+	}
+
+	IVec2 move_vec(0, 0);
+	move_vec.m_X = dest_.m_X - souce_.m_X;
+	move_vec.m_Y = dest_.m_Y - souce_.m_Y;
+	
+	if (turn_ == AttackTurn::ATTACK_SECOND) {
+		move_vec.m_X = -move_vec.m_X;
+		move_vec.m_Y = -move_vec.m_Y;
+	}
+
+	return m_Board[souce_.m_Y][souce_.m_X].m_Piece->IsAbleMove(move_vec);
+}
+
+void ShogiBoard::SetPiece(IVec2 souce_, IVec2 dest_, AttackTurn turn_)
+{
+	// 移動先が王なら王がとられたフラグをオンにする
+	if (m_Board[dest_.m_Y][dest_.m_X].m_Piece != nullptr) {
+		if (m_Board[dest_.m_Y][dest_.m_X].m_Piece->GetShogiPiece() == PieceType::PIECE_KING) m_KingWasTake = true;
+	}
+
+	// 移動先に移動元情報を保存する
+	m_Board[dest_.m_Y][dest_.m_X]       = m_Board[souce_.m_Y][souce_.m_X];
+	m_piece_param[dest_.m_Y][dest_.m_X] = m_piece_param[souce_.m_Y][souce_.m_X];
+
+
+	// 移動元情報をクリアする
+	m_Board[souce_.m_Y][souce_.m_X].m_Piece      = nullptr;
+	m_Board[souce_.m_Y][souce_.m_X].m_WhosePiece = AttackTurn::ATTACK_NONE;
+
+	m_piece_param[souce_.m_Y][souce_.m_X].m_piece_type  = PieceType::PIECE_EMPTY;
+	m_piece_param[souce_.m_Y][souce_.m_X].m_attack_turn = AttackTurn::ATTACK_NONE;
+
 }

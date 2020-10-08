@@ -4,6 +4,7 @@
 #include "../Piece/ShogiPieceBase.h"
 #include "PieceOfBoard.h"
 #include "../Definition.h"
+#include "PieceParam.h"
 #include <vector>
 
 /**
@@ -29,7 +30,7 @@ public:
 	* @param[in] id_   先手か後手かの情報
 	* @return  bool 選択可能ならtrueを返す
 	*/
-	bool IsAbleSelectPiece(IVec2 pos_, MoveTrun id_);
+	bool IsAbleSelectPiece(IVec2 pos_, AttackTurn id_) const;
 
 	/**
 	* @brief     選択した場所に移動可能かどうかを判定する関数
@@ -39,14 +40,14 @@ public:
 	* @param[in] isTake_　　　　移動可能状態の時に移動するかどうか
 	* @return  bool移動可能ならtrueを返し移動する
 	*/
-	bool IsAblePutOnTheBoard(IVec2 moveSource_, IVec2 moveDest_, MoveTrun id_, bool isTake_ = true);
+	bool IsAblePutOnTheBoard(IVec2 moveSource_, IVec2 moveDest_, AttackTurn id_);
 
 	/**
 	* @brief     指定駒の座標をvectorに詰めて返す関数
 	* @param[out] outPos_    駒の座標を受けとるvector
 	* @param[in]  id_　　　　先手か後手かのどちら
 	*/
-	void GetPiecePos(std::vector<IVec2>* outPos_, MoveTrun id_);
+	void GetPiecePos(std::vector<IVec2>* outPos_, AttackTurn id_);
 
 	/**
 	* @brief     指定した駒の座標を返す関数
@@ -54,7 +55,8 @@ public:
 	* @param[in]  piece_  　 どの駒を返すか
 	* @param[in]  id_　　　　先手か後手かのどちら
 	*/
-	void GetPiecePos(IVec2* outPos_, ShogiPiece piece_, MoveTrun id_);
+	void GetPiecePos(IVec2* outPos_, PieceType piece_, AttackTurn id_);
+
 
 	/**
 	* @brief     　　王がとられたかどうかを返す関数
@@ -74,6 +76,11 @@ public:
 	*/
 	void Draw();
 
+
+	bool CanMove(IVec2 souce_, IVec2 dest_, AttackTurn turn_) const;
+	void SetPiece(IVec2 souce_, IVec2 dest_, AttackTurn turn_);
+	auto GetPieceParam() { return m_piece_param; }
+
 private:
 	//! 初期化用の駒の初期位置を保存する変数
 	static const PieceOfBoard m_BlankBoard[BOARD_HEIGHT][BOARD_WIDTH];
@@ -92,6 +99,8 @@ private:
 
 	//! カーソルがどこに置かれているかを保存する変数
 	IVec2 m_SelectCursor;
+
+	PieceParam m_piece_param[BOARD_HEIGHT][BOARD_WIDTH];
 
 };
 

@@ -7,7 +7,7 @@
 /*=============================================*/
 int Input::GetKey()
 {
-	if (_kbhit() == true) {
+	if (_kbhit() != 0) {
 		return _getch();
 	}
 	return -1;

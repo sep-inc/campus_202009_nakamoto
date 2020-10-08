@@ -151,7 +151,7 @@
     <ClCompile Include="Object\Piece\ShogiPieceBase.cpp" />
     <ClCompile Include="Object\ShogiPlayer\NPC\ShogiPlayerNPC.cpp" />
     <ClCompile Include="Object\ShogiPlayer\PC\ShogiPlayerPC.cpp" />
-    <ClCompile Include="Object\ShogiPlayer\ShogiPlayerBase.cpp" />
+    <ClCompile Include="Object\ShogiPlayer\PlayerBase.cpp" />
     <ClCompile Include="Scene\GameScene\ShogiGameScene.cpp" />
     <ClCompile Include="Scene\ResultScene\ShogiResultScene.cpp" />
     <ClCompile Include="Scene\SelectScene\ShogiSelectScene.cpp" />
@@ -160,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\ShogiGame.h" />
+    <ClInclude Include="Object\Bord\PieceParam.h" />
     <ClInclude Include="Object\Bord\PieceOfBoard.h" />
     <ClInclude Include="Object\Bord\ShogiBoard.h" />
     <ClInclude Include="Object\Cursor.h" />
@@ -171,7 +172,7 @@
     <ClInclude Include="Object\Piece\ShogiPieceBase.h" />
     <ClInclude Include="Object\ShogiPlayer\NPC\ShogiPlayerNPC.h" />
     <ClInclude Include="Object\ShogiPlayer\PC\ShogiPlayerPC.h" />
-    <ClInclude Include="Object\ShogiPlayer\ShogiPlayerBase.h" />
+    <ClInclude Include="Object\ShogiPlayer\PlayerBase.h" />
     <ClInclude Include="Scene\GameScene\ShogiGameScene.h" />
     <ClInclude Include="Scene\ResultScene\ShogiResultScene.h" />
     <ClInclude Include="Scene\SelectScene\ShogiSelectScene.h" />

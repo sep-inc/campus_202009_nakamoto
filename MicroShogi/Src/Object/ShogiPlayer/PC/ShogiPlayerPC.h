@@ -1,21 +1,21 @@
 ﻿#ifndef SHOGI_PLAYER_PC_H_
 #define SHOGI_PLAYER_PC_H_
 
-#include "../ShogiPlayerBase.h"
+#include "../PlayerBase.h"
 #include "../../Cursor.h"
 #include <string>
 
 /**
 * @brief 【棋士】PCクラス
 */
-class ShogiPlayerPC : public ShogiPlayerBase
+class ShogiPlayerPC : public PlayerBase
 {
 public:
 	/**
 	* @brief   コンストラクタ
 	* @details 必要な情報を初期化する
 	*/
-	ShogiPlayerPC(ShogiBoard* board_, MoveTrun id_);
+	ShogiPlayerPC(AttackTurn id_);
 
 	/**
 	* @brief   デストラクタ

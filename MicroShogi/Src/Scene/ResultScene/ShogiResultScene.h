@@ -22,7 +22,7 @@ public:
 	* @brief   コンストラクタ
 	* @details 必要な情報を初期化する
 	*/
-	ShogiResultScene(const MoveTrun* whoseWin_);
+	ShogiResultScene(const AttackTurn* whoseWin_);
 
 	/**
 	* @brief   デストラクタ

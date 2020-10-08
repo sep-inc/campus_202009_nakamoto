@@ -9,31 +9,31 @@
 /*　コンストラクタ   */
 /*===================*/
 PieceOfBoard::PieceOfBoard() :
-	m_Piece{ nullptr }, m_WhosePiece{ MoveTrun::MOVE_NON }
+	m_Piece{ nullptr }, m_WhosePiece{ AttackTurn::ATTACK_NONE }
 {}
 
 
 /*===================*/
 /*　コンストラクタ   */
 /*===================*/
-PieceOfBoard::PieceOfBoard(ShogiPiece piece_, MoveTrun id_):
+PieceOfBoard::PieceOfBoard(PieceType piece_, AttackTurn id_):
 	m_Piece{ nullptr }, m_WhosePiece{ id_ }
 {
 	switch (piece_)
 	{
-	case ShogiPiece::PIECE_EMPTY:
+	case PieceType::PIECE_EMPTY:
 		m_Piece = nullptr;
 		break;
-	case ShogiPiece::PIECE_KING:
+	case PieceType::PIECE_KING:
 		m_Piece = new ShogiPieceKing;
 		break;
-	case ShogiPiece::PIECE_GOLD:
+	case PieceType::PIECE_GOLDGENERAL:
 		m_Piece = new ShogiPieceGold;
 		break;
-	case ShogiPiece::PIECE_KNIGHT:
+	case PieceType::PIECE_KNIGHT:
 		m_Piece = new ShogiPieceKnight;
 		break;
-	case ShogiPiece::PIECE_PAWN:
+	case PieceType::PIECE_PAWN:
 		m_Piece = new ShogiPiecePawn;
 		break;
 	default:

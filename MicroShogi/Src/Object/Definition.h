@@ -1,6 +1,8 @@
 ﻿#ifndef DEFINITION_H_
 #define DEFINITION_H_
 
+#include <cstdint>
+
 #define CURSOR_FLASH_TIME 20
 
 // セーフデリート
@@ -28,11 +30,11 @@
 * @enum Enum
 * 先手後手の列挙
 */
-enum class MoveTrun : unsigned char
+enum class AttackTurn : uint8_t
 {
-	MOVE_FIRST,		// 先手
-	MOVE_SECOND,	// 後手
-	MOVE_NON,
+	ATTACK_FIRST,	// 先手
+	ATTACK_SECOND,	// 後手
+	ATTACK_NONE,
 };
 
 /**
@@ -62,13 +64,13 @@ enum class ShogiSceneList : unsigned char
 * @enum Enum
 * 駒の種類
 */
-enum class ShogiPiece : unsigned char
+enum class PieceType : uint8_t
 {
+	PIECE_KING,			// 王
+	PIECE_GOLDGENERAL,	// 金
+	PIECE_KNIGHT,		// 桂
+	PIECE_PAWN,			// 歩
 	PIECE_EMPTY,
-	PIECE_KING,		// 王
-	PIECE_GOLD,		// 金
-	PIECE_KNIGHT,	// 桂
-	PIECE_PAWN,		// 歩
 };
 
 #endif

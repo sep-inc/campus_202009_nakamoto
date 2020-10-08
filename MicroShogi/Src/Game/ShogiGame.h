@@ -61,7 +61,7 @@ private:
 	ShogiPlayerType m_SecondMovePlayer;
 
 	//! 誰が勝利したかを保存する変数
-	MoveTrun        m_WhoseWin;
+	AttackTurn        m_WhoseWin;
 
 };
 

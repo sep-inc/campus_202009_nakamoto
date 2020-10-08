@@ -6,16 +6,16 @@
 /*===================*/
 /*　コンストラクタ   */
 /*===================*/
-ShogiResultScene::ShogiResultScene(const MoveTrun* whoseWin_) :
+ShogiResultScene::ShogiResultScene(const AttackTurn* whoseWin_) :
 	m_WhoseWin{ "\0" }, CurrentSelectMenu{ 0 }, m_NextScene{ ShogiSceneList::SCENE_SELECT }
 {
 	switch (*whoseWin_)
 	{
-	case MoveTrun::MOVE_FIRST:
+	case AttackTurn::ATTACK_FIRST:
 		m_WhoseWin = "先手の勝利です！\n\n";
 		break;
 
-	case MoveTrun::MOVE_SECOND:
+	case AttackTurn::ATTACK_SECOND:
 		m_WhoseWin = "後手の勝利です！\n\n";
 		break;
 	default:

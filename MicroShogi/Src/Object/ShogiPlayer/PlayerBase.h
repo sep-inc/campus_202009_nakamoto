@@ -7,24 +7,26 @@
 /**
 * @brief 棋士の基底クラス
 */
-class ShogiPlayerBase
+class PlayerBase
 {
 public:
 	/**
 	* @brief   コンストラクタ
 	* @details 必要な情報を初期化する
 	*/
-	ShogiPlayerBase(ShogiBoard* board_, MoveTrun id_);
+	PlayerBase(AttackTurn id_);
 
 	/**
 	* @brief   デストラクタ
 	*/
-	~ShogiPlayerBase(){}
+	~PlayerBase(){}
 
 	/**
 	* @brief   更新関数
 	*/
-	bool Update();
+	virtual bool Update();
+
+	void SetBoard(ShogiBoard* board_) { m_ref_shogi_board = board_; }
 
 protected:
 	/**
@@ -41,13 +43,16 @@ protected:
 	
 protected:
 	//! ボードクラス参照用変数
-	ShogiBoard* m_RefBoard;
+	ShogiBoard* m_ref_shogi_board;
 
 	//! 自身が先手か後手を保存する変数
-	const MoveTrun m_Id;
+	const AttackTurn m_attack_turn;
 
 	//! 駒の移動元を保存する変数
-	IVec2 m_MoveSource;
+	IVec2 m_souce_pos;
+
+	//! 駒の移動先を保存する変数
+	IVec2 m_dest_pos;
 
 private:
 

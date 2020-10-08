@@ -88,9 +88,6 @@
     <ClCompile Include="Object\ShogiPlayer\PC\ShogiPlayerPC.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Object\ShogiPlayer\ShogiPlayerBase.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\GameScene\ShogiGameScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -101,6 +98,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Object\Cursor.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\ShogiPlayer\PlayerBase.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -117,7 +117,6 @@
     <ClInclude Include="Object\Piece\ShogiPieceBase.h" />
     <ClInclude Include="Object\ShogiPlayer\NPC\ShogiPlayerNPC.h" />
     <ClInclude Include="Object\ShogiPlayer\PC\ShogiPlayerPC.h" />
-    <ClInclude Include="Object\ShogiPlayer\ShogiPlayerBase.h" />
     <ClInclude Include="Object\Definition.h" />
     <ClInclude Include="Scene\GameScene\ShogiGameScene.h" />
     <ClInclude Include="Scene\ResultScene\ShogiResultScene.h" />
@@ -125,5 +124,7 @@
     <ClInclude Include="Scene\SelectScene\ShogiSelectScene.h" />
     <ClInclude Include="Game\ShogiGame.h" />
     <ClInclude Include="Object\Cursor.h" />
+    <ClInclude Include="Object\Bord\PieceParam.h" />
+    <ClInclude Include="Object\ShogiPlayer\PlayerBase.h" />
   </ItemGroup>
 </Project>

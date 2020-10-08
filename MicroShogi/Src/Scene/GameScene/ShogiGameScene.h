@@ -3,7 +3,7 @@
 
 #include "../ShogiSceneBase.h"
 #include "../../Object/Definition.h"
-#include "../../Object/ShogiPlayer/ShogiPlayerBase.h"
+#include "../../Object/ShogiPlayer/PlayerBase.h"
 #include "../../Object/Bord/ShogiBoard.h"
 
 /**
@@ -16,7 +16,7 @@ public:
 	* @brief   コンストラクタ
 	* @details 必要な情報を初期化する、タイトルシーンで先手と後手を決めておく必要がある
 	*/
-	ShogiGameScene(const ShogiPlayerType* first_, const ShogiPlayerType* second_, MoveTrun* whoseWin_);
+	ShogiGameScene(const ShogiPlayerType* first_, const ShogiPlayerType* second_, AttackTurn* whoseWin_);
 
 	/**
 	* @brief   デストラクタ
@@ -37,16 +37,16 @@ public:
 
 private:
 	//! 棋士クラス[0->先手] [1->後手]
-	ShogiPlayerBase* m_ShogiPlayer[2];
+	PlayerBase* m_player[2];
 
 	//! ボード
-	ShogiBoard* m_Board;
+	ShogiBoard* m_board;
 
 	//! どちらの番なのかを保存する変数
-	MoveTrun CurrentTurn;
+	AttackTurn CurrentTurn;
 
 	//! 誰が勝利したかを保存する変数
-	MoveTrun* m_WhoseWin;
+	AttackTurn* m_WhoseWin;
 
 };
 

@@ -17,21 +17,23 @@ ShogiPieceKing::ShogiPieceKing()
 /*=======================================*/
 /*　駒の描画に必要なリソースを返す関数   */
 /*=======================================*/
-const char* ShogiPieceKing::GetResouce(MoveTrun id_) const
+const char* ShogiPieceKing::GetResouce(AttackTurn id_) const
 {
 	// 先手と後手によって返す文字列を変える
 	switch (id_)
 	{
-	case MoveTrun::MOVE_FIRST:
+	case AttackTurn::ATTACK_FIRST:
 		return "王";
 		break;
-	case MoveTrun::MOVE_SECOND:
+	case AttackTurn::ATTACK_SECOND:
 		return "玉";
 		break;
-	case MoveTrun::MOVE_NON:
+	case AttackTurn::ATTACK_NONE:
 		return nullptr;
 		break;
 	default:
 		break;
 	}
+
+	return nullptr;
 }

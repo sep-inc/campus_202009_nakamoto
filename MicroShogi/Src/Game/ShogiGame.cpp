@@ -10,7 +10,7 @@ ShogiGame::ShogiGame() :
 	m_CurrentScene    {nullptr                        },
 	m_FirstMovePlayer { ShogiPlayerType::TYPE_UNKNOWN },
 	m_SecondMovePlayer{ ShogiPlayerType::TYPE_UNKNOWN },
-	m_WhoseWin        { MoveTrun::MOVE_FIRST          }
+	m_WhoseWin        { AttackTurn::ATTACK_FIRST          }
 { 
 	m_CurrentScene = new ShogiSelectScene(&m_FirstMovePlayer, &m_SecondMovePlayer);
 }

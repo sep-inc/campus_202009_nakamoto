@@ -1,13 +1,14 @@
-﻿#include "ShogiPlayerBase.h"
+﻿#include "PlayerBase.h"
 
 
 /*====================*/
 /*　 コンストラクタ   */
 /*====================*/
-ShogiPlayerBase::ShogiPlayerBase(ShogiBoard* board_, MoveTrun id_) :
-	m_RefBoard	{ board_ },
-	m_Id		{ id_	 },
-	m_MoveSource{ 0,0	 },
+PlayerBase::PlayerBase(AttackTurn id_) :
+	m_ref_shogi_board{ nullptr },
+	m_attack_turn{ id_ },
+	m_souce_pos{ 0,0 },
+	m_dest_pos{ 0,0 },
 	SelectedMoveSource{ false }
 {}
 
@@ -15,7 +16,7 @@ ShogiPlayerBase::ShogiPlayerBase(ShogiBoard* board_, MoveTrun id_) :
 /*=============*/
 /*　更新関数   */
 /*=============*/
-bool ShogiPlayerBase::Update()
+bool PlayerBase::Update()
 {
 	static bool selected = false;
 
