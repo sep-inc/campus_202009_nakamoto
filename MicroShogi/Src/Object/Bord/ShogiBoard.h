@@ -79,7 +79,7 @@ public:
 
 	bool CanMove(IVec2 souce_, IVec2 dest_, AttackTurn turn_) const;
 	void SetPiece(IVec2 souce_, IVec2 dest_, AttackTurn turn_);
-	auto GetPieceParam() { return m_piece_param; }
+	PieceParam(*GetPieceParam())[4]{ return m_piece_param; }
 
 private:
 	//! 初期化用の駒の初期位置を保存する変数
