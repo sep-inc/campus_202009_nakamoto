@@ -22,6 +22,11 @@ struct Vec2
 		this->m_Y = vec_.m_Y;
 	}
 
+	bool operator == (const Vec2& vec_) const
+	{
+		return (m_X == vec_.m_X && m_Y == vec_.m_Y);
+	}
+
 
 	//! X’l
 	__int8 m_X;

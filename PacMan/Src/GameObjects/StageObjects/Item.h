@@ -3,27 +3,55 @@
 
 #include "StageObject.h"
 
-class Item : public StageObject
+namespace PacMan
 {
-public:
-	Item(Stage* stage_);
+	/*
+		アイテムクラス
+	*/
+	class Item : public StageObject
+	{
+	public:
+		/*
+			コンストラクタ
+		*/
+		Item(Stage* stage_);
 
-	~Item(){}
+		/*
+			デストラクタ
+		*/
+		~Item();
 
-	void Init() override{}
+		/*
+			初期化関数
+			空
+		*/
+		void Init() override {}
 
-	void Update() override{}
+		/*
+			更新関数
+			空
+		*/
+		void Update() override {}
 
-	void Draw() override;
+		/*
+			描画関数
+		*/
+		void Draw() override;
 
-	virtual inline ObjectType GetObjectType() const { return ObjectType::TYPE_ITEM; }
+		/*
+			自身のオブジェクトの種類を返す関数
+		*/
+		virtual inline ObjectType GetObjectType() const { return ObjectType::TYPE_ITEM; }
 
 
-private:
-	static int m_InstanceNum;
+	private:
+		// インスタンスの数を保存する変数
+		static int m_InstanceNum;
 
-	int m_Id;
+		int m_Id;
 
-};
+	};
+}
+
 
 #endif

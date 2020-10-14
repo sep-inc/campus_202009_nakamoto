@@ -8,6 +8,8 @@
 #define KEY_RIGHT	77
 #define KEY_LEFT	75
 #define KEY_SPACE	32
+#define KEY_ENTER   13
+#define KEY_ESC     27
 
 /**
 * @brief   インプットクラス

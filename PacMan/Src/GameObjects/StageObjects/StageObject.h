@@ -3,35 +3,68 @@
 
 #include "../../Utility/Vec2.h"
 #include "../../Definition.h"
+#include "../Stage.h"
 
-class Stage;
 
-/*
-	ステージに配置するオブジェクトの基底クラス
-*/
-class StageObject
+namespace PacMan
 {
-public:
-	StageObject(Stage* stage_);
+	/*
+		ステージに配置するオブジェクトの基底クラス
+	*/
+	class StageObject
+	{
+	public:
+		/*
+			コンストラクタ
+		*/
+		StageObject(Stage* stage_);
 
-	virtual ~StageObject(){}
+		/*
+			デストラクタ
+		*/
+		virtual ~StageObject() {}
 
-	virtual void Init() = 0;
+		/*
+			初期化関数
+		*/
+		virtual void Init() = 0;
 
-	virtual void Update() = 0;
+		/*
+			更新関数
+		*/
+		virtual void Update() = 0;
 
-	virtual void Draw() = 0;
+		/*
+			描画関数
+		*/
+		virtual void Draw() = 0;
 
-	virtual inline ObjectType GetObjectType() const = 0;
+		/*
+			自身のオブジェクトの種類を返す関数
+		*/
+		virtual inline ObjectType GetObjectType() const = 0;
 
-	inline void SetPos(Vec2 vec_) { m_Pos = vec_; }
+		/*
+			自身の座標をセットする関数
+		*/
+		inline void SetPos(Vec2 vec_) { m_Pos = vec_; }
+
+		/*
+			自身の座標を返す関数
+		*/
+		inline Vec2 GetPos()const { return m_Pos; }
 
 
-protected:
-	Vec2 m_Pos;
-	Stage* m_RefStage;
+	protected:
+		// 現在の座標を保存する変数
+		Vec2 m_Pos;
+
+		// ステージクラスへのポインタ変数
+		Stage* m_RefStage;
 
 
-};
+	};
+}
+
 
 #endif

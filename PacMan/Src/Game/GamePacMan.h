@@ -4,32 +4,67 @@
 #include "../GameObjects/Stage.h"
 #include "../Definition.h"
 
-class GamePacMan
+namespace PacMan
 {
-	enum class GamePacManStep : unsigned char
+	/*
+	パックマンのゲーム管理クラス
+*/
+	class GamePacMan
 	{
-		STEP_INIT,
-		STEP_UPDATE,
-		STEP_RELEASE,
+		// ステップ
+		enum class GamePacManStep : unsigned char
+		{
+			STEP_INIT,		// 初期化ステップ
+			STEP_UPDATE,	// 更新ステップ
+			STEP_RELEASE,	// 解放ステップ
+		};
+
+	public:
+		/*
+			コンストラクタ
+		*/
+		GamePacMan();
+
+		/*
+			デストラクタ
+		*/
+		~GamePacMan();
+
+		/*
+			更新関数
+		*/
+		void Update();
+
+		/*
+			描画関数
+		*/
+		void Draw();
+
+	private:
+		/*
+			結果を出力する関数
+		*/
+		void PrintResult();
+
+		/*
+			続けるかどうかを選択し、結果を真偽で返す関数
+			真：続ける
+			偽：やめる
+		*/
+		bool SelectContinue();
+
+	private:
+		// ステージ
+		Stage* m_Stage;
+		// プレイヤー
+		StageObject* m_Player;
+		// エネミー
+		StageObject* m_Enemy[ENEMY_NUM];
+		// 現在のステップを保存する変数
+		GamePacManStep m_CurrentStep;
+		// ゲームをクリアしたかどうかを保存する変数
+		bool m_GameClear;
 	};
-
-public:
-	GamePacMan();
-
-	~GamePacMan(){}
-
-	void Update();
-
-	void Draw();
-
-private:
-	Stage*       m_Stage;
-	StageObject* m_Player;
-	StageObject* m_Enemy[ENEMY_NUM];
-	StageObject* m_Item[ITEM_NUM];
-
-	GamePacManStep m_CurrentStep;
-
-};
+}
 
 #endif

@@ -36,8 +36,8 @@ int main()
 	// 計測時間終了時の
 	LARGE_INTEGER time_end;
 
-
-	GamePacMan game;
+	// 
+	PacMan::GamePacMan game;
 
 
 	// ゲームループ
