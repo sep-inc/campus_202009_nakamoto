@@ -17,6 +17,7 @@ PacMan::Enemy::Enemy(PacMan::Stage* stage_) :
 void PacMan::Enemy::Init()
 {
 	m_Timer = 0;
+	m_RefStage->SetRandomPlacementObject(this);
 }
 
 

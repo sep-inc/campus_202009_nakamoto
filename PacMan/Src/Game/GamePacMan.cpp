@@ -13,7 +13,7 @@ using namespace PacMan;
 	コンストラクタ
 */
 PacMan::GamePacMan::GamePacMan() :
-	m_Stage{ nullptr }, m_Enemy{ nullptr }, m_CurrentStep{ GamePacManStep::STEP_INIT }, m_GameClear{ false }
+	m_Stage{ nullptr }, m_EnemyArray{ nullptr }, m_CurrentStep{ GamePacManStep::STEP_INIT }, m_GameClear{ false }
 {
 	m_Stage = new Stage();
 
@@ -22,9 +22,7 @@ PacMan::GamePacMan::GamePacMan() :
 #endif
 
 #ifdef ENEMY_ON
-	for (int i = 0; i < ENEMY_NUM; ++i) {
-		m_Enemy[i] = new Enemy(m_Stage);
-	}
+	m_EnemyArray = new EnemyArray(m_Stage);
 #endif
 }
 
@@ -36,9 +34,7 @@ PacMan::GamePacMan::~GamePacMan()
 {
 	SAFE_DELETE(m_Stage);
 	SAFE_DELETE(m_Player);
-	for (int i = 0; i < ENEMY_NUM; ++i) {
-		SAFE_DELETE(m_Enemy[i]);
-	}
+	SAFE_DELETE(m_EnemyArray);
 }
 
 
@@ -57,11 +53,7 @@ void PacMan::GamePacMan::Update()
 		// プレイヤーの初期化
 		if (m_Player) m_Player->Init();
 		// エネミーの初期化
-		for (int i = 0; i < ENEMY_NUM; ++i) {
-			if (m_Enemy[i]) {
-				m_Stage->SetRandomPlacementObject(m_Enemy[i]);
-			}
-		}
+		if (m_EnemyArray)m_EnemyArray->Init();
 
 		// 次のステップへ進める
 		m_CurrentStep = GamePacManStep::STEP_UPDATE;
@@ -70,9 +62,7 @@ void PacMan::GamePacMan::Update()
 		// 各オブジェクトの更新をおこなう
 		if (m_Player) m_Player->Update();
 
-		for (int i = 0; i < ENEMY_NUM; ++i) {
-			if (m_Enemy[i]) m_Enemy[i]->Update();
-		}
+		if (m_EnemyArray)m_EnemyArray->Update();
 
 		// もしステージにアイテムがなくなったらステップを進める
 		if (m_Stage->EmptyItem() == true) {
@@ -119,9 +109,8 @@ void PacMan::GamePacMan::Draw()
 
 	if (m_Player) m_Player->Draw();
 
-	for (int i = 0; i < ENEMY_NUM; ++i) {
-		if (m_Enemy[i]) m_Enemy[i]->Draw();
-	}
+	if (m_EnemyArray)m_EnemyArray->Draw();
+
 }
 
 
