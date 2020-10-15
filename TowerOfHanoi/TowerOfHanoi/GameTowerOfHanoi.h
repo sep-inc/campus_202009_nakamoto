@@ -53,7 +53,7 @@ public:
 	
 private:
 	//! ディスク
-	Disk m_Disk;
+	Hanoi::Disk m_Disk;
 	
 	//! 現在のステップを保存する変数
 	TowerOfHanoiStep m_CurrentStep;
