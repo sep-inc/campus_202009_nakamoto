@@ -147,7 +147,9 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Src\GameObjects\StageObjects\ItemArray.cpp" />
     <ClCompile Include="Src\GameObjects\StageObjects\Player.cpp" />
+    <ClCompile Include="Src\GameObjects\StageObjects\StageCharacter.cpp" />
     <ClCompile Include="Src\GameObjects\StageObjects\StageObject.cpp" />
     <ClCompile Include="Src\Game\GamePacMan.cpp" />
     <ClCompile Include="Src\System\Drawer.cpp" />
@@ -162,7 +164,9 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Src\GameObjects\StageObjects\ItemArray.h" />
     <ClInclude Include="Src\GameObjects\StageObjects\Player.h" />
+    <ClInclude Include="Src\GameObjects\StageObjects\StageCharacter.h" />
     <ClInclude Include="Src\GameObjects\StageObjects\StageObject.h" />
     <ClInclude Include="Src\Game\GamePacMan.h" />
     <ClInclude Include="Src\System\Drawer.h" />

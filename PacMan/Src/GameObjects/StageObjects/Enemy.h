@@ -1,14 +1,14 @@
 #ifndef ENEMY_H_
 #define ENEMY_H_
 
-#include "../StageObjects/StageObject.h"
+#include "../StageObjects/StageCharacter.h"
 
 namespace PacMan
 {
 	/*
 		エネミークラス
 	*/
-	class Enemy : public StageObject
+	class Enemy : public StageCharacter
 	{
 	public:
 		/*

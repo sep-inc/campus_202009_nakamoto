@@ -34,7 +34,7 @@ namespace PacMan
 		void Draw();
 
 	private:
-		StageObject* m_Enemy[ENEMY_NUM];
+		Enemy* m_Enemy[ENEMY_NUM];
 
 	};
 }

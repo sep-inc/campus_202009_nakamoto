@@ -14,24 +14,12 @@ namespace PacMan
 		/*
 			コンストラクタ
 		*/
-		Item(Stage* stage_);
+		Item();
 
 		/*
 			デストラクタ
 		*/
 		~Item();
-
-		/*
-			初期化関数
-			空
-		*/
-		void Init() override {}
-
-		/*
-			更新関数
-			空
-		*/
-		void Update() override {}
 
 		/*
 			描画関数

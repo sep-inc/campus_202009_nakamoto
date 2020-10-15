@@ -1,12 +1,11 @@
 #include "Enemy.h"
 #include "../../System/Drawer.h"
-#include "../Stage.h"
 
 /*
 	コンストラクタ
 */
-PacMan::Enemy::Enemy(PacMan::Stage* stage_) :
-	StageObject{ stage_ }, m_Timer{ 0 }
+PacMan::Enemy::Enemy(Stage* stage_) :
+	StageCharacter{ stage_ }, m_Timer{ 0 }
 {
 }
 

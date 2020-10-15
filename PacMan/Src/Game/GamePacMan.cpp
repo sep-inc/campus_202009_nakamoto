@@ -1,13 +1,8 @@
 #include "GamePacMan.h"
-#include "../GameObjects/StageObjects/Player.h"
-#include "../GameObjects/StageObjects/Enemy.h"
-#include "../GameObjects/StageObjects/Item.h"
 #include "../System/Input.h"
 #include <string>
 #include <iostream>
 #include <Windows.h>
-
-using namespace PacMan;
 
 /*
 	コンストラクタ

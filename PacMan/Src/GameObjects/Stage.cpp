@@ -1,11 +1,8 @@
 #include "Stage.h"
 #include "../System/Drawer.h"
-#include "StageObjects/Item.h"
-#include "StageObjects/StageObject.h"
 #include <string.h>
 #include <vector>
 
-using namespace PacMan;
 
 const int PacMan::Stage::m_BlankStage[STAGE_HEIGHT][STAGE_WIDTH] =
 {
@@ -29,9 +26,13 @@ const int PacMan::Stage::m_BlankStage[STAGE_HEIGHT][STAGE_WIDTH] =
 	コンストラクタ
 */
 PacMan::Stage::Stage() :
-	m_Stage{ ObjectType::TYPE_EMPTY }, m_Item{ nullptr }, m_IsGameOver{ false }
+	m_Stage{ ObjectType::TYPE_EMPTY }, m_ItemArray{ nullptr }, m_IsGameOver{ false }
 {
 	memcpy(m_Stage, m_BlankStage, sizeof(m_BlankStage));
+
+#ifdef ITEM_ON
+	m_ItemArray = new ItemArray();
+#endif
 }
 
 /*
@@ -39,9 +40,7 @@ PacMan::Stage::Stage() :
 */
 PacMan::Stage::~Stage()
 {
-	for (int i = 0; i < ITEM_NUM; ++i) {
-		SAFE_DELETE(m_Item[i]);
-	}
+	SAFE_DELETE(m_ItemArray);
 }
 
 
@@ -51,20 +50,16 @@ PacMan::Stage::~Stage()
 void PacMan::Stage::Init()
 {
 	memcpy(m_Stage, m_BlankStage, sizeof(m_BlankStage));
+	// プレイヤーの初期値だけはあらかじめ決めておく
 	m_Stage[PLAYER_INIT_POS_Y][PLAYER_INIT_POS_X] = ObjectType::TYPE_PLAYER;
 	m_IsGameOver = false;
 
-#ifdef ITEM_ON
-	for (int i = 0; i < ITEM_NUM; ++i) {
-		SAFE_DELETE(m_Item[i]);
-	}
-	for (int i = 0; i < ITEM_NUM; ++i) {
-		if (m_Item[i] == nullptr) {
-			m_Item[i] = new PacMan::Item(this);
+	if (m_ItemArray) {
+		m_ItemArray->Init();
+		for (int i = 0; i < ITEM_NUM; ++i) {
+			SetRandomPlacementObject(m_ItemArray->GetItem(i));
 		}
-		this->SetRandomPlacementObject(m_Item[i]);
 	}
-#endif
 }
 
 
@@ -83,11 +78,7 @@ void PacMan::Stage::Draw()
 	}
 
 	// アイテムの描画
-	for (int i = 0; i < ITEM_NUM; ++i) {
-		if (m_Item[i]) {
-			m_Item[i]->Draw();
-		}
-	}
+	if (m_ItemArray)m_ItemArray->Draw();
 }
 
 void PacMan::Stage::SetRandomPlacementObject(StageObject* stageObject_)
@@ -115,12 +106,14 @@ void PacMan::Stage::SetRandomPlacementObject(StageObject* stageObject_)
 */
 bool PacMan::Stage::HitItem(Vec2 pos_)
 {
+	if (!m_ItemArray) return false;
+	
 	for (int i = 0; i < ITEM_NUM; ++i) {
-		if (m_Item[i]) {
+		if (m_ItemArray->GetItem(i)) {
 			
 			// 当たっていたらDeleteしてtrueを返す
-			if (m_Item[i]->GetPos() == pos_) {
-				SAFE_DELETE(m_Item[i]);
+			if (m_ItemArray->GetItem(i)->GetPos() == pos_) {
+				m_ItemArray->Destory(i);
 				return true;
 			}
 
@@ -163,13 +156,13 @@ void PacMan::Stage::SetStage(Vec2 moveSource_, Vec2 moveDest_, ObjectType type_)
 */
 bool PacMan::Stage::EmptyItem()
 {
-#ifndef ITEM_ON
-	return false;
-#endif
-	// 一つでもアイテムが残っていたらfalseを返す
-	for (int i = 0; i < ITEM_NUM; ++i) {
-		if (m_Item[i]) return false;
+	if (!m_ItemArray) return false;
+
+	// アイテムが空なら偽
+	if (!m_ItemArray->Empty()) {
+		return false;
 	}
 
+	// アイテムが空なら真
 	return true;
 }

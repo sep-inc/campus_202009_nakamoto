@@ -1,14 +1,14 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
-#include "StageObject.h"
+#include "StageCharacter.h"
 
 namespace PacMan
 {
 	/*
 		プレイヤークラス
 	*/
-	class Player : public StageObject
+	class Player : public StageCharacter
 	{
 	public:
 		/*

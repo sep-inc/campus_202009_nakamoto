@@ -9,8 +9,8 @@ int PacMan::Item::m_InstanceNum = 0;
 /*
 	コンストラクタ
 */
-PacMan::Item::Item(PacMan::Stage* stage_) :
-	StageObject{ stage_ }, m_Id{ 0 }
+PacMan::Item::Item() :
+	m_Id{ 0 }
 {
 	// インスタンスが生成されるたびにカウントを1あげる
 	m_InstanceNum++;

@@ -7,7 +7,7 @@
 using namespace PacMan;
 
 PacMan::Player::Player(Stage* stage_) :
-	StageObject{ stage_ }
+	StageCharacter{ stage_ }
 {
 }
 

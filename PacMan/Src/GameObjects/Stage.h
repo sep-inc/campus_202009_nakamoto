@@ -3,12 +3,10 @@
 
 #include "../Definition.h"
 #include "../Utility/Vec2.h"
+#include "StageObjects/ItemArray.h"
 
 namespace PacMan
 {
-	class Item;
-	class StageObject;
-
 	// ステージ情報を扱うクラス
 	class Stage
 	{
@@ -75,8 +73,7 @@ namespace PacMan
 		// ステージの情報を保存する変数
 		ObjectType m_Stage[STAGE_HEIGHT][STAGE_WIDTH];
 
-		// アイテムを保存する変数
-		Item* m_Item[ITEM_NUM];
+		ItemArray* m_ItemArray;
 
 		// プレイヤーと敵が当たったかどうかを保存する変数
 		bool m_IsGameOver;

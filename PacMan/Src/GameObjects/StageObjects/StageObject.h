@@ -3,7 +3,6 @@
 
 #include "../../Utility/Vec2.h"
 #include "../../Definition.h"
-#include "../Stage.h"
 
 
 namespace PacMan
@@ -17,22 +16,12 @@ namespace PacMan
 		/*
 			コンストラクタ
 		*/
-		StageObject(Stage* stage_);
+		StageObject();
 
 		/*
 			デストラクタ
 		*/
 		virtual ~StageObject() {}
-
-		/*
-			初期化関数
-		*/
-		virtual void Init() = 0;
-
-		/*
-			更新関数
-		*/
-		virtual void Update() = 0;
 
 		/*
 			描画関数
@@ -58,9 +47,6 @@ namespace PacMan
 	protected:
 		// 現在の座標を保存する変数
 		Vec2 m_Pos;
-
-		// ステージクラスへのポインタ変数
-		Stage* m_RefStage;
 
 
 	};

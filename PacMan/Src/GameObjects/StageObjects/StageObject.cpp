@@ -1,7 +1,7 @@
 #include "StageObject.h"
 
-PacMan::StageObject::StageObject(Stage* stage_) :
-	m_Pos{ 0,0 }, m_RefStage{ stage_ }
+PacMan::StageObject::StageObject() :
+	m_Pos{ 0,0 }
 {
 }
 
