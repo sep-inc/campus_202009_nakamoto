@@ -1,7 +1,7 @@
 #include "ObjectBase.h"
 #include "GrobalObject.h"
 
-void ObjectBase::Select()
+void TicTacToe::ObjectBase::Select()
 {
 	while (true)
 	{

@@ -39,10 +39,10 @@ private:
 
 private:
 	// プレイヤー
-	Player m_Player;
+	TicTacToe::Player m_Player;
 
 	// エネミー
-	Enemy m_Enemy;
+	TicTacToe::Enemy m_Enemy;
 
 	// 現在のステップ
 	TicTacToeGameStep m_CurrentStep;

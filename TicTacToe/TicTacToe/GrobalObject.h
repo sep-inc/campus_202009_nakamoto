@@ -16,7 +16,7 @@ extern ObjectType g_WhosTurn;
 extern ObjectType g_WhosWon;
 
 // グリッド
-extern Grid g_Grid;
+extern TicTacToe::Grid g_Grid;
 
 
 #endif

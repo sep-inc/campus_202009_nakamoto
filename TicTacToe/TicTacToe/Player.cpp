@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 
-void Player::StepUpdate()
+void TicTacToe::Player::StepUpdate()
 {
 	// 現在のステップを確認
 	switch (m_CurrentStep)
@@ -46,13 +46,13 @@ void Player::StepUpdate()
 
 
 // 初期化関数
-void Player::Init()
+void TicTacToe::Player::Init()
 {
 	m_CurrentStep = PlayerStep::STEP_INIT;
 }
 
 // どのマスの横軸に置くかを決める関数
-__int8 Player::SelectHorizontal()
+__int8 TicTacToe::Player::SelectHorizontal()
 {
 	printf("横軸を入力してください\n");
 	printf("A  or  B  or  C\n");
@@ -67,7 +67,7 @@ __int8 Player::SelectHorizontal()
 }
 
 // どのマスの縦軸に置くかを決める関数
-__int8 Player::SelectVertical()
+__int8 TicTacToe::Player::SelectVertical()
 {
 	printf("縦軸を入力してください\n");
 	printf("1  or  2  or  3\n");

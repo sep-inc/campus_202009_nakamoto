@@ -7,7 +7,7 @@
 	成功したら保存してtrueを返す
 	失敗したらfalseを返す
 */
-bool Grid::Select(__int8 x_, __int8 y_, ObjectType type_)
+bool TicTacToe::Grid::Select(__int8 x_, __int8 y_, ObjectType type_)
 {
 	if (x_ < 0 || x_ > GRID_WIDTH) return false;
 	if (y_ < 0 || y_ > GRID_HEIGHT) return false;
@@ -38,7 +38,7 @@ bool Grid::Select(__int8 x_, __int8 y_, ObjectType type_)
 
 // 描画関数
 // バッファに送る
-void Grid::Draw()
+void TicTacToe::Grid::Draw()
 {
 	for (__int8 y = 0; y < GRID_HEIGHT; ++y) {
 		for (__int8 x = 0; x < GRID_WIDTH; ++x) {
@@ -50,7 +50,7 @@ void Grid::Draw()
 
 
 // 初期化関数
-void Grid::Init()
+void TicTacToe::Grid::Init()
 {
 	// 全て空で埋める
 	for (int y = 0; y < 3; ++y) {
@@ -61,7 +61,7 @@ void Grid::Init()
 }
 
 
-bool Grid::JudgmentWinner(ObjectType type_)
+bool TicTacToe::Grid::JudgmentWinner(ObjectType type_)
 {
 	// 横軸を調べる
 	for (int y = 0; y < GRID_HEIGHT; ++y) {
@@ -106,7 +106,7 @@ bool Grid::JudgmentWinner(ObjectType type_)
 }
 
 // 引き分けかを調べる関数
-bool Grid::DrawJudgment()
+bool TicTacToe::Grid::DrawJudgment()
 {
 	// 横軸を調べる
 	for (int y = 0; y < GRID_HEIGHT; ++y) {

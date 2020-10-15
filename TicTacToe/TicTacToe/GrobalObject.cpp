@@ -10,4 +10,4 @@ ObjectType g_WhosTurn;
 ObjectType g_WhosWon;
 
 // グリッド
-Grid g_Grid;
+TicTacToe::Grid g_Grid;

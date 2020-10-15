@@ -5,7 +5,7 @@
 #include <windows.h>
 
 // ステップの更新関数
-void Enemy::StepUpdate()
+void TicTacToe::Enemy::StepUpdate()
 {
 	// 現在のステップを確認
 	switch (m_CurrentStep)
@@ -43,19 +43,19 @@ void Enemy::StepUpdate()
 }
 
 // 初期化関数
-void Enemy::Init()
+void TicTacToe::Enemy::Init()
 {
 	m_CurrentStep = EnemyStep::STEP_INIT;
 }
 
 // どのマスの横軸に置くかを決める関数
-__int8 Enemy::SelectHorizontal()
+__int8 TicTacToe::Enemy::SelectHorizontal()
 {	
 	return rand() % 3;
 }
 
 // どのマスの縦軸に置くかを決める関数
-__int8 Enemy::SelectVertical()
+__int8 TicTacToe::Enemy::SelectVertical()
 {
 	return rand() % 3;
 }
