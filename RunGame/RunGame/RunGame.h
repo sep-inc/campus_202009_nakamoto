@@ -6,7 +6,7 @@
 /**
 * @brief Runゲームクラス
 */
-class RunGame
+class GameRunGame
 {
 	/**
 	* @enum Enum
@@ -24,12 +24,12 @@ public:
 	* @brief   コンストラクタ
 	* @details 必要な情報を初期化する
 	*/
-	RunGame();
+	GameRunGame();
 
 	/**
 	* @brief   デストラクタ
 	*/
-	~RunGame();
+	~GameRunGame();
 
 
 	/**
@@ -59,10 +59,10 @@ private:
 
 private:
 	//! プレイヤー変数
-	Player* m_Player;
+	RunGame::Player* m_Player;
 
 	//! ステージ変数
-	Stage* m_Stage;
+	RunGame::Stage* m_Stage;
 	
 	//! 現在のステップを保存する変数
 	RunGameStep m_CurrentStep;

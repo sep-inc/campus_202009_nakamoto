@@ -19,7 +19,7 @@ const int g_Stage[STAGE_HEIGHT][STAGE_WIDTH]
 /*=============================================*/
 /*　　　　　　　　初期化関数     　　　　　　  */
 /*=============================================*/
-void Stage::Init()
+void RunGame::Stage::Init()
 {
 	memcpy(&m_Stage, g_Stage, sizeof(g_Stage));
 }
@@ -28,7 +28,7 @@ void Stage::Init()
 /*=============================================*/
 /*　　　　　　　　　描画関数関数     　　　　　*/
 /*=============================================*/
-void Stage::Draw()
+void RunGame::Stage::Draw()
 {
 	std::string stage_souce;
 
@@ -68,7 +68,7 @@ void Stage::Draw()
 /*=================================================================*/
 /*　プレイヤーの右の辺とブロックの左の辺との当たり判定を行う関数   */
 /*=================================================================*/
-bool Stage::HitPlyaerAndBlockLeftEdge(Vec2 pos_, __int8 width_, __int8 height_)
+bool RunGame::Stage::HitPlyaerAndBlockLeftEdge(Vec2 pos_, __int8 width_, __int8 height_)
 {
 	// プレイヤーの右の辺を作成
 	Vec2 player_right_edge[2] = {
@@ -92,7 +92,7 @@ bool Stage::HitPlyaerAndBlockLeftEdge(Vec2 pos_, __int8 width_, __int8 height_)
 /*=================================================================*/
 /*　プレイヤーの下の辺とブロックの上の辺との当たり判定を行う関数   */
 /*=================================================================*/
-bool Stage::HitPlayerAndBlockTopEdge(Vec2 pos_, __int8 width_, __int8 height_, float* contactPos_)
+bool RunGame::Stage::HitPlayerAndBlockTopEdge(Vec2 pos_, __int8 width_, __int8 height_, float* contactPos_)
 {
 	// プレイヤーの下の辺を作成
 	Vec2 player_bottom_edge[2] = {
@@ -117,7 +117,7 @@ bool Stage::HitPlayerAndBlockTopEdge(Vec2 pos_, __int8 width_, __int8 height_, f
 /*=============================================*/
 /*　　　　ステージにセットする関数     　　　　*/
 /*=============================================*/
-void Stage::SetStage(Vec2 pos_)
+void RunGame::Stage::SetStage(Vec2 pos_)
 {
 	// ステージをクリアする
 	memcpy(&m_Stage, g_Stage, sizeof(g_Stage));

@@ -4,7 +4,7 @@
 /*============================*/
 /*　　　　　更新関数        　*/
 /*============================*/
-void Player::Update()
+void RunGame::Player::Update()
 {
 	switch (m_CurrentStep)
 	{
@@ -50,7 +50,7 @@ void Player::Update()
 /*===========================*/
 /*　　　　  初期化関数     　*/
 /*===========================*/
-void Player::Init()
+void RunGame::Player::Init()
 {
 	m_Pos          = Vec2(PLAYER_INIT_POS_X, 4.f);
 	m_OldPos       = m_Pos;
@@ -61,7 +61,7 @@ void Player::Init()
 /*===============================*/
 /*　　　　  描画関数関数     　  */
 /*===============================*/
-void Player::Draw()
+void RunGame::Player::Draw()
 {
 	if (m_RefStege)m_RefStege->SetStage(m_Pos);
 }
@@ -70,7 +70,7 @@ void Player::Draw()
 /*===========================*/
 /*　　　　ジャンプ関数     　*/
 /*===========================*/
-void Player::Jump()
+void RunGame::Player::Jump()
 {
 	if (m_OnGround && g_Input.GetKey(KeyList::R_KEY))
 	{
@@ -83,7 +83,7 @@ void Player::Jump()
 /*==========================*/
 /*　　　　   落下関数     　*/
 /*==========================*/
-void Player::Fall()
+void RunGame::Player::Fall()
 {
 	if (m_OnGround == false) {
 		m_Vertical = (m_Pos.m_Y - m_OldPos.m_Y) - m_JumpVelocity;
@@ -99,7 +99,7 @@ void Player::Fall()
 /*===============================================*/
 /*　　　ブロックと当たっているかを調べる関数     */
 /*===============================================*/
-void Player::ChecHitBlock()
+void RunGame::Player::ChecHitBlock()
 {
 	// 前の座標のプレイヤーの右の辺とブロックの左の辺が当たっているかを調べる
 	if (m_RefStege->HitPlyaerAndBlockLeftEdge(m_OldPos, m_Width, m_Height) == true)

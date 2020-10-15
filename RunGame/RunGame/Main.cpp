@@ -25,7 +25,7 @@ int main()
 	clock_t start_frame_time = 0, frame_time = 0;
 
 	// ゲームクラス
-	RunGame game;
+	GameRunGame game;
 	
 	while (!g_Quit && !g_Input.GetKey(KeyList::ESC_KEY))
 	{

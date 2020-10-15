@@ -2,14 +2,14 @@
 #include "System.h"
 #include <iostream>
 
-RunGame::RunGame():
+GameRunGame::GameRunGame():
 	m_Player(nullptr),m_Stage (nullptr),m_CurrentStep(RunGameStep::STEP_INT)
 {
-	m_Stage  = new Stage();
-	m_Player = new Player(m_Stage);
+	m_Stage  = new RunGame::Stage();
+	m_Player = new RunGame::Player(m_Stage);
 }
 
-RunGame::~RunGame()
+GameRunGame::~GameRunGame()
 {
 	delete m_Player;
 	delete m_Stage;
@@ -18,11 +18,11 @@ RunGame::~RunGame()
 /*=============================================*/
 /*　　　　　　　　　更新関数     　　　　　　　*/
 /*=============================================*/
-void RunGame::Update()
+void GameRunGame::Update()
 {
 	switch (m_CurrentStep)
 	{
-	case RunGame::RunGameStep::STEP_INT:
+	case GameRunGame::RunGameStep::STEP_INT:
 		// 初期化ステップ
 
 		// フラグを初期化
@@ -37,7 +37,7 @@ void RunGame::Update()
 		m_CurrentStep = RunGameStep::STEP_UPDATE;
 		break;
 
-	case RunGame::RunGameStep::STEP_UPDATE:
+	case GameRunGame::RunGameStep::STEP_UPDATE:
 		
 		// ゲームが終了していたらステップを進める
 		if (g_GameEnd) {
@@ -51,7 +51,7 @@ void RunGame::Update()
 
 		break;
 
-	case RunGame::RunGameStep::STEP_RELEASE:
+	case GameRunGame::RunGameStep::STEP_RELEASE:
 		// 結果を出力する
 		PrintResult();
 
@@ -74,7 +74,7 @@ void RunGame::Update()
 /*=============================================*/
 /*　　　　　　　　　描画関数     　　　　　　　*/
 /*=============================================*/
-void RunGame::Draw()
+void GameRunGame::Draw()
 {
 	// 各オブジェクトの描画
 	if (m_Player)m_Player->Draw();
@@ -84,7 +84,7 @@ void RunGame::Draw()
 /*=============================================*/
 /*　　　　　結果を出力する関数     　　　　　　*/
 /*=============================================*/
-void RunGame::PrintResult()
+void GameRunGame::PrintResult()
 {
 	// クリアフラグをみて結果を出力する
 	if (g_GameClear == true) {
@@ -98,7 +98,7 @@ void RunGame::PrintResult()
 /*=============================================*/
 /* ゲーム終了時に続けるかどうかを選択する関数  */
 /*=============================================*/
-bool RunGame::SelectContinue()
+bool GameRunGame::SelectContinue()
 {
 	std::cout << "続けますか？"  << std::endl;
 	std::cout << "続ける\tEnter" << std::endl;
