@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{9d491983-44b0-4342-839b-ff3fbf1493a7}</ProjectGuid>
+    <RootNamespace>MiniGame</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\Game.cpp" />
+    <ClCompile Include="Src\GameController.cpp" />
+    <ClCompile Include="Src\Main.cpp" />
+    <ClCompile Include="Src\MicroShogi\Game\ShogiGame.cpp" />
+    <ClCompile Include="Src\MicroShogi\Object\Bord\PieceOfBoard.cpp" />
+    <ClCompile Include="Src\MicroShogi\Object\Bord\ShogiBoard.cpp" />
+    <ClCompile Include="Src\MicroShogi\Object\Cursor.cpp" />
+    <ClCompile Include="Src\MicroShogi\Object\Piece\Gold\ShogiPieceGold.cpp" />
+    <ClCompile Include="Src\MicroShogi\Object\Piece\King\ShogiPieceKing.cpp" />
+    <ClCompile Include="Src\MicroShogi\Object\Piece\Knight\ShogiPieceKnight.cpp" />
+    <ClCompile Include="Src\MicroShogi\Object\Piece\Pawn\ShogiPiecePawn.cpp" />
+    <ClCompile Include="Src\MicroShogi\Object\Piece\ShogiPieceBase.cpp" />
+    <ClCompile Include="Src\MicroShogi\Object\ShogiPlayer\NPC\ShogiPlayerNPC.cpp" />
+    <ClCompile Include="Src\MicroShogi\Object\ShogiPlayer\PC\ShogiPlayerPC.cpp" />
+    <ClCompile Include="Src\MicroShogi\Object\ShogiPlayer\PlayerBase.cpp" />
+    <ClCompile Include="Src\MicroShogi\Scene\GameScene\ShogiGameScene.cpp" />
+    <ClCompile Include="Src\MicroShogi\Scene\ResultScene\ShogiResultScene.cpp" />
+    <ClCompile Include="Src\MicroShogi\Scene\SelectScene\ShogiSelectScene.cpp" />
+    <ClCompile Include="Src\PacMan\GameObjects\Stage.cpp" />
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\CharacterEnemy.cpp" />
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\CharacterPlayer.cpp" />
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\EnemyArray.cpp" />
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\Item.cpp" />
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\ItemArray.cpp" />
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\StageCharacter.cpp" />
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\StageObject.cpp" />
+    <ClCompile Include="Src\PacMan\Game\GamePacMan.cpp" />
+    <ClCompile Include="Src\RunGame\RanDefinition.cpp" />
+    <ClCompile Include="Src\RunGame\RanPlayer.cpp" />
+    <ClCompile Include="Src\RunGame\RunGame.cpp" />
+    <ClCompile Include="Src\RunGame\RanGameStage.cpp" />
+    <ClCompile Include="Src\System\Drawer.cpp" />
+    <ClCompile Include="Src\System\Input.cpp" />
+    <ClCompile Include="Src\TicTacToe\Enemy.cpp" />
+    <ClCompile Include="Src\TicTacToe\Grid.cpp" />
+    <ClCompile Include="Src\TicTacToe\GrobalObject.cpp" />
+    <ClCompile Include="Src\TicTacToe\ObjectBase.cpp" />
+    <ClCompile Include="Src\TicTacToe\Player.cpp" />
+    <ClCompile Include="Src\TicTacToe\TicTacToeGame.cpp" />
+    <ClCompile Include="Src\TowerOfHanoi\Disk.cpp" />
+    <ClCompile Include="Src\TowerOfHanoi\GameTowerOfHanoi.cpp" />
+    <ClCompile Include="Src\TowerOfHanoi\Global.cpp" />
+    <ClCompile Include="Src\Tron\CharacterBase.cpp" />
+    <ClCompile Include="Src\Tron\CharacterTronEnemy.cpp" />
+    <ClCompile Include="Src\Tron\TronDefinition.cpp" />
+    <ClCompile Include="Src\Tron\GameTron.cpp" />
+    <ClCompile Include="Src\Tron\CharacterTronPlayer.cpp" />
+    <ClCompile Include="Src\Tron\TronStage.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\Game.h" />
+    <ClInclude Include="Src\GameController.h" />
+    <ClInclude Include="Src\MicroShogi\Game\ShogiGame.h" />
+    <ClInclude Include="Src\MicroShogi\Object\Bord\PieceOfBoard.h" />
+    <ClInclude Include="Src\MicroShogi\Object\Bord\PieceParam.h" />
+    <ClInclude Include="Src\MicroShogi\Object\Bord\ShogiBoard.h" />
+    <ClInclude Include="Src\MicroShogi\Object\Cursor.h" />
+    <ClInclude Include="Src\MicroShogi\Object\Definition.h" />
+    <ClInclude Include="Src\MicroShogi\Object\Piece\Gold\ShogiPieceGold.h" />
+    <ClInclude Include="Src\MicroShogi\Object\Piece\King\ShogiPieceKing.h" />
+    <ClInclude Include="Src\MicroShogi\Object\Piece\Knight\ShogiPieceKnight.h" />
+    <ClInclude Include="Src\MicroShogi\Object\Piece\Pawn\ShogiPiecePawn.h" />
+    <ClInclude Include="Src\MicroShogi\Object\Piece\ShogiPieceBase.h" />
+    <ClInclude Include="Src\MicroShogi\Object\ShogiPlayer\NPC\ShogiPlayerNPC.h" />
+    <ClInclude Include="Src\MicroShogi\Object\ShogiPlayer\PC\ShogiPlayerPC.h" />
+    <ClInclude Include="Src\MicroShogi\Object\ShogiPlayer\PlayerBase.h" />
+    <ClInclude Include="Src\MicroShogi\Scene\GameScene\ShogiGameScene.h" />
+    <ClInclude Include="Src\MicroShogi\Scene\ResultScene\ShogiResultScene.h" />
+    <ClInclude Include="Src\MicroShogi\Scene\SelectScene\ShogiSelectScene.h" />
+    <ClInclude Include="Src\MicroShogi\Scene\ShogiSceneBase.h" />
+    <ClInclude Include="Src\PacMan\PacManDefinition.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\Stage.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\CharacterEnemy.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyArray.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\Item.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\ItemArray.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\CharacterPlayer.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\StageCharacter.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\StageObject.h" />
+    <ClInclude Include="Src\PacMan\Game\GamePacMan.h" />
+    <ClInclude Include="Src\RunGame\RanDefinition.h" />
+    <ClInclude Include="Src\RunGame\RanPlayer.h" />
+    <ClInclude Include="Src\RunGame\RunGame.h" />
+    <ClInclude Include="Src\RunGame\RanGameStage.h" />
+    <ClInclude Include="Src\System\Drawer.h" />
+    <ClInclude Include="Src\System\Input.h" />
+    <ClInclude Include="Src\TicTacToe\Enemy.h" />
+    <ClInclude Include="Src\TicTacToe\Grid.h" />
+    <ClInclude Include="Src\TicTacToe\GrobalObject.h" />
+    <ClInclude Include="Src\TicTacToe\ObjectBase.h" />
+    <ClInclude Include="Src\TicTacToe\ObjectDefinition.h" />
+    <ClInclude Include="Src\TicTacToe\ObjectType.h" />
+    <ClInclude Include="Src\TicTacToe\Player.h" />
+    <ClInclude Include="Src\TicTacToe\TicTacToeGame.h" />
+    <ClInclude Include="Src\TowerOfHanoi\Disk.h" />
+    <ClInclude Include="Src\TowerOfHanoi\GameTowerOfHanoi.h" />
+    <ClInclude Include="Src\TowerOfHanoi\Global.h" />
+    <ClInclude Include="Src\Tron\CharacterBase.h" />
+    <ClInclude Include="Src\Tron\TronDefinition.h" />
+    <ClInclude Include="Src\Tron\CharacterTronEnemy.h" />
+    <ClInclude Include="Src\Tron\GameTron.h" />
+    <ClInclude Include="Src\Tron\CharacterTronPlayer.h" />
+    <ClInclude Include="Src\Tron\TronStage.h" />
+    <ClInclude Include="Src\Utility\IVec2.h" />
+    <ClInclude Include="Src\Utility\SafeDelete.h" />
+    <ClInclude Include="Src\Utility\Vec2.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
