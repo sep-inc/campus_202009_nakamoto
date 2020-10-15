@@ -5,7 +5,7 @@
 /*=========================*/
 /*　    コンストラクタ     */
 /*=========================*/
-ShogiPlayerPC::ShogiPlayerPC(AttackTurn id_) :
+MicroShogi::ShogiPlayerPC::ShogiPlayerPC(AttackTurn id_) :
 	PlayerBase{ id_ }, m_SelectCursor{ IVec2(0,0) }
 {
 	if (id_ == AttackTurn::ATTACK_FIRST) { m_Name = "先手"; }
@@ -15,7 +15,7 @@ ShogiPlayerPC::ShogiPlayerPC(AttackTurn id_) :
 /*=========================*/
 /*　移動元を選択する関数   */
 /*=========================*/
-bool ShogiPlayerPC::SelectSource()
+bool MicroShogi::ShogiPlayerPC::SelectSource()
 {
 	printf("%sの番です\n", m_Name.c_str());
 	printf("十字キーでカーソルの移動  Spaceで決定\n");
@@ -61,7 +61,7 @@ bool ShogiPlayerPC::SelectSource()
 /*=========================*/
 /*　移動先を選択する関数   */
 /*=========================*/
-bool ShogiPlayerPC::SelectDest(bool* selected_)
+bool MicroShogi::ShogiPlayerPC::SelectDest(bool* selected_)
 {
 	printf("%sの番です\n", m_Name.c_str());
 	printf("十字キーでカーソルの移動  Spaceで決定\n");

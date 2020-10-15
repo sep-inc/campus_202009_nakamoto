@@ -37,7 +37,7 @@ public:
 
 private:
 	//! 棋士クラス[0->先手] [1->後手]
-	PlayerBase* m_player[2];
+	MicroShogi::PlayerBase* m_player[2];
 
 	//! ボード
 	ShogiBoard* m_board;

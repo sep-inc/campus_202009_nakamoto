@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <windows.h>
 
-ShogiPlayerNPC::ShogiPlayerNPC(AttackTurn id_) :
+MicroShogi::ShogiPlayerNPC::ShogiPlayerNPC(AttackTurn id_) :
 	PlayerBase{ id_ }, m_Priority{ 1 }, m_piece_param{ nullptr }
 {
 	m_EnemyId = (m_attack_turn == AttackTurn::ATTACK_FIRST) ? AttackTurn::ATTACK_SECOND : AttackTurn::ATTACK_FIRST;
 }
 
-bool ShogiPlayerNPC::Update()
+bool MicroShogi::ShogiPlayerNPC::Update()
 {
 	// ボード情報取得
 	
@@ -32,7 +32,7 @@ bool ShogiPlayerNPC::Update()
 /*=========================*/
 /*　移動元を選択する関数   */
 /*=========================*/
-bool ShogiPlayerNPC::SelectSource()
+bool MicroShogi::ShogiPlayerNPC::SelectSource()
 {	
 	switch (m_Priority)
 	{
@@ -73,7 +73,7 @@ bool ShogiPlayerNPC::SelectSource()
 /*=========================*/
 /*　移動先を選択する関数   */
 /*=========================*/
-bool ShogiPlayerNPC::SelectDest(bool* selected_)
+bool MicroShogi::ShogiPlayerNPC::SelectDest(bool* selected_)
 {
 	switch (m_Priority)
 	{

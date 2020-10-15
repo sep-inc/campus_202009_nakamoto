@@ -14,17 +14,17 @@ ShogiGameScene::ShogiGameScene(const ShogiPlayerType* first_, const ShogiPlayerT
 
 	// ゲームクラスからもらった先手と後手の情報をもとに先手と後手の情報を初期化する
 	if (*first_ == ShogiPlayerType::TYPE_PC) {
-		m_player[static_cast<unsigned __int8>(AttackTurn::ATTACK_FIRST)] = new ShogiPlayerPC(AttackTurn::ATTACK_FIRST);
+		m_player[static_cast<unsigned __int8>(AttackTurn::ATTACK_FIRST)] = new MicroShogi::ShogiPlayerPC(AttackTurn::ATTACK_FIRST);
 	}
 	else {
-		m_player[static_cast<unsigned __int8>(AttackTurn::ATTACK_FIRST)] = new ShogiPlayerNPC(AttackTurn::ATTACK_FIRST);
+		m_player[static_cast<unsigned __int8>(AttackTurn::ATTACK_FIRST)] = new MicroShogi::ShogiPlayerNPC(AttackTurn::ATTACK_FIRST);
 	}
 	
 	if (*second_ == ShogiPlayerType::TYPE_PC) {
-		m_player[static_cast<unsigned __int8>(AttackTurn::ATTACK_SECOND)] = new ShogiPlayerPC(AttackTurn::ATTACK_SECOND);
+		m_player[static_cast<unsigned __int8>(AttackTurn::ATTACK_SECOND)] = new MicroShogi::ShogiPlayerPC(AttackTurn::ATTACK_SECOND);
 	}
 	else {
-		m_player[static_cast<unsigned __int8>(AttackTurn::ATTACK_SECOND)] = new ShogiPlayerNPC(AttackTurn::ATTACK_SECOND);
+		m_player[static_cast<unsigned __int8>(AttackTurn::ATTACK_SECOND)] = new MicroShogi::ShogiPlayerNPC(AttackTurn::ATTACK_SECOND);
 	}
 
 	m_player[(uint8_t)AttackTurn::ATTACK_FIRST]->SetBoard(m_board);

@@ -4,7 +4,7 @@
 /*====================*/
 /*　 コンストラクタ   */
 /*====================*/
-PlayerBase::PlayerBase(AttackTurn id_) :
+MicroShogi::PlayerBase::PlayerBase(AttackTurn id_) :
 	m_ref_shogi_board{ nullptr },
 	m_attack_turn{ id_ },
 	m_souce_pos{ 0,0 },
@@ -16,7 +16,7 @@ PlayerBase::PlayerBase(AttackTurn id_) :
 /*=============*/
 /*　更新関数   */
 /*=============*/
-bool PlayerBase::Update()
+bool MicroShogi::PlayerBase::Update()
 {
 	static bool selected = false;
 
