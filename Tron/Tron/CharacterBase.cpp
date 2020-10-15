@@ -1,6 +1,6 @@
 ﻿#include "CharacterBase.h"
 
-void CharacterBase::Move()
+void Tron::CharacterBase::Move()
 {
 	switch (m_Direction)
 	{
@@ -21,7 +21,7 @@ void CharacterBase::Move()
 	}
 }
 
-void CharacterBase::SendToStage()
+void Tron::CharacterBase::SendToStage()
 {
 	m_RefStage->SetStage(m_PosX, m_PosY, m_Type);
 }

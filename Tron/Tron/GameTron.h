@@ -67,13 +67,13 @@ private:
 
 private:
 	//! プレイヤー変数
-	CharacterPlayer m_Player;
+	Tron::CharacterPlayer m_Player;
 
 	//! エネミー変数
-	CharacterEnemy  m_Enemy;
+	Tron::CharacterEnemy  m_Enemy;
 
 	//! ステージ変数
-	Stage           m_Stage;
+	Tron::Stage           m_Stage;
 
 	//! 現在のステップを保存する変数
 	GameTronStep    m_CurrentStep;

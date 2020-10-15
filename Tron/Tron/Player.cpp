@@ -1,7 +1,7 @@
 ﻿#include "Player.h"
 #include "System.h"
 
-void CharacterPlayer::Init()
+void Tron::CharacterPlayer::Init()
 {
 	m_PosX    = 1;
 	m_PosY    = STAGE_HEIGHT / 2;
@@ -10,7 +10,7 @@ void CharacterPlayer::Init()
 	m_RefStage->SetStage(m_PosX, m_PosY, m_Type);
 }
 
-void CharacterPlayer::Update()
+void Tron::CharacterPlayer::Update()
 {
 	// 現在のステップを確認
 	switch (m_CurrentStep)
@@ -52,7 +52,7 @@ void CharacterPlayer::Update()
 	}
 }
 
-void CharacterPlayer::DecideDirection()
+void Tron::CharacterPlayer::DecideDirection()
 {
 	while (true)
 	{
@@ -85,7 +85,7 @@ void CharacterPlayer::DecideDirection()
 	}
 }
 
-bool CharacterPlayer::CheckHitObject()
+bool Tron::CharacterPlayer::CheckHitObject()
 {
 	if (m_RefStage->GetStageObject(m_PosX, m_PosY) != ObjectType::TYPE_EMPTY) {
 		return true;

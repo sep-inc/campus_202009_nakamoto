@@ -3,17 +3,17 @@
 #include <string.h>
 
 
-void Stage::Init()
+void Tron::Stage::Init()
 {
 	memcpy(m_Stage, m_BlankStage, sizeof(m_BlankStage));
 }
 
-void Stage::SetStage(__int8 x_, __int8 y_, ObjectType type_)
+void Tron::Stage::SetStage(__int8 x_, __int8 y_, ObjectType type_)
 {
 	m_Stage[y_ + 1][x_ + 1] = type_;
 }
 
-void Stage::Draw()
+void Tron::Stage::Draw()
 {
 	char str[MAP_HEIGHT * MAP_WIDTH * 3] = { "\0" };
 

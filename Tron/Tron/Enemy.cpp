@@ -1,7 +1,7 @@
 ﻿#include "Enemy.h"
 #include <stdlib.h>
 
-void CharacterEnemy::Init()
+void Tron::CharacterEnemy::Init()
 {
 	m_PosX    = STAGE_WIDTH - 2;
 	m_PosY    = STAGE_HEIGHT / 2;
@@ -10,7 +10,7 @@ void CharacterEnemy::Init()
 	m_RefStage->SetStage(m_PosX, m_PosY, m_Type);
 }
 
-void CharacterEnemy::Update()
+void Tron::CharacterEnemy::Update()
 {
 	// 現在のステップを確認する
 	switch (m_CurrentStep)
@@ -54,7 +54,7 @@ void CharacterEnemy::Update()
 	}
 }
 
-void CharacterEnemy::SerchDirecttion()
+void Tron::CharacterEnemy::SerchDirecttion()
 {
 	m_MovableDirectionNum = 0;
 
@@ -83,7 +83,7 @@ void CharacterEnemy::SerchDirecttion()
 	}
 }
 
-void CharacterEnemy::DecideDirection()
+void Tron::CharacterEnemy::DecideDirection()
 {
 	m_Direction = m_MovableDirection[rand() % m_MovableDirectionNum];
 }
