@@ -58,7 +58,7 @@ void GameRunGame::Update()
 		// 続けるかどうかを決める
 		if (SelectContinue() == true) {
 			m_CurrentStep = RunGameStep::STEP_INT;
-
+			system("cls");
 			return;
 		}
 

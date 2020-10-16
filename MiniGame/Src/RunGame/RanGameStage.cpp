@@ -1,6 +1,7 @@
 ﻿#include "RanGameStage.h"
 #include "../System/Drawer.h"
 #include <string.h>
+#include <cmath>
 
 const int g_Stage[RANGAME_STAGE_HEIGHT][RANGAME_STAGE_WIDTH]
 {
@@ -74,8 +75,8 @@ bool RunGame::RanGameStage::HitPlyaerAndBlockLeftEdge(Vec2 pos_, __int8 width_, 
 	};
 
 	// ブロックに当たっているかを調べる
-	for (int y = player_right_edge[0].m_Y; y < player_right_edge[1].m_Y; ++y) {
-		for (int x = player_right_edge[0].m_X; x < player_right_edge[1].m_X; ++x) {
+	for (int y = (int)player_right_edge[0].m_Y; y < std::ceilf(player_right_edge[1].m_Y); ++y) {
+		for (int x = (int)player_right_edge[0].m_X; x < std::ceilf(player_right_edge[1].m_X); ++x) {
 			if (g_Stage[y][x] == 1) {
 				return true;
 			}
@@ -98,8 +99,8 @@ bool RunGame::RanGameStage::HitPlayerAndBlockTopEdge(Vec2 pos_, __int8 width_, _
 	};
 
 	// プレイヤーの下の辺にブロックが当たってるかを調べる
-	for (int y = player_bottom_edge[0].m_Y; y < player_bottom_edge[1].m_Y; ++y) {
-		for (int x = player_bottom_edge[0].m_X; x < player_bottom_edge[1].m_X; ++x) {
+	for (int y = (int)player_bottom_edge[0].m_Y; y < std::ceilf(player_bottom_edge[1].m_Y); ++y) {
+		for (int x = (int)player_bottom_edge[0].m_X; x < std::ceilf(player_bottom_edge[1].m_X); ++x) {
 			if (g_Stage[y][x] == 1) {
 				*contactPos_ = static_cast<float>(y);
 				return true;

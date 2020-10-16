@@ -2,12 +2,12 @@
 #define RUNGAME_DEFINITION_H_
 
 // 重力
-#define GRAVITY           0.1
+#define GRAVITY           0.1f
 // 初速度
-#define INITIAL_VELOCITY  0.6
+#define INITIAL_VELOCITY  0.6f
 
 // プレイヤー速度
-#define PLAYER_SPEED      0.3
+#define PLAYER_SPEED      0.3f
 // プレイヤーの横幅
 #define PLAYER_WIDTH      1
 // プレイヤーの縦幅
