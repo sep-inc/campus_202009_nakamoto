@@ -33,22 +33,23 @@ void RunGame::RanGameStage::Draw()
 
 	for (int y = 0; y < DRAW_RANGE_HEIGHT; ++y) {
 		for (int x = m_Draw_Range_Min; x < m_Draw_Range_Max; ++x) {
+			int convet_pos_x = x - m_Draw_Range_Min;
 			switch (m_Stage[y][x])
 			{
 			case 0:
-				Drawer::GetInstance().SetDrawBuffer(x, y, "  ");
+				Drawer::GetInstance().SetDrawBuffer(convet_pos_x, y, "  ");
 				break;
 
 			case 1:
-				Drawer::GetInstance().SetDrawBuffer(x, y, "■");
+				Drawer::GetInstance().SetDrawBuffer(convet_pos_x, y, "■");
 				break;
 
 			case 2:
-				Drawer::GetInstance().SetDrawBuffer(x, y, "〇");
+				Drawer::GetInstance().SetDrawBuffer(convet_pos_x, y, "〇");
 				break;
 
 			case 3:
-				Drawer::GetInstance().SetDrawBuffer(x, y, "▽");
+				Drawer::GetInstance().SetDrawBuffer(convet_pos_x, y, "▽");
 				break;
 
 			default:
