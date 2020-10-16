@@ -34,6 +34,8 @@ void Drawer::ClearBuffer()
 
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ 0,0 });
 
+	memset(m_DrawBuffer, 0, sizeof(m_DrawBuffer));
+
 	// バッファをリセットする
 	m_StrDrawBuffer = "\0";
 }
@@ -44,8 +46,11 @@ void Drawer::ClearBuffer()
 /*=====================================*/
 void Drawer::DrawBuffer()
 {
-	for (int y = 0; y < 30; ++y) {
+	for (int y = 0; y < 15; ++y) {
 		for (int x = 0; x < 30; ++x) {
+			if (m_DrawBuffer[y][x] == " ") {
+
+			}
 			m_StrDrawBuffer += m_DrawBuffer[y][x];
 		}
 		m_StrDrawBuffer += "\n";

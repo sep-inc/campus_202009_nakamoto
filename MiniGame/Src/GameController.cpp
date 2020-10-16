@@ -88,21 +88,17 @@ void GameController::Draw()
 
 GameController::GameList GameController::SelectGame()
 {
-	// TODO バグ直し
-
-	std::cout << "ゲームを選択してください" << std::endl;
-
 	int current_select_game = 0;
 
 	while (true)
 	{
-		std::string shogi_str = "	4マス将棋\n";
-		std::string pacman_str = "	パックマン\n";
-		std::string rungame_str = "	ランゲーム\n";
-		std::string tictactoe_str = "	〇×ゲーム\n";
-		std::string hanoi_str = "	ハノイ塔\n";
-		std::string tron_str = "	トロン\n";
-		std::string quit_str = "	終了\n";
+		std::string shogi_str = "4マス将棋\n";
+		std::string pacman_str = "パックマン\n";
+		std::string rungame_str = "ランゲーム\n";
+		std::string tictactoe_str = "〇×ゲーム\n";
+		std::string hanoi_str = "ハノイ塔\n";
+		std::string tron_str = "トロン\n";
+		std::string quit_str = "終了\n";
 		int key = Input::GetKey();
 
 		if (key == KEY_UP)	      current_select_game--;
@@ -141,7 +137,13 @@ GameController::GameList GameController::SelectGame()
 
 		std::string menu;
 		menu = shogi_str + pacman_str + rungame_str + tictactoe_str + hanoi_str + tron_str + quit_str;
+		std::cout << "ゲームを選択してください" << std::endl;
 		std::cout << menu << std::endl;
+
+		if (key != -1) {
+
+			system("cls");
+		}
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ 0,2 });
 		
 	}

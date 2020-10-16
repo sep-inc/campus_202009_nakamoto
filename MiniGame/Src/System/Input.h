@@ -10,6 +10,9 @@
 #define KEY_SPACE	32
 #define KEY_ENTER   13
 #define KEY_ESC     27
+#define KEY_1       49
+#define KEY_2       50
+#define KEY_3       51
 
 /**
 * @brief   インプットクラス

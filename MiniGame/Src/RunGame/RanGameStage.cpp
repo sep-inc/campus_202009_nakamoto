@@ -30,7 +30,6 @@ void RunGame::RanGameStage::Init()
 /*=============================================*/
 void RunGame::RanGameStage::Draw()
 {
-	std::string stage_souce;
 
 	for (int y = 0; y < DRAW_RANGE_HEIGHT; ++y) {
 		for (int x = m_Draw_Range_Min; x < m_Draw_Range_Max; ++x) {
@@ -57,7 +56,7 @@ void RunGame::RanGameStage::Draw()
 			}
 		}
 	}
-	Drawer::GetInstance().SetDrawBuffer(0, DRAW_RANGE_HEIGHT, "Rキーでジャンプ！\n");
+	Drawer::GetInstance().SetDrawBuffer(0, DRAW_RANGE_HEIGHT+1, "Rキーでジャンプ！\n");
 
 }
 

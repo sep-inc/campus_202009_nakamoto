@@ -65,7 +65,7 @@ void Tron::CharacterTronPlayer::DecideDirection()
 		}
 
 		// 下キーが押されたら
-		else if (key == KEY_UP) {
+		else if (key == KEY_DOWN) {
 			m_Direction = Direction::DIRECTION_DOWN;
 			break;
 		}

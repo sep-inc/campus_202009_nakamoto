@@ -158,7 +158,7 @@ bool TicTacToe::Grid::Select(__int8 x_, __int8 y_, ObjectType type_)
 void TicTacToe::Grid::Draw()
 {
 	memcpy(m_DrawGrid, m_DrawBlankGrid, sizeof(m_DrawBlankGrid));
-
+	system("cls");
 	for (__int8 y = 0; y < GRID_HEIGHT; ++y) {
 		for (__int8 x = 0; x < GRID_WIDTH; ++x) {
 			
@@ -169,7 +169,7 @@ void TicTacToe::Grid::Draw()
 			else if (m_Grid[y][x] == ObjectType::TYPE_PlAYER) {
 				strcpy_s(m_DrawGrid[y * 2 + 2][x * 2 + 2], "〇");
 			}
-			else if (m_Grid[y][x] == ObjectType::TYPE_PlAYER) {
+			else if (m_Grid[y][x] == ObjectType::TYPE_ENEMY) {
 				strcpy_s(m_DrawGrid[y * 2 + 2][x * 2 + 2], "×");
 			}
 		}

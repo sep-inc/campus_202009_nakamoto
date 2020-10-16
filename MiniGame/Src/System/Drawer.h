@@ -51,7 +51,7 @@ private:
 
 
 private:
-	char m_DrawBuffer[30][20][10];
+	char m_DrawBuffer[15][30][22];
 
 	//! 連結用描画バッファ
 	std::string m_StrDrawBuffer;

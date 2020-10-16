@@ -84,7 +84,6 @@ void PacMan::GamePacMan::Update()
 		else {
 			// ‘±‚¯‚È‚¢‚È‚çƒQ[ƒ€I—¹
 			m_IsEnd = true;
-			exit(0);
 		}
 		break;
 	default:

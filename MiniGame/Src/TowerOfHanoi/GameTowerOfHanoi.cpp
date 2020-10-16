@@ -15,6 +15,8 @@ void GameTowerOfHanoi::Update()
 	case GameTowerOfHanoi::TowerOfHanoiStep::STEP_INIT:
 		// 初期化
 
+		g_GameClear = false;
+
 		m_Disk.Init();
 
 		// ステップを進める
@@ -70,15 +72,23 @@ bool GameTowerOfHanoi::IsContinue()
 	printf("遊ぶ\t\treturn\n");
 	printf("遊ばない\tesc\n");
 	
-	int key = Input::GetKey();
-	// エンターキーが押されたら
-	if (key == KEY_ENTER) {
-		// クリアフラグをfalseにする
-		g_GameClear = false;
-		// ステップを始めに戻す
-		m_CurrentStep = TowerOfHanoiStep::STEP_INIT;
-		
-		return true;
+	while (true)
+	{
+		int key = Input::GetKey();
+
+		if (key == -1) continue;
+		// エンターキーが押されたら
+		if (key == KEY_ENTER) {
+			// クリアフラグをfalseにする
+			g_GameClear = false;
+			// ステップを始めに戻す
+			m_CurrentStep = TowerOfHanoiStep::STEP_INIT;
+			return true;
+		}
+		else if (key == KEY_ESC) {
+			return false;
+		}
+
 	}
 
 	return false;

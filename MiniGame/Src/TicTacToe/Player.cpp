@@ -57,11 +57,16 @@ __int8 TicTacToe::Player::SelectHorizontal()
 	printf("横軸を入力してください\n");
 	printf("A  or  B  or  C\n");
 
-	int key = Input::GetKey();
+	while (true)
+	{
+		int key = Input::GetKey();
+		
+		if (key == -1) continue;
 
-	if (key == 'a')		 return 0;
-	else if (key == 'b') return 1;
-	else if (key == 'c') return 2;
+		if (key == 'a')		 return 0;
+		else if (key == 'b') return 1;
+		else if (key == 'c') return 2;
+	}
 
 	return -1;
 }
@@ -72,11 +77,17 @@ __int8 TicTacToe::Player::SelectVertical()
 	printf("縦軸を入力してください\n");
 	printf("1  or  2  or  3\n");
 
-	int key = Input::GetKey();
+	while (true)
+	{
+		int key = Input::GetKey();
 
-	if (key == '1')		 return 0;
-	else if (key == '2') return 1;
-	else if (key == '3') return 2;
+		if (key == -1) continue;
+
+		if (key == '1')		 return 0;
+		else if (key == '2') return 1;
+		else if (key == '3') return 2;
+	}
+
 
 	return -1;
 }
