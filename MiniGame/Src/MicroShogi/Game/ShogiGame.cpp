@@ -11,7 +11,8 @@ ShogiGame::ShogiGame() :
 	m_CurrentScene    {nullptr                        },
 	m_FirstMovePlayer { ShogiPlayerType::TYPE_UNKNOWN },
 	m_SecondMovePlayer{ ShogiPlayerType::TYPE_UNKNOWN },
-	m_WhoseWin        { AttackTurn::ATTACK_FIRST      }
+	m_WhoseWin        { AttackTurn::ATTACK_FIRST      },
+	m_Continue{ false }
 { 
 	m_CurrentScene = new ShogiSelectScene(&m_FirstMovePlayer, &m_SecondMovePlayer);
 }
@@ -44,7 +45,7 @@ void ShogiGame::ChangeScene(ShogiSceneList scene_)
 
 	case ShogiSceneList::SCENE_GAME:
 		SAFE_DELETE(m_CurrentScene);
-		m_CurrentScene = new ShogiResultScene(&m_WhoseWin, &m_IsEnd);
+		m_CurrentScene = new ShogiResultScene(&m_WhoseWin, &m_IsEnd, &m_Continue);
 		system("cls");
 		break;
 
@@ -52,9 +53,14 @@ void ShogiGame::ChangeScene(ShogiSceneList scene_)
 		SAFE_DELETE(m_CurrentScene);
 
 		if (!m_IsEnd) {
-			m_FirstMovePlayer = ShogiPlayerType::TYPE_UNKNOWN;
-			m_SecondMovePlayer = ShogiPlayerType::TYPE_UNKNOWN;
-			m_CurrentScene = new ShogiSelectScene(&m_FirstMovePlayer, &m_SecondMovePlayer);
+			if (m_Continue) {
+				m_CurrentScene = new ShogiGameScene(&m_FirstMovePlayer, &m_SecondMovePlayer, &m_WhoseWin);
+			}
+			else {
+				m_FirstMovePlayer = ShogiPlayerType::TYPE_UNKNOWN;
+				m_SecondMovePlayer = ShogiPlayerType::TYPE_UNKNOWN;
+				m_CurrentScene = new ShogiSelectScene(&m_FirstMovePlayer, &m_SecondMovePlayer);
+			}
 		}
 		system("cls");
 		break;

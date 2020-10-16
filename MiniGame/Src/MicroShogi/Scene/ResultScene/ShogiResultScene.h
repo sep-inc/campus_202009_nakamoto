@@ -22,7 +22,7 @@ public:
 	* @brief   コンストラクタ
 	* @details 必要な情報を初期化する
 	*/
-	ShogiResultScene(const AttackTurn* whoseWin_, bool* gameEnd_);
+	ShogiResultScene(const AttackTurn* whoseWin_, bool* gameEnd_, bool* contine_);
 
 	/**
 	* @brief   デストラクタ
@@ -65,6 +65,7 @@ private:
 	std::string EndStr;
 
 	bool* m_GameEnd;
+	bool* m_Continue;
 
 };
 

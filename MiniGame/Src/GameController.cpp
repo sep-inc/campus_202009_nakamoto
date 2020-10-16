@@ -8,8 +8,8 @@
 #include "Tron/GameTron.h"
 #include "Utility/SafeDelete.h"
 #include <Windows.h>
-
 #include <iostream>
+
 
 GameController::GameController() :
 	m_Game{ nullptr }, m_CurrentStep{ GameStep::STEP_INIT }
@@ -56,6 +56,7 @@ void GameController::Update()
 			break;
 		}
 
+		system("cls");
 		m_CurrentStep = GameStep::STEP_UPDATE;
 	}
 
@@ -66,6 +67,7 @@ void GameController::Update()
 		m_Game->Update();
 		if (m_Game->IsEnd() == true) {
 			// ゲームの開放
+			SAFE_DELETE(m_Game);
 
 			//ステップをInitにする
 			m_CurrentStep = GameStep::STEP_INIT;
@@ -89,7 +91,7 @@ void GameController::Draw()
 GameController::GameList GameController::SelectGame()
 {
 	int current_select_game = 0;
-
+	system("cls");
 	while (true)
 	{
 		std::string shogi_str = "4マス将棋\n";
@@ -111,25 +113,25 @@ GameController::GameList GameController::SelectGame()
 		switch ((GameList)current_select_game)
 		{
 		case GameController::GameList::GAME_MICRO_SHOGI:
-			shogi_str = "→" + shogi_str;
+			shogi_str =		"⇒" + shogi_str;
 			break;
 		case GameController::GameList::GAME_PACMAN:
-			pacman_str = "→" + pacman_str;
+			pacman_str =	"⇒" + pacman_str;
 			break;
 		case GameController::GameList::GAME_RUNGAME:
-			rungame_str = "→" + rungame_str;
+			rungame_str =	"⇒" + rungame_str;
 			break;
 		case GameController::GameList::GAME_TICTACTOE:
-			tictactoe_str = "→" + tictactoe_str;
+			tictactoe_str = "⇒" + tictactoe_str;
 			break;
 		case GameController::GameList::GAME_HANOI:
-			hanoi_str = "→" + hanoi_str;
+			hanoi_str =		"⇒" + hanoi_str;
 			break;
 		case GameController::GameList::GAME_TRON:
-			tron_str = "→" + tron_str;
+			tron_str =		"⇒" + tron_str;
 			break;
 		case GameController::GameList::GAME_UNKNOWN:
-			quit_str = "→" + quit_str;
+			quit_str =		"⇒" + quit_str;
 			break;
 		default:
 			break;
@@ -137,14 +139,15 @@ GameController::GameList GameController::SelectGame()
 
 		std::string menu;
 		menu = shogi_str + pacman_str + rungame_str + tictactoe_str + hanoi_str + tron_str + quit_str;
-		std::cout << "ゲームを選択してください" << std::endl;
+		std::cout << "【ゲームを選択してください】" << std::endl;
+		std::cout << "【十字キーで選択　　Enterキーで確定】" << std::endl;
 		std::cout << menu << std::endl;
 
 		if (key != -1) {
 
 			system("cls");
 		}
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ 0,2 });
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORD{ 0,0 });
 		
 	}
 

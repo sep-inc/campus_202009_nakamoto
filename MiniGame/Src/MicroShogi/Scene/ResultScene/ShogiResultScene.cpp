@@ -6,8 +6,8 @@
 /*===================*/
 /*　コンストラクタ   */
 /*===================*/
-ShogiResultScene::ShogiResultScene(const AttackTurn* whoseWin_, bool* gameEnd_) :
-	m_WhoseWin{ "\0" }, CurrentSelectMenu{ 0 }, m_NextScene{ ShogiSceneList::SCENE_SELECT }, m_GameEnd{ gameEnd_ }
+ShogiResultScene::ShogiResultScene(const AttackTurn* whoseWin_, bool* gameEnd_, bool* contine_) :
+	m_WhoseWin{ "\0" }, CurrentSelectMenu{ 0 }, m_NextScene{ ShogiSceneList::SCENE_SELECT }, m_GameEnd{ gameEnd_ }, m_Continue{ contine_ }
 {
 	switch (*whoseWin_)
 	{
@@ -40,6 +40,9 @@ void ShogiResultScene::Update()
 		// 終了が選ばれたらプログラムを終了させる
 		if (m_NextScene == ShogiSceneList::SCENE_UNKNOWN) {
 			*m_GameEnd = true;
+		}
+		else if (m_NextScene == ShogiSceneList::SCENE_GAME) {
+			*m_Continue = true;
 		}
 
 		// 選択されたシーンへ遷移する

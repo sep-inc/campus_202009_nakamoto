@@ -64,12 +64,12 @@ void RunGame::RanGameStage::Draw()
 /*=================================================================*/
 /*　プレイヤーの右の辺とブロックの左の辺との当たり判定を行う関数   */
 /*=================================================================*/
-bool RunGame::RanGameStage::HitPlyaerAndBlockLeftEdge(Vec2 pos_, int width_, int height_)
+bool RunGame::RanGameStage::HitPlyaerAndBlockLeftEdge(Vec2 pos_, __int8 width_, __int8 height_)
 {
 	// プレイヤーの右の辺を作成
 	Vec2 player_right_edge[2] = {
-		{pos_.m_X + (float)width_, pos_.m_Y},
-		{pos_.m_X + (float)width_, pos_.m_Y + (float)height_},
+		{pos_.m_X + width_, pos_.m_Y},
+		{pos_.m_X + width_, pos_.m_Y + height_},
 	};
 
 	// ブロックに当たっているかを調べる
@@ -88,7 +88,7 @@ bool RunGame::RanGameStage::HitPlyaerAndBlockLeftEdge(Vec2 pos_, int width_, int
 /*=================================================================*/
 /*　プレイヤーの下の辺とブロックの上の辺との当たり判定を行う関数   */
 /*=================================================================*/
-bool RunGame::RanGameStage::HitPlayerAndBlockTopEdge(Vec2 pos_, int width_, int height_, float* contactPos_)
+bool RunGame::RanGameStage::HitPlayerAndBlockTopEdge(Vec2 pos_, __int8 width_, __int8 height_, float* contactPos_)
 {
 	// プレイヤーの下の辺を作成
 	Vec2 player_bottom_edge[2] = {

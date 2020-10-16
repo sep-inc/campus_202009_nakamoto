@@ -55,6 +55,8 @@ private:
 	//! 誰が勝利したかを保存する変数
 	AttackTurn        m_WhoseWin;
 
+	bool m_Continue;
+
 };
 
 #endif

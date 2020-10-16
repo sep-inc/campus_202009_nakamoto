@@ -1,6 +1,7 @@
 ﻿#include "GameTowerOfHanoi.h"
 #include "Global.h"
 #include "../System/Input.h"
+#include <Windows.h>
 #include <stdio.h>
 
 
@@ -67,6 +68,7 @@ void GameTowerOfHanoi::Draw()
 
 bool GameTowerOfHanoi::IsContinue()
 {
+	system("cls");
 	printf("クリア!!\n");
 	printf("もう一度遊びますか?\n");
 	printf("遊ぶ\t\treturn\n");
@@ -83,6 +85,7 @@ bool GameTowerOfHanoi::IsContinue()
 			g_GameClear = false;
 			// ステップを始めに戻す
 			m_CurrentStep = TowerOfHanoiStep::STEP_INIT;
+			system("cls");
 			return true;
 		}
 		else if (key == KEY_ESC) {

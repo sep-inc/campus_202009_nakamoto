@@ -51,7 +51,7 @@ namespace RunGame
 		* @param[in] height_ 縦幅
 		* @return  bool 当たっていたらTrueを返す
 		*/
-		bool HitPlyaerAndBlockLeftEdge(Vec2 pos_, int width_, int height_);
+		bool HitPlyaerAndBlockLeftEdge(Vec2 pos_, __int8 width_, __int8 height_);
 
 		/**
 		* @brief     プレイヤーの下の辺とブロックの上の辺との当たり判定を行う関数
@@ -61,7 +61,7 @@ namespace RunGame
 		* @param[out] contactPos_ 当たったY軸の座標を返す
 		* @return  bool 当たっていたらTrueを返す
 		*/
-		bool HitPlayerAndBlockTopEdge(Vec2 pos_, int width_, int height_, float* contactPos_);
+		bool HitPlayerAndBlockTopEdge(Vec2 pos_, __int8 width_, __int8 height_, float* contactPos_);
 
 		/**
 		* @brief      ステージにセットする関数

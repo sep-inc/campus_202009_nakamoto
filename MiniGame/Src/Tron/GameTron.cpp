@@ -53,6 +53,7 @@ void GameTron::Update()
 		if (IsContinue() == true) {
 			// 続けるならステップを1に
 			m_CurrentStep = GameTronStep::STEP_INIT;
+			system("cls");
 			return;
 		}
 
