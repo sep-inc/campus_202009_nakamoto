@@ -5,12 +5,12 @@
 
 namespace PacMan
 {
-	class ItemArray
+	class ItemManager
 	{
 	public:
-		ItemArray();
+		ItemManager();
 
-		~ItemArray();
+		~ItemManager();
 		
 		void Init();
 

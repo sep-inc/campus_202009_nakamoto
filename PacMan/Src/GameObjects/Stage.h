@@ -3,7 +3,7 @@
 
 #include "../Definition.h"
 #include "../Utility/Vec2.h"
-#include "StageObjects/ItemArray.h"
+#include "StageObjects/ItemManager.h"
 
 namespace PacMan
 {
@@ -73,7 +73,7 @@ namespace PacMan
 		// ステージの情報を保存する変数
 		ObjectType m_Stage[STAGE_HEIGHT][STAGE_WIDTH];
 
-		ItemArray* m_ItemArray;
+		ItemManager* m_ItemArray;
 
 		// プレイヤーと敵が当たったかどうかを保存する変数
 		bool m_IsGameOver;

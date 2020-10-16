@@ -2,7 +2,7 @@
 #define GAME_PACMAN_H_
 
 #include "../GameObjects/Stage.h"
-#include "../GameObjects/StageObjects/EnemyArray.h"
+#include "../GameObjects/StageObjects/EnemyManager.h"
 #include "../GameObjects/StageObjects/Player.h"
 #include "../Definition.h"
 
@@ -61,7 +61,7 @@ namespace PacMan
 		// プレイヤー
 		Player* m_Player;
 		// エネミー
-		EnemyArray* m_EnemyArray;
+		EnemyManager* m_EnemyArray;
 		// 現在のステップを保存する変数
 		GamePacManStep m_CurrentStep;
 		// ゲームをクリアしたかどうかを保存する変数

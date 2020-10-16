@@ -17,7 +17,7 @@ PacMan::GamePacMan::GamePacMan() :
 #endif
 
 #ifdef ENEMY_ON
-	m_EnemyArray = new EnemyArray(m_Stage);
+	m_EnemyArray = new EnemyManager(m_Stage);
 #endif
 }
 

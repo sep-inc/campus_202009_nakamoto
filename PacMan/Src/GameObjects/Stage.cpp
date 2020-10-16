@@ -31,7 +31,7 @@ PacMan::Stage::Stage() :
 	memcpy(m_Stage, m_BlankStage, sizeof(m_BlankStage));
 
 #ifdef ITEM_ON
-	m_ItemArray = new ItemArray();
+	m_ItemArray = new ItemManager();
 #endif
 }
 

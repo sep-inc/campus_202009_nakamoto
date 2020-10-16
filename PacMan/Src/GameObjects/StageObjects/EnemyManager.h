@@ -5,18 +5,18 @@
 
 namespace PacMan
 {
-	class EnemyArray
+	class EnemyManager
 	{
 	public:
 		/*
 			コンストラクタ
 		*/
-		EnemyArray(Stage* stage_);
+		EnemyManager(Stage* stage_);
 
 		/*
 			デストラクタ
 		*/
-		~EnemyArray();
+		~EnemyManager();
 
 		/*
 			初期化関数

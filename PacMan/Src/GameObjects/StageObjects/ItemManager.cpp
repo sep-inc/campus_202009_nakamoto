@@ -1,6 +1,6 @@
-#include "ItemArray.h"
+#include "ItemManager.h"
 
-PacMan::ItemArray::ItemArray() :
+PacMan::ItemManager::ItemManager() :
 	m_Item{ nullptr }
 {
 	for (int i = 0; i < ITEM_NUM; ++i) {
@@ -8,14 +8,14 @@ PacMan::ItemArray::ItemArray() :
 	}
 }
 
-PacMan::ItemArray::~ItemArray()
+PacMan::ItemManager::~ItemManager()
 {
 	for (int i = 0; i < ITEM_NUM; ++i) {
 		SAFE_DELETE(m_Item[i]);
 	}
 }
 
-void PacMan::ItemArray::Init()
+void PacMan::ItemManager::Init()
 {
 	for (int i = 0; i < ITEM_NUM; ++i) {
 		SAFE_DELETE(m_Item[i]);
@@ -25,14 +25,14 @@ void PacMan::ItemArray::Init()
 	}
 }
 
-void PacMan::ItemArray::Draw()
+void PacMan::ItemManager::Draw()
 {
 	for (int i = 0; i < ITEM_NUM; ++i) {
 		if (m_Item[i])m_Item[i]->Draw();
 	}
 }
 
-bool PacMan::ItemArray::Empty()
+bool PacMan::ItemManager::Empty()
 {
 	// 一つでもアイテムが残っていたらfalseを返す
 	for (int i = 0; i < ITEM_NUM; ++i) {

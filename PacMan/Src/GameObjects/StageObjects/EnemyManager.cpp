@@ -1,6 +1,6 @@
-#include "EnemyArray.h"
+#include "EnemyManager.h"
 
-PacMan::EnemyArray::EnemyArray(Stage* stage_) :
+PacMan::EnemyManager::EnemyManager(Stage* stage_) :
 	m_Enemy{ nullptr }
 {
 	for (int i = 0; i < ENEMY_NUM; ++i)
@@ -9,7 +9,7 @@ PacMan::EnemyArray::EnemyArray(Stage* stage_) :
 	}
 }
 
-PacMan::EnemyArray::~EnemyArray()
+PacMan::EnemyManager::~EnemyManager()
 {
 	for (int i = 0; i < ENEMY_NUM; ++i)
 	{
@@ -17,7 +17,7 @@ PacMan::EnemyArray::~EnemyArray()
 	}
 }
 
-void PacMan::EnemyArray::Init()
+void PacMan::EnemyManager::Init()
 {
 	for (int i = 0; i < ENEMY_NUM; ++i)
 	{
@@ -25,7 +25,7 @@ void PacMan::EnemyArray::Init()
 	}
 }
 
-void PacMan::EnemyArray::Update()
+void PacMan::EnemyManager::Update()
 {
 	for (int i = 0; i < ENEMY_NUM; ++i)
 	{
@@ -33,7 +33,7 @@ void PacMan::EnemyArray::Update()
 	}
 }
 
-void PacMan::EnemyArray::Draw()
+void PacMan::EnemyManager::Draw()
 {
 	for (int i = 0; i < ENEMY_NUM; ++i)
 	{

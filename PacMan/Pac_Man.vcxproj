@@ -142,12 +142,12 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Src\GameObjects\Stage.cpp" />
     <ClCompile Include="Src\GameObjects\StageObjects\Enemy.cpp" />
-    <ClCompile Include="Src\GameObjects\StageObjects\EnemyArray.cpp" />
+    <ClCompile Include="Src\GameObjects\StageObjects\EnemyManager.cpp" />
     <ClCompile Include="Src\GameObjects\StageObjects\Item.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Src\GameObjects\StageObjects\ItemArray.cpp" />
+    <ClCompile Include="Src\GameObjects\StageObjects\ItemManager.cpp" />
     <ClCompile Include="Src\GameObjects\StageObjects\Player.cpp" />
     <ClCompile Include="Src\GameObjects\StageObjects\StageCharacter.cpp" />
     <ClCompile Include="Src\GameObjects\StageObjects\StageObject.cpp" />
@@ -159,12 +159,12 @@
     <ClInclude Include="Src\Definition.h" />
     <ClInclude Include="Src\GameObjects\Stage.h" />
     <ClInclude Include="Src\GameObjects\StageObjects\Enemy.h" />
-    <ClInclude Include="Src\GameObjects\StageObjects\EnemyArray.h" />
+    <ClInclude Include="Src\GameObjects\StageObjects\EnemyManager.h" />
     <ClInclude Include="Src\GameObjects\StageObjects\Item.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Src\GameObjects\StageObjects\ItemArray.h" />
+    <ClInclude Include="Src\GameObjects\StageObjects\ItemManager.h" />
     <ClInclude Include="Src\GameObjects\StageObjects\Player.h" />
     <ClInclude Include="Src\GameObjects\StageObjects\StageCharacter.h" />
     <ClInclude Include="Src\GameObjects\StageObjects\StageObject.h" />
