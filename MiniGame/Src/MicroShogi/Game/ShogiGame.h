@@ -12,13 +12,16 @@ class ShogiGame : public Game
 {
 public:
 	/**
-	* @brief   自身のインスタンスを返す関数
-	* @return  static ShogiGame& 当たっていたらTrueを返す
+* @brief   コンストラクタ
+* @details 必要な情報を初期化する
+*/
+	ShogiGame();
+
+	/**
+	* @brief   コンストラクタ
+	* @details 現在のシーンを解放する
 	*/
-	static ShogiGame& GetInstance() {
-		static ShogiGame instance;
-		return instance;
-	}
+	~ShogiGame();
 
 	/**
 	* @brief     シーンの切り替え関数
@@ -38,18 +41,6 @@ public:
 	*/
 	void Draw() override;
 
-private:
-	/**
-	* @brief   コンストラクタ
-	* @details 必要な情報を初期化する
-	*/
-	ShogiGame();
-
-	/**
-	* @brief   コンストラクタ
-	* @details 現在のシーンを解放する
-	*/
-	~ShogiGame();
 
 private:
 	//! 現在のシーンを保存する変数

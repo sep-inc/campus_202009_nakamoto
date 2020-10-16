@@ -32,7 +32,7 @@ void GameController::Update()
 		switch (select_game)
 		{
 		case GameController::GameList::GAME_MICRO_SHOGI:
-			exit(1);
+			m_Game = new ShogiGame();
 			break;
 		case GameController::GameList::GAME_PACMAN:
 			m_Game = new PacMan::GamePacMan();

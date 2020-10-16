@@ -20,7 +20,6 @@ ShogiSelectScene::ShogiSelectScene(ShogiPlayerType* first_, ShogiPlayerType* sec
 /*=====================*/
 void ShogiSelectScene::Update()
 {
-
 	if (*m_FirstMovePlayer == ShogiPlayerType::TYPE_UNKNOWN) {
 		m_DrawStr = "先攻の棋士の種類を選択してください\n";
 		SelectPlayer(m_FirstMovePlayer);
@@ -31,7 +30,8 @@ void ShogiSelectScene::Update()
 	}
 	else if (IsConfirm() == true) {
 		//  ゲームシーンに遷移
-		ShogiGame::GetInstance().ChangeScene(ShogiSceneList::SCENE_GAME);
+		m_EndScene = true;
+
 	}
 }
 

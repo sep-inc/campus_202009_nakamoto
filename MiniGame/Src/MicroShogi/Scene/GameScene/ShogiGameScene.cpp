@@ -60,7 +60,8 @@ void ShogiGameScene::Update()
 	if (turn_end && m_board->KingWasTake() == true) {
 		*m_WhoseWin = CurrentTurn;
 		// リザルトシーンに切り替える
-		ShogiGame::GetInstance().ChangeScene(ShogiSceneList::SCENE_RESULT);
+		m_EndScene = true;
+		return;
 	}
 
 	// ターンを切り替える

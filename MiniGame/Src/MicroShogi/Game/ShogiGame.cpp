@@ -31,25 +31,31 @@ ShogiGame::~ShogiGame()
 /*===========================*/
 void ShogiGame::ChangeScene(ShogiSceneList scene_)
 {
+	// 現在のsceneを参照
 	switch (scene_)
 	{
+		// セレクトシーンならゲームシーンに遷移
 	case ShogiSceneList::SCENE_SELECT:
 		SAFE_DELETE(m_CurrentScene);
-		m_FirstMovePlayer  = ShogiPlayerType::TYPE_UNKNOWN;
-		m_SecondMovePlayer = ShogiPlayerType::TYPE_UNKNOWN;
-		m_CurrentScene     = new ShogiSelectScene(&m_FirstMovePlayer, &m_SecondMovePlayer);
+
+		m_CurrentScene = new ShogiGameScene(&m_FirstMovePlayer, &m_SecondMovePlayer, &m_WhoseWin);
 		system("cls");
 		break;
 
 	case ShogiSceneList::SCENE_GAME:
 		SAFE_DELETE(m_CurrentScene);
-		m_CurrentScene = new ShogiGameScene(&m_FirstMovePlayer, &m_SecondMovePlayer, &m_WhoseWin);
+		m_CurrentScene = new ShogiResultScene(&m_WhoseWin, &m_IsEnd);
 		system("cls");
 		break;
 
 	case ShogiSceneList::SCENE_RESULT:
 		SAFE_DELETE(m_CurrentScene);
-		m_CurrentScene = new ShogiResultScene(&m_WhoseWin, &m_IsEnd);
+
+		if (!m_IsEnd) {
+			m_FirstMovePlayer = ShogiPlayerType::TYPE_UNKNOWN;
+			m_SecondMovePlayer = ShogiPlayerType::TYPE_UNKNOWN;
+			m_CurrentScene = new ShogiSelectScene(&m_FirstMovePlayer, &m_SecondMovePlayer);
+		}
 		system("cls");
 		break;
 
@@ -64,7 +70,13 @@ void ShogiGame::ChangeScene(ShogiSceneList scene_)
 /*=====================*/
 void ShogiGame::Update()
 {
-	if (m_CurrentScene) m_CurrentScene->Update();
+	if (!m_CurrentScene) return;
+
+	m_CurrentScene->Update();
+	
+	if (m_CurrentScene->EndScene() == true) {
+		this->ChangeScene(m_CurrentScene->GetScene());
+	}
 }
 
 

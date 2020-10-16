@@ -40,11 +40,10 @@ void ShogiResultScene::Update()
 		// 終了が選ばれたらプログラムを終了させる
 		if (m_NextScene == ShogiSceneList::SCENE_UNKNOWN) {
 			*m_GameEnd = true;
-			exit(0);
 		}
 
 		// 選択されたシーンへ遷移する
-		ShogiGame::GetInstance().ChangeScene(m_NextScene);
+		m_EndScene = true;
 	}
 	
 }

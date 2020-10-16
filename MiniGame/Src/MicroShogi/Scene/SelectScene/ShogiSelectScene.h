@@ -33,6 +33,8 @@ public:
 	*/
 	void Draw() override;
 
+	inline const ShogiSceneList GetScene() const override { return ShogiSceneList::SCENE_SELECT; }
+
 private:
 	/**
 	* @brief 　PCかNPCを選択する関数

@@ -1,6 +1,7 @@
 ﻿#ifndef SHOGISCENEBASE_H_
 #define SHOGISCENEBASE_H_
 
+#include "../Object/Definition.h"
 #include <string>
 
 /**
@@ -12,7 +13,9 @@ public:
 	/**
 	* @brief   デストラクタ
 	*/
-	ShogiSceneBase(){}
+	ShogiSceneBase() :
+		m_EndScene{ false }
+	{}
 
 	/**
 	* @brief   コンストラクタ
@@ -31,9 +34,16 @@ public:
 	*/
 	virtual void Draw()   = 0;
 
+	virtual inline const ShogiSceneList GetScene() const = 0;
+
+	bool EndScene() const { return m_EndScene; }
+
 protected:
 	//! 描画用文字列
 	std::string m_DrawStr;
+
+	//! 現在のシーンが終了したかどうかを保存する変数
+	bool m_EndScene;
 	
 };
 

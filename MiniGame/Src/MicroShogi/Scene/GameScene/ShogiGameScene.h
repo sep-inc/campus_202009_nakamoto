@@ -35,6 +35,8 @@ public:
 	*/
 	void Draw() override;
 
+	inline const ShogiSceneList GetScene() const override { return ShogiSceneList::SCENE_GAME; }
+
 private:
 	//! 棋士クラス[0->先手] [1->後手]
 	MicroShogi::PlayerBase* m_player[2];

@@ -41,6 +41,9 @@ public:
 	*/
 	void Draw() override;
 
+	inline const ShogiSceneList GetScene() const override { return ShogiSceneList::SCENE_RESULT; }
+
+
 private:
 	/**
 	* @brief   続けるかどうかを選択させる関数
