@@ -27,6 +27,13 @@ struct IVec2
 		return (m_X == vec_.m_X && m_Y == vec_.m_Y);
 	}
 
+	IVec2 operator - (IVec2& vec_) {
+		IVec2 vec2;
+		vec2.m_X = this->m_X - vec_.m_X;
+		vec2.m_Y = this->m_Y - vec_.m_Y;
+		return vec2;
+	}
+
 
 	//! X’l
 	__int8 m_X;

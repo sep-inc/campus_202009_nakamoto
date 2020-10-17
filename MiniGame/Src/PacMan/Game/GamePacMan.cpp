@@ -8,7 +8,7 @@
 	コンストラクタ
 */
 PacMan::GamePacMan::GamePacMan() :
-	m_Stage{ nullptr }, m_EnemyArray{ nullptr }, m_CurrentStep{ GamePacManStep::STEP_INIT }, m_GameClear{ false }
+	m_Stage{ nullptr }, m_EnemyArray{ nullptr }, m_CurrentStep{ GamePacManStep::STEP_INIT }, m_GameClear{ false }, m_Once{ true }
 {
 	m_Stage = new Stage();
 
@@ -50,10 +50,24 @@ void PacMan::GamePacMan::Update()
 		// エネミーの初期化
 		if (m_EnemyArray)m_EnemyArray->Init();
 
+		m_Once      = true;
+		m_GameClear = false;
+
 		// 次のステップへ進める
 		m_CurrentStep = GamePacManStep::STEP_UPDATE;
 		break;
 	case GamePacMan::GamePacManStep::STEP_UPDATE:
+		if (m_Once == true)
+		{
+			printf("スペースキーで始める\n");
+
+			if (Input::GetKey() == KEY_SPACE){
+				system("cls");
+				m_Once = false;
+			}
+			return;
+		}
+
 		// 各オブジェクトの更新をおこなう
 		if (m_Player) m_Player->Update();
 

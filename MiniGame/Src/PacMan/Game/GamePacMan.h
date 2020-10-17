@@ -67,6 +67,8 @@ namespace PacMan
 		GamePacManStep m_CurrentStep;
 		// ƒQ[ƒ€‚ğƒNƒŠƒA‚µ‚½‚©‚Ç‚¤‚©‚ğ•Û‘¶‚·‚é•Ï”
 		bool m_GameClear;
+
+		bool m_Once;
 	};
 }
 

@@ -51,10 +51,18 @@ namespace PacMan
 		*/
 		void Move();
 
+		/*
+			自身の周りで移動できる方向と数をかえす関数
+		*/
+		void AbleMoveAround(IVec2 pos_, IVec2* outVecArray_, int* ableMoveNum_);
+
 	private:
 		// フレーム数をカウントする変数
 		int m_Timer;
 
+		// 現在の移動方向を保存する変数
+		IVec2 m_Direction;
+		
 	};
 }
 

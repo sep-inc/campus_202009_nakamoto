@@ -158,7 +158,7 @@ bool PacMan::Stage::EmptyItem()
 {
 	if (!m_ItemArray) return false;
 
-	// アイテムが空なら偽
+	// アイテムが空じゃないなら偽
 	if (!m_ItemArray->Empty()) {
 		return false;
 	}
