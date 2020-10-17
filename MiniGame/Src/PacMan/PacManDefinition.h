@@ -23,7 +23,7 @@
 #define ITEM_NUM  5
 
 // 敵の速度　20 -> 20フレームに一度行動する
-#define ENEMY_SPEED 20
+#define ENEMY_SPEED 10
 
 namespace PacMan
 {
