@@ -61,12 +61,12 @@ public class GameController : MonoBehaviour
             
             // ボールに通知する
             ball.GetComponent<Ball>().NotifyGameClear();
+
+            SceneManager.LoadScene("TitleScene");
             return;
         }
-
-
         // 残機が0になったらゲームオーバー
-        if (remainNum == 0)
+        else if (remainNum == 0)
         {
             Text text = result_text.GetComponent<Text>();
             text.text = "ゲームオーバー";
@@ -82,6 +82,7 @@ public class GameController : MonoBehaviour
 
                 block_array[i].GetComponent<Block>().NotifyGameOver();
             }
+
             SceneManager.LoadScene("TitleScene");
             return;
         }
