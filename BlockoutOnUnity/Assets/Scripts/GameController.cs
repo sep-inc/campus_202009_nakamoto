@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class GameController : MonoBehaviour
 {
@@ -57,7 +58,7 @@ public class GameController : MonoBehaviour
             Text text = result_text.GetComponent<Text>();
             text.text = "ゲームクリア!!";
             result_text.SetActive(true);
-
+            
             // ボールに通知する
             ball.GetComponent<Ball>().NotifyGameClear();
             return;
@@ -81,7 +82,7 @@ public class GameController : MonoBehaviour
 
                 block_array[i].GetComponent<Block>().NotifyGameOver();
             }
-
+            SceneManager.LoadScene("TitleScene");
             return;
         }
 
