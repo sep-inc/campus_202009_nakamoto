@@ -17,7 +17,7 @@
 #define PLAYER_INIT_POS_Y 6
 
 // “G‚Ì”
-#define ENEMY_NUM 3
+#define ENEMY_NUM 1
 
 // ƒAƒCƒeƒ€‚Ì”
 #define ITEM_NUM  5

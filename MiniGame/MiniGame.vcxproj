@@ -242,7 +242,10 @@
     <ClInclude Include="Src\Tron\GameTron.h" />
     <ClInclude Include="Src\Tron\CharacterTronPlayer.h" />
     <ClInclude Include="Src\Tron\TronStage.h" />
+    <ClInclude Include="Src\Utility\Astar.h" />
+    <ClInclude Include="Src\Utility\Cell.h" />
     <ClInclude Include="Src\Utility\IVec2.h" />
+    <ClInclude Include="Src\Utility\Node.h" />
     <ClInclude Include="Src\Utility\SafeDelete.h" />
     <ClInclude Include="Src\Utility\Vec2.h" />
   </ItemGroup>

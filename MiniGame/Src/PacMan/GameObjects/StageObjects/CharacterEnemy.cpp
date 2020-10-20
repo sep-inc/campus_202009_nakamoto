@@ -60,34 +60,55 @@ void PacMan::CharacterEnemy::Draw()
 */
 void PacMan::CharacterEnemy::Move()
 {
-	// 自身の位置から移動可能な場所を保存する変数
-	IVec2 able_move[4];
-	// 移動可能な数を保存する変数
-	int able_move_num = 0;
-
-	AbleMoveAround(m_Pos, able_move, &able_move_num);
-
-	// 現座の進んでいるベクトルの逆のベクトルを算出する
-	IVec2 reverce_vec;
-	reverce_vec.m_X = -m_Direction.m_X;
-	reverce_vec.m_Y = -m_Direction.m_Y;
-	
-	std::vector<IVec2> new_able_move;
-	// 反対方向にはいきたくないので、候補から削除する
-	for (int i = 0; i < able_move_num; ++i)
+	if (m_TraceList.empty())
 	{
-		IVec2 vec = able_move[i] - m_Pos;
-		if (vec == reverce_vec)continue;
-		new_able_move.push_back(able_move[i]);
+		for (int y = 0; y < STAGE_HEIGHT; ++y) {
+			for (int x = 0; x < STAGE_WIDTH; ++x) {
+				if (m_RefStage->GetStageObject(IVec2(x, y)) == ObjectType::TYPE_PLAYER) {
+					m_RefStage->FindShortestPath(&m_TraceList, m_Pos, IVec2(x, y));
+					break;
+				}
+			}
+		}
 	}
+	else
+	{
+		// 移動する
+		m_RefStage->SetStage(m_Pos, m_TraceList.front(), this->GetObjectType());
+		m_Pos = m_TraceList.front();
+		m_TraceList.erase(m_TraceList.begin());
+	}
+	
+	
 
-	// 乱数を移動可能な数で割った余りを保存する
-	int random_num = rand() % new_able_move.size();
-
-	//　移動する
-	m_RefStage->SetStage(m_Pos, new_able_move[random_num], this->GetObjectType());
-	m_Direction = new_able_move[random_num] - m_Pos;
-	m_Pos = new_able_move[random_num];
+	//// 自身の位置から移動可能な場所を保存する変数
+	//IVec2 able_move[4];
+	//// 移動可能な数を保存する変数
+	//int able_move_num = 0;
+	//
+	//AbleMoveAround(m_Pos, able_move, &able_move_num);
+	//
+	//// 現座の進んでいるベクトルの逆のベクトルを算出する
+	//IVec2 reverce_vec;
+	//reverce_vec.m_X = -m_Direction.m_X;
+	//reverce_vec.m_Y = -m_Direction.m_Y;
+	//
+	//std::vector<IVec2> new_able_move;
+	//// 反対方向にはいきたくないので、候補から削除する
+	//for (int i = 0; i < able_move_num; ++i)
+	//{
+	//	IVec2 vec = able_move[i] - m_Pos;
+	//	if (vec == reverce_vec)continue;
+	//	new_able_move.push_back(able_move[i]);
+	//}
+	//
+	//// 乱数を移動可能な数で割った余りを保存する
+	//int random_num = rand() % new_able_move.size();
+	//
+	////　移動する
+	//m_RefStage->SetStage(m_Pos, new_able_move[random_num], this->GetObjectType());
+	//m_Direction = new_able_move[random_num] - m_Pos;
+	//m_Pos = new_able_move[random_num];
 }
 
 void PacMan::CharacterEnemy::AbleMoveAround(IVec2 pos_, IVec2* outVecArray_, int* ableMoveNum_)

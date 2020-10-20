@@ -4,6 +4,8 @@
 #include "../PacManDefinition.h"
 #include "../../Utility/IVec2.h"
 #include "StageObjects/ItemArray.h"
+#include "../../Utility/Astar.h"
+#include <list>
 
 namespace PacMan
 {
@@ -66,6 +68,8 @@ namespace PacMan
 		*/
 		bool HitPlayerAndEnemy()const { return m_IsGameOver; }
 
+		bool FindShortestPath(std::vector<IVec2>* traceList_, IVec2 sourcePos_, IVec2 destPos_);
+
 	private:
 		// 初期化用の空のステージデータ
 		static const int m_BlankStage[STAGE_HEIGHT][STAGE_WIDTH];
@@ -77,6 +81,10 @@ namespace PacMan
 
 		// プレイヤーと敵が当たったかどうかを保存する変数
 		bool m_IsGameOver;
+
+		
+		int m_CostTable[STAGE_HEIGHT][STAGE_WIDTH];
+		MyAStarAlgorithm::Astar<STAGE_WIDTH, STAGE_HEIGHT> m_Ater;
 
 	};
 }

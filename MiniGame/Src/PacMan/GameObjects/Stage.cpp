@@ -30,6 +30,14 @@ PacMan::Stage::Stage() :
 {
 	memcpy(m_Stage, m_BlankStage, sizeof(m_BlankStage));
 
+	for (int y = 0; y < STAGE_HEIGHT; ++y) {
+		for (int x = 0; x < STAGE_WIDTH; ++x) {
+			m_CostTable[y][x] = !m_BlankStage[y][x];
+		}
+	}
+
+	m_Ater.CreateGraph(m_CostTable);
+
 #ifdef ITEM_ON
 	m_ItemArray = new ItemArray();
 #endif
@@ -164,5 +172,26 @@ bool PacMan::Stage::EmptyItem()
 	}
 
 	// アイテムが空なら真
+	return true;
+}
+
+bool PacMan::Stage::FindShortestPath(std::vector<IVec2>* traceList_, IVec2 sourcePos_, IVec2 destPos_)
+{
+	if (m_BlankStage[sourcePos_.m_Y][sourcePos_.m_X] == 1)return false;
+	if (m_BlankStage[destPos_.m_Y][destPos_.m_X]     == 1)return false;
+
+	std::list<Cell> tmp = m_Ater.GetShortestPath(Cell(sourcePos_.m_X, sourcePos_.m_Y), Cell(destPos_.m_X, destPos_.m_Y));
+	
+	tmp.pop_front();
+
+	std::vector<IVec2> ret_trace_list;
+	
+	for (const Cell& v : tmp)
+	{
+		ret_trace_list.push_back(IVec2(v.m_X, v.m_Y));
+	}
+
+	*traceList_ = ret_trace_list;
+	
 	return true;
 }

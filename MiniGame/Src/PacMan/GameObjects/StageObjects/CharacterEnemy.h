@@ -63,6 +63,7 @@ namespace PacMan
 		// Œ»İ‚ÌˆÚ“®•ûŒü‚ğ•Û‘¶‚·‚é•Ï”
 		IVec2 m_Direction;
 		
+		std::vector<IVec2> m_TraceList;
 	};
 }
 
