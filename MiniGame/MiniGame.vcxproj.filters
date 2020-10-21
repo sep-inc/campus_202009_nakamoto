@@ -338,5 +338,8 @@
     <ClInclude Include="Src\Utility\Node.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\AIBase.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -209,6 +209,7 @@
     <ClInclude Include="Src\MicroShogi\Scene\ResultScene\ShogiResultScene.h" />
     <ClInclude Include="Src\MicroShogi\Scene\SelectScene\ShogiSelectScene.h" />
     <ClInclude Include="Src\MicroShogi\Scene\ShogiSceneBase.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\AIBase.h" />
     <ClInclude Include="Src\PacMan\PacManDefinition.h" />
     <ClInclude Include="Src\PacMan\GameObjects\Stage.h" />
     <ClInclude Include="Src\PacMan\GameObjects\StageObjects\CharacterEnemy.h" />
