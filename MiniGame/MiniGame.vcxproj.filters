@@ -159,6 +159,24 @@
     <ClCompile Include="Src\Tron\CharacterTronEnemy.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAISauntering.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIDefend.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIChase.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIBase.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Utility\IVec2.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIController.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\MicroShogi\Game\ShogiGame.h">
@@ -338,7 +356,22 @@
     <ClInclude Include="Src\Utility\Node.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\AIBase.h">
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIBase.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAISauntering.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIDefend.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIChase.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIController.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyParamater.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

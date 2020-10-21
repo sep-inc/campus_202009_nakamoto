@@ -2,6 +2,8 @@
 #define ENEMY_H_
 
 #include "../StageObjects/StageCharacter.h"
+#include "EnemyAI/EnemyParamater.h"
+#include "EnemyAI/EnemyAIController.h"
 
 namespace PacMan
 {
@@ -51,19 +53,14 @@ namespace PacMan
 		*/
 		void Move();
 
-		/*
-			自身の周りで移動できる方向と数をかえす関数
-		*/
-		void AbleMoveAround(IVec2 pos_, IVec2* outVecArray_, int* ableMoveNum_);
-
 	private:
-		// フレーム数をカウントする変数
+
 		int m_Timer;
 
-		// 現在の移動方向を保存する変数
-		IVec2 m_Direction;
-		
-		std::vector<IVec2> m_TraceList;
+		// エネミーのパラメーターをまとめた構造体
+		EnemyParameter m_Param;
+
+		EnemyAIController m_AI;
 	};
 }
 

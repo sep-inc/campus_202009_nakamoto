@@ -160,6 +160,11 @@
     <ClCompile Include="Src\PacMan\GameObjects\Stage.cpp" />
     <ClCompile Include="Src\PacMan\GameObjects\StageObjects\CharacterEnemy.cpp" />
     <ClCompile Include="Src\PacMan\GameObjects\StageObjects\CharacterPlayer.cpp" />
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIBase.cpp" />
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIChase.cpp" />
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIController.cpp" />
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIDefend.cpp" />
+    <ClCompile Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAISauntering.cpp" />
     <ClCompile Include="Src\PacMan\GameObjects\StageObjects\EnemyArray.cpp" />
     <ClCompile Include="Src\PacMan\GameObjects\StageObjects\Item.cpp" />
     <ClCompile Include="Src\PacMan\GameObjects\StageObjects\ItemArray.cpp" />
@@ -187,6 +192,7 @@
     <ClCompile Include="Src\Tron\GameTron.cpp" />
     <ClCompile Include="Src\Tron\CharacterTronPlayer.cpp" />
     <ClCompile Include="Src\Tron\TronStage.cpp" />
+    <ClCompile Include="Src\Utility\IVec2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Game.h" />
@@ -209,7 +215,12 @@
     <ClInclude Include="Src\MicroShogi\Scene\ResultScene\ShogiResultScene.h" />
     <ClInclude Include="Src\MicroShogi\Scene\SelectScene\ShogiSelectScene.h" />
     <ClInclude Include="Src\MicroShogi\Scene\ShogiSceneBase.h" />
-    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\AIBase.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIChase.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIBase.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIController.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIDefend.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAISauntering.h" />
+    <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyParamater.h" />
     <ClInclude Include="Src\PacMan\PacManDefinition.h" />
     <ClInclude Include="Src\PacMan\GameObjects\Stage.h" />
     <ClInclude Include="Src\PacMan\GameObjects\StageObjects\CharacterEnemy.h" />
