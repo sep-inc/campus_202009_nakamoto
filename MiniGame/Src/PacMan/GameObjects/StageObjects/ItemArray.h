@@ -23,6 +23,8 @@ namespace PacMan
 
 		bool Empty();
 
+		int GetItemTotalNum() const;
+
 	private:
 		Item* m_Item[ITEM_NUM];
 

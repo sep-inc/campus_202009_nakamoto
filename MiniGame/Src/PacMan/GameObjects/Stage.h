@@ -64,6 +64,16 @@ namespace PacMan
 		bool EmptyItem();
 
 		/*
+			アイテムの数を返す関数
+		*/
+		int ItemTotalNum() const;
+
+		/*
+			ステージ上にあるどれかのアイテムの座標を返す
+		*/
+		IVec2 GetRandomItemPos();
+
+		/*
 			プレイヤーとエネミーが当たったかどうかを返す関数
 		*/
 		bool HitPlayerAndEnemy()const { return m_IsGameOver; }

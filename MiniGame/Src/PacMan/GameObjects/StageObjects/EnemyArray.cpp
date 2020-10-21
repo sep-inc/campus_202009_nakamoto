@@ -3,10 +3,10 @@
 PacMan::EnemyArray::EnemyArray(Stage* stage_) :
 	m_Enemy{ nullptr }
 {
-	for (int i = 0; i < ENEMY_NUM; ++i)
-	{
-		if (!m_Enemy[i])m_Enemy[i] = new CharacterEnemy(stage_);
-	}
+	if (!m_Enemy[0])m_Enemy[0] = new CharacterEnemy(stage_, 15, EnemyPersonalityList::PERSONALITY_A);
+	if (!m_Enemy[1])m_Enemy[1] = new CharacterEnemy(stage_, 25, EnemyPersonalityList::PERSONALITY_C);
+	if (!m_Enemy[2])m_Enemy[2] = new CharacterEnemy(stage_, 25, EnemyPersonalityList::PERSONALITY_A);
+
 }
 
 PacMan::EnemyArray::~EnemyArray()

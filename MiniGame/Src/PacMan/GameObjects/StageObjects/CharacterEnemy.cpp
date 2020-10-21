@@ -5,11 +5,11 @@
 /*
 	コンストラクタ
 */
-PacMan::CharacterEnemy::CharacterEnemy(Stage* stage_) :
+PacMan::CharacterEnemy::CharacterEnemy(Stage* stage_, int speed_, EnemyPersonalityList personality_) :
 	StageCharacter{ stage_ }, m_AI{ &m_Pos, &m_Param, stage_ }, m_Timer{ 0 }
 {
-	m_Param.m_Personality = EnemyPersonalityList::PERSONALITY_A;
-	m_Param.m_Speed = 15;
+	m_Param.m_Personality = personality_;
+	m_Param.m_Speed = speed_;
 
 }
 
@@ -20,10 +20,8 @@ PacMan::CharacterEnemy::CharacterEnemy(Stage* stage_) :
 void PacMan::CharacterEnemy::Init()
 {
 	m_Timer = 0;
+	
 	m_RefStage->SetRandomPlacementObject(this);
-
-	
-	
 }
 
 
@@ -59,7 +57,9 @@ void PacMan::CharacterEnemy::Draw()
 */
 void PacMan::CharacterEnemy::Move()
 {
-	
+	if (m_RefStage->GetStageObject(m_Pos + m_Param.m_Direction) == ObjectType::TYPE_WALL) {
+		return;
+	}
 	m_RefStage->SetStage(m_Pos, m_Pos + m_Param.m_Direction, this->GetObjectType());
 	m_Pos = m_Pos + m_Param.m_Direction;
 }

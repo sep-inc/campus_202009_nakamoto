@@ -1,6 +1,9 @@
 #ifndef ENEMY_ENEMY_PARAMETER_H_
 #define ENEMY_ENEMY_PARAMETER_H_
 
+#include "../../../../Utility/IVec2.h"
+#include <vector>
+
 enum class EnemyPersonalityList
 {
 	PERSONALITY_A,
@@ -25,6 +28,8 @@ struct EnemyParameter
 
 	// エネミーの性格
 	EnemyPersonalityList m_Personality;
+
+	std::vector<IVec2> m_TraceList;
 };
 
 #endif

@@ -19,6 +19,9 @@ namespace PacMan
 		ActionStateList Update(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_) override;
 
 	private:
+		bool HeadForItemPosition(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_);
+
+	private:
 		EnemyAIDeffend() {}
 		
 	};

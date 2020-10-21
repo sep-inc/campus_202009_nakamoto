@@ -41,3 +41,12 @@ bool PacMan::ItemArray::Empty()
 
 	return true;
 }
+
+int PacMan::ItemArray::GetItemTotalNum() const
+{
+	int ret_num = 0;
+	for (int i = 0; i < ITEM_NUM; ++i) {
+		if (m_Item[i]) ret_num++;
+	}
+	return ret_num;
+}

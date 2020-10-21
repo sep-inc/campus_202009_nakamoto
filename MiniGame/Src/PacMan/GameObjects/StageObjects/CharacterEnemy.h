@@ -16,7 +16,7 @@ namespace PacMan
 		/*
 			コンストラクタ
 		*/
-		CharacterEnemy(Stage* stage_);
+		CharacterEnemy(Stage* stage_, int speed_, EnemyPersonalityList personality_);
 
 
 		/*

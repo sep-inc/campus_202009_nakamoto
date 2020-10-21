@@ -18,9 +18,14 @@ namespace PacMan
 		
 		ActionStateList Update(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_) override;
 	private:
-		EnemyAISauntering() {}
+		EnemyAISauntering() :m_CurrentItemTotalNum{ ITEM_NUM }
+		{}
 
 		std::vector<IVec2> GetAbleMoveDirection(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_);
+
+	private:
+		int m_CurrentItemTotalNum;
+		
 	};
 }
 

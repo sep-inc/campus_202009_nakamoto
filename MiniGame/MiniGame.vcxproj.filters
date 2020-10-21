@@ -177,6 +177,9 @@
     <ClCompile Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIController.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Utility\Calc.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\MicroShogi\Game\ShogiGame.h">
@@ -372,6 +375,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyParamater.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Utility\Calc.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

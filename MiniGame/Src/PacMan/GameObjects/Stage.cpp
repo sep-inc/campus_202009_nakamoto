@@ -175,6 +175,23 @@ bool PacMan::Stage::EmptyItem()
 	return true;
 }
 
+int PacMan::Stage::ItemTotalNum() const
+{
+	if (!m_ItemArray) return 0;
+	return m_ItemArray->GetItemTotalNum();
+}
+
+IVec2 PacMan::Stage::GetRandomItemPos()
+{	
+	while (true)
+	{
+		Item* item = m_ItemArray->GetItem(rand() % m_ItemArray->GetItemTotalNum());
+		if (!item)continue;
+		else 
+			return item->GetPos();
+	}
+}
+
 bool PacMan::Stage::FindShortestPath(std::vector<IVec2>* traceList_, IVec2 sourcePos_, IVec2 destPos_)
 {
 	if (m_BlankStage[sourcePos_.m_Y][sourcePos_.m_X] == 1)return false;

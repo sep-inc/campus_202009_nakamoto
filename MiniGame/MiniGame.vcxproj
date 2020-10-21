@@ -192,6 +192,7 @@
     <ClCompile Include="Src\Tron\GameTron.cpp" />
     <ClCompile Include="Src\Tron\CharacterTronPlayer.cpp" />
     <ClCompile Include="Src\Tron\TronStage.cpp" />
+    <ClCompile Include="Src\Utility\Calc.cpp" />
     <ClCompile Include="Src\Utility\IVec2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +256,7 @@
     <ClInclude Include="Src\Tron\CharacterTronPlayer.h" />
     <ClInclude Include="Src\Tron\TronStage.h" />
     <ClInclude Include="Src\Utility\Astar.h" />
+    <ClInclude Include="Src\Utility\Calc.h" />
     <ClInclude Include="Src\Utility\Cell.h" />
     <ClInclude Include="Src\Utility\IVec2.h" />
     <ClInclude Include="Src\Utility\Node.h" />
