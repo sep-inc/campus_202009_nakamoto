@@ -18,10 +18,6 @@ public class GameController : MonoBehaviour
     [SerializeField]
     int remainNum = 0;
 
-    // 結果を表示するためのtextオブジェクト
-    [SerializeField]
-    GameObject result_text = null;
-
     // ボールの発射キーを表示するためのtextオブジェクト
     [SerializeField]
     GameObject start_text  = null;
@@ -34,6 +30,8 @@ public class GameController : MonoBehaviour
 
     // ボールが発射されたかどうかを保存する変数
     private bool is_ball_start;
+
+    public static string result_string;
 
 
     // Start is called before the first frame update
@@ -55,23 +53,19 @@ public class GameController : MonoBehaviour
         // ブロックが0になったらゲームクリア
         if (block_num == 0)
         {
-            Text text = result_text.GetComponent<Text>();
-            text.text = "ゲームクリア!!";
-            result_text.SetActive(true);
-            
+                       
             // ボールに通知する
             ball.GetComponent<Ball>().NotifyGameClear();
 
-            SceneManager.LoadScene("TitleScene");
+            result_string = "ゲームクリア！！";
+
+            // 次のシーンに遷移
+            SceneContoller.LoadNextScene();
             return;
         }
         // 残機が0になったらゲームオーバー
         else if (remainNum == 0)
-        {
-            Text text = result_text.GetComponent<Text>();
-            text.text = "ゲームオーバー";
-            result_text.SetActive(true);
-            
+        {            
             // 生きているブロックに通知する
             for(int i = 0; i < block_array.Length; ++i)
             {
@@ -83,7 +77,10 @@ public class GameController : MonoBehaviour
                 block_array[i].GetComponent<Block>().NotifyGameOver();
             }
 
-            SceneManager.LoadScene("TitleScene");
+            result_string = "ゲームオーバー";
+
+            // 次のシーンに遷移
+            SceneContoller.LoadNextScene();
             return;
         }
 
