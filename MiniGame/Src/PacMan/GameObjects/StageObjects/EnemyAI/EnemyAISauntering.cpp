@@ -13,11 +13,12 @@ ActionStateList PacMan::EnemyAISauntering::Update()
 	// もしプレイヤーがいた場合、次に行う行動を追いかけるにする
 	IVec2 player_pos;
 	if (FoundPlayer(m_RefEnemyPos, m_RefStage, 11, &player_pos) == true) {
-		player_pos = player_pos - *m_RefEnemyPos;
-		if (player_pos.m_X != 0)player_pos.m_X /= Calc::Abs(player_pos.m_X);
-		if (player_pos.m_Y != 0)player_pos.m_Y /= Calc::Abs(player_pos.m_Y);
+		IVec2 enemy_to_player_vec;
+		enemy_to_player_vec = player_pos - *m_RefEnemyPos;
+		if (enemy_to_player_vec.m_X != 0)enemy_to_player_vec.m_X /= Calc::Abs(enemy_to_player_vec.m_X);
+		if (enemy_to_player_vec.m_Y != 0)enemy_to_player_vec.m_Y /= Calc::Abs(enemy_to_player_vec.m_Y);
 		
-		m_EnemyParam->m_Direction = (*m_RefEnemyPos + player_pos) - *m_RefEnemyPos;
+		m_EnemyParam->m_Direction = enemy_to_player_vec;
 		return ActionStateList::ACTION_CHASE;
 	}
 
@@ -26,7 +27,7 @@ ActionStateList PacMan::EnemyAISauntering::Update()
 	m_EnemyParam->m_Direction = able_direction[rand() % able_direction.size()];
 
 
-	// もし性格が守備での時、プレイヤーがアイテムをとった場合、次の行動を守りにする
+	// もし性格が守備の時、プレイヤーがアイテムをとった場合、次の行動を守りにする
 	if (m_EnemyParam->m_Personality == EnemyPersonalityList::PERSONALITY_C) {
 
 		int current_item_num = m_RefStage->ItemTotalNum();
@@ -44,6 +45,7 @@ ActionStateList PacMan::EnemyAISauntering::Update()
 
 void PacMan::EnemyAISauntering::Init()
 {
+	// 現在のアイテムの数を保存する
 	m_CurrentItemTotalNum = m_RefStage->ItemTotalNum();
 }
 
@@ -73,12 +75,13 @@ std::vector<IVec2> PacMan::EnemyAISauntering::GetAbleMoveDirection()
 	}
 	else {
 
-		// 後退しないように前と右と左を追加
+		// 前と左と右にそれぞれ移動できるか調べ移動できるなら候補に追加
 		IVec2 left_direction{ m_EnemyParam->m_Direction.m_Y, -m_EnemyParam->m_Direction.m_X };
 		if (m_RefStage->GetStageObject(*m_RefEnemyPos + m_EnemyParam->m_Direction) != ObjectType::TYPE_WALL)   ret_vec.push_back(*m_RefEnemyPos + m_EnemyParam->m_Direction - *m_RefEnemyPos);
 		if (m_RefStage->GetStageObject(*m_RefEnemyPos + left_direction) != ObjectType::TYPE_WALL)ret_vec.push_back(*m_RefEnemyPos + left_direction - *m_RefEnemyPos);
 		if (m_RefStage->GetStageObject(*m_RefEnemyPos - left_direction) != ObjectType::TYPE_WALL)ret_vec.push_back(*m_RefEnemyPos - left_direction - *m_RefEnemyPos);
 	}
 
+	// 追加し終えた結果を返す
 	return ret_vec;
 }

@@ -37,6 +37,7 @@ namespace PacMan
 	protected:
 		/*
 			プレイヤーを見つけたかどうかを返す関数
+			見つけた場合FoundPos_にプレイヤーの座標が返る
 		*/
 		bool FoundPlayer(IVec2* enemyPos_, Stage* stage_,__int8 range_, IVec2* FoundPos_ = nullptr);
 

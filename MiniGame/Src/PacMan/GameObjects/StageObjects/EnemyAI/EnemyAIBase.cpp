@@ -10,6 +10,11 @@ PacMan::EnemyAIBase::EnemyAIBase(IVec2* enemyPos_, EnemyParameter* enemyParam_, 
 
 bool PacMan::EnemyAIBase::FoundPlayer(IVec2* enemyPos_, Stage* stage_, __int8 range_, IVec2* FoundPos_)
 {
+	/*
+		それぞれの方向にプレイヤーがいるかを調べる、
+		ブロックがあった場合はその方向は検索を中止する
+	*/
+
 	for (int i = 0; i < range_; i++) {
 		IVec2 up = IVec2(enemyPos_->m_X, enemyPos_->m_Y - i);
 		if (stage_->GetStageObject(up) == ObjectType::TYPE_WALL) break;

@@ -31,6 +31,7 @@ struct EnemyParameter
 	// エネミーの性格
 	EnemyPersonalityList m_Personality;
 
+	// 追跡リスト
 	std::vector<IVec2> m_TraceList;
 };
 

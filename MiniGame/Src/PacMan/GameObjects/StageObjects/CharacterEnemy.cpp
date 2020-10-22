@@ -59,10 +59,8 @@ void PacMan::CharacterEnemy::Draw()
 */
 void PacMan::CharacterEnemy::Move()
 {
-	if (m_RefStage->GetStageObject(m_Pos + m_Param.m_Direction) == ObjectType::TYPE_WALL
-		|| m_RefStage->GetStageObject(m_Pos + m_Param.m_Direction) == ObjectType::TYPE_ENEMY) {
-		return;
-	}
+	if (m_RefStage->GetStageObject(m_Pos + m_Param.m_Direction) == ObjectType::TYPE_WALL) return;
+	
 	m_RefStage->SetStage(m_Pos, m_Pos + m_Param.m_Direction, this->GetObjectType());
 	m_Pos = m_Pos + m_Param.m_Direction;
 }
