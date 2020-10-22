@@ -9,19 +9,25 @@ namespace PacMan
 	class EnemyAIController
 	{
 	public:
+		/*
+			コンストラクタ
+		*/
 		EnemyAIController(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_);
 
-		~EnemyAIController(){}
+		/*
+			デストラクタ
+		*/
+		~EnemyAIController();
 
+		/*
+			更新関数
+		*/
 		void Update();
 
 	private:
-		EnemyAIBase* m_AI;
-		EnemyParameter* m_Parameter;
-		IVec2* m_EnemyPos;
-		Stage* m_RefStage;
-
-
+		// AI配列
+		EnemyAIBase* m_AI[(int)ActionStateList::ACTION_NUM];
+		// 現在の行動を保存する変数
 		ActionStateList m_CurrentAction;
 
 	};

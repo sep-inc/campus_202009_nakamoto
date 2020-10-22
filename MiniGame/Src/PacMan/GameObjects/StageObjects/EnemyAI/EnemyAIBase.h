@@ -6,17 +6,48 @@
 
 namespace PacMan
 {
+	/*
+		敵AIの基底クラス
+	*/
 	class EnemyAIBase
 	{
 	public:
-		EnemyAIBase(){}
+		/*
+			コンストラクタ
+		*/
+		EnemyAIBase(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_);
 
+		/*
+			デストラクタ
+		*/
 		virtual ~EnemyAIBase() {}
 
-		virtual ActionStateList Update(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_) = 0;
+
+		/*
+			更新関数
+			次に行動する状態を返す
+		*/
+		virtual ActionStateList Update() = 0;
+
+		/*
+			初期化関数
+		*/
+		virtual void Init() {};
 
 	protected:
+		/*
+			プレイヤーを見つけたかどうかを返す関数
+		*/
 		bool FoundPlayer(IVec2* enemyPos_, Stage* stage_,__int8 range_, IVec2* FoundPos_ = nullptr);
+
+
+	protected:
+		// エネミーの位置情報
+		IVec2* m_RefEnemyPos;
+		// エネミーのparameter情報
+		EnemyParameter* m_EnemyParam;
+		// ステージクラスの参照用変数
+		Stage* m_RefStage;
 	};
 }
 

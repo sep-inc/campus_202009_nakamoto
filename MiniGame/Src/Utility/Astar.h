@@ -54,7 +54,7 @@ namespace MyAStarAlgorithm
 		// オープンリストに追加
 		bool AddAdjacentNode(std::list<Node*>& open_list, std::list<Node*>& close_list, Node* adjacent_node, float cost);
 	private:
-		const int _INFINITY = 100000.0f;
+		const int _INFINITY = 100000;
 
 		Node m_Graph[TABLE_HEIGHT][TABLE_WIDTH];
 		int  m_CostTable[TABLE_HEIGHT][TABLE_WIDTH];
@@ -146,7 +146,7 @@ namespace MyAStarAlgorithm
 				}
 
 				// ノード間のコストを取得
-				float edge_cost = m_CostTable[adjacent_node->m_Pos.m_Y][adjacent_node->m_Pos.m_X];
+				float edge_cost = (float)m_CostTable[adjacent_node->m_Pos.m_Y][adjacent_node->m_Pos.m_X];
 				// トータルコストを算出
 				float total_cost = edge_cost + search_node->m_HeuristicCost + search_node->m_TotalCost;
 
@@ -229,7 +229,7 @@ namespace MyAStarAlgorithm
 	{
 		for (int y = 0; y < TABLE_HEIGHT; ++y) {
 			for (int x = 0; x < TABLE_WIDTH; ++x) {
-				m_Graph[y][x].m_HeuristicCost = _INFINITY;
+				m_Graph[y][x].m_HeuristicCost = (float)_INFINITY;
 				m_Graph[y][x].m_TotalCost = 0;
 			}
 		}

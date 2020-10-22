@@ -185,7 +185,7 @@ IVec2 PacMan::Stage::GetRandomItemPos()
 {	
 	while (true)
 	{
-		Item* item = m_ItemArray->GetItem(rand() % m_ItemArray->GetItemTotalNum());
+		Item* item = m_ItemArray->GetItem(rand() % ITEM_NUM);
 		if (!item)continue;
 		else 
 			return item->GetPos();

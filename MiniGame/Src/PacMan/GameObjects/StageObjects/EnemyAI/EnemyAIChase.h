@@ -8,32 +8,45 @@ namespace PacMan
 	class EnemyAIChase : public EnemyAIBase
 	{
 	public:
-		static EnemyAIChase* GetInstance()
-		{
-			static EnemyAIChase instance;
-			return &instance;
-		}
+		/*
+			コンストラクタ
+		*/
+		EnemyAIChase(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_);
 
+		/*
+			デストラクタ
+		*/
 		~EnemyAIChase() {}
 
-		ActionStateList Update(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_) override;
+		/*
+			更新関数
+			次に行動する状態を返す
+		*/
+		ActionStateList Update() override;
+
+		/*
+			初期化関数
+			AIが切り替わった時に一度だけ呼ぶ
+		*/
+		void Init() override;
 
 	private:
 
-		EnemyAIChase() {}
+		/*
+			先回りする関数
+			見失ったらfalseを返す
+		*/
+		bool Forestall();
 
 		/*
-			先回りする
+			追いかける関数
+			見失ったらfalseを返す
 		*/
-		void Forestall(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_);
-
-		/*
-			追いかける
-		*/
-		bool Chase(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_);
+		bool Chase();
 
 	private:
-		std::vector<IVec2> m_TraceList;
+		// プレイヤーの前の前の座標を保存しておく変数
+		IVec2 m_PlayerOldPos;
 
 	};
 }

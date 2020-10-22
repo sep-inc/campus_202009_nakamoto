@@ -5,24 +5,35 @@
 
 namespace PacMan
 {
+	/*
+		守備AIクラス
+	*/
 	class EnemyAIDeffend : public EnemyAIBase
 	{
 	public:
-		static EnemyAIDeffend* GetInstance()
-		{
-			static EnemyAIDeffend instance;
-			return &instance;
-		}
+		/*
+			コンストラクタ
+		*/
+		EnemyAIDeffend(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_);
 
+		/*
+			デストラクタ
+		*/
 		~EnemyAIDeffend(){}
 
-		ActionStateList Update(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_) override;
+		/*
+			更新関数
+			次に行動する状態を返す
+		*/
+		ActionStateList Update() override;
 
 	private:
-		bool HeadForItemPosition(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_);
+		/*
+			アイテムの位置に移動する関数
+			到着したらtrueを返す
+		*/
+		bool HeadForItemPosition();
 
-	private:
-		EnemyAIDeffend() {}
 		
 	};
 

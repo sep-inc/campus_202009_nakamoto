@@ -16,6 +16,8 @@ enum class ActionStateList
 	ACTION_SAUNTERING,	// œpœj
 	ACTION_DEFEND,		// ƒAƒCƒeƒ€‚ðŽç‚é
 	ACTION_CHASE,		// ’Ç‚¢‚©‚¯‚é
+
+	ACTION_NUM,
 };
 
 struct EnemyParameter

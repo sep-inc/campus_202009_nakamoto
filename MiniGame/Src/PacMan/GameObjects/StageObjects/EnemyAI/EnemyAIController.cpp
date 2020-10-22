@@ -4,40 +4,34 @@
 #include "EnemyAISauntering.h"
 
 PacMan::EnemyAIController::EnemyAIController(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_) :
-	m_AI{ nullptr }, m_EnemyPos{ enemyPos_ }, m_Parameter{ enemyParam_ }, m_RefStage{ stage_ }, m_CurrentAction{ ActionStateList::ACTION_SAUNTERING }
+	m_AI{ nullptr },  m_CurrentAction{ ActionStateList::ACTION_SAUNTERING }
 {
-	m_AI = EnemyAISauntering::GetInstance();
+	m_AI[(int)ActionStateList::ACTION_SAUNTERING] = new EnemyAISauntering(enemyPos_, enemyParam_, stage_);
+	m_AI[(int)ActionStateList::ACTION_CHASE]	  = new EnemyAIChase(enemyPos_, enemyParam_, stage_);
+	m_AI[(int)ActionStateList::ACTION_DEFEND]	  = new EnemyAIDeffend(enemyPos_, enemyParam_, stage_);
+
+	m_AI[(int)m_CurrentAction]->Init();
+}
+
+PacMan::EnemyAIController::~EnemyAIController()
+{
+	for (int i = 0; i < (int)ActionStateList::ACTION_NUM; ++i)
+	{
+		SAFE_DELETE(m_AI[i]);
+	}
 }
 
 
-ActionStateList m_CurrentAction;
 void PacMan::EnemyAIController::Update()
 {
 	// 更新
-	ActionStateList tmp = m_AI->Update(m_EnemyPos, m_Parameter, m_RefStage);
+	ActionStateList next_action = m_AI[(int)m_CurrentAction]->Update();
 
 	// もしアクションが変わっていたら
-	if (tmp != m_CurrentAction) {
-		switch (tmp)
-		{
-		case ActionStateList::ACTION_SAUNTERING:
-			// 徘徊
-			m_AI = EnemyAISauntering::GetInstance();
-			break;
-		case ActionStateList::ACTION_DEFEND:
-			// 守備
-			m_AI = EnemyAIDeffend::GetInstance();
-			break;
-		case ActionStateList::ACTION_CHASE:
-			// 追いかける
-			m_AI = EnemyAIChase::GetInstance();
-			break;
-		default:
-			break;
-		}
+	if (next_action != m_CurrentAction) {
+
+		// アクションを更新
+		m_CurrentAction = next_action;
+		m_AI[(int)m_CurrentAction]->Init();
 	}
-
-	// アクションを更新
-	m_CurrentAction = tmp;
-
 }

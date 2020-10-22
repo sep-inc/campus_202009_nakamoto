@@ -20,7 +20,9 @@ PacMan::CharacterEnemy::CharacterEnemy(Stage* stage_, int speed_, EnemyPersonali
 void PacMan::CharacterEnemy::Init()
 {
 	m_Timer = 0;
-	
+	m_Param.m_TraceList.clear();
+	m_Param.m_Direction.m_X = 0;
+	m_Param.m_Direction.m_Y = 0;
 	m_RefStage->SetRandomPlacementObject(this);
 }
 
@@ -57,7 +59,8 @@ void PacMan::CharacterEnemy::Draw()
 */
 void PacMan::CharacterEnemy::Move()
 {
-	if (m_RefStage->GetStageObject(m_Pos + m_Param.m_Direction) == ObjectType::TYPE_WALL) {
+	if (m_RefStage->GetStageObject(m_Pos + m_Param.m_Direction) == ObjectType::TYPE_WALL
+		|| m_RefStage->GetStageObject(m_Pos + m_Param.m_Direction) == ObjectType::TYPE_ENEMY) {
 		return;
 	}
 	m_RefStage->SetStage(m_Pos, m_Pos + m_Param.m_Direction, this->GetObjectType());

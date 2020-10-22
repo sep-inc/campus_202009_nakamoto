@@ -1,6 +1,13 @@
 #include "EnemyAIBase.h"
 
 
+PacMan::EnemyAIBase::EnemyAIBase(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_) :
+	m_RefEnemyPos{ enemyPos_ }, m_EnemyParam{ enemyParam_ }, m_RefStage{ stage_ }
+{
+}
+
+
+
 bool PacMan::EnemyAIBase::FoundPlayer(IVec2* enemyPos_, Stage* stage_, __int8 range_, IVec2* FoundPos_)
 {
 	for (int i = 0; i < range_; i++) {

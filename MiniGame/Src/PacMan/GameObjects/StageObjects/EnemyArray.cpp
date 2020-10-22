@@ -3,9 +3,9 @@
 PacMan::EnemyArray::EnemyArray(Stage* stage_) :
 	m_Enemy{ nullptr }
 {
-	if (!m_Enemy[0])m_Enemy[0] = new CharacterEnemy(stage_, 15, EnemyPersonalityList::PERSONALITY_A);
-	if (!m_Enemy[1])m_Enemy[1] = new CharacterEnemy(stage_, 25, EnemyPersonalityList::PERSONALITY_C);
-	if (!m_Enemy[2])m_Enemy[2] = new CharacterEnemy(stage_, 25, EnemyPersonalityList::PERSONALITY_A);
+	if (!m_Enemy[0])m_Enemy[0] = new CharacterEnemy(stage_, 20, EnemyPersonalityList::PERSONALITY_A);
+	if (!m_Enemy[1])m_Enemy[1] = new CharacterEnemy(stage_, 30, EnemyPersonalityList::PERSONALITY_B);
+	if (!m_Enemy[2])m_Enemy[2] = new CharacterEnemy(stage_, 30, EnemyPersonalityList::PERSONALITY_C);
 
 }
 

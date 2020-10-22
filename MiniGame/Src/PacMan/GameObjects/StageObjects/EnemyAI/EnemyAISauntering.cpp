@@ -3,28 +3,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-ActionStateList PacMan::EnemyAISauntering::Update(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_)
+PacMan::EnemyAISauntering::EnemyAISauntering(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_) :
+	EnemyAIBase{ enemyPos_,enemyParam_ , stage_ }, m_CurrentItemTotalNum{ 0 }
+{
+}
+
+ActionStateList PacMan::EnemyAISauntering::Update()
 {
 	// もしプレイヤーがいた場合、次に行う行動を追いかけるにする
-	IVec2 hoge;
-	if (FoundPlayer(enemyPos_, stage_, 11, &hoge) == true) {
-		hoge = hoge - *enemyPos_;
-		if (hoge.m_X != 0)hoge.m_X /= Calc::Abs(hoge.m_X);
-		if (hoge.m_Y != 0)hoge.m_Y /= Calc::Abs(hoge.m_Y);
+	IVec2 player_pos;
+	if (FoundPlayer(m_RefEnemyPos, m_RefStage, 11, &player_pos) == true) {
+		player_pos = player_pos - *m_RefEnemyPos;
+		if (player_pos.m_X != 0)player_pos.m_X /= Calc::Abs(player_pos.m_X);
+		if (player_pos.m_Y != 0)player_pos.m_Y /= Calc::Abs(player_pos.m_Y);
 		
-		enemyParam_->m_Direction = (*enemyPos_ + hoge) - *enemyPos_;
+		m_EnemyParam->m_Direction = (*m_RefEnemyPos + player_pos) - *m_RefEnemyPos;
 		return ActionStateList::ACTION_CHASE;
 	}
 
 	// 移動方向をランダムに決める
-	std::vector<IVec2> able_direction = GetAbleMoveDirection(enemyPos_, enemyParam_, stage_);
-	enemyParam_->m_Direction = able_direction[rand() % able_direction.size()];
+	std::vector<IVec2> able_direction = GetAbleMoveDirection();
+	m_EnemyParam->m_Direction = able_direction[rand() % able_direction.size()];
 
 
 	// もし性格が守備での時、プレイヤーがアイテムをとった場合、次の行動を守りにする
-	if (enemyParam_->m_Personality == EnemyPersonalityList::PERSONALITY_C) {
+	if (m_EnemyParam->m_Personality == EnemyPersonalityList::PERSONALITY_C) {
 
-		int current_item_num = stage_->ItemTotalNum();
+		int current_item_num = m_RefStage->ItemTotalNum();
 
 		if (current_item_num != m_CurrentItemTotalNum) {
 
@@ -37,34 +42,42 @@ ActionStateList PacMan::EnemyAISauntering::Update(IVec2* enemyPos_, EnemyParamet
 	return ActionStateList::ACTION_SAUNTERING;
 }
 
+void PacMan::EnemyAISauntering::Init()
+{
+	m_CurrentItemTotalNum = m_RefStage->ItemTotalNum();
+}
 
-std::vector<IVec2> PacMan::EnemyAISauntering::GetAbleMoveDirection(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_)
+
+std::vector<IVec2> PacMan::EnemyAISauntering::GetAbleMoveDirection()
 {
 	std::vector<IVec2> ret_vec;
 
 	// ゼロベクトルだったら移動できる方向をランダムに選ぶ
-	if (enemyParam_->m_Direction.Zero() == true)
+	if (m_EnemyParam->m_Direction.Zero() == true)
 	{
+		
 		IVec2 direction[4] = {
-			{enemyPos_->m_X + 1, enemyPos_->m_Y},
-			{enemyPos_->m_X - 1, enemyPos_->m_Y},
-			{enemyPos_->m_X, enemyPos_->m_Y + 1},
-			{enemyPos_->m_X, enemyPos_->m_Y - 1},
+			{m_RefEnemyPos->m_X + 1, m_RefEnemyPos->m_Y},
+			{m_RefEnemyPos->m_X - 1, m_RefEnemyPos->m_Y},
+			{m_RefEnemyPos->m_X, m_RefEnemyPos->m_Y + 1},
+			{m_RefEnemyPos->m_X, m_RefEnemyPos->m_Y - 1},
 		};
 
+		// 四方向で移動できる場所があれば候補に追加
 		for (int i = 0; i < 4; ++i) {
-			if (stage_->GetStageObject(direction[i]) != ObjectType::TYPE_WALL)
+			if (m_RefStage->GetStageObject(direction[i]) != ObjectType::TYPE_WALL)
 			{
-				ret_vec.push_back(direction[i] - *enemyPos_);
+				ret_vec.push_back(direction[i] - *m_RefEnemyPos);
 			}
 		}
 	}
 	else {
 
-		IVec2 left_direction{ enemyParam_->m_Direction.m_Y, -enemyParam_->m_Direction.m_X };
-		if (stage_->GetStageObject(*enemyPos_ + enemyParam_->m_Direction) != ObjectType::TYPE_WALL)   ret_vec.push_back(*enemyPos_ + enemyParam_->m_Direction - *enemyPos_);
-		if (stage_->GetStageObject(*enemyPos_ + left_direction) != ObjectType::TYPE_WALL)ret_vec.push_back(*enemyPos_ + left_direction - *enemyPos_);
-		if (stage_->GetStageObject(*enemyPos_ - left_direction) != ObjectType::TYPE_WALL)ret_vec.push_back(*enemyPos_ - left_direction - *enemyPos_);
+		// 後退しないように前と右と左を追加
+		IVec2 left_direction{ m_EnemyParam->m_Direction.m_Y, -m_EnemyParam->m_Direction.m_X };
+		if (m_RefStage->GetStageObject(*m_RefEnemyPos + m_EnemyParam->m_Direction) != ObjectType::TYPE_WALL)   ret_vec.push_back(*m_RefEnemyPos + m_EnemyParam->m_Direction - *m_RefEnemyPos);
+		if (m_RefStage->GetStageObject(*m_RefEnemyPos + left_direction) != ObjectType::TYPE_WALL)ret_vec.push_back(*m_RefEnemyPos + left_direction - *m_RefEnemyPos);
+		if (m_RefStage->GetStageObject(*m_RefEnemyPos - left_direction) != ObjectType::TYPE_WALL)ret_vec.push_back(*m_RefEnemyPos - left_direction - *m_RefEnemyPos);
 	}
 
 	return ret_vec;
