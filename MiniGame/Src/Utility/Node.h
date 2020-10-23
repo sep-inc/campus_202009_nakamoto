@@ -1,4 +1,4 @@
-#ifndef NODE_H_
+ï»¿#ifndef NODE_H_
 #define NODE_H_
 
 #include "Cell.h"
@@ -14,16 +14,16 @@ struct Node
 		m_Pos(x_, y_), m_HeuristicCost(0), m_TotalCost(0)
 	{}
 
-	// ƒm[ƒh‚ÌÀ•W
+	// ãƒãƒ¼ãƒ‰ã®åº§æ¨™
 	Cell				m_Pos;
 
-	// —×Ú‚·‚éƒm[ƒh
+	// éš£æ¥ã™ã‚‹ãƒãƒ¼ãƒ‰
 	std::vector<Node*>	m_Edges;
 
-	// ƒqƒ…[ƒŠƒXƒeƒBƒbƒNƒRƒXƒg
+	// ãƒ’ãƒ¥ãƒ¼ãƒªã‚¹ãƒ†ã‚£ãƒƒã‚¯ã‚³ã‚¹ãƒˆ
 	float				m_HeuristicCost;
 
-	// ƒg[ƒ^ƒ‹ƒRƒXƒg
+	// ãƒˆãƒ¼ã‚¿ãƒ«ã‚³ã‚¹ãƒˆ
 	float				m_TotalCost;
 
 };

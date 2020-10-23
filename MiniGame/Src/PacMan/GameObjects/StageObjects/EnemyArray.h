@@ -1,4 +1,4 @@
-#ifndef ENEMY_ARRAY_H_
+ï»¿#ifndef ENEMY_ARRAY_H_
 #define ENEMY_ARRAY_H_
 
 #include "CharacterEnemy.h"
@@ -9,27 +9,27 @@ namespace PacMan
 	{
 	public:
 		/*
-			ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+			ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		EnemyArray(Stage* stage_);
 
 		/*
-			ƒfƒXƒgƒ‰ƒNƒ^
+			ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		~EnemyArray();
 
 		/*
-			‰Šú‰»ŠÖ”
+			åˆæœŸåŒ–é–¢æ•°
 		*/
 		void Init();
 
 		/*
-			XVŠÖ”
+			æ›´æ–°é–¢æ•°
 		*/
 		void Update();
 
 		/*
-			•`‰æŠÖ”
+			æç”»é–¢æ•°
 		*/
 		void Draw();
 

@@ -1,4 +1,4 @@
-#ifndef GAME_SCENE_H_
+ï»¿#ifndef GAME_SCENE_H_
 #define GAME_SCENE_H_
 
 #include "SceneBase.h"
@@ -6,38 +6,38 @@
 #include "../MiniGameDifinition.h"
 
 /*
-	ƒQ[ƒ€ƒV[ƒ“
+	ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³
 */
 class GameScene : public SceneBase
 {
 public:
 	/*
-		ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	*/
 	GameScene(GameList game_);
 
 	/*
-		ƒfƒXƒgƒ‰ƒNƒ^
+		ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	*/
 	~GameScene();
 
 	/*
-		XVŠÖ”
+		æ›´æ–°é–¢æ•°
 	*/
 	void Update() override;
 
 	/*
-		•`‰æŠÖ”
+		æç”»é–¢æ•°
 	*/
 	void Draw() override;
 
 	/*
-		Œ»İ‚ÌƒV[ƒ“‚ğæ“¾‚·‚éŠÖ”
+		ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ã‚’å–å¾—ã™ã‚‹é–¢æ•°
 	*/
 	inline SceneList GetScene() const { return SceneList::SCENE_GAME; }
 
 private:
-	// ƒQ[ƒ€ƒNƒ‰ƒX‚Ìƒ|ƒCƒ“ƒ^
+	// ã‚²ãƒ¼ãƒ ã‚¯ãƒ©ã‚¹ã®ãƒã‚¤ãƒ³ã‚¿
 	Game* m_Game;
 
 };

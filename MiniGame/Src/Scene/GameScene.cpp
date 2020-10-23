@@ -1,4 +1,4 @@
-#include "GameScene.h"
+ï»¿#include "GameScene.h"
 #include "../MicroShogi/Game/ShogiGame.h"
 #include "../PacMan/Game/GamePacMan.h"
 #include "../RunGame/RunGame.h"
@@ -10,7 +10,7 @@
 GameScene::GameScene(GameList game_) :
 	m_Game{ nullptr }
 {
-	// ó‚¯æ‚Á‚½ƒQ[ƒ€‚É‚æ‚Á‚ÄƒCƒ“ƒXƒ^ƒ“ƒX‰»‚·‚éƒQ[ƒ€‚ğ•Ô‚é
+	// å—ã‘å–ã£ãŸã‚²ãƒ¼ãƒ ã«ã‚ˆã£ã¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã™ã‚‹ã‚²ãƒ¼ãƒ ã‚’è¿”ã‚‹
 	switch (game_)
 	{
 	case GameList::GAME_MICRO_SHOGI:

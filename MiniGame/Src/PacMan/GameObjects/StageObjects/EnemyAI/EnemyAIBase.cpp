@@ -1,4 +1,4 @@
-#include "EnemyAIBase.h"
+ï»¿#include "EnemyAIBase.h"
 
 
 PacMan::EnemyAIBase::EnemyAIBase(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_) :
@@ -11,8 +11,8 @@ PacMan::EnemyAIBase::EnemyAIBase(IVec2* enemyPos_, EnemyParameter* enemyParam_, 
 bool PacMan::EnemyAIBase::FoundPlayer(IVec2* enemyPos_, Stage* stage_, __int8 range_, IVec2* FoundPos_)
 {
 	/*
-		‚»‚ê‚¼‚ê‚Ì•ûŒü‚ÉƒvƒŒƒCƒ„[‚ª‚¢‚é‚©‚ğ’²‚×‚éA
-		ƒuƒƒbƒN‚ª‚ ‚Á‚½ê‡‚Í‚»‚Ì•ûŒü‚ÍŒŸõ‚ğ’†~‚·‚é
+		ãã‚Œãã‚Œã®æ–¹å‘ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã„ã‚‹ã‹ã‚’èª¿ã¹ã‚‹ã€
+		ãƒ–ãƒ­ãƒƒã‚¯ãŒã‚ã£ãŸå ´åˆã¯ãã®æ–¹å‘ã¯æ¤œç´¢ã‚’ä¸­æ­¢ã™ã‚‹
 	*/
 
 	for (int i = 0; i < range_; i++) {

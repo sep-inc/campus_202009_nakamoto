@@ -1,9 +1,9 @@
-#include "CharacterEnemy.h"
+ï»¿#include "CharacterEnemy.h"
 #include "../../../System/Drawer.h"
 #include <vector>
 
 /*
-	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 */
 PacMan::CharacterEnemy::CharacterEnemy(Stage* stage_, int speed_, EnemyPersonalityList personality_) :
 	StageCharacter{ stage_ }, m_AI{ &m_Pos, &m_Param, stage_ }, m_Timer{ 0 }
@@ -15,7 +15,7 @@ PacMan::CharacterEnemy::CharacterEnemy(Stage* stage_, int speed_, EnemyPersonali
 
 
 /*
-	‰Šú‰»ŠÖ”
+	åˆæœŸåŒ–é–¢æ•°
 */
 void PacMan::CharacterEnemy::Init()
 {
@@ -28,7 +28,7 @@ void PacMan::CharacterEnemy::Init()
 
 
 /*
-	XVŠÖ”
+	æ›´æ–°é–¢æ•°
 */
 void PacMan::CharacterEnemy::Update()
 {
@@ -36,26 +36,26 @@ void PacMan::CharacterEnemy::Update()
 
 	if (m_Timer % m_Param.m_Speed == 0) {
 
-		// AI‚ÅˆÚ“®•ûŒü‚ğl‚¦‚é
+		// AIã§ç§»å‹•æ–¹å‘ã‚’è€ƒãˆã‚‹
 		m_AI.Update();
 
-		// ˆÚ“®‚·‚é
+		// ç§»å‹•ã™ã‚‹
 		Move();
 	}
 }
 
 
 /*
-	•`‰æŠÖ”
+	æç”»é–¢æ•°
 */
 void PacMan::CharacterEnemy::Draw()
 {
-	Drawer::GetInstance().SetDrawBuffer(m_Pos.m_X, m_Pos.m_Y, "—");
+	Drawer::GetInstance().SetDrawBuffer(m_Pos.m_X, m_Pos.m_Y, "ï¼ ");
 }
 
 
 /*
-	ˆÚ“®ŠÖ”
+	ç§»å‹•é–¢æ•°
 */
 void PacMan::CharacterEnemy::Move()
 {

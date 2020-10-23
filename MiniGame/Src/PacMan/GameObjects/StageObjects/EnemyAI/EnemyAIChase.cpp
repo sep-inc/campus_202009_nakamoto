@@ -1,4 +1,4 @@
-#include "EnemyAIChase.h"
+ï»¿#include "EnemyAIChase.h"
 #include "../../../../Utility/Calc.h"
 
 PacMan::EnemyAIChase::EnemyAIChase(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_) :
@@ -8,38 +8,38 @@ PacMan::EnemyAIChase::EnemyAIChase(IVec2* enemyPos_, EnemyParameter* enemyParam_
 
 ActionStateList PacMan::EnemyAIChase::Update()
 {
-	// ‚à‚µ«Ši‚ªA‚©C‚È‚çƒvƒŒƒCƒ„[‚ÉŒü‚©‚Á‚Äi‚ÞA
+	// ã‚‚ã—æ€§æ ¼ãŒAã‹Cãªã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«å‘ã‹ã£ã¦é€²ã‚€ã€
 	if (m_EnemyParam->m_Personality == EnemyPersonalityList::PERSONALITY_A || m_EnemyParam->m_Personality == EnemyPersonalityList::PERSONALITY_C)
 	{
-		// ‚à‚µŒ©Ž¸‚Á‚½‚çƒAƒNƒVƒ‡ƒ“‚ðœpœj‚É‚·‚é
+		// ã‚‚ã—è¦‹å¤±ã£ãŸã‚‰ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’å¾˜å¾Šã«ã™ã‚‹
 		if (Chase() == false) return ActionStateList::ACTION_SAUNTERING;
 	}
-	// ‚à‚µ«Ši‚ªB‚È‚çæ‚ð“Ç‚ñ‚Ås“®‚·‚é
+	// ã‚‚ã—æ€§æ ¼ãŒBãªã‚‰å…ˆã‚’èª­ã‚“ã§è¡Œå‹•ã™ã‚‹
 	else if (m_EnemyParam->m_Personality == EnemyPersonalityList::PERSONALITY_B) {
-		// ˆê’èƒtƒŒ[ƒ€‚ÅƒAƒNƒVƒ‡ƒ“‚ðœpœj‚É‚·‚é
+		// ä¸€å®šãƒ•ãƒ¬ãƒ¼ãƒ ã§ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’å¾˜å¾Šã«ã™ã‚‹
 		if (Forestall() == false) return ActionStateList::ACTION_SAUNTERING;
 
 	}
 	
-	// “G‚ð‚Ü‚¾Œ©Ž¸‚Á‚Ä‚¢‚È‚¢‚Ì‚ÅA’Ç‚¢‚©‚¯‚éó‘Ô‚Ì‚Ü‚Ü
+	// æ•µã‚’ã¾ã è¦‹å¤±ã£ã¦ã„ãªã„ã®ã§ã€è¿½ã„ã‹ã‘ã‚‹çŠ¶æ…‹ã®ã¾ã¾
 	return ActionStateList::ACTION_CHASE;
 }
 
 /*
-	æ‰ñ‚è‚Å’Ç‚¢‚©‚¯‚é
+	å…ˆå›žã‚Šã§è¿½ã„ã‹ã‘ã‚‹
 */
 bool PacMan::EnemyAIChase::Forestall()
 {
-	// ‚à‚µƒvƒŒƒCƒ„[‚ª‚¢‚½ê‡,’Ç‚¢‚©‚¯‚é
+	// ã‚‚ã—ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã„ãŸå ´åˆ,è¿½ã„ã‹ã‘ã‚‹
 	IVec2 player_pos;
 	if (FoundPlayer(m_RefEnemyPos, m_RefStage, 11, &player_pos) == true) {
 
-		// ‚à‚µƒvƒŒƒCƒ„[‚ðŒ©‚Â‚¯‚½ê‡’ÇÕƒŠƒXƒg‚ðƒNƒŠƒA‚·‚é
+		// ã‚‚ã—ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¦‹ã¤ã‘ãŸå ´åˆè¿½è·¡ãƒªã‚¹ãƒˆã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
 		m_EnemyParam->m_TraceList.clear();
-		// ƒvƒŒƒCƒ„[‚ÌˆÊ’u‚ð•Û‘¶‚µ‚Ä‚¨‚­
+		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½ç½®ã‚’ä¿å­˜ã—ã¦ãŠã
 		m_PlayerOldPos = player_pos;
 
-		// ƒvƒŒƒCƒ„[‚Ì•ûŒü‚ðŽZo‚·‚é
+		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ–¹å‘ã‚’ç®—å‡ºã™ã‚‹
 		IVec2 enemy_to_player_vec = player_pos - *m_RefEnemyPos;
 		if (enemy_to_player_vec.m_X != 0)enemy_to_player_vec.m_X /= Calc::Abs(enemy_to_player_vec.m_X);
 		if (enemy_to_player_vec.m_Y != 0)enemy_to_player_vec.m_Y /= Calc::Abs(enemy_to_player_vec.m_Y);
@@ -47,96 +47,96 @@ bool PacMan::EnemyAIChase::Forestall()
 		m_EnemyParam->m_Direction = enemy_to_player_vec;
 		return true;
 	}
-	// ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½ê‡‚©‚é‘O‚ÌƒtƒŒ[ƒ€‚Å‚àŒ©‚Â‚©‚Á‚Ä‚È‚©‚Á‚½‚çAŒ©Ž¸‚Á‚½‚Ì‚Åfalse‚ð•Ô‚·
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸå ´åˆã‹ã‚‹å‰ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã§ã‚‚è¦‹ã¤ã‹ã£ã¦ãªã‹ã£ãŸã‚‰ã€è¦‹å¤±ã£ãŸã®ã§falseã‚’è¿”ã™
 	else if (m_PlayerOldPos.m_X == -1 || m_PlayerOldPos.m_Y == -1) return false;
-	// ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚ç‚È‚©‚Á‚½‚ªA‘O‚ÌƒtƒŒ[ƒ€‚ÅƒvƒŒƒCƒ„[‚ðŒ©‚Â‚¯‚Ä‚¢‚½ê‡
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒè¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸãŒã€å‰ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã§ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¦‹ã¤ã‘ã¦ã„ãŸå ´åˆ
 	else {
 		
-		// ‚à‚µ’ÇÕƒŠƒXƒg‚ª‚È‚­‚È‚é‚Ü‚ÅˆÚ“®‚·‚é
+		// ã‚‚ã—è¿½è·¡ãƒªã‚¹ãƒˆãŒãªããªã‚‹ã¾ã§ç§»å‹•ã™ã‚‹
 		if (!m_EnemyParam->m_TraceList.empty()) {
 			m_EnemyParam->m_Direction = m_EnemyParam->m_TraceList.front() - *m_RefEnemyPos;
 			m_EnemyParam->m_TraceList.erase(std::begin(m_EnemyParam->m_TraceList));
 			return true;
 		}
 
-		// ‚à‚µAŒ©Ž¸‚Á‚½‚çAƒvƒŒƒCƒ„[‚ÌˆÚ“®‚µ‚½•ûŒü‚ðŒŸõ‚·‚é
+		// ã‚‚ã—ã€è¦‹å¤±ã£ãŸã‚‰ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•ã—ãŸæ–¹å‘ã‚’æ¤œç´¢ã™ã‚‹
 
-		// ƒvƒŒƒCƒ„[‚ðŒ©Ž¸‚Á‚½ˆÊ’u‚©‚çA’¼üã‚ÉƒvƒŒƒCƒ„[‚ª‘¶Ý‚·‚é‚©‚ð’²‚×‚é
-		// ‚à‚µ‚¢‚È‚©‚Á‚½‚çŒ©Ž¸‚Á‚½‚Ì‚Åfalse‚ð•Ô‚·
+		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¦‹å¤±ã£ãŸä½ç½®ã‹ã‚‰ã€ç›´ç·šä¸Šã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå­˜åœ¨ã™ã‚‹ã‹ã‚’èª¿ã¹ã‚‹
+		// ã‚‚ã—ã„ãªã‹ã£ãŸã‚‰è¦‹å¤±ã£ãŸã®ã§falseã‚’è¿”ã™
 		if (FoundPlayer(&m_PlayerOldPos, m_RefStage, 11, &player_pos) == false) { return false; }
 
 
-		// ‚¢‚½ê‡ˆÚ“®‚Å‚«‚é•ûŒü‚ª•¡”‚É‚È‚é‚Ü‚ÅˆÚ“®‚·‚é•ûŒü‚ð—\‘ª‚·‚é
+		// ã„ãŸå ´åˆç§»å‹•ã§ãã‚‹æ–¹å‘ãŒè¤‡æ•°ã«ãªã‚‹ã¾ã§ç§»å‹•ã™ã‚‹æ–¹å‘ã‚’äºˆæ¸¬ã™ã‚‹
 		while (true)
 		{
-			// ƒvƒŒƒCƒ„[‚ÌˆÚ“®‚µ‚½•ûŒü‚ðŽZo‚·‚é
+			// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•ã—ãŸæ–¹å‘ã‚’ç®—å‡ºã™ã‚‹
 			IVec2 player_vec = player_pos - m_PlayerOldPos;
 			if (player_vec.m_X != 0)player_vec.m_X /= Calc::Abs(player_vec.m_X);
 			if (player_vec.m_Y != 0)player_vec.m_Y /= Calc::Abs(player_vec.m_Y);
 
-			// ƒvƒŒƒCƒ„[‚ÌˆÚ“®‚µ‚½•ûŒü‚É‘Î‚µ‚ÄA¶Œü‚«‚ÌƒxƒNƒgƒ‹‚ðŽZo‚·‚é
+			// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•ã—ãŸæ–¹å‘ã«å¯¾ã—ã¦ã€å·¦å‘ãã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’ç®—å‡ºã™ã‚‹
 			IVec2 left_direction{ player_vec.m_Y, -player_vec.m_X };
 
 
 
-			// ƒvƒŒƒCƒ„[‚ÌˆÚ“®‰Â”\‚È•ûŒü‚Ì”‚ð•Û‘¶‚·‚é•Ï”
+			// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•å¯èƒ½ãªæ–¹å‘ã®æ•°ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 			int able_move_num = 0;
 
-			// ƒvƒŒƒCƒ„[‚ÌŽŸ‚ÉˆÚ“®‚·‚é‚Å‚ ‚ë‚¤À•W‚ð•Û‘¶‚·‚é•Ï”
+			// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ¬¡ã«ç§»å‹•ã™ã‚‹ã§ã‚ã‚ã†åº§æ¨™ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 			IVec2 player_next_pos;
 
-			// ƒvƒŒƒCƒ„[‚ÌŽŸ‚ÉˆÚ“®‚·‚é‚Å‚ ‚ë‚¤ˆÚ“®ƒxƒNƒgƒ‹‚ð•Û‘¶‚·‚é•Ï”
+			// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ¬¡ã«ç§»å‹•ã™ã‚‹ã§ã‚ã‚ã†ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 			IVec2 move_vec;
 
-			// ‘OŒü‚«‚ÉˆÚ“®‚Å‚«‚é‚©‚ð’²‚×‚é
+			// å‰å‘ãã«ç§»å‹•ã§ãã‚‹ã‹ã‚’èª¿ã¹ã‚‹
 			player_next_pos = player_pos + player_vec;
 			if (m_RefStage->GetStageObject(player_next_pos) != ObjectType::TYPE_WALL) {
 				
-				// ˆÚ“®‚Å‚«‚éê‡‚»‚ÌƒxƒNƒgƒ‹‚ð•Û‘¶‚·‚é
+				// ç§»å‹•ã§ãã‚‹å ´åˆãã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’ä¿å­˜ã™ã‚‹
 				move_vec = player_next_pos - player_pos;
 
-				// ˆÚ“®‰Â”\”‚ð‘«‚·
+				// ç§»å‹•å¯èƒ½æ•°ã‚’è¶³ã™
 				able_move_num++;
 			}
 
-			// ¶Œü‚«‚ÉˆÚ“®‚Å‚«‚é‚©‚ð’²‚×‚é
+			// å·¦å‘ãã«ç§»å‹•ã§ãã‚‹ã‹ã‚’èª¿ã¹ã‚‹
 			player_next_pos = player_pos + left_direction;
 			if (m_RefStage->GetStageObject(player_next_pos) != ObjectType::TYPE_WALL) {
-				// ˆÚ“®‚Å‚«‚é”‚ª1ˆÈã‚È‚çbreak
+				// ç§»å‹•ã§ãã‚‹æ•°ãŒ1ä»¥ä¸Šãªã‚‰break
 				if (able_move_num >= 1)break;
 
-				// ˆÚ“®‚Å‚«‚éê‡‚»‚ÌƒxƒNƒgƒ‹‚ð•Û‘¶‚·‚é
+				// ç§»å‹•ã§ãã‚‹å ´åˆãã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’ä¿å­˜ã™ã‚‹
 				move_vec = player_next_pos - player_pos;
 
-				// ˆÚ“®‰Â”\”‚ð‘«‚·
+				// ç§»å‹•å¯èƒ½æ•°ã‚’è¶³ã™
 				able_move_num++;
 			}
 
-			// Œü‚¢‚Ä‚¢‚é•ûŒü‚É‘Î‚µ‚Ä‰E‚É‚·‚·‚ß‚é‚©
+			// å‘ã„ã¦ã„ã‚‹æ–¹å‘ã«å¯¾ã—ã¦å³ã«ã™ã™ã‚ã‚‹ã‹
 			player_next_pos = player_pos - left_direction;
 			if (m_RefStage->GetStageObject(player_next_pos) != ObjectType::TYPE_WALL) {
-				// ˆÚ“®‚Å‚«‚é”‚ª1ˆÈã‚È‚çbreak
+				// ç§»å‹•ã§ãã‚‹æ•°ãŒ1ä»¥ä¸Šãªã‚‰break
 				if (able_move_num >= 1)break;
 				
-				// ˆÚ“®‚Å‚«‚éê‡‚»‚ÌƒxƒNƒgƒ‹‚ð•Û‘¶‚·‚é
+				// ç§»å‹•ã§ãã‚‹å ´åˆãã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’ä¿å­˜ã™ã‚‹
 				move_vec = player_next_pos - player_pos;
 
-				// ˆÚ“®‰Â”\”‚ð‘«‚·
+				// ç§»å‹•å¯èƒ½æ•°ã‚’è¶³ã™
 				able_move_num++;
 			}
 
-			// ˆÊ’u‚ðXV‚·‚é
+			// ä½ç½®ã‚’æ›´æ–°ã™ã‚‹
 			m_PlayerOldPos = player_pos;
 			player_pos = player_pos + move_vec;
 		}
 
-		// ƒvƒŒƒCƒ„[‚ÌˆÚ“®‚·‚é‚Å‚ ‚ë‚¤êŠ‚ÉÅ’ZŒo˜H‚ÅˆÚ“®‚·‚é
+		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•ã™ã‚‹ã§ã‚ã‚ã†å ´æ‰€ã«æœ€çŸ­çµŒè·¯ã§ç§»å‹•ã™ã‚‹
 		m_RefStage->FindShortestPath(&m_EnemyParam->m_TraceList, *m_RefEnemyPos, player_pos);
 
 		
 		if (m_EnemyParam->m_TraceList.empty())return false;
 		
-		// ˆÚ“®‚·‚é•ûŒü‚ð•Û‘¶‚·‚é
+		// ç§»å‹•ã™ã‚‹æ–¹å‘ã‚’ä¿å­˜ã™ã‚‹
 		m_EnemyParam->m_Direction = m_EnemyParam->m_TraceList.front() - *m_RefEnemyPos;
 		m_EnemyParam->m_TraceList.erase(std::begin(m_EnemyParam->m_TraceList));
 	}
@@ -145,11 +145,11 @@ bool PacMan::EnemyAIChase::Forestall()
 }
 
 /*
-	’Ç‚¢‚©‚¯‚é
+	è¿½ã„ã‹ã‘ã‚‹
 */
 bool PacMan::EnemyAIChase::Chase()
 {
-	// ‚à‚µ’ÇÕƒŠƒXƒg‚ª‚È‚­‚È‚é‚Ü‚ÅˆÚ“®‚·‚é
+	// ã‚‚ã—è¿½è·¡ãƒªã‚¹ãƒˆãŒãªããªã‚‹ã¾ã§ç§»å‹•ã™ã‚‹
 	if (!m_EnemyParam->m_TraceList.empty()) {
 		m_EnemyParam->m_Direction = m_EnemyParam->m_TraceList.front() - *m_RefEnemyPos;
 		m_EnemyParam->m_TraceList.erase(std::begin(m_EnemyParam->m_TraceList));
@@ -158,16 +158,16 @@ bool PacMan::EnemyAIChase::Chase()
 
 	IVec2 player_pos;
 
-	// Ž©g‚ÌˆÊ’u‚©‚ç4•ûŒü‚Ì’¼üã‚ÉƒvƒŒƒCƒ„[‚ª‚¢‚é‚©‚ð’²‚×‚é
+	// è‡ªèº«ã®ä½ç½®ã‹ã‚‰4æ–¹å‘ã®ç›´ç·šä¸Šã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã„ã‚‹ã‹ã‚’èª¿ã¹ã‚‹
 	if (FoundPlayer(m_RefEnemyPos, m_RefStage, 11, &player_pos) == false) return false;
 
-	// ‚¢‚½ê‡A“G‚ÆƒvƒŒƒCƒ„[‚ÌƒxƒNƒgƒ‹‚ðŽZo‚·‚é
+	// ã„ãŸå ´åˆã€æ•µã¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’ç®—å‡ºã™ã‚‹
 	IVec2 enemy_to_player_vec = player_pos - *m_RefEnemyPos;
-	// ƒxƒNƒgƒ‹‚ð’PˆÊ‰»‚·‚é
+	// ãƒ™ã‚¯ãƒˆãƒ«ã‚’å˜ä½åŒ–ã™ã‚‹
 	if (enemy_to_player_vec.m_X != 0)enemy_to_player_vec.m_X /= Calc::Abs(enemy_to_player_vec.m_X);
 	if (enemy_to_player_vec.m_Y != 0)enemy_to_player_vec.m_Y /= Calc::Abs(enemy_to_player_vec.m_Y);
 
-	// ŽŸ‚ÉˆÚ“®‚·‚é•ûŒü‚ðƒvƒŒƒCƒ„[‚Ì•ûŒü‚ÉƒZƒbƒg‚·‚é
+	// æ¬¡ã«ç§»å‹•ã™ã‚‹æ–¹å‘ã‚’ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ–¹å‘ã«ã‚»ãƒƒãƒˆã™ã‚‹
 	m_EnemyParam->m_Direction = enemy_to_player_vec;
 	return true;
 }

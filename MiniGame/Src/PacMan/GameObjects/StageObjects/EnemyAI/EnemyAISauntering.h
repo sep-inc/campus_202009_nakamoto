@@ -1,4 +1,4 @@
-#ifndef ENEMY_AI_SAUNTERING_H_
+ï»¿#ifndef ENEMY_AI_SAUNTERING_H_
 #define ENEMY_AI_SAUNTERING_H_
 
 #include "EnemyAIBase.h"
@@ -6,43 +6,43 @@
 namespace PacMan
 {
 	/*
-		œpœj‚ÌAI
+		å¾˜å¾Šã®AI
 	*/
 	class EnemyAISauntering : public EnemyAIBase
 	{
 	public:
 		/*
-			ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+			ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		EnemyAISauntering(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_);
 
 		/*
-		* ƒfƒXƒgƒ‰ƒNƒ^
+		* ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		~EnemyAISauntering(){}
 		
 		/*
-			XVŠÖ”
-			Ÿ‚És“®‚·‚éó‘Ô‚ğ•Ô‚·
+			æ›´æ–°é–¢æ•°
+			æ¬¡ã«è¡Œå‹•ã™ã‚‹çŠ¶æ…‹ã‚’è¿”ã™
 		*/
 		ActionStateList Update() override;
 
 		/*
-			‰Šú‰»ŠÖ”
-			AI‚ªØ‚è‘Ö‚í‚Á‚½‚Éˆê“x‚¾‚¯ŒÄ‚Ô
+			åˆæœŸåŒ–é–¢æ•°
+			AIãŒåˆ‡ã‚Šæ›¿ã‚ã£ãŸæ™‚ã«ä¸€åº¦ã ã‘å‘¼ã¶
 		*/
 		void Init() override;
 
 	private:
 
 		/*
-			ˆÚ“®‰Â”\‚È•ûŒü‚ğ•Ô‚·ŠÖ”
+			ç§»å‹•å¯èƒ½ãªæ–¹å‘ã‚’è¿”ã™é–¢æ•°
 		*/
 		std::vector<IVec2> GetAbleMoveDirection();
 
 	private:
 		/*
-			Œ»İ‚ÌƒAƒCƒeƒ€‚Ì”‚ğ•Û‘¶‚·‚é•Ï”
+			ç¾åœ¨ã®ã‚¢ã‚¤ãƒ†ãƒ ã®æ•°ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 		*/
 		int m_CurrentItemTotalNum;
 		

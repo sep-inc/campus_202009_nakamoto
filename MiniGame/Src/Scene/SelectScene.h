@@ -1,4 +1,4 @@
-#ifndef SELECT_SCENE_H_
+﻿#ifndef SELECT_SCENE_H_
 #define SELECT_SCENE_H_
 
 #include "SceneBase.h"

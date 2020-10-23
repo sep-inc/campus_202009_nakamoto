@@ -1,7 +1,7 @@
-#ifndef SAFE_DELETE_H_
+ï»¿#ifndef SAFE_DELETE_H_
 #define SAFE_DELETE_H_
 
-// ƒZ[ƒtƒfƒŠ[ƒg
+// ã‚»ãƒ¼ãƒ•ãƒ‡ãƒªãƒ¼ãƒˆ
 #define SAFE_DELETE(p) { if (p != nullptr) { delete (p); (p) = nullptr; }}
 
 #endif

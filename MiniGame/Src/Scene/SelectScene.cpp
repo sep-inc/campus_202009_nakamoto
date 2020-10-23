@@ -1,4 +1,4 @@
-#include "SelectScene.h"
+ï»¿#include "SelectScene.h"
 #include "../System/Drawer.h"
 #include "../System/Input.h"
 
@@ -26,13 +26,13 @@ bool SelectScene::SelectGame(GameList* game_)
 	system("cls");
 	while (true)
 	{
-		std::string shogi_str = "4ƒ}ƒX«Šû\n";
-		std::string pacman_str = "ƒpƒbƒNƒ}ƒ“\n";
-		std::string rungame_str = "ƒ‰ƒ“ƒQ[ƒ€\n";
-		std::string tictactoe_str = "Z~ƒQ[ƒ€\n";
-		std::string hanoi_str = "ƒnƒmƒC“ƒ\n";
-		std::string tron_str = "ƒgƒƒ“\n";
-		std::string quit_str = "I—¹\n";
+		std::string shogi_str = "4ãƒã‚¹å°†æ£‹\n";
+		std::string pacman_str = "ãƒ‘ãƒƒã‚¯ãƒãƒ³\n";
+		std::string rungame_str = "ãƒ©ãƒ³ã‚²ãƒ¼ãƒ \n";
+		std::string tictactoe_str = "ã€‡Ã—ã‚²ãƒ¼ãƒ \n";
+		std::string hanoi_str = "ãƒãƒã‚¤å¡”\n";
+		std::string tron_str = "ãƒˆãƒ­ãƒ³\n";
+		std::string quit_str = "çµ‚äº†\n";
 		int key = Input::GetKey();
 
 		if (key == KEY_UP)	      current_select_game--;
@@ -45,25 +45,25 @@ bool SelectScene::SelectGame(GameList* game_)
 		switch ((GameList)current_select_game)
 		{
 		case GameList::GAME_MICRO_SHOGI:
-			shogi_str = "Ë" + shogi_str;
+			shogi_str = "â‡’" + shogi_str;
 			break;
 		case GameList::GAME_PACMAN:
-			pacman_str = "Ë" + pacman_str;
+			pacman_str = "â‡’" + pacman_str;
 			break;
 		case GameList::GAME_RUNGAME:
-			rungame_str = "Ë" + rungame_str;
+			rungame_str = "â‡’" + rungame_str;
 			break;
 		case GameList::GAME_TICTACTOE:
-			tictactoe_str = "Ë" + tictactoe_str;
+			tictactoe_str = "â‡’" + tictactoe_str;
 			break;
 		case GameList::GAME_HANOI:
-			hanoi_str = "Ë" + hanoi_str;
+			hanoi_str = "â‡’" + hanoi_str;
 			break;
 		case GameList::GAME_TRON:
-			tron_str = "Ë" + tron_str;
+			tron_str = "â‡’" + tron_str;
 			break;
 		case GameList::GAME_UNKNOWN:
-			quit_str = "Ë" + quit_str;
+			quit_str = "â‡’" + quit_str;
 			break;
 		default:
 			break;
@@ -71,8 +71,8 @@ bool SelectScene::SelectGame(GameList* game_)
 
 		std::string menu;
 		menu = shogi_str + pacman_str + rungame_str + tictactoe_str + hanoi_str + tron_str + quit_str;
-		std::cout << "yƒQ[ƒ€‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢z" << std::endl;
-		std::cout << "y\šƒL[‚Å‘I‘ğ@@EnterƒL[‚ÅŠm’èz" << std::endl;
+		std::cout << "ã€ã‚²ãƒ¼ãƒ ã‚’é¸æŠã—ã¦ãã ã•ã„ã€‘" << std::endl;
+		std::cout << "ã€åå­—ã‚­ãƒ¼ã§é¸æŠã€€ã€€Enterã‚­ãƒ¼ã§ç¢ºå®šã€‘" << std::endl;
 		std::cout << menu << std::endl;
 
 		if (key != -1) {

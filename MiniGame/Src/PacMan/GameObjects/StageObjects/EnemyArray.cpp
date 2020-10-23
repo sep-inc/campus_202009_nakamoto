@@ -1,4 +1,4 @@
-#include "EnemyArray.h"
+﻿#include "EnemyArray.h"
 
 PacMan::EnemyArray::EnemyArray(Stage* stage_) :
 	m_Enemy{ nullptr }

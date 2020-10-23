@@ -1,4 +1,4 @@
-#ifndef ENEMY_AI_CHASE_H_
+ï»¿#ifndef ENEMY_AI_CHASE_H_
 #define ENEMY_AI_CHASE_H_
 
 #include "EnemyAIBase.h"
@@ -9,43 +9,43 @@ namespace PacMan
 	{
 	public:
 		/*
-			ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+			ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		EnemyAIChase(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_);
 
 		/*
-			ƒfƒXƒgƒ‰ƒNƒ^
+			ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		~EnemyAIChase() {}
 
 		/*
-			XVŠÖ”
-			Ÿ‚És“®‚·‚éó‘Ô‚ğ•Ô‚·
+			æ›´æ–°é–¢æ•°
+			æ¬¡ã«è¡Œå‹•ã™ã‚‹çŠ¶æ…‹ã‚’è¿”ã™
 		*/
 		ActionStateList Update() override;
 
 		/*
-			‰Šú‰»ŠÖ”
-			AI‚ªØ‚è‘Ö‚í‚Á‚½‚Éˆê“x‚¾‚¯ŒÄ‚Ô
+			åˆæœŸåŒ–é–¢æ•°
+			AIãŒåˆ‡ã‚Šæ›¿ã‚ã£ãŸæ™‚ã«ä¸€åº¦ã ã‘å‘¼ã¶
 		*/
 		void Init() override;
 
 	private:
 
 		/*
-			æ‰ñ‚è‚·‚éŠÖ”
-			Œ©¸‚Á‚½‚çfalse‚ğ•Ô‚·
+			å…ˆå›ã‚Šã™ã‚‹é–¢æ•°
+			è¦‹å¤±ã£ãŸã‚‰falseã‚’è¿”ã™
 		*/
 		bool Forestall();
 
 		/*
-			’Ç‚¢‚©‚¯‚éŠÖ”
-			Œ©¸‚Á‚½‚çfalse‚ğ•Ô‚·
+			è¿½ã„ã‹ã‘ã‚‹é–¢æ•°
+			è¦‹å¤±ã£ãŸã‚‰falseã‚’è¿”ã™
 		*/
 		bool Chase();
 
 	private:
-		// ƒvƒŒƒCƒ„[‚Ì‘O‚Ì‘O‚ÌÀ•W‚ğ•Û‘¶‚µ‚Ä‚¨‚­•Ï”
+		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‰ã®å‰ã®åº§æ¨™ã‚’ä¿å­˜ã—ã¦ãŠãå¤‰æ•°
 		IVec2 m_PlayerOldPos;
 
 	};

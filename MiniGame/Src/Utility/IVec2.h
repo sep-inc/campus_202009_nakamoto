@@ -1,4 +1,4 @@
-#ifndef IVEC2_H_
+ï»¿#ifndef IVEC2_H_
 #define IVEC2_H_
 
 
@@ -41,13 +41,13 @@ struct IVec2
 		return vec2;
 	}
 
-	// ƒ[ƒƒxƒNƒgƒ‹‚©‚Ç‚¤‚©‚ğ•Ô‚·ŠÖ”
+	// ã‚¼ãƒ­ãƒ™ã‚¯ãƒˆãƒ«ã‹ã©ã†ã‹ã‚’è¿”ã™é–¢æ•°
 	bool Zero() const;
 
 
-	//! X’l
+	//! Xå€¤
 	__int8 m_X;
-	//! Y’l
+	//! Yå€¤
 	__int8 m_Y;
 };
 

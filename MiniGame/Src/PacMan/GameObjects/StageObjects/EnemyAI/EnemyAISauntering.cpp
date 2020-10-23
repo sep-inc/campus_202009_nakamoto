@@ -1,4 +1,4 @@
-#include "EnemyAISauntering.h"
+ï»¿#include "EnemyAISauntering.h"
 #include "../../../../Utility/Calc.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,7 +10,7 @@ PacMan::EnemyAISauntering::EnemyAISauntering(IVec2* enemyPos_, EnemyParameter* e
 
 ActionStateList PacMan::EnemyAISauntering::Update()
 {
-	// ‚à‚µƒvƒŒƒCƒ„[‚ª‚¢‚½ê‡AŸ‚És‚¤s“®‚ğ’Ç‚¢‚©‚¯‚é‚É‚·‚é
+	// ã‚‚ã—ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã„ãŸå ´åˆã€æ¬¡ã«è¡Œã†è¡Œå‹•ã‚’è¿½ã„ã‹ã‘ã‚‹ã«ã™ã‚‹
 	IVec2 player_pos;
 	if (FoundPlayer(m_RefEnemyPos, m_RefStage, 11, &player_pos) == true) {
 		IVec2 enemy_to_player_vec;
@@ -22,12 +22,12 @@ ActionStateList PacMan::EnemyAISauntering::Update()
 		return ActionStateList::ACTION_CHASE;
 	}
 
-	// ˆÚ“®•ûŒü‚ğƒ‰ƒ“ƒ_ƒ€‚ÉŒˆ‚ß‚é
+	// ç§»å‹•æ–¹å‘ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«æ±ºã‚ã‚‹
 	std::vector<IVec2> able_direction = GetAbleMoveDirection();
 	m_EnemyParam->m_Direction = able_direction[rand() % able_direction.size()];
 
 
-	// ‚à‚µ«Ši‚ªç”õ‚ÌAƒvƒŒƒCƒ„[‚ªƒAƒCƒeƒ€‚ğ‚Æ‚Á‚½ê‡AŸ‚Ìs“®‚ğç‚è‚É‚·‚é
+	// ã‚‚ã—æ€§æ ¼ãŒå®ˆå‚™ã®æ™‚ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã‚¢ã‚¤ãƒ†ãƒ ã‚’ã¨ã£ãŸå ´åˆã€æ¬¡ã®è¡Œå‹•ã‚’å®ˆã‚Šã«ã™ã‚‹
 	if (m_EnemyParam->m_Personality == EnemyPersonalityList::PERSONALITY_C) {
 
 		int current_item_num = m_RefStage->ItemTotalNum();
@@ -45,7 +45,7 @@ ActionStateList PacMan::EnemyAISauntering::Update()
 
 void PacMan::EnemyAISauntering::Init()
 {
-	// Œ»İ‚ÌƒAƒCƒeƒ€‚Ì”‚ğ•Û‘¶‚·‚é
+	// ç¾åœ¨ã®ã‚¢ã‚¤ãƒ†ãƒ ã®æ•°ã‚’ä¿å­˜ã™ã‚‹
 	m_CurrentItemTotalNum = m_RefStage->ItemTotalNum();
 }
 
@@ -54,7 +54,7 @@ std::vector<IVec2> PacMan::EnemyAISauntering::GetAbleMoveDirection()
 {
 	std::vector<IVec2> ret_vec;
 
-	// ƒ[ƒƒxƒNƒgƒ‹‚¾‚Á‚½‚çˆÚ“®‚Å‚«‚é•ûŒü‚ğƒ‰ƒ“ƒ_ƒ€‚É‘I‚Ô
+	// ã‚¼ãƒ­ãƒ™ã‚¯ãƒˆãƒ«ã ã£ãŸã‚‰ç§»å‹•ã§ãã‚‹æ–¹å‘ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«é¸ã¶
 	if (m_EnemyParam->m_Direction.Zero() == true)
 	{
 		
@@ -65,7 +65,7 @@ std::vector<IVec2> PacMan::EnemyAISauntering::GetAbleMoveDirection()
 			{m_RefEnemyPos->m_X, m_RefEnemyPos->m_Y - 1},
 		};
 
-		// l•ûŒü‚ÅˆÚ“®‚Å‚«‚éêŠ‚ª‚ ‚ê‚ÎŒó•â‚É’Ç‰Á
+		// å››æ–¹å‘ã§ç§»å‹•ã§ãã‚‹å ´æ‰€ãŒã‚ã‚Œã°å€™è£œã«è¿½åŠ 
 		for (int i = 0; i < 4; ++i) {
 			if (m_RefStage->GetStageObject(direction[i]) != ObjectType::TYPE_WALL)
 			{
@@ -75,13 +75,13 @@ std::vector<IVec2> PacMan::EnemyAISauntering::GetAbleMoveDirection()
 	}
 	else {
 
-		// ‘O‚Æ¶‚Æ‰E‚É‚»‚ê‚¼‚êˆÚ“®‚Å‚«‚é‚©’²‚×ˆÚ“®‚Å‚«‚é‚È‚çŒó•â‚É’Ç‰Á
+		// å‰ã¨å·¦ã¨å³ã«ãã‚Œãã‚Œç§»å‹•ã§ãã‚‹ã‹èª¿ã¹ç§»å‹•ã§ãã‚‹ãªã‚‰å€™è£œã«è¿½åŠ 
 		IVec2 left_direction{ m_EnemyParam->m_Direction.m_Y, -m_EnemyParam->m_Direction.m_X };
 		if (m_RefStage->GetStageObject(*m_RefEnemyPos + m_EnemyParam->m_Direction) != ObjectType::TYPE_WALL)   ret_vec.push_back(*m_RefEnemyPos + m_EnemyParam->m_Direction - *m_RefEnemyPos);
 		if (m_RefStage->GetStageObject(*m_RefEnemyPos + left_direction) != ObjectType::TYPE_WALL)ret_vec.push_back(*m_RefEnemyPos + left_direction - *m_RefEnemyPos);
 		if (m_RefStage->GetStageObject(*m_RefEnemyPos - left_direction) != ObjectType::TYPE_WALL)ret_vec.push_back(*m_RefEnemyPos - left_direction - *m_RefEnemyPos);
 	}
 
-	// ’Ç‰Á‚µI‚¦‚½Œ‹‰Ê‚ğ•Ô‚·
+	// è¿½åŠ ã—çµ‚ãˆãŸçµæœã‚’è¿”ã™
 	return ret_vec;
 }

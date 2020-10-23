@@ -1,4 +1,4 @@
-#ifndef STAGE_H_
+﻿#ifndef STAGE_H_
 #define STAGE_H_
 
 #include "../PacManDefinition.h"
@@ -9,87 +9,87 @@
 
 namespace PacMan
 {
-	// �X�e�[�W���������N���X
+	// ステージ情報を扱うクラス
 	class Stage
 	{
 	public:
 		/*
-			�R���X�g���N�^
+			コンストラクタ
 		*/
 		Stage();
 
 		/*
-			�f�X�g���N�^
+			デストラクタ
 		*/
 		~Stage();
 
 		/*
-			�������֐�
+			初期化関数
 		*/
 		void Init();
 
 		/*
-			�`��֐�
+			描画関数
 		*/
 		void Draw();
 
 		/*
-			�I�u�W�F�N�g�������_���ɔz�u����֐�
+			オブジェクトをランダムに配置する関数
 		*/
 		void SetRandomPlacementObject(StageObject* stageObject_);
 
 		/*
-			�����ɐݒ肵�����W�ɂǂ̃I�u�W�F�N�g������̂���Ԃ��֐�
+			引数に設定した座標にどのオブジェクトがあるのかを返す関数
 		*/
 		const ObjectType GetStageObject(IVec2 pos_) const { return m_Stage[pos_.m_Y][pos_.m_X]; }
 
 		/*
-			�A�C�e���Ɠ������Ă��邩�𒲂ׂ�֐�
-			�������Ă����ꍇ�A�C�e��������
+			アイテムと当たっているかを調べる関数
+			あたっていた場合アイテムを消す
 		*/
 		bool HitItem(IVec2 pos_);
 
 		/*
-			�I�u�W�F�N�g�̈ړ���X�e�[�W�ɃZ�b�g����֐�
+			オブジェクトの移動後ステージにセットする関数
 
-			moveSource_ �ړ���
-			moveDest_   �ړ���
-			type_       �I�u�W�F�N�g�̎��
+			moveSource_ 移動元
+			moveDest_   移動先
+			type_       オブジェクトの種類
 		*/
 		void SetStage(IVec2 moveSource_, IVec2 moveDest_, PacMan::ObjectType type_);
 
 		/*
-			�A�C�e�������݂��邩�ǂ�����Ԃ��֐�
+			アイテムが存在するかどうかを返す関数
 		*/
 		bool EmptyItem();
 
 		/*
-			�A�C�e���̐���Ԃ��֐�
+			アイテムの数を返す関数
 		*/
 		int ItemTotalNum() const;
 
 		/*
-			�X�e�[�W��ɂ���ǂꂩ�̃A�C�e���̍��W��Ԃ�
+			ステージ上にあるどれかのアイテムの座標を返す
 		*/
 		IVec2 GetRandomItemPos();
 
 		/*
-			�v���C���[�ƃG�l�~�[�������������ǂ�����Ԃ��֐�
+			プレイヤーとエネミーが当たったかどうかを返す関数
 		*/
 		bool HitPlayerAndEnemy()const { return m_IsGameOver; }
 
 		bool FindShortestPath(std::vector<IVec2>* traceList_, IVec2 sourcePos_, IVec2 destPos_);
 
 	private:
-		// �������p�̋�̃X�e�[�W�f�[�^
+		// 初期化用の空のステージデータ
 		static const int m_BlankStage[STAGE_HEIGHT][STAGE_WIDTH];
 
-		// �X�e�[�W�̏���ۑ�����ϐ�
+		// ステージの情報を保存する変数
 		PacMan::ObjectType m_Stage[STAGE_HEIGHT][STAGE_WIDTH];
 
 		ItemArray* m_ItemArray;
 
-		// �v���C���[�ƓG�������������ǂ�����ۑ�����ϐ�
+		// プレイヤーと敵が当たったかどうかを保存する変数
 		bool m_IsGameOver;
 
 		

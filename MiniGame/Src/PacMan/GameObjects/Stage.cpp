@@ -1,4 +1,4 @@
-#include "Stage.h"
+ï»¿#include "Stage.h"
 #include "../../System/Drawer.h"
 #include <string.h>
 #include <vector>
@@ -23,7 +23,7 @@ const int PacMan::Stage::m_BlankStage[STAGE_HEIGHT][STAGE_WIDTH] =
 
 
 /*
-	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 */
 PacMan::Stage::Stage() :
 	m_Stage{ PacMan::ObjectType::TYPE_EMPTY }, m_ItemArray{ nullptr }, m_IsGameOver{ false }
@@ -44,7 +44,7 @@ PacMan::Stage::Stage() :
 }
 
 /*
-	ƒfƒXƒgƒ‰ƒNƒ^
+	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 */
 PacMan::Stage::~Stage()
 {
@@ -53,12 +53,12 @@ PacMan::Stage::~Stage()
 
 
 /*
-	‰Šú‰»ŠÖ”
+	åˆæœŸåŒ–é–¢æ•°
 */
 void PacMan::Stage::Init()
 {
 	memcpy(m_Stage, m_BlankStage, sizeof(m_BlankStage));
-	// ƒvƒŒƒCƒ„[‚Ì‰Šú’l‚¾‚¯‚Í‚ ‚ç‚©‚¶‚ßŒˆ‚ß‚Ä‚¨‚­
+	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åˆæœŸå€¤ã ã‘ã¯ã‚ã‚‰ã‹ã˜ã‚æ±ºã‚ã¦ãŠã
 	m_Stage[PLAYER_INIT_POS_Y][PLAYER_INIT_POS_X] = PacMan::ObjectType::TYPE_PLAYER;
 	m_IsGameOver = false;
 
@@ -72,26 +72,26 @@ void PacMan::Stage::Init()
 
 
 /*
-	•`‰æŠÖ”
+	æç”»é–¢æ•°
 */
 void PacMan::Stage::Draw()
 {
-	// ƒXƒe[ƒW•`‰æ
+	// ã‚¹ãƒ†ãƒ¼ã‚¸æç”»
 	for (int y = 0; y < STAGE_HEIGHT; ++y) {
 		for (int x = 0; x < STAGE_WIDTH; ++x) {
-			if (m_Stage[y][x] == PacMan::ObjectType::TYPE_WALL)Drawer::GetInstance().SetDrawBuffer(x, y, "¡");
-			else { Drawer::GetInstance().SetDrawBuffer(x, y, "@"); }
+			if (m_Stage[y][x] == PacMan::ObjectType::TYPE_WALL)Drawer::GetInstance().SetDrawBuffer(x, y, "â– ");
+			else { Drawer::GetInstance().SetDrawBuffer(x, y, "ã€€"); }
 		}
 
 	}
 
-	// ƒAƒCƒeƒ€‚Ì•`‰æ
+	// ã‚¢ã‚¤ãƒ†ãƒ ã®æç”»
 	if (m_ItemArray)m_ItemArray->Draw();
 }
 
 void PacMan::Stage::SetRandomPlacementObject(StageObject* stageObject_)
 {
-	// ”z’u‰Â”\‚ÈêŠ‚ğ’T‚·
+	// é…ç½®å¯èƒ½ãªå ´æ‰€ã‚’æ¢ã™
 	std::vector<IVec2> able_placement;
 	for (int y = 0; y < STAGE_HEIGHT; ++y) {
 		for (int x = 0; x < STAGE_WIDTH; ++x) {
@@ -101,7 +101,7 @@ void PacMan::Stage::SetRandomPlacementObject(StageObject* stageObject_)
 		}
 	}
 
-	// ”z—ñ‚Ì‚Ç‚ê‚ğ‘I‚Ô‚©‚ğƒ‰ƒ“ƒ_ƒ€‚É‘I‚Ô
+	// é…åˆ—ã®ã©ã‚Œã‚’é¸ã¶ã‹ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«é¸ã¶
 	int random_num = rand() % able_placement.size();
 
 	stageObject_->SetPos(able_placement[random_num]);
@@ -110,7 +110,7 @@ void PacMan::Stage::SetRandomPlacementObject(StageObject* stageObject_)
 
 
 /*
-	ƒAƒCƒeƒ€‚Æ“–‚½‚Á‚Ä‚¢‚é‚©‚ğ’²‚×‚éŠÖ”
+	ã‚¢ã‚¤ãƒ†ãƒ ã¨å½“ãŸã£ã¦ã„ã‚‹ã‹ã‚’èª¿ã¹ã‚‹é–¢æ•°
 */
 bool PacMan::Stage::HitItem(IVec2 pos_)
 {
@@ -119,7 +119,7 @@ bool PacMan::Stage::HitItem(IVec2 pos_)
 	for (int i = 0; i < ITEM_NUM; ++i) {
 		if (m_ItemArray->GetItem(i)) {
 			
-			// “–‚½‚Á‚Ä‚¢‚½‚çDelete‚µ‚Ätrue‚ğ•Ô‚·
+			// å½“ãŸã£ã¦ã„ãŸã‚‰Deleteã—ã¦trueã‚’è¿”ã™
 			if (m_ItemArray->GetItem(i)->GetPos() == pos_) {
 				m_ItemArray->Destory(i);
 				return true;
@@ -133,45 +133,45 @@ bool PacMan::Stage::HitItem(IVec2 pos_)
 
 
 /*
-	ƒIƒuƒWƒFƒNƒg‚ÌˆÚ“®ŒãƒXƒe[ƒW‚ÉƒZƒbƒg‚·‚éŠÖ”
+	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç§»å‹•å¾Œã‚¹ãƒ†ãƒ¼ã‚¸ã«ã‚»ãƒƒãƒˆã™ã‚‹é–¢æ•°
 */
 void PacMan::Stage::SetStage(IVec2 moveSource_, IVec2 moveDest_, PacMan::ObjectType type_)
 {
-	// ˆÚ“®‚·‚éƒIƒuƒWƒFƒNƒg‚ªƒvƒŒƒCƒ„[‚Ì
+	// ç§»å‹•ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ™‚
 	if (type_ == PacMan::ObjectType::TYPE_PLAYER) {
-		// ˆÚ“®æ‚ÉƒGƒlƒ~[‚ª‚¢‚ê‚ÎƒQ[ƒ€ƒI[ƒo[
+		// ç§»å‹•å…ˆã«ã‚¨ãƒãƒŸãƒ¼ãŒã„ã‚Œã°ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
 		if (m_Stage[moveDest_.m_Y][moveDest_.m_X] == PacMan::ObjectType::TYPE_ENEMY) {
 			m_IsGameOver = true;
 		}
 	}
-	// ˆÚ“®‚·‚éƒIƒuƒWƒFƒNƒg‚ªƒGƒlƒ~[‚Ì
+	// ç§»å‹•ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã‚¨ãƒãƒŸãƒ¼ã®æ™‚
 	else if (type_ == PacMan::ObjectType::TYPE_ENEMY) {
-		// ˆÚ“®æ‚ÉƒvƒŒƒCƒ„[‚ª‚¢‚ê‚ÎƒQ[ƒ€ƒI[ƒo[
+		// ç§»å‹•å…ˆã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã„ã‚Œã°ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
 		if (m_Stage[moveDest_.m_Y][moveDest_.m_X] == PacMan::ObjectType::TYPE_PLAYER) {
 			m_IsGameOver = true;
 		}
 	}
 
-	// ˆÚ“®æ‚ÉˆÚ“®Œ³‚ğ‘ã“ü
+	// ç§»å‹•å…ˆã«ç§»å‹•å…ƒã‚’ä»£å…¥
 	m_Stage[moveDest_.m_Y][moveDest_.m_X] = m_Stage[moveSource_.m_Y][moveSource_.m_X];
-	// ˆÚ“®Œ³‚ğ‹ó‚É‚·‚é
+	// ç§»å‹•å…ƒã‚’ç©ºã«ã™ã‚‹
 	m_Stage[moveSource_.m_Y][moveSource_.m_X] = PacMan::ObjectType::TYPE_EMPTY;
 }
 
 
 /*
-	ƒAƒCƒeƒ€‚ª‹ó‚©‚Ç‚¤‚©‚ğ•Ô‚·ŠÖ”
+	ã‚¢ã‚¤ãƒ†ãƒ ãŒç©ºã‹ã©ã†ã‹ã‚’è¿”ã™é–¢æ•°
 */
 bool PacMan::Stage::EmptyItem()
 {
 	if (!m_ItemArray) return false;
 
-	// ƒAƒCƒeƒ€‚ª‹ó‚¶‚á‚È‚¢‚È‚ç‹U
+	// ã‚¢ã‚¤ãƒ†ãƒ ãŒç©ºã˜ã‚ƒãªã„ãªã‚‰å½
 	if (!m_ItemArray->Empty()) {
 		return false;
 	}
 
-	// ƒAƒCƒeƒ€‚ª‹ó‚È‚ç^
+	// ã‚¢ã‚¤ãƒ†ãƒ ãŒç©ºãªã‚‰çœŸ
 	return true;
 }
 

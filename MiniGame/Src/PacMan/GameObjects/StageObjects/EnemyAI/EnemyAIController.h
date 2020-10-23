@@ -1,4 +1,4 @@
-#ifndef ENEMY_AI_CONTROLLER_H_
+ï»¿#ifndef ENEMY_AI_CONTROLLER_H_
 #define ENEMY_AI_CONTROLLER_H_
 
 #include "EnemyAIBase.h"
@@ -10,24 +10,24 @@ namespace PacMan
 	{
 	public:
 		/*
-			ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+			ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		EnemyAIController(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_);
 
 		/*
-			ƒfƒXƒgƒ‰ƒNƒ^
+			ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		~EnemyAIController();
 
 		/*
-			XVŠÖ”
+			æ›´æ–°é–¢æ•°
 		*/
 		void Update();
 
 	private:
-		// AI”z—ñ
+		// AIé…åˆ—
 		EnemyAIBase* m_AI[(int)ActionStateList::ACTION_NUM];
-		// Œ»İ‚Ìs“®‚ğ•Û‘¶‚·‚é•Ï”
+		// ç¾åœ¨ã®è¡Œå‹•ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 		ActionStateList m_CurrentAction;
 
 	};

@@ -1,4 +1,4 @@
-#ifndef VEC2_H_
+ï»¿#ifndef VEC2_H_
 #define VEC2_H_
 
 
@@ -28,9 +28,9 @@ struct Vec2
 	}
 
 
-	//! X’l
+	//! Xå€¤
 	float m_X;
-	//! Y’l
+	//! Yå€¤
 	float m_Y;
 };
 

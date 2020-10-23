@@ -1,4 +1,4 @@
-#ifndef ENEMY_AI_BASE_H_
+ï»¿#ifndef ENEMY_AI_BASE_H_
 #define ENEMY_AI_BASE_H_
 
 #include "../../Stage.h"
@@ -7,47 +7,47 @@
 namespace PacMan
 {
 	/*
-		“GAI‚ÌŠî’êƒNƒ‰ƒX
+		æ•µAIã®åŸºåº•ã‚¯ãƒ©ã‚¹
 	*/
 	class EnemyAIBase
 	{
 	public:
 		/*
-			ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+			ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		EnemyAIBase(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_);
 
 		/*
-			ƒfƒXƒgƒ‰ƒNƒ^
+			ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		virtual ~EnemyAIBase() {}
 
 
 		/*
-			XVŠÖ”
-			Ÿ‚És“®‚·‚éó‘Ô‚ğ•Ô‚·
+			æ›´æ–°é–¢æ•°
+			æ¬¡ã«è¡Œå‹•ã™ã‚‹çŠ¶æ…‹ã‚’è¿”ã™
 		*/
 		virtual ActionStateList Update() = 0;
 
 		/*
-			‰Šú‰»ŠÖ”
+			åˆæœŸåŒ–é–¢æ•°
 		*/
 		virtual void Init() {};
 
 	protected:
 		/*
-			ƒvƒŒƒCƒ„[‚ğŒ©‚Â‚¯‚½‚©‚Ç‚¤‚©‚ğ•Ô‚·ŠÖ”
-			Œ©‚Â‚¯‚½ê‡FoundPos_‚ÉƒvƒŒƒCƒ„[‚ÌÀ•W‚ª•Ô‚é
+			ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¦‹ã¤ã‘ãŸã‹ã©ã†ã‹ã‚’è¿”ã™é–¢æ•°
+			è¦‹ã¤ã‘ãŸå ´åˆFoundPos_ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åº§æ¨™ãŒè¿”ã‚‹
 		*/
 		bool FoundPlayer(IVec2* enemyPos_, Stage* stage_,__int8 range_, IVec2* FoundPos_ = nullptr);
 
 
 	protected:
-		// ƒGƒlƒ~[‚ÌˆÊ’uî•ñ
+		// ã‚¨ãƒãƒŸãƒ¼ã®ä½ç½®æƒ…å ±
 		IVec2* m_RefEnemyPos;
-		// ƒGƒlƒ~[‚Ìparameterî•ñ
+		// ã‚¨ãƒãƒŸãƒ¼ã®parameteræƒ…å ±
 		EnemyParameter* m_EnemyParam;
-		// ƒXƒe[ƒWƒNƒ‰ƒX‚ÌQÆ—p•Ï”
+		// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒ©ã‚¹ã®å‚ç…§ç”¨å¤‰æ•°
 		Stage* m_RefStage;
 	};
 }

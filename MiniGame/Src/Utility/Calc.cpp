@@ -1,4 +1,4 @@
-#include "Calc.h"
+﻿#include "Calc.h"
 
 __int8 Calc::Abs(__int8 a)
 {

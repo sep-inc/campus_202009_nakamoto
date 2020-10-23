@@ -1,10 +1,10 @@
-#ifndef DRAWER_H_
+ï»¿#ifndef DRAWER_H_
 #define DRAWER_H_
 
 #include <string>
 
 /**
-* @brief   •`‰æƒNƒ‰ƒX
+* @brief   æç”»ã‚¯ãƒ©ã‚¹
 */
 class Drawer
 {
@@ -15,37 +15,37 @@ public:
 	}
 
 	/**
-	* @brief ŠÈ’P‚Èà–¾i`‚·‚éŠÖ”j
-	* @param[in] resouce_ •`‰æ‚·‚éƒŠƒ\[ƒX(•¶š—ñ)
-	* @details Ú×‚Èà–¾
+	* @brief ç°¡å˜ãªèª¬æ˜ï¼ˆï½ã™ã‚‹é–¢æ•°ï¼‰
+	* @param[in] resouce_ æç”»ã™ã‚‹ãƒªã‚½ãƒ¼ã‚¹(æ–‡å­—åˆ—)
+	* @details è©³ç´°ãªèª¬æ˜
 	*/
 	void SetDrawBuffer(std::string resouce_);
 
 	void SetDrawBuffer(int x_, int y_, const char* str_);
 
 	/**
-	* @brief   ƒoƒbƒtƒ@‚ÌƒNƒŠƒA
-	* @details ‘‚«‚Ü‚ê‚Ä‚¢‚éƒoƒbƒtƒ@‚ğƒNƒŠƒA‚·‚é
+	* @brief   ãƒãƒƒãƒ•ã‚¡ã®ã‚¯ãƒªã‚¢
+	* @details æ›¸ãè¾¼ã¾ã‚Œã¦ã„ã‚‹ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
 	*/
 	void ClearBuffer();
 
 	/**
-	* @brief   •`‰æŠÖ”
-	* @details ƒoƒbƒtƒ@‚ğ•`‰æ‚·‚é
+	* @brief   æç”»é–¢æ•°
+	* @details ãƒãƒƒãƒ•ã‚¡ã‚’æç”»ã™ã‚‹
 	*/
 	void DrawBuffer();
 
 private:
 	/**
-* @brief   ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-* @details •K—v‚Èî•ñ‚ğ‰Šú‰»‚·‚é
+* @brief   ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+* @details å¿…è¦ãªæƒ…å ±ã‚’åˆæœŸåŒ–ã™ã‚‹
 */
 	Drawer() :
 		m_DrawBuffer{ "\0" }
 	{}
 
 	/**
-	* @brief   ƒfƒXƒgƒ‰ƒNƒ^
+	* @brief   ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	*/
 	~Drawer() {}
 
@@ -53,7 +53,7 @@ private:
 private:
 	char m_DrawBuffer[15][30][22];
 
-	//! ˜AŒ‹—p•`‰æƒoƒbƒtƒ@
+	//! é€£çµç”¨æç”»ãƒãƒƒãƒ•ã‚¡
 	std::string m_StrDrawBuffer;
 
 };

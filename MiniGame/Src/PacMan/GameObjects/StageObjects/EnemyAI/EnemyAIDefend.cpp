@@ -1,4 +1,4 @@
-#include "EnemyAIDefend.h"
+ï»¿#include "EnemyAIDefend.h"
 #include "../../../../Utility/Calc.h"
 
 PacMan::EnemyAIDeffend::EnemyAIDeffend(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_) :
@@ -9,7 +9,7 @@ PacMan::EnemyAIDeffend::EnemyAIDeffend(IVec2* enemyPos_, EnemyParameter* enemyPa
 
 ActionStateList PacMan::EnemyAIDeffend::Update()
 {
-	// ‚à‚µƒvƒŒƒCƒ„[‚ª‚¢‚½ê‡AŽŸ‚És‚¤s“®‚ð’Ç‚¢‚©‚¯‚é‚É‚·‚é
+	// ã‚‚ã—ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒã„ãŸå ´åˆã€æ¬¡ã«è¡Œã†è¡Œå‹•ã‚’è¿½ã„ã‹ã‘ã‚‹ã«ã™ã‚‹
 	IVec2 player_pos;
 	if (FoundPlayer(m_RefEnemyPos, m_RefStage, 11, &player_pos) == true) {
 		IVec2 enemy_to_player_vec = player_pos - *m_RefEnemyPos;
@@ -23,7 +23,7 @@ ActionStateList PacMan::EnemyAIDeffend::Update()
 		return ActionStateList::ACTION_CHASE;
 	}
 
-	// ƒAƒCƒeƒ€‚ÌˆÊ’u‚Ü‚Å“ž’…‚µ‚½‚çœpœj‚É‘JˆÚ	
+	// ã‚¢ã‚¤ãƒ†ãƒ ã®ä½ç½®ã¾ã§åˆ°ç€ã—ãŸã‚‰å¾˜å¾Šã«é·ç§»	
 	if (HeadForItemPosition() == true) {
 		return ActionStateList::ACTION_SAUNTERING;
 	}
@@ -34,26 +34,26 @@ ActionStateList PacMan::EnemyAIDeffend::Update()
 
 bool PacMan::EnemyAIDeffend::HeadForItemPosition()
 {
-	// ‚à‚µ’ÇÕƒŠƒXƒg‚ª‚È‚­‚È‚é‚Ü‚ÅˆÚ“®‚·‚é
+	// ã‚‚ã—è¿½è·¡ãƒªã‚¹ãƒˆãŒãªããªã‚‹ã¾ã§ç§»å‹•ã™ã‚‹
 	if (!m_EnemyParam->m_TraceList.empty()) {
 		m_EnemyParam->m_Direction = m_EnemyParam->m_TraceList.front() - *m_RefEnemyPos;
 		m_EnemyParam->m_TraceList.erase(std::begin(m_EnemyParam->m_TraceList));
 		
-		// ˆÚ“®Œã’ÇÕƒŠƒXƒg‚ª‚È‚©‚Á‚½ê‡A“ž’…‚µ‚½‚Ì‚ÅAtrue‚ð•Ô‚·
+		// ç§»å‹•å¾Œè¿½è·¡ãƒªã‚¹ãƒˆãŒãªã‹ã£ãŸå ´åˆã€åˆ°ç€ã—ãŸã®ã§ã€trueã‚’è¿”ã™
 		if (m_EnemyParam->m_TraceList.empty()) {
 			return true;
 		}
 		else return false;
 	}
 
-	// ƒ‰ƒ“ƒ_ƒ€‚ÅƒAƒCƒeƒ€‚ÌˆÊ’u‚ðŽæ“¾‚·‚é
+	// ãƒ©ãƒ³ãƒ€ãƒ ã§ã‚¢ã‚¤ãƒ†ãƒ ã®ä½ç½®ã‚’å–å¾—ã™ã‚‹
 	IVec2 item_pos = m_RefStage->GetRandomItemPos();
 
-	// ƒAƒCƒeƒ€‚ÌˆÊ’u‚Ü‚Å‚ÌÅ’ZŒo˜H‚ðŽZo
+	// ã‚¢ã‚¤ãƒ†ãƒ ã®ä½ç½®ã¾ã§ã®æœ€çŸ­çµŒè·¯ã‚’ç®—å‡º
 	m_RefStage->FindShortestPath(&m_EnemyParam->m_TraceList, *m_RefEnemyPos, item_pos);
 	if (m_EnemyParam->m_TraceList.empty())return false;
 
-	// ˆÚ“®•ûŒü‚ðXV‚·‚é
+	// ç§»å‹•æ–¹å‘ã‚’æ›´æ–°ã™ã‚‹
 	m_EnemyParam->m_Direction = m_EnemyParam->m_TraceList.front() - *m_RefEnemyPos;
 	m_EnemyParam->m_TraceList.erase(std::begin(m_EnemyParam->m_TraceList));
 

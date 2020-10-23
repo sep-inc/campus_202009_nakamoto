@@ -1,22 +1,22 @@
-#ifndef SCENE_MANAGER_H_
+ï»¿#ifndef SCENE_MANAGER_H_
 #define SCENE_MANAGER_H_
 
 #include "SceneBase.h"
 #include "../MiniGameDifinition.h"
 
 /*
-	ƒ~ƒjƒQ[ƒ€‚ÌƒV[ƒ“‚ğŠÇ—‚·‚éƒNƒ‰ƒX
+	ãƒŸãƒ‹ã‚²ãƒ¼ãƒ ã®ã‚·ãƒ¼ãƒ³ã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
 */
 class SceneManager
 {
 public:
 	/*
-		ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	*/
 	SceneManager();
 
 	/*
-		ƒfƒXƒgƒ‰ƒNƒ^
+		ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	*/
 	~SceneManager();
 	

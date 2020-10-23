@@ -1,4 +1,4 @@
-#ifndef ENEMY_H_
+ï»¿#ifndef ENEMY_H_
 #define ENEMY_H_
 
 #include "../StageObjects/StageCharacter.h"
@@ -8,48 +8,48 @@
 namespace PacMan
 {
 	/*
-		ƒGƒlƒ~[ƒNƒ‰ƒX
+		ã‚¨ãƒãƒŸãƒ¼ã‚¯ãƒ©ã‚¹
 	*/
 	class CharacterEnemy : public StageCharacter
 	{
 	public:
 		/*
-			ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+			ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		CharacterEnemy(Stage* stage_, int speed_, EnemyPersonalityList personality_);
 
 
 		/*
-			ƒfƒXƒgƒ‰ƒNƒ^
+			ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		~CharacterEnemy() {}
 
 		/*
-			‰Šú‰»ŠÖ”
-			ƒQ[ƒ€ŠJn‚Éˆê“x‚¾‚¯ŒÄ‚Ño‚·
+			åˆæœŸåŒ–é–¢æ•°
+			ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã«ä¸€åº¦ã ã‘å‘¼ã³å‡ºã™
 		*/
 		void Init() override;
 
 		/*
-			XVŠÖ”
+			æ›´æ–°é–¢æ•°
 		*/
 		void Update() override;
 
 		/*
-			•`‰æŠÖ”
-			•`‰æƒNƒ‰ƒX‚Ìƒoƒbƒtƒ@‚ÉƒZƒbƒg‚·‚é
+			æç”»é–¢æ•°
+			æç”»ã‚¯ãƒ©ã‚¹ã®ãƒãƒƒãƒ•ã‚¡ã«ã‚»ãƒƒãƒˆã™ã‚‹
 		*/
 		void Draw() override;
 
 		/*
-			©g‚Ìí—Ş‚ğ•Ô‚·ŠÖ”
+			è‡ªèº«ã®ç¨®é¡ã‚’è¿”ã™é–¢æ•°
 		*/
 		virtual inline ObjectType GetObjectType()const override { return ObjectType::TYPE_ENEMY; }
 
 
 	private:
 		/*
-			ˆÚ“®ŠÖ”
+			ç§»å‹•é–¢æ•°
 		*/
 		void Move();
 
@@ -57,7 +57,7 @@ namespace PacMan
 
 		int m_Timer;
 
-		// ƒGƒlƒ~[‚Ìƒpƒ‰ƒ[ƒ^[‚ğ‚Ü‚Æ‚ß‚½\‘¢‘Ì
+		// ã‚¨ãƒãƒŸãƒ¼ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’ã¾ã¨ã‚ãŸæ§‹é€ ä½“
 		EnemyParameter m_Param;
 
 		EnemyAIController m_AI;

@@ -1,4 +1,4 @@
-#ifndef ITEM_ARRAY_H_
+﻿#ifndef ITEM_ARRAY_H_
 #define ITEM_ARRAY_H_
 
 #include "Item.h"

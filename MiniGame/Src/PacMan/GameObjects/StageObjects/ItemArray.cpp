@@ -1,4 +1,4 @@
-#include "ItemArray.h"
+ï»¿#include "ItemArray.h"
 
 PacMan::ItemArray::ItemArray() :
 	m_Item{ nullptr }
@@ -34,7 +34,7 @@ void PacMan::ItemArray::Draw()
 
 bool PacMan::ItemArray::Empty()
 {
-	// ˆê‚Â‚Å‚àƒAƒCƒeƒ€‚ªc‚Á‚Ä‚¢‚½‚çfalse‚ğ•Ô‚·
+	// ä¸€ã¤ã§ã‚‚ã‚¢ã‚¤ãƒ†ãƒ ãŒæ®‹ã£ã¦ã„ãŸã‚‰falseã‚’è¿”ã™
 	for (int i = 0; i < ITEM_NUM; ++i) {
 		if (m_Item[i]) return false;
 	}

@@ -1,4 +1,4 @@
-#ifndef ENEMY_AI_DEFEND_H_
+ï»¿#ifndef ENEMY_AI_DEFEND_H_
 #define ENEMY_AI_DEFEND_H_
 
 #include "EnemyAIBase.h"
@@ -6,31 +6,31 @@
 namespace PacMan
 {
 	/*
-		ç”õAIƒNƒ‰ƒX
+		å®ˆå‚™AIã‚¯ãƒ©ã‚¹
 	*/
 	class EnemyAIDeffend : public EnemyAIBase
 	{
 	public:
 		/*
-			ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+			ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		EnemyAIDeffend(IVec2* enemyPos_, EnemyParameter* enemyParam_, Stage* stage_);
 
 		/*
-			ƒfƒXƒgƒ‰ƒNƒ^
+			ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		~EnemyAIDeffend(){}
 
 		/*
-			XVŠÖ”
-			Ÿ‚És“®‚·‚éó‘Ô‚ğ•Ô‚·
+			æ›´æ–°é–¢æ•°
+			æ¬¡ã«è¡Œå‹•ã™ã‚‹çŠ¶æ…‹ã‚’è¿”ã™
 		*/
 		ActionStateList Update() override;
 
 	private:
 		/*
-			ƒAƒCƒeƒ€‚ÌˆÊ’u‚ÉˆÚ“®‚·‚éŠÖ”
-			“’…‚µ‚½‚çtrue‚ğ•Ô‚·
+			ã‚¢ã‚¤ãƒ†ãƒ ã®ä½ç½®ã«ç§»å‹•ã™ã‚‹é–¢æ•°
+			åˆ°ç€ã—ãŸã‚‰trueã‚’è¿”ã™
 		*/
 		bool HeadForItemPosition();
 

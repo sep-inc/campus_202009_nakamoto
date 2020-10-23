@@ -1,4 +1,4 @@
-#ifndef ASTAR_H_
+ï»¿#ifndef ASTAR_H_
 #define ASTAR_H_
 
 #include "Node.h"
@@ -30,28 +30,28 @@ namespace MyAStarAlgorithm
 	private:
 
 		/*
-			ƒm[ƒh‚Ì‰Šú‰»
+			ãƒãƒ¼ãƒ‰ã®åˆæœŸåŒ–
 		*/
 		void InitCost();
 
 		/*
-			w’è‚³‚ê‚½À•W‚ªƒZƒ‹‚Ì”ÍˆÍ“à‚É“ü‚Á‚Ä‚¢‚é‚©‚ğ’²‚×‚é
+			æŒ‡å®šã•ã‚ŒãŸåº§æ¨™ãŒã‚»ãƒ«ã®ç¯„å›²å†…ã«å…¥ã£ã¦ã„ã‚‹ã‹ã‚’èª¿ã¹ã‚‹
 		*/
 		bool IsCellWithinTheRange(int x_, int y_);
 
 		/*
-			ƒqƒ…[ƒŠƒXƒeƒBƒbƒNƒRƒXƒg‚ÌŒvZ
-			ƒ†[ƒNƒŠƒbƒh‹——£‚Å•Ô‚é
+			ãƒ’ãƒ¥ãƒ¼ãƒªã‚¹ãƒ†ã‚£ãƒƒã‚¯ã‚³ã‚¹ãƒˆã®è¨ˆç®—
+			ãƒ¦ãƒ¼ã‚¯ãƒªãƒƒãƒ‰è·é›¢ã§è¿”ã‚‹
 		*/
 		float CalclaterHeuristicCost(const Node* node_, const Node* goal_);
 
-		// ƒZƒ‹”äŠr
+		// ã‚»ãƒ«æ¯”è¼ƒ
 		bool IsEqualCell(const Cell& a, const Cell& b);
 
-		// ƒm[ƒh‚Ìíœ
+		// ãƒãƒ¼ãƒ‰ã®å‰Šé™¤
 		EraseResult EraseNode(std::list<Node*>& list, Node* node, float cost);
 
-		// ƒI[ƒvƒ“ƒŠƒXƒg‚É’Ç‰Á
+		// ã‚ªãƒ¼ãƒ—ãƒ³ãƒªã‚¹ãƒˆã«è¿½åŠ 
 		bool AddAdjacentNode(std::list<Node*>& open_list, std::list<Node*>& close_list, Node* adjacent_node, float cost);
 	private:
 		const int _INFINITY = 100000;
@@ -75,11 +75,11 @@ namespace MyAStarAlgorithm
 		for (int y = 0; y < TABLE_HEIGHT; ++y) {
 			for (int x = 0; x < TABLE_WIDTH; ++x) {
 
-				// ƒZƒ‹‚ÌÀ•W‚ğ•Û‘¶
+				// ã‚»ãƒ«ã®åº§æ¨™ã‚’ä¿å­˜
 				m_Graph[y][x].m_Pos.m_X = x;
 				m_Graph[y][x].m_Pos.m_Y = y;
 
-				// —×Ú‚·‚éƒm[ƒh‚ğŒŸõ‚Æ’Ç‰Á
+				// éš£æ¥ã™ã‚‹ãƒãƒ¼ãƒ‰ã‚’æ¤œç´¢ã¨è¿½åŠ 
 				Cell adjacent_cells[] = {
 					Cell(x, y - 1),
 					Cell(x, y + 1),
@@ -89,7 +89,7 @@ namespace MyAStarAlgorithm
 
 				for (const Cell& adjacent_cell : adjacent_cells)
 				{
-					// ‚à‚µA—×Ú‚µ‚Ä‚¢‚éƒm[ƒh‚ª—LŒø‚Èƒm[ƒh‚Ìê‡’Ç‰Á‚·‚é
+					// ã‚‚ã—ã€éš£æ¥ã—ã¦ã„ã‚‹ãƒãƒ¼ãƒ‰ãŒæœ‰åŠ¹ãªãƒãƒ¼ãƒ‰ã®å ´åˆè¿½åŠ ã™ã‚‹
 					if (this->IsCellWithinTheRange(adjacent_cell.m_X, adjacent_cell.m_Y) == true &&
 						m_CostTable[adjacent_cell.m_Y][adjacent_cell.m_X] == 1)
 					{
@@ -103,11 +103,11 @@ namespace MyAStarAlgorithm
 	template<int TABLE_WIDTH, int TABLE_HEIGHT>
 	inline std::list<Cell> Astar<TABLE_WIDTH, TABLE_HEIGHT>::GetShortestPath(Cell startCell_, Cell goalCell_)
 	{
-		// ƒI[ƒvƒ“ƒŠƒXƒg‚ÆƒNƒ[ƒYƒŠƒXƒg‚Ìì¬
+		// ã‚ªãƒ¼ãƒ—ãƒ³ãƒªã‚¹ãƒˆã¨ã‚¯ãƒ­ãƒ¼ã‚ºãƒªã‚¹ãƒˆã®ä½œæˆ
 		std::list<Node*> open_list;
 		std::list<Node*> close_list;
 
-		// ƒXƒ^[ƒg’n“_‚ÆƒS[ƒ‹’n“_‚Ìƒm[ƒh‚ğ•Û‘¶‚·‚é
+		// ã‚¹ã‚¿ãƒ¼ãƒˆåœ°ç‚¹ã¨ã‚´ãƒ¼ãƒ«åœ°ç‚¹ã®ãƒãƒ¼ãƒ‰ã‚’ä¿å­˜ã™ã‚‹
 		const Node* start_node = &m_Graph[startCell_.m_Y][startCell_.m_X];
 		const Node* goal_node = &m_Graph[goalCell_.m_Y][goalCell_.m_X];
 
@@ -115,48 +115,48 @@ namespace MyAStarAlgorithm
 
 		InitCost();
 
-		// ƒXƒ^[ƒg’n“_‚Ìƒm[ƒh‚ğƒI[ƒvƒ“ƒŠƒXƒg‚É’Ç‰Á
+		// ã‚¹ã‚¿ãƒ¼ãƒˆåœ°ç‚¹ã®ãƒãƒ¼ãƒ‰ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ãƒªã‚¹ãƒˆã«è¿½åŠ 
 		open_list.push_back(&m_Graph[startCell_.m_Y][startCell_.m_X]);
 
-		// ƒI[ƒvƒ“ƒŠƒXƒg‚ª‚È‚­‚È‚é‚Ü‚ÅŒJ‚è•Ô‚·
+		// ã‚ªãƒ¼ãƒ—ãƒ³ãƒªã‚¹ãƒˆãŒãªããªã‚‹ã¾ã§ç¹°ã‚Šè¿”ã™
 		while (!open_list.empty())
 		{
-			// ƒI[ƒvƒ“ƒŠƒXƒg‚©‚çƒm[ƒh‚ğæ‚èo‚·
-			// ƒg[ƒ^ƒ‹ƒRƒXƒg‚Å¸‡ƒ\[ƒg‚µ‚Ä‚ ‚é‚Ì‚ÅA‰‚ß‚Ìƒm[ƒh‚ğæ‚èo‚·
+			// ã‚ªãƒ¼ãƒ—ãƒ³ãƒªã‚¹ãƒˆã‹ã‚‰ãƒãƒ¼ãƒ‰ã‚’å–ã‚Šå‡ºã™
+			// ãƒˆãƒ¼ã‚¿ãƒ«ã‚³ã‚¹ãƒˆã§æ˜‡é †ã‚½ãƒ¼ãƒˆã—ã¦ã‚ã‚‹ã®ã§ã€åˆã‚ã®ãƒãƒ¼ãƒ‰ã‚’å–ã‚Šå‡ºã™
 			Node* search_node = *open_list.begin();
 
-			// æ‚èo‚µ‚½‚Ì‚ÅƒI[ƒvƒ“ƒŠƒXƒg‚©‚çíœ‚·‚é
+			// å–ã‚Šå‡ºã—ãŸã®ã§ã‚ªãƒ¼ãƒ—ãƒ³ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 			open_list.erase(open_list.begin());
 
-			// æ‚èo‚µ‚½ƒm[ƒh‚ªƒS[ƒ‹‚©‚Ç‚¤‚©‚ğ”»’è‚·‚é
+			// å–ã‚Šå‡ºã—ãŸãƒãƒ¼ãƒ‰ãŒã‚´ãƒ¼ãƒ«ã‹ã©ã†ã‹ã‚’åˆ¤å®šã™ã‚‹
 			if (IsEqualCell(search_node->m_Pos, goal_node->m_Pos) == true)
 			{
-				// ‚à‚µƒS[ƒ‹’n“_‚É“’…‚µ‚½‚çI‚í‚è
+				// ã‚‚ã—ã‚´ãƒ¼ãƒ«åœ°ç‚¹ã«åˆ°ç€ã—ãŸã‚‰çµ‚ã‚ã‚Š
 				close_list.push_back(search_node);
 				break;
 			}
 
-			// —×Ú‚µ‚Ä‚¢‚éƒm[ƒh‚ğƒI[ƒvƒ“ƒŠƒXƒg‚É’Ç‰Á‚·‚é
+			// éš£æ¥ã—ã¦ã„ã‚‹ãƒãƒ¼ãƒ‰ã‚’ã‚ªãƒ¼ãƒ—ãƒ³ãƒªã‚¹ãƒˆã«è¿½åŠ ã™ã‚‹
 			for (Node* adjacent_node : search_node->m_Edges)
 			{
-				// ƒqƒ…[ƒŠƒXƒeƒBƒbƒNƒRƒXƒg‚ÌŒvZ‚ğs‚¤
+				// ãƒ’ãƒ¥ãƒ¼ãƒªã‚¹ãƒ†ã‚£ãƒƒã‚¯ã‚³ã‚¹ãƒˆã®è¨ˆç®—ã‚’è¡Œã†
 				if (adjacent_node->m_HeuristicCost == _INFINITY)
 				{
 					adjacent_node->m_HeuristicCost = CalclaterHeuristicCost(adjacent_node, goal_node);
 				}
 
-				// ƒm[ƒhŠÔ‚ÌƒRƒXƒg‚ğæ“¾
+				// ãƒãƒ¼ãƒ‰é–“ã®ã‚³ã‚¹ãƒˆã‚’å–å¾—
 				float edge_cost = (float)m_CostTable[adjacent_node->m_Pos.m_Y][adjacent_node->m_Pos.m_X];
-				// ƒg[ƒ^ƒ‹ƒRƒXƒg‚ğZo
+				// ãƒˆãƒ¼ã‚¿ãƒ«ã‚³ã‚¹ãƒˆã‚’ç®—å‡º
 				float total_cost = edge_cost + search_node->m_HeuristicCost + search_node->m_TotalCost;
 
-				// ƒI[ƒvƒ“ƒŠƒXƒg‚Éƒm[ƒh‚ğ’Ç‰Á‚·‚é
+				// ã‚ªãƒ¼ãƒ—ãƒ³ãƒªã‚¹ãƒˆã«ãƒãƒ¼ãƒ‰ã‚’è¿½åŠ ã™ã‚‹
 				if (AddAdjacentNode(open_list, close_list, adjacent_node, total_cost) == true)
 				{
-					// ƒg[ƒ^ƒ‹ƒRƒXƒg‚ğXV
+					// ãƒˆãƒ¼ã‚¿ãƒ«ã‚³ã‚¹ãƒˆã‚’æ›´æ–°
 					adjacent_node->m_TotalCost = total_cost;
 
-					// Œo˜H‚ğXV‚µ‚½ƒZƒ‹‚ğ•Û‘¶
+					// çµŒè·¯ã‚’æ›´æ–°ã—ãŸã‚»ãƒ«ã‚’ä¿å­˜
 					last_update_cells[adjacent_node->m_Pos.m_Y][adjacent_node->m_Pos.m_X] = search_node->m_Pos;
 				}
 			}
@@ -166,16 +166,16 @@ namespace MyAStarAlgorithm
 			// 
 			for (const auto& v : close_list)
 			{
-				// Œ»İ‚Ìƒm[ƒh‚Æ“¯‚¶ƒZƒ‹‚ª‚ ‚é‚©‚ğ’²‚×‚é
+				// ç¾åœ¨ã®ãƒãƒ¼ãƒ‰ã¨åŒã˜ã‚»ãƒ«ãŒã‚ã‚‹ã‹ã‚’èª¿ã¹ã‚‹
 				if (IsEqualCell(search_node->m_Pos, v->m_Pos) == true)
 				{
-					// “¯‚¶ƒZƒ‹‚ª‚ ‚Á‚½ê‡’Ç‰Á‚µ‚È‚¢
+					// åŒã˜ã‚»ãƒ«ãŒã‚ã£ãŸå ´åˆè¿½åŠ ã—ãªã„
 					is_add_close = true;
 					break;
 				}
 			}
 
-			// ƒNƒ[ƒYƒŠƒXƒg‚É’Tõ‚µI‚¦‚½ƒm[ƒh‚ğ’Ç‰Á‚·‚é
+			// ã‚¯ãƒ­ãƒ¼ã‚ºãƒªã‚¹ãƒˆã«æ¢ç´¢ã—çµ‚ãˆãŸãƒãƒ¼ãƒ‰ã‚’è¿½åŠ ã™ã‚‹
 			if (is_add_close == false) close_list.push_back(search_node);
 
 			auto less = [](Node* a_, Node* b_) {
@@ -186,23 +186,23 @@ namespace MyAStarAlgorithm
 				return false;
 			};
 
-			// ƒI[ƒvƒ“ƒŠƒXƒg‚ğƒ\[ƒg‚·‚é
+			// ã‚ªãƒ¼ãƒ—ãƒ³ãƒªã‚¹ãƒˆã‚’ã‚½ãƒ¼ãƒˆã™ã‚‹
 			open_list.sort(less);
 		}
 
 
-		// ƒI[ƒvƒ“ƒŠƒXƒg‚ª‹ó‚É‚È‚èŒo˜H’Tõ‚ªI—¹‚µ‚½‚ç
-		// Œo˜H‚ğ•œŒ³‚·‚é
+		// ã‚ªãƒ¼ãƒ—ãƒ³ãƒªã‚¹ãƒˆãŒç©ºã«ãªã‚ŠçµŒè·¯æ¢ç´¢ãŒçµ‚äº†ã—ãŸã‚‰
+		// çµŒè·¯ã‚’å¾©å…ƒã™ã‚‹
 
 		std::list<Cell> route_list;
 
-		// ƒS[ƒ‹‚©‚ç’Ç‰Á‚µ‚Ä‚¢‚­
+		// ã‚´ãƒ¼ãƒ«ã‹ã‚‰è¿½åŠ ã—ã¦ã„ã
 		route_list.push_back(goalCell_);
 		while (!route_list.empty())
 		{
 			Cell route = route_list.front();
 
-			// ƒXƒ^[ƒg’n“_‚È‚çI—¹
+			// ã‚¹ã‚¿ãƒ¼ãƒˆåœ°ç‚¹ãªã‚‰çµ‚äº†
 			if (IsEqualCell(route, start_node->m_Pos) == true)
 			{
 				break;
@@ -211,11 +211,11 @@ namespace MyAStarAlgorithm
 			{
 				if (IsCellWithinTheRange(route.m_X, route.m_Y) == true)
 				{
-					// ’Ç‰Á
+					// è¿½åŠ 
 					route_list.push_front(last_update_cells[route.m_Y][route.m_X]);
 				}
 				else {
-					// Œ©‚Â‚©‚ç‚È‚©‚Á‚½
+					// è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸ
 					break;
 				}
 			}
@@ -271,10 +271,10 @@ namespace MyAStarAlgorithm
 	template<int TABLE_WIDTH, int TABLE_HEIGHT>
 	inline EraseResult Astar<TABLE_WIDTH, TABLE_HEIGHT>::EraseNode(std::list<Node*>& list_, Node* node_, float cost_)
 	{
-		// ƒNƒ[ƒYƒŠƒXƒgƒ`ƒFƒbƒN
+		// ã‚¯ãƒ­ãƒ¼ã‚ºãƒªã‚¹ãƒˆãƒã‚§ãƒƒã‚¯
 		for (auto itr = list_.begin(); itr != list_.end(); itr++)
 		{
-			// ƒm[ƒh‚Æ“¯‚¶ƒZƒ‹‚ª‚ ‚é‚©’²‚×‚é
+			// ãƒãƒ¼ãƒ‰ã¨åŒã˜ã‚»ãƒ«ãŒã‚ã‚‹ã‹èª¿ã¹ã‚‹
 			if (IsEqualCell(node_->m_Pos, (*itr)->m_Pos) == true)
 			{
 				if (cost_ < (*itr)->m_TotalCost)
@@ -295,13 +295,13 @@ namespace MyAStarAlgorithm
 	inline bool Astar<TABLE_WIDTH, TABLE_HEIGHT>::AddAdjacentNode(std::list<Node*>& openList_, std::list<Node*>& closeList_, Node* adjacentNode_, float cost_)
 	{
 		bool can_update = true;
-		// ƒNƒ[ƒYƒŠƒXƒg‚É“¯‚¶ƒm[ƒh‚ª‚ ‚Á‚ÄƒŠƒXƒg‚Ì•û‚ÌƒRƒXƒg‚ª‚‚¢‚È‚çíœ
+		// ã‚¯ãƒ­ãƒ¼ã‚ºãƒªã‚¹ãƒˆã«åŒã˜ãƒãƒ¼ãƒ‰ãŒã‚ã£ã¦ãƒªã‚¹ãƒˆã®æ–¹ã®ã‚³ã‚¹ãƒˆãŒé«˜ã„ãªã‚‰å‰Šé™¤
 		if (EraseNode(closeList_, adjacentNode_, cost_) == EraseResult::CouldntErased)
 		{
 			can_update = false;
 		}
 
-		// ƒI[ƒvƒ“ƒŠƒXƒg‚É“¯‚¶ƒm[ƒh‚ª‚ ‚Á‚ÄƒŠƒXƒg‚Ì•û‚ÌƒRƒXƒg‚ª‚‚¢‚È‚çíœ
+		// ã‚ªãƒ¼ãƒ—ãƒ³ãƒªã‚¹ãƒˆã«åŒã˜ãƒãƒ¼ãƒ‰ãŒã‚ã£ã¦ãƒªã‚¹ãƒˆã®æ–¹ã®ã‚³ã‚¹ãƒˆãŒé«˜ã„ãªã‚‰å‰Šé™¤
 		if (EraseNode(closeList_, adjacentNode_, cost_) == EraseResult::CouldntErased)
 		{
 			can_update = false;

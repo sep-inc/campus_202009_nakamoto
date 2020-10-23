@@ -1,4 +1,4 @@
-#ifndef SCENE_BASE_H_
+ï»¿#ifndef SCENE_BASE_H_
 #define SCENE_BASE_H_
 
 enum class SceneList
@@ -8,7 +8,7 @@ enum class SceneList
 };
 
 /*
-	ƒV[ƒ“‚ÌŠî’êƒNƒ‰ƒX
+	ã‚·ãƒ¼ãƒ³ã®åŸºåº•ã‚¯ãƒ©ã‚¹
 */
 class SceneBase
 {

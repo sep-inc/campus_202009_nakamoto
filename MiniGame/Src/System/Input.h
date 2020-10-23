@@ -1,4 +1,4 @@
-#ifndef INPUT_H_
+ï»¿#ifndef INPUT_H_
 #define INPUT_H_
 
 #include <Windows.h>
@@ -15,16 +15,16 @@
 #define KEY_3       51
 
 /**
-* @brief   ƒCƒ“ƒvƒbƒgƒNƒ‰ƒX
-* @details “ü—Í‚ğŠÇ—‚·‚éƒNƒ‰ƒX
+* @brief   ã‚¤ãƒ³ãƒ—ãƒƒãƒˆã‚¯ãƒ©ã‚¹
+* @details å…¥åŠ›ã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
 */
 class Input
 {
 public:
 	/**
-	* @brief       “ü—ÍŠÖ”
-	* @return int  ASCIIƒR[ƒh•\‚É‘Î‰‚·‚é10i”‚ª•Ô‚é
-	* @details     “ü—Í‚³‚ê‚½•¶š‚ÌASCIIƒR[ƒh•\‚É‘Î‰‚·‚é10i”‚ğ•Ô‚·
+	* @brief       å…¥åŠ›é–¢æ•°
+	* @return int  ASCIIã‚³ãƒ¼ãƒ‰è¡¨ã«å¯¾å¿œã™ã‚‹10é€²æ•°ãŒè¿”ã‚‹
+	* @details     å…¥åŠ›ã•ã‚ŒãŸæ–‡å­—ã®ASCIIã‚³ãƒ¼ãƒ‰è¡¨ã«å¯¾å¿œã™ã‚‹10é€²æ•°ã‚’è¿”ã™
 	*/
 	static int GetKey();
 

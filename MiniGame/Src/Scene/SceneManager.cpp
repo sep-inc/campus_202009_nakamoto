@@ -1,4 +1,4 @@
-#include "SceneManager.h"
+﻿#include "SceneManager.h"
 #include "SelectScene.h"
 #include "GameScene.h"
 #include "../Utility/SafeDelete.h"

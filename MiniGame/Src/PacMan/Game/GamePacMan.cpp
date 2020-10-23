@@ -1,11 +1,11 @@
-#include "GamePacMan.h"
+ï»¿#include "GamePacMan.h"
 #include "../../System/Input.h"
 #include <string>
 #include <iostream>
 #include <Windows.h>
 
 /*
-	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 */
 PacMan::GamePacMan::GamePacMan() :
 	m_Stage{ nullptr }, m_EnemyArray{ nullptr }, m_CurrentStep{ GamePacManStep::STEP_INIT }, m_GameClear{ false }, m_Once{ true }
@@ -23,7 +23,7 @@ PacMan::GamePacMan::GamePacMan() :
 
 
 /*
-	ƒfƒXƒgƒ‰ƒNƒ^
+	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 */
 PacMan::GamePacMan::~GamePacMan()
 {
@@ -34,32 +34,32 @@ PacMan::GamePacMan::~GamePacMan()
 
 
 /*
-	XVŠÖ”
+	æ›´æ–°é–¢æ•°
 */
 void PacMan::GamePacMan::Update()
 {
-	// Œ»İ‚ÌƒXƒeƒbƒv‚ğQÆ
+	// ç¾åœ¨ã®ã‚¹ãƒ†ãƒƒãƒ—ã‚’å‚ç…§
 	switch (m_CurrentStep)
 	{
 	case GamePacMan::GamePacManStep::STEP_INIT:
 
-		// ƒXƒe[ƒW‚Ì‰Šú‰»
+		// ã‚¹ãƒ†ãƒ¼ã‚¸ã®åˆæœŸåŒ–
 		if (m_Stage) m_Stage->Init();
-		// ƒvƒŒƒCƒ„[‚Ì‰Šú‰»
+		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åˆæœŸåŒ–
 		if (m_Player) m_Player->Init();
-		// ƒGƒlƒ~[‚Ì‰Šú‰»
+		// ã‚¨ãƒãƒŸãƒ¼ã®åˆæœŸåŒ–
 		if (m_EnemyArray)m_EnemyArray->Init();
 
 		m_Once      = true;
 		m_GameClear = false;
 
-		// Ÿ‚ÌƒXƒeƒbƒv‚Öi‚ß‚é
+		// æ¬¡ã®ã‚¹ãƒ†ãƒƒãƒ—ã¸é€²ã‚ã‚‹
 		m_CurrentStep = GamePacManStep::STEP_UPDATE;
 		break;
 	case GamePacMan::GamePacManStep::STEP_UPDATE:
 		if (m_Once == true)
 		{
-			printf("ƒXƒy[ƒXƒL[‚Ån‚ß‚é\n");
+			printf("ã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼ã§å§‹ã‚ã‚‹\n");
 
 			if (Input::GetKey() == KEY_SPACE){
 				system("cls");
@@ -68,18 +68,18 @@ void PacMan::GamePacMan::Update()
 			return;
 		}
 
-		// ŠeƒIƒuƒWƒFƒNƒg‚ÌXV‚ğ‚¨‚±‚È‚¤
+		// å„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ›´æ–°ã‚’ãŠã“ãªã†
 		if (m_Player) m_Player->Update();
 
 		if (m_EnemyArray)m_EnemyArray->Update();
 
-		// ‚à‚µƒXƒe[ƒW‚ÉƒAƒCƒeƒ€‚ª‚È‚­‚È‚Á‚½‚çƒXƒeƒbƒv‚ği‚ß‚é
+		// ã‚‚ã—ã‚¹ãƒ†ãƒ¼ã‚¸ã«ã‚¢ã‚¤ãƒ†ãƒ ãŒãªããªã£ãŸã‚‰ã‚¹ãƒ†ãƒƒãƒ—ã‚’é€²ã‚ã‚‹
 		if (m_Stage->EmptyItem() == true) {
 			
 			m_CurrentStep = GamePacManStep::STEP_RELEASE;
 			m_GameClear = true;
 		}
-		// ‚à‚µ“G‚ÆƒvƒŒƒCƒ„[‚ª“–‚½‚Á‚Ä‚¢‚½‚çƒXƒeƒbƒv‚ği‚ß‚é
+		// ã‚‚ã—æ•µã¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå½“ãŸã£ã¦ã„ãŸã‚‰ã‚¹ãƒ†ãƒƒãƒ—ã‚’é€²ã‚ã‚‹
 		else if (m_Stage->HitPlayerAndEnemy() == true) {
 
 			m_CurrentStep = GamePacManStep::STEP_RELEASE;
@@ -87,16 +87,16 @@ void PacMan::GamePacMan::Update()
 
 		break;
 	case GamePacMan::GamePacManStep::STEP_RELEASE:
-		// Œ‹‰Ê‚ğo—Í
+		// çµæœã‚’å‡ºåŠ›
 		PrintResult();
-		// ‘±‚¯‚é‚©‚Ç‚¤‚©‚ğ‘I‘ğ
+		// ç¶šã‘ã‚‹ã‹ã©ã†ã‹ã‚’é¸æŠ
 		if (SelectContinue() == true) {
-			// ‘±‚¯‚é‚È‚ç‰Šú‰»ƒXƒeƒbƒv‚Ö
+			// ç¶šã‘ã‚‹ãªã‚‰åˆæœŸåŒ–ã‚¹ãƒ†ãƒƒãƒ—ã¸
 			m_CurrentStep = GamePacManStep::STEP_INIT;
 			system("cls");
 		}
 		else {
-			// ‘±‚¯‚È‚¢‚È‚çƒQ[ƒ€I—¹
+			// ç¶šã‘ãªã„ãªã‚‰ã‚²ãƒ¼ãƒ çµ‚äº†
 			m_IsEnd = true;
 		}
 		break;
@@ -107,13 +107,13 @@ void PacMan::GamePacMan::Update()
 
 
 /*
-	•`‰æŠÖ”
+	æç”»é–¢æ•°
 */
 void PacMan::GamePacMan::Draw()
 {
-	std::cout << "\šƒL[‚ÅˆÚ“®" << std::endl;
+	std::cout << "åå­—ã‚­ãƒ¼ã§ç§»å‹•" << std::endl;
 
-	// ŠeƒIƒuƒWƒFƒNƒg‚Ì•`‰æ
+	// å„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æç”»
 	m_Stage->Draw();
 
 	if (m_Player) m_Player->Draw();
@@ -124,13 +124,13 @@ void PacMan::GamePacMan::Draw()
 
 
 /*
-	Œ‹‰Ê‚ğ•\¦‚·‚éŠÖ”
+	çµæœã‚’è¡¨ç¤ºã™ã‚‹é–¢æ•°
 */
 void PacMan::GamePacMan::PrintResult()
 {
 	std::string str_result;
 
-	str_result = m_GameClear ? "ƒQ[ƒ€ƒNƒŠƒA!!" : "ƒQ[ƒ€ƒI[ƒo[";
+	str_result = m_GameClear ? "ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢!!" : "ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼";
 
 	std::cout << str_result << std::endl;
 	
@@ -138,13 +138,13 @@ void PacMan::GamePacMan::PrintResult()
 
 
 /*
-	‘±‚¯‚é‚©‚Ç‚¤‚©‚ğ‘I‘ğ‚µ‚Ä•Ô‚·ŠÖ”
+	ç¶šã‘ã‚‹ã‹ã©ã†ã‹ã‚’é¸æŠã—ã¦è¿”ã™é–¢æ•°
 */
 bool PacMan::GamePacMan::SelectContinue()
 {
-	std::cout << "‚à‚¤ˆê“x‘±‚¯‚Ü‚·‚©H" << std::endl;
-	std::cout << "‘±‚¯‚é	EnterƒL[" << std::endl;
-	std::cout << "‚â‚ß‚é	EscƒL[@" << std::endl;
+	std::cout << "ã‚‚ã†ä¸€åº¦ç¶šã‘ã¾ã™ã‹ï¼Ÿ" << std::endl;
+	std::cout << "ç¶šã‘ã‚‹	Enterã‚­ãƒ¼" << std::endl;
+	std::cout << "ã‚„ã‚ã‚‹	Escã‚­ãƒ¼ã€€" << std::endl;
 
 	while (true)
 	{

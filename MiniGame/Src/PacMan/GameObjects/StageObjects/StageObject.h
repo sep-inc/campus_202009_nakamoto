@@ -1,4 +1,4 @@
-#ifndef STAGE_OBJECT_H_
+ï»¿#ifndef STAGE_OBJECT_H_
 #define STAGE_OBJECT_H_
 
 #include "../../../Utility/IVec2.h"
@@ -8,44 +8,44 @@
 namespace PacMan
 {
 	/*
-		ƒXƒe[ƒW‚É”z’u‚·‚éƒIƒuƒWƒFƒNƒg‚ÌŠî’êƒNƒ‰ƒX
+		ã‚¹ãƒ†ãƒ¼ã‚¸ã«é…ç½®ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åŸºåº•ã‚¯ãƒ©ã‚¹
 	*/
 	class StageObject
 	{
 	public:
 		/*
-			ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+			ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		StageObject();
 
 		/*
-			ƒfƒXƒgƒ‰ƒNƒ^
+			ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		virtual ~StageObject() {}
 
 		/*
-			•`‰æŠÖ”
+			æç”»é–¢æ•°
 		*/
 		virtual void Draw() = 0;
 
 		/*
-			©g‚ÌƒIƒuƒWƒFƒNƒg‚Ìí—Ş‚ğ•Ô‚·ŠÖ”
+			è‡ªèº«ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç¨®é¡ã‚’è¿”ã™é–¢æ•°
 		*/
 		virtual inline ObjectType GetObjectType() const = 0;
 
 		/*
-			©g‚ÌÀ•W‚ğƒZƒbƒg‚·‚éŠÖ”
+			è‡ªèº«ã®åº§æ¨™ã‚’ã‚»ãƒƒãƒˆã™ã‚‹é–¢æ•°
 		*/
 		inline void SetPos(IVec2 vec_) { m_Pos = vec_; }
 
 		/*
-			©g‚ÌÀ•W‚ğ•Ô‚·ŠÖ”
+			è‡ªèº«ã®åº§æ¨™ã‚’è¿”ã™é–¢æ•°
 		*/
 		inline IVec2 GetPos()const { return m_Pos; }
 
 
 	protected:
-		// Œ»İ‚ÌÀ•W‚ğ•Û‘¶‚·‚é•Ï”
+		// ç¾åœ¨ã®åº§æ¨™ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 		IVec2 m_Pos;
 
 

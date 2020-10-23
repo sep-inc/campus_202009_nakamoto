@@ -1,4 +1,4 @@
-#ifndef ENEMY_ENEMY_PARAMETER_H_
+ï»¿#ifndef ENEMY_ENEMY_PARAMETER_H_
 #define ENEMY_ENEMY_PARAMETER_H_
 
 #include "../../../../Utility/IVec2.h"
@@ -13,25 +13,25 @@ enum class EnemyPersonalityList
 
 enum class ActionStateList
 {
-	ACTION_SAUNTERING,	// œpœj
-	ACTION_DEFEND,		// ƒAƒCƒeƒ€‚ğç‚é
-	ACTION_CHASE,		// ’Ç‚¢‚©‚¯‚é
+	ACTION_SAUNTERING,	// å¾˜å¾Š
+	ACTION_DEFEND,		// ã‚¢ã‚¤ãƒ†ãƒ ã‚’å®ˆã‚‹
+	ACTION_CHASE,		// è¿½ã„ã‹ã‘ã‚‹
 
 	ACTION_NUM,
 };
 
 struct EnemyParameter
 {
-	// ƒGƒlƒ~[‚ÌXV‘¬“x
+	// ã‚¨ãƒãƒŸãƒ¼ã®æ›´æ–°é€Ÿåº¦
 	int m_Speed;
 
-	// Œ»İ‚ÌˆÚ“®•ûŒü‚ğ•Û‘¶‚·‚é•Ï”
+	// ç¾åœ¨ã®ç§»å‹•æ–¹å‘ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 	IVec2 m_Direction;
 
-	// ƒGƒlƒ~[‚Ì«Ši
+	// ã‚¨ãƒãƒŸãƒ¼ã®æ€§æ ¼
 	EnemyPersonalityList m_Personality;
 
-	// ’ÇÕƒŠƒXƒg
+	// è¿½è·¡ãƒªã‚¹ãƒˆ
 	std::vector<IVec2> m_TraceList;
 };
 

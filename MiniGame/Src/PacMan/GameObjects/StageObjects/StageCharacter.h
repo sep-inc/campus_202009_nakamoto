@@ -1,4 +1,4 @@
-#ifndef STAGE_CHARACTER_H_
+ï»¿#ifndef STAGE_CHARACTER_H_
 #define STAGE_CHARACTER_H_
 
 #include "StageObject.h"
@@ -7,7 +7,7 @@
 namespace PacMan
 {
 	/*
-	ƒXƒe[ƒW‚É’u‚­ƒLƒƒƒ‰ƒNƒ^[‚Ì‹K’èƒNƒ‰ƒX
+	ã‚¹ãƒ†ãƒ¼ã‚¸ã«ç½®ãã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®è¦å®šã‚¯ãƒ©ã‚¹
 */
 	class StageCharacter : public StageObject
 	{
@@ -17,27 +17,27 @@ namespace PacMan
 		virtual ~StageCharacter() {}
 
 		/*
-			‰Šú‰»ŠÖ”
+			åˆæœŸåŒ–é–¢æ•°
 		*/
 		virtual void Init() = 0;
 
 		/*
-			XVŠÖ”
+			æ›´æ–°é–¢æ•°
 		*/
 		virtual void Update() = 0;
 
 		/*
-			•`‰æŠÖ”
+			æç”»é–¢æ•°
 		*/
 		virtual void Draw() = 0;
 
 		/*
-			©g‚ÌƒIƒuƒWƒFƒNƒg‚Ìí—Ş‚ğ•Ô‚·ŠÖ”
+			è‡ªèº«ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç¨®é¡ã‚’è¿”ã™é–¢æ•°
 		*/
 		virtual inline ObjectType GetObjectType() const = 0;
 
 	protected:
-		// ƒXƒe[ƒWƒNƒ‰ƒX‚Ö‚Ìƒ|ƒCƒ“ƒ^•Ï”
+		// ã‚¹ãƒ†ãƒ¼ã‚¸ã‚¯ãƒ©ã‚¹ã¸ã®ãƒã‚¤ãƒ³ã‚¿å¤‰æ•°
 		Stage* m_RefStage;
 
 	};

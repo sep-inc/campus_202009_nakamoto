@@ -1,4 +1,4 @@
-#include "IVec2.h"
+﻿#include "IVec2.h"
 
 bool IVec2::Zero() const
 {

@@ -1,4 +1,4 @@
-#ifndef PLAYER_H_
+ï»¿#ifndef PLAYER_H_
 #define PLAYER_H_
 
 #include "StageCharacter.h"
@@ -6,47 +6,47 @@
 namespace PacMan
 {
 	/*
-		ƒvƒŒƒCƒ„[ƒNƒ‰ƒX
+		ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚¯ãƒ©ã‚¹
 	*/
 	class CharacterPlayer : public StageCharacter
 	{
 	public:
 		/*
-			ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+			ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		CharacterPlayer(Stage* stage_);
 
 		/*
-			ƒfƒXƒgƒ‰ƒNƒ^
+			ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		~CharacterPlayer() {}
 
 		/*
-			‰Šú‰»ŠÖ”
-			ƒQ[ƒ€ŠJn‚É1“xŒÄ‚Ô
+			åˆæœŸåŒ–é–¢æ•°
+			ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã«1åº¦å‘¼ã¶
 		*/
 		void Init() override;
 
 		/*
-			XVŠÖ”
-			1ƒtƒŒ[ƒ€‚É1“xŒÄ‚Ô
+			æ›´æ–°é–¢æ•°
+			1ãƒ•ãƒ¬ãƒ¼ãƒ ã«1åº¦å‘¼ã¶
 		*/
 		void Update() override;
 
 		/*
-			•`‰æŠÖ”
-			•`‰æƒXƒeƒbƒv‚É
-			1ƒtƒŒ[ƒ€1“xŒÄ‚Ô
+			æç”»é–¢æ•°
+			æç”»ã‚¹ãƒ†ãƒƒãƒ—æ™‚ã«
+			1ãƒ•ãƒ¬ãƒ¼ãƒ 1åº¦å‘¼ã¶
 		*/
 		void Draw() override;
 
-		// ©g‚ÌƒIƒuƒWƒFƒNƒg‚Ìí—Ş‚ğ•Ô‚·ŠÖ”
+		// è‡ªèº«ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç¨®é¡ã‚’è¿”ã™é–¢æ•°
 		virtual inline ObjectType GetObjectType()const override { return ObjectType::TYPE_PLAYER; }
 
 
 	private:
 		/*
-			ˆÚ“®ŠÖ”
+			ç§»å‹•é–¢æ•°
 		*/
 		void Move();
 

@@ -1,4 +1,4 @@
-#include "CharacterPlayer.h"
+ï»¿#include "CharacterPlayer.h"
 #include "../../../System/Drawer.h"
 #include "../../../System/Input.h"
 #include "../../PacManDefinition.h"
@@ -26,29 +26,29 @@ void PacMan::CharacterPlayer::Update()
 
 void PacMan::CharacterPlayer::Draw()
 {
-	Drawer::GetInstance().SetDrawBuffer(m_Pos.m_X, m_Pos.m_Y, "Z");
+	Drawer::GetInstance().SetDrawBuffer(m_Pos.m_X, m_Pos.m_Y, "ã€‡");
 }
 
 void PacMan::CharacterPlayer::Move()
 {
 	int key = Input::GetKey();
 
-	// ƒL[‚ª“ü—Í‚³‚ê‚Ä‚¢‚È‚¯‚ê‚Î‰º‚Ì”»’è‚ð‚¹‚¸‚É•Ô‚·
+	// ã‚­ãƒ¼ãŒå…¥åŠ›ã•ã‚Œã¦ã„ãªã‘ã‚Œã°ä¸‹ã®åˆ¤å®šã‚’ã›ãšã«è¿”ã™
 	if (key == -1) return;
 
 	IVec2 next_pos = m_Pos;
-	// ãƒL[‚ª‰Ÿ‚³‚ê‚½‚Æ‚«
+	// ä¸Šã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã¨ã
 	if (key == KEY_UP)         next_pos.m_Y--;
-	// ‰ºƒL[‚ª‰Ÿ‚³‚ê‚½‚Æ‚«
+	// ä¸‹ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã¨ã
 	else if (key == KEY_DOWN)  next_pos.m_Y++;
-	// ¶ƒL[‚ª‰Ÿ‚³‚ê‚½‚Æ‚«
+	// å·¦ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã¨ã
 	else if (key == KEY_LEFT)  next_pos.m_X--;
-	// ‰EƒL[‚ª‰Ÿ‚³‚ê‚½‚Æ‚«
+	// å³ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã¨ã
 	else if (key == KEY_RIGHT) next_pos.m_X++;
-	// ‚»‚êˆÈŠO‚ÌƒL[‚ª‰Ÿ‚³‚ê‚½‚çˆÚ“®‚µ‚È‚¢‚Ì‚Å‰º‚Ì”»’è‚ð‚¹‚¸‚É•Ô‚·
+	// ãã‚Œä»¥å¤–ã®ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã‚‰ç§»å‹•ã—ãªã„ã®ã§ä¸‹ã®åˆ¤å®šã‚’ã›ãšã«è¿”ã™
 	else return;
 
-	// ˆÚ“®æ‚É•Ç‚ª‚È‚©‚Á‚½‚çˆÚ“®‚·‚é
+	// ç§»å‹•å…ˆã«å£ãŒãªã‹ã£ãŸã‚‰ç§»å‹•ã™ã‚‹
 	if (m_RefStage->GetStageObject(next_pos) != ObjectType::TYPE_WALL) {
 		m_RefStage->SetStage(m_Pos, next_pos, this->GetObjectType());
 		m_Pos = next_pos;

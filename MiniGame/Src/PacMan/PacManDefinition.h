@@ -1,40 +1,40 @@
-#ifndef DIFINITION_H_
+ï»¿#ifndef DIFINITION_H_
 #define DIFINITION_H_
 
-// ’P‘ÌƒeƒXƒg—p
+// å˜ä½“ãƒ†ã‚¹ãƒˆç”¨
 #define PLAYER_ON
 #define ENEMY_ON
 #define ITEM_ON
 
-// ƒXƒe[ƒW‚Ì‰¡•
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®æ¨ªå¹…
 #define STAGE_WIDTH  13
 
-// ƒXƒe[ƒW‚Ìc•
+// ã‚¹ãƒ†ãƒ¼ã‚¸ã®ç¸¦å¹…
 #define STAGE_HEIGHT 13
 
-// ƒvƒŒƒCƒ„[‚Ì‰Šú’l
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åˆæœŸå€¤
 #define PLAYER_INIT_POS_X 3
 #define PLAYER_INIT_POS_Y 6
 
-// “G‚Ì”
+// æ•µã®æ•°
 #define ENEMY_NUM 3
 
-// ƒAƒCƒeƒ€‚Ì”
+// ã‚¢ã‚¤ãƒ†ãƒ ã®æ•°
 #define ITEM_NUM  5
 
-// “G‚Ì‘¬“x@20 -> 20ƒtƒŒ[ƒ€‚Éˆê“xs“®‚·‚é
+// æ•µã®é€Ÿåº¦ã€€20 -> 20ãƒ•ãƒ¬ãƒ¼ãƒ ã«ä¸€åº¦è¡Œå‹•ã™ã‚‹
 #define ENEMY_SPEED 10
 
 namespace PacMan
 {
-	// ƒIƒuƒWƒFƒNƒg‚ÌŽ¯•Ê
+	// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®è­˜åˆ¥
 	enum class ObjectType : int
 	{
-		TYPE_EMPTY,		// ‹ó
-		TYPE_WALL,		// •Ç
-		TYPE_PLAYER,	// ƒvƒŒƒCƒ„[
-		TYPE_ENEMY,		// “G
-		TYPE_ITEM,		// ƒAƒCƒeƒ€
+		TYPE_EMPTY,		// ç©º
+		TYPE_WALL,		// å£
+		TYPE_PLAYER,	// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+		TYPE_ENEMY,		// æ•µ
+		TYPE_ITEM,		// ã‚¢ã‚¤ãƒ†ãƒ 
 	};
 }
 

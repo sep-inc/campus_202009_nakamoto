@@ -1,4 +1,4 @@
-#ifndef CELL_H_
+ï»¿#ifndef CELL_H_
 #define CELL_H_
 
 struct Cell
@@ -11,8 +11,8 @@ struct Cell
 		m_X(x_), m_Y(y_)
 	{}
 
-	int m_X;	// ƒ}ƒX‚Ì‰¡²
-	int m_Y;	// ƒ}ƒX‚Ìc²
+	int m_X;	// ãƒã‚¹ã®æ¨ªè»¸
+	int m_Y;	// ãƒã‚¹ã®ç¸¦è»¸
 
 };
 

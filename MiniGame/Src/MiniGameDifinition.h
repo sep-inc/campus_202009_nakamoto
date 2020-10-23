@@ -1,17 +1,17 @@
-#ifndef MINIGAME_DIFINITION_H_
+ï»¿#ifndef MINIGAME_DIFINITION_H_
 #define MINIGAME_DIFINITION_H_
 
 /*
-	ƒQ[ƒ€‚ÌŽí—Þ
+	ã‚²ãƒ¼ãƒ ã®ç¨®é¡ž
 */
 enum class GameList
 {
-	GAME_MICRO_SHOGI,	// «Šû
-	GAME_PACMAN,		// ƒpƒbƒNƒ}ƒ“
-	GAME_RUNGAME,		// ƒ‰ƒ“ƒQ[ƒ€
-	GAME_TICTACTOE,		// Z~ƒQ[ƒ€
-	GAME_HANOI,			// ƒnƒmƒC‚Ì“ƒ
-	GAME_TRON,			// ƒgƒƒ“
+	GAME_MICRO_SHOGI,	// å°†æ£‹
+	GAME_PACMAN,		// ãƒ‘ãƒƒã‚¯ãƒžãƒ³
+	GAME_RUNGAME,		// ãƒ©ãƒ³ã‚²ãƒ¼ãƒ 
+	GAME_TICTACTOE,		// ã€‡Ã—ã‚²ãƒ¼ãƒ 
+	GAME_HANOI,			// ãƒãƒŽã‚¤ã®å¡”
+	GAME_TRON,			// ãƒˆãƒ­ãƒ³
 	GAME_UNKNOWN,		
 };
 

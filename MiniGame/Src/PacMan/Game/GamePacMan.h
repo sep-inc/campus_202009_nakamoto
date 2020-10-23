@@ -1,4 +1,4 @@
-#ifndef GAME_PACMAN_H_
+ï»¿#ifndef GAME_PACMAN_H_
 #define GAME_PACMAN_H_
 
 #include "../GameObjects/Stage.h"
@@ -10,62 +10,62 @@
 namespace PacMan
 {
 	/*
-	ƒpƒbƒNƒ}ƒ“‚ÌƒQ[ƒ€ŠÇ—ƒNƒ‰ƒX
+	ãƒ‘ãƒƒã‚¯ãƒãƒ³ã®ã‚²ãƒ¼ãƒ ç®¡ç†ã‚¯ãƒ©ã‚¹
 */
 	class GamePacMan : public Game
 	{
-		// ƒXƒeƒbƒv
+		// ã‚¹ãƒ†ãƒƒãƒ—
 		enum class GamePacManStep : unsigned char
 		{
-			STEP_INIT,		// ‰Šú‰»ƒXƒeƒbƒv
-			STEP_UPDATE,	// XVƒXƒeƒbƒv
-			STEP_RELEASE,	// ‰ğ•úƒXƒeƒbƒv
+			STEP_INIT,		// åˆæœŸåŒ–ã‚¹ãƒ†ãƒƒãƒ—
+			STEP_UPDATE,	// æ›´æ–°ã‚¹ãƒ†ãƒƒãƒ—
+			STEP_RELEASE,	// è§£æ”¾ã‚¹ãƒ†ãƒƒãƒ—
 		};
 
 	public:
 		/*
-			ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+			ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		GamePacMan();
 
 		/*
-			ƒfƒXƒgƒ‰ƒNƒ^
+			ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		*/
 		~GamePacMan();
 
 		/*
-			XVŠÖ”
+			æ›´æ–°é–¢æ•°
 		*/
 		void Update() override;
 
 		/*
-			•`‰æŠÖ”
+			æç”»é–¢æ•°
 		*/
 		void Draw() override;
 
 	private:
 		/*
-			Œ‹‰Ê‚ğo—Í‚·‚éŠÖ”
+			çµæœã‚’å‡ºåŠ›ã™ã‚‹é–¢æ•°
 		*/
 		void PrintResult();
 
 		/*
-			‘±‚¯‚é‚©‚Ç‚¤‚©‚ğ‘I‘ğ‚µAŒ‹‰Ê‚ğ^‹U‚Å•Ô‚·ŠÖ”
-			^F‘±‚¯‚é
-			‹UF‚â‚ß‚é
+			ç¶šã‘ã‚‹ã‹ã©ã†ã‹ã‚’é¸æŠã—ã€çµæœã‚’çœŸå½ã§è¿”ã™é–¢æ•°
+			çœŸï¼šç¶šã‘ã‚‹
+			å½ï¼šã‚„ã‚ã‚‹
 		*/
 		bool SelectContinue();
 
 	private:
-		// ƒXƒe[ƒW
+		// ã‚¹ãƒ†ãƒ¼ã‚¸
 		Stage* m_Stage;
-		// ƒvƒŒƒCƒ„[
+		// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
 		CharacterPlayer* m_Player;
-		// ƒGƒlƒ~[
+		// ã‚¨ãƒãƒŸãƒ¼
 		EnemyArray* m_EnemyArray;
-		// Œ»İ‚ÌƒXƒeƒbƒv‚ğ•Û‘¶‚·‚é•Ï”
+		// ç¾åœ¨ã®ã‚¹ãƒ†ãƒƒãƒ—ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 		GamePacManStep m_CurrentStep;
-		// ƒQ[ƒ€‚ğƒNƒŠƒA‚µ‚½‚©‚Ç‚¤‚©‚ğ•Û‘¶‚·‚é•Ï”
+		// ã‚²ãƒ¼ãƒ ã‚’ã‚¯ãƒªã‚¢ã—ãŸã‹ã©ã†ã‹ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
 		bool m_GameClear;
 
 		bool m_Once;

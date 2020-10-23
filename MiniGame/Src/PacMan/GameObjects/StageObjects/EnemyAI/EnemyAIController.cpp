@@ -1,4 +1,4 @@
-#include "EnemyAIController.h"
+ï»¿#include "EnemyAIController.h"
 #include "EnemyAIChase.h"
 #include "EnemyAIDefend.h"
 #include "EnemyAISauntering.h"
@@ -24,13 +24,13 @@ PacMan::EnemyAIController::~EnemyAIController()
 
 void PacMan::EnemyAIController::Update()
 {
-	// XV
+	// æ›´æ–°
 	ActionStateList next_action = m_AI[(int)m_CurrentAction]->Update();
 
-	// ‚à‚µƒAƒNƒVƒ‡ƒ“‚ª•Ï‚í‚Á‚Ä‚¢‚½‚ç
+	// ã‚‚ã—ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ãŒå¤‰ã‚ã£ã¦ã„ãŸã‚‰
 	if (next_action != m_CurrentAction) {
 
-		// ƒAƒNƒVƒ‡ƒ“‚ðXV
+		// ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚’æ›´æ–°
 		m_CurrentAction = next_action;
 		m_AI[(int)m_CurrentAction]->Init();
 	}
