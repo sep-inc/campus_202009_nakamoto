@@ -140,7 +140,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Src\Game.cpp" />
-    <ClCompile Include="Src\GameController.cpp" />
     <ClCompile Include="Src\Main.cpp" />
     <ClCompile Include="Src\MicroShogi\Game\ShogiGame.cpp" />
     <ClCompile Include="Src\MicroShogi\Object\Bord\PieceOfBoard.cpp" />
@@ -175,6 +174,10 @@
     <ClCompile Include="Src\RunGame\RanPlayer.cpp" />
     <ClCompile Include="Src\RunGame\RunGame.cpp" />
     <ClCompile Include="Src\RunGame\RanGameStage.cpp" />
+    <ClCompile Include="Src\Scene\GameScene.cpp" />
+    <ClCompile Include="Src\Scene\SceneBase.cpp" />
+    <ClCompile Include="Src\Scene\SceneManager.cpp" />
+    <ClCompile Include="Src\Scene\SelectScene.cpp" />
     <ClCompile Include="Src\System\Drawer.cpp" />
     <ClCompile Include="Src\System\Input.cpp" />
     <ClCompile Include="Src\TicTacToe\Enemy.cpp" />
@@ -197,7 +200,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Game.h" />
-    <ClInclude Include="Src\GameController.h" />
     <ClInclude Include="Src\MicroShogi\Game\ShogiGame.h" />
     <ClInclude Include="Src\MicroShogi\Object\Bord\PieceOfBoard.h" />
     <ClInclude Include="Src\MicroShogi\Object\Bord\PieceParam.h" />
@@ -216,6 +218,7 @@
     <ClInclude Include="Src\MicroShogi\Scene\ResultScene\ShogiResultScene.h" />
     <ClInclude Include="Src\MicroShogi\Scene\SelectScene\ShogiSelectScene.h" />
     <ClInclude Include="Src\MicroShogi\Scene\ShogiSceneBase.h" />
+    <ClInclude Include="Src\MiniGameDifinition.h" />
     <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIChase.h" />
     <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIBase.h" />
     <ClInclude Include="Src\PacMan\GameObjects\StageObjects\EnemyAI\EnemyAIController.h" />
@@ -236,6 +239,10 @@
     <ClInclude Include="Src\RunGame\RanPlayer.h" />
     <ClInclude Include="Src\RunGame\RunGame.h" />
     <ClInclude Include="Src\RunGame\RanGameStage.h" />
+    <ClInclude Include="Src\Scene\GameScene.h" />
+    <ClInclude Include="Src\Scene\SceneBase.h" />
+    <ClInclude Include="Src\Scene\SceneManager.h" />
+    <ClInclude Include="Src\Scene\SelectScene.h" />
     <ClInclude Include="Src\System\Drawer.h" />
     <ClInclude Include="Src\System\Input.h" />
     <ClInclude Include="Src\TicTacToe\Enemy.h" />

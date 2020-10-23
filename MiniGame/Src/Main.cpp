@@ -1,5 +1,5 @@
 ﻿#include "System/Drawer.h"
-#include "GameController.h"
+#include "Scene/SceneManager.h"
 #include <stdlib.h>
 #include <time.h>
 #include <signal.h>
@@ -37,7 +37,7 @@ int main()
 	LARGE_INTEGER time_end;
 
 	// 
-	GameController game_controller;
+	SceneManager scene_manager;
 
 
 	// ゲームループ
@@ -46,12 +46,12 @@ int main()
 		// 計測開始時間のを取得
 		QueryPerformanceCounter(&time_start);
 
-		game_controller.Update();
+		scene_manager.Update();
 
 		// バッファのクリア
 		Drawer::GetInstance().ClearBuffer();
 
-		game_controller.Draw();
+		scene_manager.Draw();
 
 
 		// バッファの描画
