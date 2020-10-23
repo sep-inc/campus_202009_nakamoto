@@ -4,6 +4,8 @@
 #include "SceneBase.h"
 #include "../MiniGameDifinition.h"
 
+#include <string>
+
 class SelectScene : public SceneBase
 {
 public:
@@ -22,6 +24,11 @@ private:
 
 private:
 	GameList* m_SelectGame;
+
+	const std::string m_DescriptionText;
+
+	std::string m_BlankMenuListStr[(int)GameList::GAME_NUM + 1];
+	std::string m_MenuListStr[(int)GameList::GAME_NUM + 1];
 
 };
 

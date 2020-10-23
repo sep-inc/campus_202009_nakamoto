@@ -46,16 +46,17 @@ void Drawer::ClearBuffer()
 /*=====================================*/
 void Drawer::DrawBuffer()
 {
+	std::string str_buffer;
+
 	for (int y = 0; y < 15; ++y) {
 		for (int x = 0; x < 30; ++x) {
-			if (m_DrawBuffer[y][x] == " ") {
-
-			}
-			m_StrDrawBuffer += m_DrawBuffer[y][x];
+			str_buffer += m_DrawBuffer[y][x];
 		}
-		m_StrDrawBuffer += "\n";
+		str_buffer += "\n";
 	}
 
+
+	if (!m_StrDrawBuffer.empty())std::cout << m_StrDrawBuffer << std::endl;
 	// バッファに格納している文字列を出力す
-	std::cout << m_StrDrawBuffer << std::endl;
+	std::cout << str_buffer << std::endl;
 }

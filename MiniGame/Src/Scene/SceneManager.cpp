@@ -8,6 +8,7 @@ SceneManager::SceneManager() :
 	m_Scene{ nullptr }
 {
 	m_Scene = new SelectScene(&m_SelectGame);
+
 }
 
 SceneManager::~SceneManager()
@@ -36,6 +37,8 @@ void SceneManager::Update()
 			break;
 		case SceneList::SCENE_GAME:
 
+			SAFE_DELETE(m_Scene);
+			
 			system("cls");
 			m_Scene = new SelectScene(&m_SelectGame);
 			break;

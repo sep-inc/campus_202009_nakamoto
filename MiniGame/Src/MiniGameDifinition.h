@@ -12,7 +12,8 @@ enum class GameList
 	GAME_TICTACTOE,		// 〇×ゲーム
 	GAME_HANOI,			// ハノイの塔
 	GAME_TRON,			// トロン
-	GAME_UNKNOWN,		
+	GAME_NUM,
+	GAME_UNKNOWN = GAME_NUM,		
 };
 
 #endif
