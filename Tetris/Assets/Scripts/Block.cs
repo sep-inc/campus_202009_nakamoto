@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    [SerializeField] GameObject StageControllerObj = null;
+    private StageController StageControllerScript = null;
 
     [SerializeField] GameObject BlockCell = null;
     private GameObject[] BlockObject;
     private int[,] BlockData;
     private Color BlockColor;
 
-  
-    float FallTimer = 0f;
-    float FallInterval = 1f;
+    private float FallTimer = 0f;
+    private float FallInterval = 1f;
+
+    // ブロック着地したかどうかを保存する変数
+    private bool is_landing = false;
+
+    private void Start()
+    {
+        StageControllerObj = GameObject.Find("StageManager");
+        StageControllerScript = StageControllerObj.GetComponent<StageController>();
+    }
 
     public void Create(BlocksDefinition.BlockList block_)
     {
@@ -78,18 +88,19 @@ public class Block : MonoBehaviour
 
 
     }
+    // 着地したかどうかを返す関数
+    public bool IsLanding() { return is_landing; }
 
 
     public void MyUpdate()
     {
-
+        
         Fall();
 
         Move();
 
 
     }
-
 
     // 落下処理
     private void Fall()
@@ -100,24 +111,48 @@ public class Block : MonoBehaviour
 
         if (FallTimer > FallInterval)
         {
+            Vector3 next_pos = transform.position;
+            next_pos.y--;
+            if (StageControllerScript.AableMove(ref next_pos, ref BlockData) == false)
+            {
+                is_landing = true;
+
+                foreach(GameObject gameObject in BlockObject)
+                {
+                    StageControllerScript.SetBlock(gameObject);
+                }
+                Destroy(gameObject);
+            }
             FallTimer = 0;
             transform.Translate(0, -1, 0);
         }
     }
 
-    // 左右の移動処理
+    // 左右の移動処理z
     private void Move()
     {
         // 右キーが押されたとき
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            transform.Translate(1, 0, 0);
+            Vector3 next_pos = transform.position;
+            next_pos.x++;
+
+            if (StageControllerScript.AableMove(ref next_pos, ref BlockData))
+            {
+                transform.Translate(1, 0, 0);
+            }
         }
 
         // 左キーが押されたとき
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            transform.Translate(-1, 0, 0);
+            Vector3 next_pos = transform.position;
+            next_pos.x--;
+
+            if (StageControllerScript.AableMove(ref next_pos, ref BlockData))
+            {
+                transform.Translate(-1, 0, 0);
+            }
         }
     }
 }

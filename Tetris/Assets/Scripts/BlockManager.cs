@@ -63,6 +63,12 @@ public class BlockManager : MonoBehaviour
 
         if (OperationBlockScript) OperationBlockScript.MyUpdate();
 
+        if (OperationBlockScript && OperationBlockScript.IsLanding())
+        {
+            OperationBlock = null;
+            OperationBlockScript = null;
+        }
+
     }
 
     
