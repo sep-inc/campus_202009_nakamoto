@@ -18,9 +18,9 @@ public class BlockManager : MonoBehaviour
     [SerializeField] GameObject[] NextBlockPoint = null;
 
     // ストック中のブロックを保存する変数
-    //private GameObject StockBlock = null;
+    private GameObject StockBlock = null;
     // ストック中のブロックの場所を保存する変数
-   // [SerializeField] GameObject StockBlockPoint = null;
+    [SerializeField] GameObject StockBlockPoint = null;
 
 
     // Start is called before the first frame update
@@ -68,13 +68,19 @@ public class BlockManager : MonoBehaviour
 
         }
 
+        // 操作中のブロックの更新を行う
         if (OperationBlockScript) OperationBlockScript.MyUpdate();
 
+        // 操作中のブロックが着地した場合操作できないようにする
         if (OperationBlockScript && OperationBlockScript.IsLanding())
         {
             OperationBlock = null;
             OperationBlockScript = null;
         }
+
+
+        // ストック
+        Stock();
 
     }
 
@@ -87,5 +93,32 @@ public class BlockManager : MonoBehaviour
         block.Create(BlocksDefinition.BlockListArray[Random.Range(0, 7)]);
 
         return gameObject;
+    }
+
+
+    private void Stock()
+    {
+        if (Input.GetKeyDown(KeyCode.S) == false) return;
+
+        // ストックが空かどうかを調べる
+        if (StockBlock == null) {
+            StockBlock = OperationBlock;
+            StockBlock.transform.position = StockBlockPoint.transform.position;
+
+            OperationBlock = null;
+            OperationBlockScript = null;
+        }
+        else
+        {
+            GameObject temp = StockBlock;
+
+            StockBlock = OperationBlock;
+            StockBlock.transform.position = StockBlockPoint.transform.position;
+
+            OperationBlock = temp;
+            OperationBlock.transform.position = StartBlockPoint.transform.position;
+            OperationBlockScript = OperationBlock.GetComponent<Block>();
+        }
+
     }
 }
