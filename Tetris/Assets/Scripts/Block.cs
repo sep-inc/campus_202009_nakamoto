@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Block : MonoBehaviour
@@ -24,6 +26,10 @@ public class Block : MonoBehaviour
         StageControllerScript = StageControllerObj.GetComponent<StageController>();
     }
 
+    /*
+        ブロック初期化関数
+        生成時に1度だけ呼ぶ
+    */
     public void Create(BlocksDefinition.BlockList block_)
     {
         BlockObject = new GameObject[4];
@@ -94,7 +100,8 @@ public class Block : MonoBehaviour
 
     public void MyUpdate()
     {
-        
+        Rotate();
+
         Fall();
 
         Move();
@@ -124,7 +131,7 @@ public class Block : MonoBehaviour
                 Destroy(gameObject);
             }
             FallTimer = 0;
-            transform.Translate(0, -1, 0);
+            transform.Translate(0, -1, 0, Space.World);
         }
     }
 
@@ -139,19 +146,110 @@ public class Block : MonoBehaviour
 
             if (StageControllerScript.AableMove(ref next_pos, ref BlockData))
             {
-                transform.Translate(1, 0, 0);
+                transform.Translate(1, 0, 0, Space.World);
             }
         }
 
         // 左キーが押されたとき
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Vector3 next_pos = transform.position;
             next_pos.x--;
 
             if (StageControllerScript.AableMove(ref next_pos, ref BlockData))
             {
-                transform.Translate(-1, 0, 0);
+                transform.Translate(-1, 0, 0, Space.World);
+            }
+        }
+    }
+
+    private void Rotate()
+    {
+        // 左回り
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            int[,] new_block_data = new int[5, 5];
+
+            for(int y = 0; y < 5; ++y)
+            {
+                for(int x = 0; x < 5; ++x)
+                {
+                    new_block_data[5 - x - 1, y] = BlockData[y, x];
+                }
+            }
+
+            Vector3 pos = transform.position;
+            if (StageControllerScript.AableMove(ref pos, ref new_block_data) == true)
+            {
+                BlockData = new_block_data;
+                transform.Rotate(new Vector3(0, 0, -90));
+            }
+            else
+            {
+                // もし壁があった場合左右にずらせるかを調べる
+                Vector3[] vector = new Vector3[4]
+                {
+                    new Vector3(pos.x + 1,pos.y,0),
+                    new Vector3(pos.x + 2,pos.y,0),
+                    new Vector3(pos.x - 1,pos.y,0),
+                    new Vector3(pos.x - 2,pos.y,0),
+                };
+
+                foreach (Vector3 element in vector)
+                {
+                    Vector3 tmp = element;
+                    if (StageControllerScript.AableMove(ref tmp, ref new_block_data) == true)
+                    {
+                        transform.position = tmp;
+                        BlockData = new_block_data;
+                        transform.Rotate(new Vector3(0, 0, -90));
+                        break;
+                    }
+                }
+            }
+        }
+
+        // 右周り
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            int[,] new_block_data = new int[5, 5];
+
+            for (int y = 0; y < 5; ++y)
+            {
+                for (int x = 0; x < 5; ++x)
+                {
+                    new_block_data[x, 5 - y - 1] = BlockData[y, x];
+                }
+            }
+
+            Vector3 pos = transform.position;
+            if (StageControllerScript.AableMove(ref pos, ref new_block_data) == true)
+            {
+                BlockData = new_block_data;
+                transform.Rotate(new Vector3(0, 0, 90));
+            }
+            else
+            {
+                // もし壁があった場合左右にずらせるかを調べる
+                Vector3[] vector = new Vector3[4]
+                {
+                    new Vector3(pos.x + 1,pos.y,0),
+                    new Vector3(pos.x + 2,pos.y,0),
+                    new Vector3(pos.x - 1,pos.y,0),
+                    new Vector3(pos.x - 2,pos.y,0),
+                };
+
+                foreach(Vector3 element in vector)
+                {
+                    Vector3 tmp = element;
+                    if (StageControllerScript.AableMove(ref tmp, ref new_block_data) == true)
+                    {
+                        transform.position = tmp;
+                        BlockData = new_block_data;
+                        transform.Rotate(new Vector3(0, 0, 90));
+                        break;
+                    }
+                }
             }
         }
     }
