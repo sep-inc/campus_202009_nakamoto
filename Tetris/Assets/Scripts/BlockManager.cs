@@ -42,7 +42,7 @@ public class BlockManager : MonoBehaviour
         {
             if (OperationBlockScript.CannotMove() == true)
             {
-                UnityEditor.EditorApplication.isPlaying = false;
+                SceneController.LoadNextScene();
             }
         }
 

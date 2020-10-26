@@ -113,6 +113,7 @@ public class Block : MonoBehaviour
             OnceCall = true;
 
             Vector3 pos = transform.position;
+
             if (StageControllerScript.AbleMove(ref pos, ref BlockData) == false)
             {
                 cannotMove = true;
