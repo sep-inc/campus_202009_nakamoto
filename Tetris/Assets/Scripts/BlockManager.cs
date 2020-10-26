@@ -38,6 +38,7 @@ public class BlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // もしブロック生成したときに動けなかった場合ゲームオーバー
         if (OperationBlockScript)
         {
             if (OperationBlockScript.CannotMove() == true)
@@ -49,21 +50,27 @@ public class BlockManager : MonoBehaviour
         // 操作しているブロックがなかった場合
         if (OperationBlock == null)
         {
+            // 次に落ちてくるブロックの1番目を持ってくる
             OperationBlock = NextBlock[0];
             OperationBlock.transform.position = StartBlockPoint.transform.position;
             NextBlock[0] = null;
 
+            // コンポーネントを取得しておく
             OperationBlockScript = OperationBlock.GetComponent<Block>();
         }
 
-        // 次に落ちてくるブロック1番目が空なら
+        // 次に落ちてくるブロックの1番目が空なら
         if (NextBlock[0] == null)
         {
+            // 1番目に2番目を入れる
             NextBlock[0] = NextBlock[1];
             NextBlock[0].transform.position = NextBlockPoint[0].transform.position;
+
+            // 2番目に3番目を入れる
             NextBlock[1] = NextBlock[2];
             NextBlock[1].transform.position = NextBlockPoint[1].transform.position;
 
+            // 3番目のブロックを生成する
             NextBlock[2] = CreateBlock(NextBlockPoint[2].transform.position);
 
         }
@@ -85,6 +92,7 @@ public class BlockManager : MonoBehaviour
     }
 
     
+    // ブロックをランダムで生成する関数
     private GameObject CreateBlock(Vector3 pos_)
     {
         GameObject gameObject = Instantiate(BlockPrefab, pos_, Quaternion.identity);
@@ -96,12 +104,14 @@ public class BlockManager : MonoBehaviour
     }
 
 
+    // ブロックのストック
     private void Stock()
     {
         if (Input.GetKeyDown(KeyCode.S) == false) return;
 
         // ストックが空かどうかを調べる
         if (StockBlock == null) {
+            // 空の場合ストックに入れて操作中ブロックをストックに保存する
             StockBlock = OperationBlock;
             StockBlock.transform.position = StockBlockPoint.transform.position;
 
@@ -110,6 +120,8 @@ public class BlockManager : MonoBehaviour
         }
         else
         {
+            // ストックがすでにある場合交換する
+
             GameObject temp = StockBlock;
 
             StockBlock = OperationBlock;
