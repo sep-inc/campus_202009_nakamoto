@@ -108,6 +108,7 @@ public class Block : MonoBehaviour
 
     public void MyUpdate()
     {
+        // 生成時に動けない場合の処理
         if (OnceCall == false)
         {
             OnceCall = true;
@@ -151,10 +152,7 @@ public class Block : MonoBehaviour
                 // 着地フラグをtrueにする
                 isLanding = true;
 
-                for (int i = 0; i < 4; ++i)
-                {
-                    StageControllerScript.SetBlock(BlockObject[i]);
-                }
+                StageControllerScript.SetBlock(BlockObject);
                 Destroy(gameObject);
             }
 

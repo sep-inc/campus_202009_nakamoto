@@ -55,10 +55,14 @@ public class StageController : MonoBehaviour
     }
 
 
-    public void SetBlock(GameObject block_)
+    public void SetBlock(GameObject[] block_)
     {
-        OnStageBlockData[19 - (int)block_.transform.position.y, (int)block_.transform.position.x] = block_;
-        block_.transform.parent = Stage.transform;
+
+        foreach(GameObject element in block_)
+        {
+            OnStageBlockData[19 - (int)element.transform.position.y, (int)element.transform.position.x] = element;
+            element.transform.parent = Stage.transform;
+        }
         
         // 消せるかどうかの判定
         CheckErase();

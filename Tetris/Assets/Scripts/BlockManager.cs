@@ -98,7 +98,7 @@ public class BlockManager : MonoBehaviour
         GameObject gameObject = Instantiate(BlockPrefab, pos_, Quaternion.identity);
 
         Block block = gameObject.GetComponent<Block>();
-        block.Create(BlocksDefinition.BlockListArray[Random.Range(0, 7)]);
+        block.Create(BlocksDefinition.BlockListArray[0]);
 
         return gameObject;
     }
