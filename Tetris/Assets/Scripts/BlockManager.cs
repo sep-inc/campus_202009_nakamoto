@@ -38,6 +38,14 @@ public class BlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (OperationBlockScript)
+        {
+            if (OperationBlockScript.CannotMove() == true)
+            {
+                UnityEditor.EditorApplication.isPlaying = false;
+            }
+        }
+
         // 操作しているブロックがなかった場合
         if (OperationBlock == null)
         {

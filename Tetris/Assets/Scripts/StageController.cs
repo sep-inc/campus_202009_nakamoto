@@ -18,7 +18,7 @@ public class StageController : MonoBehaviour
     }
     
     // 移動可能かどうかを判定する関数
-    public bool AableMove(ref Vector3 pos_, ref int[,] blockData_)
+    public bool AbleMove(ref Vector3 pos_, ref int[,] blockData_)
     {
         // 検索範囲を算出
         Vector2[] search_range = new Vector2[4];
@@ -44,8 +44,9 @@ public class StageController : MonoBehaviour
             // 右壁と当たっている場合
             if (element.x >= STAGE_WIDTH) return false;
 
-            if (element.y < 0) continue;
             if (element.y >= STAGE_HEIGHT) return false;
+
+            if (element.y < 0) continue;
 
             if (OnStageBlockData[(int)element.y, (int)element.x] != null) return false;
         }
@@ -73,7 +74,7 @@ public class StageController : MonoBehaviour
         {
             for(int x = 0; x < STAGE_WIDTH; ++x)
             {
-                //1つでもnullのオブジェクトがあれば次の行を調べる
+                //1つでもnullのオブジェクトがあれば次の行を調べるa
                 if (OnStageBlockData[y, x] == null) break;
 
                 // 1行すべてにブロックがあった場合その列をリストに追加

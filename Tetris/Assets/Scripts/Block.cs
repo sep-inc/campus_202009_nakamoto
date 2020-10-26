@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Block : MonoBehaviour
@@ -18,7 +19,12 @@ public class Block : MonoBehaviour
     private float FallInterval = 1f;
 
     // ブロック着地したかどうかを保存する変数
-    private bool is_landing = false;
+    private bool isLanding = false;
+
+    // 一度だけ行いたい処理のフラグ変数
+    private bool OnceCall = false;
+    // 生成されたときに既に動けない場合trueになる変数
+    private bool cannotMove = false;
 
     private void Start()
     {
@@ -94,14 +100,26 @@ public class Block : MonoBehaviour
             if (create_count == 4) break;
         }
 
-
     }
     // 着地したかどうかを返す関数
-    public bool IsLanding() { return is_landing; }
+    public bool IsLanding() { return isLanding; }
+    public bool CannotMove() { return cannotMove; }
 
 
     public void MyUpdate()
     {
+        if (OnceCall == false)
+        {
+            OnceCall = true;
+
+            Vector3 pos = transform.position;
+            if (StageControllerScript.AbleMove(ref pos, ref BlockData) == false)
+            {
+                cannotMove = true;
+            }
+
+        }
+
         Fall();
 
         Rotate();
@@ -126,11 +144,11 @@ public class Block : MonoBehaviour
             next_pos.y--;
 
             // 落ちた先にが移動できるかどうかを調べる
-            if (StageControllerScript.AableMove(ref next_pos, ref BlockData) == false)
+            if (StageControllerScript.AbleMove(ref next_pos, ref BlockData) == false)
             {
                 // 移動できない場合
                 // 着地フラグをtrueにする
-                is_landing = true;
+                isLanding = true;
 
                 for (int i = 0; i < 4; ++i)
                 {
@@ -156,7 +174,7 @@ public class Block : MonoBehaviour
             Vector3 next_pos = transform.position;
             next_pos.x++;
 
-            if (StageControllerScript.AableMove(ref next_pos, ref BlockData))
+            if (StageControllerScript.AbleMove(ref next_pos, ref BlockData))
             {
                 transform.Translate(1, 0, 0, Space.World);
             }
@@ -168,7 +186,7 @@ public class Block : MonoBehaviour
             Vector3 next_pos = transform.position;
             next_pos.x--;
 
-            if (StageControllerScript.AableMove(ref next_pos, ref BlockData))
+            if (StageControllerScript.AbleMove(ref next_pos, ref BlockData))
             {
                 transform.Translate(-1, 0, 0, Space.World);
             }
@@ -193,7 +211,7 @@ public class Block : MonoBehaviour
             }
 
             Vector3 pos = transform.position;
-            if (StageControllerScript.AableMove(ref pos, ref new_block_data) == true)
+            if (StageControllerScript.AbleMove(ref pos, ref new_block_data) == true)
             {
                 BlockData = new_block_data;
                 transform.Rotate(new Vector3(0, 0, -90));
@@ -212,7 +230,7 @@ public class Block : MonoBehaviour
                 foreach (Vector3 element in vector)
                 {
                     Vector3 tmp = element;
-                    if (StageControllerScript.AableMove(ref tmp, ref new_block_data) == true)
+                    if (StageControllerScript.AbleMove(ref tmp, ref new_block_data) == true)
                     {
                         transform.position = tmp;
                         BlockData = new_block_data;
@@ -237,7 +255,7 @@ public class Block : MonoBehaviour
             }
 
             Vector3 pos = transform.position;
-            if (StageControllerScript.AableMove(ref pos, ref new_block_data) == true)
+            if (StageControllerScript.AbleMove(ref pos, ref new_block_data) == true)
             {
                 BlockData = new_block_data;
                 transform.Rotate(new Vector3(0, 0, 90));
@@ -256,7 +274,7 @@ public class Block : MonoBehaviour
                 foreach(Vector3 element in vector)
                 {
                     Vector3 tmp = element;
-                    if (StageControllerScript.AableMove(ref tmp, ref new_block_data) == true)
+                    if (StageControllerScript.AbleMove(ref tmp, ref new_block_data) == true)
                     {
                         transform.position = tmp;
                         BlockData = new_block_data;
