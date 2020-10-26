@@ -76,14 +76,16 @@ public class Block : MonoBehaviour
             {
                 if (BlockData[y, x] == 1)
                 {
-                    Vector3 pos = Vector3.zero;
-                    pos.x = x - 2;
-                    pos.y = y - 2;
+                    Vector3 to_center_vec = Vector3.zero;
+                    to_center_vec.x = x - 2;
+                    to_center_vec.y = y - 2;
 
-                    Vector3 wpos = transform.position;
-                    wpos.x += pos.x;
-                    wpos.y += pos.y;
-                    BlockObject[create_count] = Instantiate(BlockCell, wpos, Quaternion.identity, this.transform);
+                    to_center_vec.y = -to_center_vec.y;
+
+                    Vector3 pos = transform.position;
+                    pos.x += to_center_vec.x;
+                    pos.y += to_center_vec.y;
+                    BlockObject[create_count] = Instantiate(BlockCell, pos, Quaternion.identity, this.transform);
                     BlockObject[create_count].GetComponent<MeshRenderer>().material.color = BlockColor;
                     create_count++;
                 }
@@ -100,37 +102,47 @@ public class Block : MonoBehaviour
 
     public void MyUpdate()
     {
-        Rotate();
-
         Fall();
 
+        Rotate();
+
         Move();
-
-
     }
 
     // 落下処理
     private void Fall()
     {
+        // タイマーを進める
         FallTimer += Time.deltaTime;
 
+        // 下キーが押されていたら落下間隔を短くする
         FallInterval = Input.GetKey(KeyCode.DownArrow) ? .05f : 1f;
 
+     
         if (FallTimer > FallInterval)
         {
+            // 次に落ちる座標を算出する
             Vector3 next_pos = transform.position;
             next_pos.y--;
+
+            // 落ちた先にが移動できるかどうかを調べる
             if (StageControllerScript.AableMove(ref next_pos, ref BlockData) == false)
             {
+                // 移動できない場合
+                // 着地フラグをtrueにする
                 is_landing = true;
 
-                foreach(GameObject gameObject in BlockObject)
+                for (int i = 0; i < 4; ++i)
                 {
-                    StageControllerScript.SetBlock(gameObject);
+                    StageControllerScript.SetBlock(BlockObject[i]);
                 }
                 Destroy(gameObject);
             }
+
+            // 移動できる場合
+            // タイマーを初期化
             FallTimer = 0;
+            // 移動する
             transform.Translate(0, -1, 0, Space.World);
         }
     }
@@ -165,16 +177,18 @@ public class Block : MonoBehaviour
 
     private void Rotate()
     {
-        // 左回り
+        // 右回り
         if (Input.GetKeyDown(KeyCode.E))
         {
+            // 回転後のブロックの情報を保存する変数
             int[,] new_block_data = new int[5, 5];
 
+            // 配列を並べ替える
             for(int y = 0; y < 5; ++y)
             {
                 for(int x = 0; x < 5; ++x)
                 {
-                    new_block_data[5 - x - 1, y] = BlockData[y, x];
+                    new_block_data[y, x] = BlockData[4 - x, y];
                 }
             }
 
@@ -209,7 +223,7 @@ public class Block : MonoBehaviour
             }
         }
 
-        // 右周り
+        // 左回り
         else if (Input.GetKeyDown(KeyCode.Q))
         {
             int[,] new_block_data = new int[5, 5];
@@ -218,7 +232,7 @@ public class Block : MonoBehaviour
             {
                 for (int x = 0; x < 5; ++x)
                 {
-                    new_block_data[x, 5 - y - 1] = BlockData[y, x];
+                    new_block_data[y, x] = BlockData[x, 4 - y];
                 }
             }
 

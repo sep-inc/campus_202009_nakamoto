@@ -41,7 +41,6 @@ public class BlockManager : MonoBehaviour
         // 操作しているブロックがなかった場合
         if (OperationBlock == null)
         {
-            Debug.Log("移動!!!");
             OperationBlock = NextBlock[0];
             OperationBlock.transform.position = StartBlockPoint.transform.position;
             NextBlock[0] = null;
