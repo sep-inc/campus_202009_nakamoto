@@ -17,7 +17,4 @@ public static class BlockShapeZ
     public static int[,] GetBlockData() { return BlockParam; }
 
     public static Color GetBlockColor() { return Color.red; }
-
-
-    public static BlocksDefinition.BlockList GetBlockType() { return BlocksDefinition.BlockList.BLOCK_Z; }
 }

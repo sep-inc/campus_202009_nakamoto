@@ -17,6 +17,4 @@ public static class BlockShapeI
 
     public static Color GetBlockColor() { return Color.cyan; }
 
-    public static BlocksDefinition.BlockList GetBlockType() { return BlocksDefinition.BlockList.BLOCK_I; }
-
 }

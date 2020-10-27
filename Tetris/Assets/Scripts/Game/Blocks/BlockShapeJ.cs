@@ -17,7 +17,4 @@ public static class BlockShapeJ
     public static int[,] GetBlockData() { return BlockParam; }
 
     public static Color GetBlockColor() { return Color.blue; }
-
-
-    public static BlocksDefinition.BlockList GetBlockType() { return BlocksDefinition.BlockList.BLOCK_J; }
 }

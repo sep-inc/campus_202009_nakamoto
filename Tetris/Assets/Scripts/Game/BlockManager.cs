@@ -31,7 +31,7 @@ public class BlockManager : MonoBehaviour
         // 次に生成されるオブジェクトの初期化
         for (int i = 0; i < NextBlockPoint.Length; ++i)
         {
-            NextBlock[i] = CreateBlock(NextBlockPoint[i].transform.position);
+            NextBlock[i] = this.CreateBlock(NextBlockPoint[i].transform.position);
         }
     }
 
@@ -78,6 +78,7 @@ public class BlockManager : MonoBehaviour
         // 操作中のブロックの更新を行う
         if (OperationBlockScript) OperationBlockScript.MyUpdate();
 
+
         // 操作中のブロックが着地した場合操作できないようにする
         if (OperationBlockScript && OperationBlockScript.IsLanding())
         {
@@ -95,10 +96,14 @@ public class BlockManager : MonoBehaviour
     // ブロックをランダムで生成する関数
     private GameObject CreateBlock(Vector3 pos_)
     {
+        // ブロックの生成
         GameObject gameObject = Instantiate(BlockPrefab, pos_, Quaternion.identity);
 
+        // スクリプトの取得
         Block block = gameObject.GetComponent<Block>();
-        block.Create(BlocksDefinition.BlockListArray[Random.Range(0,7)]);
+        
+        // ブロックの初期化
+        block.Create((BlocksDefinition.BlockList)Random.Range(0, 7));
 
         return gameObject;
     }

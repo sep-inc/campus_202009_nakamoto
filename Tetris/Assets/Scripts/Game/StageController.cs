@@ -60,6 +60,8 @@ public class StageController : MonoBehaviour
 
         foreach(GameObject element in block_)
         {
+            if (element.transform.position.y >= STAGE_HEIGHT) continue;
+
             if (!element) continue;
             OnStageBlockData[19 - (int)element.transform.position.y, (int)element.transform.position.x] = element;
             element.transform.parent = Stage.transform;
