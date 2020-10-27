@@ -60,6 +60,7 @@ public class StageController : MonoBehaviour
 
         foreach(GameObject element in block_)
         {
+            if (!element) continue;
             OnStageBlockData[19 - (int)element.transform.position.y, (int)element.transform.position.x] = element;
             element.transform.parent = Stage.transform;
         }
@@ -92,29 +93,34 @@ public class StageController : MonoBehaviour
         // もし消せる行があった場合
         if (erace_line.Count == 0) return;
 
-
-
-       while(erace_line.Count != 0)
-       {
-           // 最初の要素を取得
-           int line = erace_line[0];
-       
-           for(int i = 0; i < STAGE_WIDTH; ++i)
-           {
-               Destroy(OnStageBlockData[line, i]);
-           }
-       
-           //for(int y = line - 1; y <= 0; --y)
-           //{
-           //    for(int x = 0; x < STAGE_WIDTH; ++x)
-           //    {
-           //        OnStageBlockData[y + 1, x] = OnStageBlockData[y, x];
-           //        if (OnStageBlockData[y, x]) OnStageBlockData[y, x].transform.Translate(0, -1, 0, Space.World);
-           //    }
-           //}
-       
-           erace_line.RemoveAt(0);
-       }        
+        // 昇順でソートする
+        erace_line.Sort();
+        
+        // erace_line.Sort();
+        while (erace_line.Count != 0)
+        {
+            // 最初の要素を取得
+            int line = erace_line[0];
+        
+            // オブジェクトを1行消す
+            for(int i = 0; i < STAGE_WIDTH; ++i)
+            {
+                Destroy(OnStageBlockData[line, i]);
+            }
+            
+            
+            // 消した行より上の行を一段さげる
+            for (int y = line - 1; y >= 0; --y)
+            {
+                for (int x = 0; x < STAGE_WIDTH; ++x)
+                {
+                    OnStageBlockData[y + 1, x] = OnStageBlockData[y, x];
+                    if (OnStageBlockData[y, x]) OnStageBlockData[y, x].transform.Translate(0, -1, 0, Space.World);
+                }
+            }
+        
+             erace_line.RemoveAt(0);
+        }        
         
         
     

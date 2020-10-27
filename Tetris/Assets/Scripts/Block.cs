@@ -194,6 +194,8 @@ public class Block : MonoBehaviour
 
     private void Rotate()
     {
+
+        bool is_rotate = false;
         // 右回り
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -213,7 +215,8 @@ public class Block : MonoBehaviour
             if (StageControllerScript.AbleMove(ref pos, ref new_block_data) == true)
             {
                 BlockData = new_block_data;
-                transform.Rotate(new Vector3(0, 0, -90));
+
+                is_rotate = true;
             }
             else
             {
@@ -233,11 +236,12 @@ public class Block : MonoBehaviour
                     {
                         transform.position = tmp;
                         BlockData = new_block_data;
-                        transform.Rotate(new Vector3(0, 0, -90));
+                        is_rotate = true;
                         break;
                     }
                 }
             }
+
         }
 
         // 左回り
@@ -257,7 +261,7 @@ public class Block : MonoBehaviour
             if (StageControllerScript.AbleMove(ref pos, ref new_block_data) == true)
             {
                 BlockData = new_block_data;
-                transform.Rotate(new Vector3(0, 0, 90));
+                is_rotate = true;
             }
             else
             {
@@ -277,11 +281,41 @@ public class Block : MonoBehaviour
                     {
                         transform.position = tmp;
                         BlockData = new_block_data;
-                        transform.Rotate(new Vector3(0, 0, 90));
+                        is_rotate = true;
                         break;
                     }
                 }
             }
         }
+
+        if (is_rotate == true)
+        {
+            int create_count = 0;
+            for (int y = 0; y < 5; ++y)
+            {
+                for (int x = 0; x < 5; ++x)
+                {
+                    if (BlockData[y, x] == 1)
+                    {
+                        Vector3 to_center_vec = Vector3.zero;
+                        to_center_vec.x = x - 2;
+                        to_center_vec.y = y - 2;
+
+                        to_center_vec.y = -to_center_vec.y;
+
+                        Vector3 pos = transform.position;
+                        pos.x += to_center_vec.x;
+                        pos.y += to_center_vec.y;
+                        Destroy(BlockObject[create_count]);
+                        BlockObject[create_count] = Instantiate(BlockCell, pos, Quaternion.identity, this.transform);
+                        BlockObject[create_count].GetComponent<MeshRenderer>().material.color = BlockColor;
+                        create_count++;
+                    }
+                }
+
+                if (create_count == 4) break;
+            }
+        }
+
     }
 }
