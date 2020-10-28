@@ -32,7 +32,9 @@ namespace My
             return false;
         }
 
-
+        /*
+         * 球と線分の当たり判定
+         */
         public static bool CheckSphereSegment(SgapeSphere sphere_, ShapeSegment segment_)
         {
             float distance = MyMath.CalcPointLineDist(sphere_.transform.position, segment_.StartPos, segment_.EndPos);
@@ -46,11 +48,16 @@ namespace My
         }
 
 
+        /*
+         * 球とカプセルの当たり判定 
+         */
         public static bool CheckSphereCapsule(SgapeSphere sphere_, ShapeCapsule3D capsule_)
         {
+            // 球の中心点から、線分までの最短距離を算出
             float distance = MyMath.CalcPointLineDist(sphere_.transform.position, capsule_.StartPos, capsule_.EndPos);
 
-            if (distance < sphere_.Radius + capsule_.Radius)
+            // 最短距離が、球とカプセルの半径を足したもの以下であれば当たっている
+            if (distance <= sphere_.Radius + capsule_.Radius)
             {
                 return true;
             }
