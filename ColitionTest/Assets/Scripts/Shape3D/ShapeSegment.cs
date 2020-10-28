@@ -2,11 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShapeSegment : MonoBehaviour
+public class ShapeSegment : Shape3D
 {
     [SerializeField] private GameObject line_start = default;
     [SerializeField] private GameObject line_end = default;
 
+
+    public Vector3 StartPos => line_start.transform.position;
+    public Vector3 EndPos => line_end.transform.position;
+
+
+    public override bool HitTest(Shape3D shape_)
+    {
+        switch (shape_.GetShape())
+        {
+            case Shape3DList.SHAPE_SEGMENT:
+                {
+                    ShapeSegment shapeSegment = (ShapeSegment)shape_;
+                    if (HitTest(shapeSegment) == true)
+                    {
+                        return true;
+                    }
+                }
+                break;
+
+            case Shape3DList.SHAPE_SPHERE:
+                {
+                    SgapeSphere sgapeSphere = (SgapeSphere)shape_;
+                    if (My.Collition3D.CheckSphereSegment(sgapeSphere, this) == true)
+                    {
+                        return true;
+                    }
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
+
+
+    public override Shape3DList GetShape() { return Shape3DList.SHAPE_SEGMENT; }
+    
 
     public bool HitTest(ShapeSegment other)
     {

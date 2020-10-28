@@ -1,21 +1,61 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShapeCapsule3D : MonoBehaviour
+public class ShapeCapsule3D : Shape3D
 {
     [SerializeField] private GameObject line_start = default;
     [SerializeField] private GameObject line_end = default;
     [SerializeField] private float radius = 1f;
 
 
+    public Vector3 StartPos => line_start.transform.position;
+    public Vector3 EndPos => line_end.transform.position;
+    public float Radius => radius;
+
+    public override Shape3DList GetShape() { return Shape3DList.SHAPE_CAPSULE_3D; }
+
+    
+    public override bool HitTest(Shape3D shape_)
+    {
+        switch(shape_.GetShape())
+        {
+            case Shape3DList.SHAPE_CAPSULE_3D:
+                {
+                    ShapeCapsule3D capsule3D = (ShapeCapsule3D)shape_;
+                    if (HitTest(capsule3D) == true)
+                    {
+                        return true;
+                    }
+                }
+                break;
+
+            case Shape3DList.SHAPE_SPHERE:
+                {
+                    SgapeSphere sgapeSphere = (SgapeSphere)shape_;
+                    if (My.Collition3D.CheckSphereCapsule(sgapeSphere, this) == true)
+                    {
+                        return true;
+                    }
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
+
+
     public bool HitTest(ShapeCapsule3D other)
     {
 
-        float A_CD = CalcPointLineDist(line_start.transform.position, other.line_start.transform.position, other.line_end.transform.position);
-        float B_CD = CalcPointLineDist(line_end.transform.position, other.line_start.transform.position, other.line_end.transform.position);
-        float C_AB = CalcPointLineDist(other.line_start.transform.position, line_start.transform.position, line_end.transform.position);
-        float D_AB = CalcPointLineDist(other.line_end.transform.position, line_start.transform.position, line_end.transform.position);
+        float A_CD = MyMath.CalcPointLineDist(line_start.transform.position, other.line_start.transform.position, other.line_end.transform.position);
+        float B_CD = MyMath.CalcPointLineDist(line_end.transform.position, other.line_start.transform.position, other.line_end.transform.position);
+        float C_AB = MyMath.CalcPointLineDist(other.line_start.transform.position, line_start.transform.position, line_end.transform.position);
+        float D_AB = MyMath.CalcPointLineDist(other.line_end.transform.position, line_start.transform.position, line_end.transform.position);
 
         float min_distance = Mathf.Min(A_CD, B_CD, C_AB, D_AB);
         float distance = radius + other.radius;
@@ -25,20 +65,6 @@ public class ShapeCapsule3D : MonoBehaviour
         }
 
         return false;
-    }
-
-
-    float CalcPointLineDist(Vector3 p, Vector3 lineStart_, Vector3 lineEnd_)
-    {
-        Vector3 start_to_end = lineEnd_ - lineStart_;
-        float length = start_to_end.magnitude;
-        start_to_end.Normalize();
-        float k = Vector3.Dot(p - lineStart_, start_to_end);
-        k = Mathf.Clamp(k, 0, length);
-
-        Vector3 a = lineStart_ + k * start_to_end;
-
-        return Vector3.Distance(a, p);
     }
 
 

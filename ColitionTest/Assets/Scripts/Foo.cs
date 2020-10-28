@@ -39,16 +39,17 @@ public class Foo : MonoBehaviour
     [SerializeField] private ShapeCapsule3D capsule3D2 = default;
 
 
+
+    [SerializeField] Shape2D[] shape2D_list = default;
+    [SerializeField] Shape3D[] shape3D_list = default;
+
+
+
     private void OnDrawGizmos()
     {
-        Vector2 vec = shape1.transform.position - shape2.transform.position;
-
-        if (vec.magnitude <= 10f)
-        {
-            // 矩形と矩形の当たり判定
-            Gizmos.color = shape1.HitTest(shape2) ? Color.red : Color.white;
-            Gizmos.DrawLine(shape1.transform.position, shape2.transform.position);
-        }
+        // 矩形と矩形の当たり判定
+        Gizmos.color = shape1.HitTest(shape2) ? Color.red : Color.white;
+        Gizmos.DrawLine(shape1.transform.position, shape2.transform.position);
         
 
         // 円と円の当たり判定
@@ -81,5 +82,25 @@ public class Foo : MonoBehaviour
         // カプセル3Dとカプセル3Dの当たり判定
         Gizmos.color = capsule3D1.HitTest(capsule3D2) ? Color.red : Color.white;
         Gizmos.DrawLine(capsule3D1.GetLineCenterPos(), capsule3D2.GetLineCenterPos());
+
+        for (int i = 0; i < shape2D_list.Length; ++i)
+        {
+            for (int j = i + 1; j < shape2D_list.Length; ++j)
+            {
+                Gizmos.color = shape2D_list[i].HitTest(shape2D_list[j]) ? Color.red : Color.white;
+                Gizmos.DrawLine(shape2D_list[i].transform.position, shape2D_list[j].transform.position);
+            }
+        }
+
+
+        for (int i = 0; i < shape3D_list.Length; ++i)
+        {
+            for (int j = i + 1; j < shape3D_list.Length; ++j)
+            {
+                Gizmos.color = shape3D_list[i].HitTest(shape3D_list[j]) ? Color.red : Color.white;
+                Gizmos.DrawLine(shape3D_list[i].transform.position, shape3D_list[j].transform.position);
+            }
+        }
+
     }
 }

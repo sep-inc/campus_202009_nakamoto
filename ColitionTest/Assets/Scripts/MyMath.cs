@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MyMath
 {
+    // 二次元の外積
     public static float Vec2Cross(Vector2 vec1_, Vector2 vec2_)
     {
         float ret_dot_scalar = 0f;
@@ -12,6 +13,7 @@ public class MyMath
         return ret_dot_scalar;
     }
 
+    // 線分と線分の当たり判定
     public static bool HitLineLine(Vector3 lineStartA_, Vector3 lineEndA_, Vector3 lineStartB_, Vector3 lineEndB_)
     {
         Vector3 startA_to__startB = lineStartB_ - lineStartA_;
@@ -29,4 +31,21 @@ public class MyMath
 
         return false;
     }
+
+
+    // 点と線の最短距離を返す関数
+    public static float CalcPointLineDist(Vector3 p, Vector3 lineStart_, Vector3 lineEnd_)
+    {
+        Vector3 start_to_end = lineEnd_ - lineStart_;
+        float length = start_to_end.magnitude;
+        start_to_end.Normalize();
+        float k = Vector3.Dot(p - lineStart_, start_to_end);
+        k = Mathf.Clamp(k, 0, length);
+
+        Vector3 a = lineStart_ + k * start_to_end;
+
+        return Vector3.Distance(a, p);
+    }
+    
+    
 }

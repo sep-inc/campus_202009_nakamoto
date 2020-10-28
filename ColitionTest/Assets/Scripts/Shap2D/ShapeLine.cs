@@ -2,11 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShapeLine : MonoBehaviour
+public class ShapeLine : Shape2D
 {
     [SerializeField] private GameObject line_start = default;
     [SerializeField] private GameObject line_end   = default;
 
+
+    public Vector2 StartPos => line_start.transform.position;
+    public Vector2 EndPos => line_end.transform.position;
+
+
+    public override Shape2DList GetShape() { return Shape2DList.SHAPE_LINE; }
+
+    public override bool HitTest(Shape2D shape_)
+    {
+        switch (shape_.GetShape())
+        {
+            case Shape2DList.SHAPE_LINE:
+                {
+                    ShapeLine line = (ShapeLine)shape_;
+                    if (HitTest(line) == true)
+                    {
+                        return true;
+                    }
+                }
+                break;
+
+            case Shape2DList.SHAPE_CIRCLE:
+                {
+                    ShapeCircle circle = (ShapeCircle)shape_;
+
+                    if (My.Collition2D.CheckCircleLine(circle, this) == true)
+                    {
+                        return true;
+                    }
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
 
     public bool HitTest(ShapeLine other)
     {
