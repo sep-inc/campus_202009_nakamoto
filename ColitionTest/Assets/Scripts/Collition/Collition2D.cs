@@ -24,6 +24,7 @@ namespace My
 
             float distance = Vector2.Distance(circle_center_pos, near_pos);
 
+
             if (distance < circle_.Radius)
             {
                 return true;
