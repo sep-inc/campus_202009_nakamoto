@@ -1026,6 +1026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BlockPrefab: {fileID: 154273331904245900, guid: 6870b693907265a4da3ceb4942a7ced9, type: 3}
+  StagecontrollerObject: {fileID: 974086018}
   StartBlockPoint: {fileID: 946867904}
   NextBlockPoint:
   - {fileID: 26755845}
