@@ -9,14 +9,30 @@ public class ShapeCapsule3D : Shape3D
     [SerializeField] private GameObject line_end = default;
     [SerializeField] private float radius = 1f;
 
-
     public Vector3 StartPos => line_start.transform.position;
     public Vector3 EndPos => line_end.transform.position;
     public float Radius => radius;
 
+
     public override Shape3DList GetShape() { return Shape3DList.SHAPE_CAPSULE_3D; }
 
-    
+
+    public override bool IsJudgable(Shape3DList shape_)
+    {
+        switch (shape_)
+        {
+            case Shape3DList.SHAPE_CAPSULE_3D:
+            case Shape3DList.SHAPE_SPHERE:
+                return true;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
+
+
     public override bool HitTest(Shape3D shape_)
     {
         switch(shape_.GetShape())

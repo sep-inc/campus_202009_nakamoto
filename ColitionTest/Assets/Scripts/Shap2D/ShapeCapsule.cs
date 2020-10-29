@@ -15,6 +15,21 @@ public class ShapeCapsule : Shape2D
     public float Radius => radius;
 
 
+    public override bool IsJudgable(Shape2DList shape_)
+    {
+        switch (shape_)
+        {
+            case Shape2DList.SHAPE_CAPSULE_2D:
+            case Shape2DList.SHAPE_CIRCLE:
+                return true;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
+
     public override Shape2D.Shape2DList GetShape() { return Shape2DList.SHAPE_CAPSULE_2D; }
 
     public override bool HitTest(Shape2D shape_)

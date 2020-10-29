@@ -12,6 +12,24 @@ public class ShapeAABB : Shape3D
     public Vector3 Min => min;
     public Vector3 Max => max;
 
+
+    public override bool IsJudgable(Shape3DList shape_)
+    {
+        switch (shape_)
+        {
+            case Shape3DList.SHAPE_AABB:
+            case Shape3DList.SHAPE_SPHERE:
+                return true;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
+
+
+
     public override bool HitTest(Shape3D shape_)
     {
         switch (shape_.GetShape())

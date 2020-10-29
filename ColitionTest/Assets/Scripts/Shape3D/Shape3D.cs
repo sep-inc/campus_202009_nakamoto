@@ -16,4 +16,6 @@ public abstract class Shape3D : MonoBehaviour
     abstract public Shape3DList GetShape();
 
     abstract public bool HitTest(Shape3D shape_);
+
+    abstract public bool IsJudgable(Shape3DList shape_);
 }

@@ -7,8 +7,23 @@ public class ShapeRect : Shape2D
 {
     [SerializeField] private Vector2 size = Vector2.one;
 
-
     public Vector2 Size => size;
+
+
+    public override bool IsJudgable(Shape2DList shape_)
+    {
+        switch (shape_)
+        {
+            case Shape2DList.SHAPE_CIRCLE:
+            case Shape2DList.SHAPE_RECT:
+                return true;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
 
     public override Shape2DList GetShape() { return Shape2DList.SHAPE_RECT; }
 

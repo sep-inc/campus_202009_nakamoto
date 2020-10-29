@@ -12,6 +12,22 @@ public class ShapeSegment : Shape3D
     public Vector3 EndPos => line_end.transform.position;
 
 
+    public override bool IsJudgable(Shape3DList shape_)
+    {
+        switch (shape_)
+        {
+            case Shape3DList.SHAPE_SEGMENT:
+            case Shape3DList.SHAPE_SPHERE:
+                return true;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
+
+
     public override bool HitTest(Shape3D shape_)
     {
         switch (shape_.GetShape())

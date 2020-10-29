@@ -11,6 +11,21 @@ public class ShapeLine : Shape2D
     public Vector2 StartPos => line_start.transform.position;
     public Vector2 EndPos => line_end.transform.position;
 
+    public override bool IsJudgable(Shape2DList shape_)
+    {
+        switch (shape_)
+        {
+            case Shape2DList.SHAPE_CIRCLE:
+            case Shape2DList.SHAPE_LINE:
+                return true;
+
+            default:
+                break;
+        }
+
+        return false;
+    }
+
 
     public override Shape2DList GetShape() { return Shape2DList.SHAPE_LINE; }
 

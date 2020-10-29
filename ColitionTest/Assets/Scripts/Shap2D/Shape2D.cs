@@ -16,4 +16,6 @@ public abstract class Shape2D : MonoBehaviour
     abstract public Shape2DList GetShape();
 
     abstract public bool HitTest(Shape2D shape_);
+
+    abstract public bool IsJudgable(Shape2DList shape_);
 }
