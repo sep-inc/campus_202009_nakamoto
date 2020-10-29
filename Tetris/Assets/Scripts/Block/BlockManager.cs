@@ -5,6 +5,7 @@ using UnityEngine;
 public class BlockManager : MonoBehaviour
 {
     [SerializeField] GameObject BlockPrefab = null;
+    [SerializeField] GameObject StagecontrollerObject = null;
 
     // 操作中のブロックを保存する変数
     private GameObject OperationBlock = null;
@@ -101,9 +102,9 @@ public class BlockManager : MonoBehaviour
 
         // スクリプトの取得
         Block block = gameObject.GetComponent<Block>();
-        
+
         // ブロックの初期化
-        block.Create((BlocksDefinition.BlockList)Random.Range(0, 7));
+        block.Create((BlocksDefinition.BlockList)Random.Range(0, 7), StagecontrollerObject);
 
         return gameObject;
     }

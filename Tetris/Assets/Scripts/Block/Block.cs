@@ -26,17 +26,12 @@ public class Block : MonoBehaviour
     // 生成されたときに既に動けない場合trueになる変数
     private bool cannotMove = false;
 
-    private void Start()
-    {
-        StageControllerObj = GameObject.Find("StageManager");
-        StageControllerScript = StageControllerObj.GetComponent<StageController>();
-    }
 
     /*
         ブロック初期化関数
         生成時に1度だけ呼ぶ
     */
-    public void Create(BlocksDefinition.BlockList block_)
+    public void Create(BlocksDefinition.BlockList block_, GameObject stageController_)
     {
         BlockObject = new GameObject[4];
 
@@ -99,6 +94,10 @@ public class Block : MonoBehaviour
 
             if (create_count == 4) break;
         }
+
+
+        StageControllerObj = stageController_;
+        StageControllerScript = StageControllerObj.GetComponent<StageController>();
 
     }
     // 着地したかどうかを返す関数
