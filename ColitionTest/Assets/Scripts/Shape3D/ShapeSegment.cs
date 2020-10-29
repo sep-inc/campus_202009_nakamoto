@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class ShapeSegment : Shape3D
 {
-    [SerializeField] private GameObject line_start = default;
     [SerializeField] private GameObject line_end = default;
 
 
-    public Vector3 StartPos => line_start.transform.position;
     public Vector3 EndPos => line_end.transform.position;
 
 
@@ -65,11 +63,11 @@ public class ShapeSegment : Shape3D
 
     public bool HitTest(ShapeSegment other)
     {
-        Vector3 line1 = line_end.transform.position - line_start.transform.position;
-        Vector3 line2 = other.line_end.transform.position - other.line_start.transform.position;
+        Vector3 line1 = line_end.transform.position - transform.position;
+        Vector3 line2 = other.line_end.transform.position - other.transform.position;
 
-        bool hit1 = MyMath.HitLineLine(line_start.transform.position, line1, other.line_start.transform.position, line2);
-        bool hit2 = MyMath.HitLineLine(other.line_start.transform.position, line2, line_start.transform.position, line1);
+        bool hit1 = MyMath.HitLineLine(transform.position, line1, other.transform.position, line2);
+        bool hit2 = MyMath.HitLineLine(other.transform.position, line2, transform.position, line1);
 
         if (hit1 && hit2)
         {
@@ -84,9 +82,9 @@ public class ShapeSegment : Shape3D
     {
         Vector3 ret_center_pos = Vector2.one;
 
-        ret_center_pos.x = (line_start.transform.position.x + line_end.transform.position.x) / 2f;
-        ret_center_pos.y = (line_start.transform.position.y + line_end.transform.position.y) / 2f;
-        ret_center_pos.z = (line_start.transform.position.z + line_end.transform.position.z) / 2f;
+        ret_center_pos.x = (transform.position.x + line_end.transform.position.x) / 2f;
+        ret_center_pos.y = (transform.position.y + line_end.transform.position.y) / 2f;
+        ret_center_pos.z = (transform.position.z + line_end.transform.position.z) / 2f;
 
         return ret_center_pos;
     }
@@ -96,8 +94,8 @@ public class ShapeSegment : Shape3D
     {
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(line_start.transform.position, 0.1f);
+        Gizmos.DrawWireSphere(transform.position, 0.1f);
         Gizmos.DrawWireSphere(line_end.transform.position, 0.1f);
-        Gizmos.DrawLine(line_start.transform.position, line_end.transform.position);
+        Gizmos.DrawLine(transform.position, line_end.transform.position);
     }
 }

@@ -40,7 +40,7 @@ namespace My
 
         public static bool CheckCircleLine(ShapeCircle circle_, ShapeLine line_)
         {
-            float distance = MyMath.CalcPointLineDist(circle_.transform.position, line_.StartPos, line_.EndPos);
+            float distance = MyMath.CalcPointLineDist(circle_.transform.position, line_.transform.position, line_.EndPos);
 
             if (distance < circle_.Radius)
             {
@@ -53,7 +53,7 @@ namespace My
 
         public static bool CheckCircleCapsule(ShapeCircle circle_, ShapeCapsule capsule_)
         {
-            float distance = MyMath.CalcPointLineDist(circle_.transform.position, capsule_.StartPos, capsule_.EndPos);
+            float distance = MyMath.CalcPointLineDist(circle_.transform.position, capsule_.transform.position, capsule_.EndPos);
 
             if (distance < circle_.Radius + capsule_.Radius)
             {
