@@ -1,0 +1,281 @@
+<chapter>ハノイの塔
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22\'8e\'64\'97\'6c\par
+\par
+\par
+\'94\'73\'96\'6b\'8f\'f0\'8c\'8f\par
+\'81\'45\par
+\par
+\par
+\'8f\'9f\'97\'98\'8f\'f0\'8c\'8f\par
+\'81\'45\par
+\par
+\'93\'fa\'95\'74\'82\'f0\'91\'9d\'82\'e2\'82\'b5\'82\'c4\par
+}
+</content>
+<group>
+<chapter>ディスク
+<attribute>-1,1,1
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22 enum \'83\'66\'83\'42\'83\'58\'83\'4e\par
+DISK_SMALL\par
+DISK_MEDIUM\par
+DISK_LARGE\par
+DISK_EMPTY\par
+\par
+\'83\'66\'83\'42\'83\'58\'83\'4e\'8c\'5e2\'8e\'9f\'8c\'b3\'94\'7a\'97\'f1\'82\'f0\'97\'70\'88\'d3\'82\'b7\'82\'e9\par
+\par
+\'83\'66\'83\'42\'83\'58\'83\'4e m_Disk[DISK_NUM][POLE_NUM]=\par
+\{\par
+DISK_SMALL         DISK_EMPTY     DISK_EMPTY\par
+DISK_MEDIUM       DISK_EMPTY     DISK_EMPTY \par
+DISK_LARGE         DISK_EMPTY     DISK_EMPTY\par
+\}\par
+\par
+\'83\'43\'83\'81\'81\'5b\'83\'57\par
+DISK_SMALL   \'81\'a0\'81\'a0\'81\'a1\'81\'a0\'81\'a0\tab  DISK_EMPTY\'81\'a0\'81\'a0\'81\'a0\'81\'a0\'81\'a0\tab DISK_EMPTY\'81\'a0\'81\'a0\'81\'a0\'81\'a0\'81\'a0\par
+DISK_MEDIUM \'81\'a0\'81\'a1\'81\'a1\'81\'a1\'81\'a0\'81\'40\'81\'40\'81\'40 DISK_EMPTY\'81\'a0\'81\'a0\'81\'a0\'81\'a0\'81\'a0\tab DISK_EMPTY\'81\'a0\'81\'a0\'81\'a0\'81\'a0\'81\'a0\par
+DISK_LARGE   \'81\'a1\'81\'a1\'81\'a1\'81\'a1\'81\'a1        DISK_EMPTY\'81\'a0\'81\'a0\'81\'a0\'81\'a0\'81\'a0\tab DISK_EMPTY\'81\'a0\'81\'a0\'81\'a0\'81\'a0\'81\'a0\par
+\'81\'40\'81\'40\tab\tab\'81\'40\'81\'401\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\tab     \'82\'51\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40\'81\'40 \tab     \'82\'52\par
+\'82\'b1\'82\'cc\'82\'e6\'82\'a4\'82\'c8\'8c\'60\'82\'c5\'88\'b5\'82\'a4\par
+\par
+// \'88\'da\'93\'ae\'8c\'b3\'82\'f0\'95\'db\'91\'b6\'82\'b7\'82\'e9\'95\'cf\'90\'94\par
+int8 m_SelectSource;\par
+\par
+// \'88\'da\'93\'ae\'90\'e6\'82\'f0\'95\'db\'91\'b6\'82\'b7\'82\'e9\'95\'cf\'90\'94\par
+int8 m_SelectDist;\par
+\par
+=========================================================\par
+\'8f\'89\'8a\'fa\'89\'bb\'8a\'d6\'90\'94\par
+Init()\par
+\{\par
+\'83\'66\'83\'42\'83\'58\'83\'4e\'94\'7a\'97\'f1\'82\'f0\'8f\'89\'8a\'fa\'89\'bb\'82\'b7\'82\'e9\par
+m_SelectDist = 0;\par
+m_SelectSource = 0;\par
+\}\par
+==========================================================\par
+\par
+\'83\'58\'83\'65\'83\'62\'83\'76\'8f\'88\'97\'9d\par
+Update()\par
+\{\par
+Step1\par
+\'8f\'89\'8a\'fa\'89\'bb\par
+\par
+Init()\par
+\'83\'58\'83\'65\'83\'62\'83\'76\'82\'51\'82\'d6\par
+Step2\par
+\'8d\'58\'90\'56\par
+\par
+====================== \'88\'da\'93\'ae\'8c\'b3\'94\'7a\'97\'f1\'82\'cc\'91\'49\'91\'f0 =============================\par
+\'88\'da\'93\'ae\'8c\'b3\'82\'f0\'91\'49\'82\'d4 ( 1 or 2 or 3 )\par
+int8 select_pole\par
+int key = g_Input.GetKey\par
+\par
+printf(" \'88\'da\'93\'ae\'8c\'b3\'82\'f0\'91\'49\'82\'f1\'82\'c5\'82\'ad\'82\'be\'82\'b3\'82\'a2 1 or 2 or 3 \\n")\par
+if (key == '1')select_pole = 0\par
+if else(key == '2')select_pole = 1\par
+if else(key == '3')select_pole = 2\par
+\'82\'bb\'82\'ea\'88\'c8\'8a\'4f\'82\'c8\'82\'e7\'82\'e0\'82\'a4\'88\'ea\'93\'78\'91\'49\'82\'d1\'82\'c8\'82\'a8\'82\'b7\par
+\'81\'ab\par
+for(i = 0; i < DISK_NUM; ++i)\par
+\'88\'da\'93\'ae\'8c\'b3\'94\'7a\'97\'f1\'82\'cc\'8d\'c5\'8f\'89\'82\'a9\'82\'e7\'82\'dd\'82\'e9\par
+\'94\'7a\'97\'f1[ i][select_pole] != DISK_EMPTY\'81\'40->  m_SelectSource = i\par
+\'81\'ab\par
+\'8d\'c5\'8c\'e3\'82\'dc\'82\'c5\'82\'c8\'82\'a9\'82\'c1\'82\'bd\'82\'e7\'82\'e0\'82\'a4\'88\'ea\'93\'78\'91\'49\'82\'d1\'82\'c8\'82\'a8\'82\'b7\par
+printf(" \'88\'da\'93\'ae\'82\'c5\'82\'ab\'82\'e9\'83\'66\'83\'42\'83\'58\'83\'4e\'82\'aa\'82\'a0\'82\'e8\'82\'dc\'82\'b9\'82\'f1\'81\'42\'82\'e0\'82\'a4\'88\'ea\'93\'78\'91\'49\'82\'f1\'82\'c5\'82\'ad\'82\'be\'82\'b3\'82\'a2\'81\'42 \\n")\par
+==================================================================\par
+\par
+===================== \'88\'da\'93\'ae\'90\'e6\'94\'7a\'97\'f1\'82\'cc\'91\'49\'91\'f0 ============================\par
+\'88\'da\'93\'ae\'90\'e6\'82\'f0\'91\'49\'82\'d4( 1 or 2 or 3 )]\par
+int8 select_pole\par
+int key = g_Input.GetKey\par
+\par
+printf(" \'88\'da\'93\'ae\'90\'e6\'82\'f0\'91\'49\'82\'f1\'82\'c5\'82\'ad\'82\'be\'82\'b3\'82\'a2 1 or 2 or 3 \\n")\par
+if (key == '1')\'81\'40select_pole = 0\par
+if else(key == '2') select_pole = 1\par
+if else(key == '3') select_pole = 2\par
+\'82\'bb\'82\'ea\'88\'c8\'8a\'4f\'82\'c8\'82\'e7\'82\'e0\'82\'a4\'88\'ea\'93\'78\'91\'49\'82\'d1\'82\'c8\'82\'a8\'82\'b7\par
+\'81\'ab\par
+\'88\'da\'93\'ae\'8c\'b3\'82\'c6\'93\'af\'82\'b6\'94\'7a\'97\'f1\'82\'c8\'82\'e7\'91\'49\'82\'d1\'92\'bc\'82\'b7\par
+if (select_pole == m_SelectSource) continue\par
+\'81\'ab\par
+for(i = 0; i < 3; ++i)\par
+\'88\'da\'93\'ae\'90\'e6\'94\'7a\'97\'f1\'82\'cc\'8d\'c5\'8c\'e3\'82\'a9\'82\'e7\'92\'b2\'82\'d7\'82\'e9\par
+if ( m_Disk[2 - i] ==  DISK_EMPTY )\'82\'c8\'82\'e7\'93\'fc\'82\'ea\'91\'d6\'82\'a6\'82\'c4\'8f\'49\'97\'b9\par
+\'81\'ab\par
+if ( \'88\'da\'93\'ae\'8c\'b3\'94\'7a\'97\'f1[\'91\'49\'91\'f0\'82\'b3\'82\'ea\'82\'c4\'82\'a2\'82\'e9\'97\'76\'91\'66]  > \'88\'da\'93\'ae\'90\'e6\'94\'7a\'97\'f1[2 - i] ) \par
+\'91\'49\'82\'d7\'82\'c8\'82\'a2\'82\'cc\'82\'c5\'88\'da\'93\'ae\'8c\'b3\'82\'a9\'82\'e7\'91\'49\'82\'d1\'82\'c8\'82\'a8\'82\'b7\par
+==================================================================\par
+\par
+\par
+====================== \'83\'4e\'83\'8a\'83\'41\'94\'bb\'92\'e8 ==================================\par
+\par
+if ( \'94\'7a\'97\'f1[0][2] != DISK_SMALL ) return\par
+if ( \'94\'7a\'97\'f1[1][2] != DISK_MEDIUM) return\par
+if (\'94\'7a\'97\'f1[2][2] != DISK_LARGE  ) return\par
+\par
+\'91\'53\'82\'c4\'82\'ccif\'95\'b6\'82\'aa\'82\'bb\'82\'eb\'82\'ed\'82\'c8\'82\'af\'82\'ea\'82\'ce\'8f\'9f\'97\'98\par
+g_GameClear = true;\par
+\par
+==================================================================\par
+\}\par
+\par
+\par
+==========================================================\par
+\par
+\'95\'60\'89\'e6\par
+Draw()\par
+\{\par
+char hoge[256] = \{"\\0"\};\par
+// \'95\'60\'89\'e6\'97\'70\'82\'c9\'89\'c1\'8d\'48\'82\'b7\'82\'e9\par
+for(int y = 0; y < DISK_NUM; ++y)\{\par
+    for(int x = 0; x < DISK_NUM; ++x)\{\par
+\tab m_Disk[y][x]\'82\'f0\'92\'b2\'82\'d7\'82\'c4\'8a\'69\'94\'5b\'82\'b3\'82\'ea\'82\'c4\'82\'a2\'82\'e9\'83\'66\'83\'42\'83\'58\'83\'4e\'82\'f0\'92\'b2\'82\'d7\'82\'c4\tab\par
+\tab\'95\'b6\'8e\'9a\'97\'f1\'82\'c9\'8a\'69\'94\'5b\'82\'b5\'82\'c4\'82\'a2\'82\'ad \par
+   \}\par
+\}\par
+\par
+\par
+\'95\'60\'89\'e6\'83\'4e\'83\'89\'83\'58\'82\'c9\'91\'97\'82\'e9\par
+SetDrawBuffer(hoge)\par
+\par
+\}\par
+}
+</content>
+<chapter>メイン
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22\par
+\par
+GameTowerOfHanoi game\par
+\par
+while(true)\par
+\par
+game.Run\par
+\par
+g_Drawer.Clear\par
+\par
+game.Draw\par
+\par
+g_Drawer.Draw\par
+}
+</content>
+<chapter>描画
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22\'81\'5a\'8d\'c5\'8f\'49\'93\'49\'82\'c9\'83\'51\'81\'5b\'83\'80\'82\'f0\'88\'ea\'82\'c2\'82\'c9\'82\'dc\'82\'c6\'82\'df\'82\'e9\'82\'b1\'82\'c6\'82\'f0\'91\'7a\'92\'e8\'82\'b5\'82\'c4\'8d\'a1\'89\'f1\'82\'cd\par
+\'81\'40 \'96\'e1\'82\'c1\'82\'c4\'82\'ab\'82\'bd\'95\'b6\'8e\'9a\'97\'f1\'82\'f0\'82\'bb\'82\'cc\'82\'dc\'82\'dc\'95\'60\'89\'e6\'82\'b7\'82\'e9\par
+\par
+char m_Buffer[256];\par
+\par
+\'96\'e1\'82\'c1\'82\'bd\'95\'b6\'8e\'9a\'97\'f1\'82\'f0\'83\'6f\'83\'62\'83\'74\'83\'40\'82\'c9\'95\'db\'91\'b6\'82\'b7\'82\'e9\par
+void SetDrawBuffer(const char* resource_)\par
+Buffer = resource_\par
+\par
+void Draw(_)\par
+printf("%s",Buffer)\par
+\par
+\par
+\'83\'6f\'83\'62\'83\'74\'83\'40\'82\'c6\'89\'e6\'96\'ca\'82\'f0\'83\'4e\'83\'8a\'83\'41\'82\'b7\'82\'e9\par
+void ClearBuffer()\par
+system("cls")\par
+}
+</content>
+<chapter>インプット
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22\'83\'7d\'83\'8b\'83\'6f\'83\'63\'82\'cc\'82\'e0\'82\'cc\'82\'f0\'82\'bb\'82\'cc\'82\'dc\'82\'dc\'8e\'67\'97\'70\par
+}
+</content>
+<chapter>GameTowerOfHanoi
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22 Disk m_Disk\par
+\par
+// \'8d\'58\'90\'56\par
+vodi Run()\par
+\{\par
+\par
+Step1\par
+\'83\'51\'81\'5b\'83\'80\'82\'c9\'95\'4b\'97\'76\'82\'c8\'8f\'ee\'95\'f1\'82\'f0\'8f\'89\'8a\'fa\'89\'bb\'82\'b7\'82\'e9\par
+g_GameClear = false\par
+\par
+\'83\'58\'83\'65\'83\'62\'83\'76\'82\'f0\'90\'69\'82\'df\'82\'e9\par
+Step2\par
+\par
+// \'83\'51\'81\'5b\'83\'80\'82\'aa\'83\'4e\'83\'8a\'83\'41\'82\'b3\'82\'ea\'82\'c4\'82\'a2\'82\'bd\'82\'e7\par
+if (g_GameClear) \par
+\'83\'58\'83\'65\'83\'62\'83\'76\'82\'f03\'82\'c9\'82\'b7\'82\'e9\par
+break;\par
+\par
+\'83\'49\'83\'75\'83\'57\'83\'46\'83\'4e\'83\'67\'82\'f0\'8d\'58\'90\'56\'82\'b7\'82\'e9\par
+m_Disk.StepUpdate();\par
+\par
+Step3\par
+\'89\'f0\'95\'fa\par
+\par
+printf("\'83\'4e\'83\'8a\'83\'41\'81\'49\'81\'49")\par
+printf("\'82\'e0\'82\'a4\'88\'ea\'93\'78\'97\'56\'82\'d1\'82\'dc\'82\'b7\'82\'a9\'81\'48")\par
+printf("\'97\'56\'82\'d4  return")\par
+printf("\'97\'56\'82\'ce\'82\'c8\'82\'a2 Esc")\par
+\par
+if \'82\'e0\'82\'b5\'83\'8a\'83\'5e\'81\'5b\'83\'93\'82\'aa\'89\'9f\'82\'b3\'82\'ea\'82\'bd\'82\'e7\par
+\{\par
+\tab m_Disk.Init()\par
+\tab\'83\'58\'83\'65\'83\'62\'83\'76\'82\'f01\'82\'c9\'96\'df\'82\'b7\par
+\tab break;\par
+\}\par
+\par
+\par
+\}\par
+\par
+// \'95\'60\'89\'e6\par
+void Draw()\par
+\{\par
+ \'83\'66\'83\'42\'83\'58\'83\'4e\'82\'cc\'95\'60\'89\'e6\par
+ m_Disk.Draw\par
+\par
+\par
+\}\par
+}
+</content>
+<chapter>グローバル
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22\'83\'66\'83\'42\'83\'58\'83\'4e\'82\'cc\'90\'94(\'89\'7e\'94\'d5)\par
+DISK_NUM     3\par
+\par
+\'83\'7c\'81\'5b\'83\'8b\'82\'cc\'90\'94\'89\'7e\'94\'d5\'82\'f0\'92\'75\'82\'ad\'95\'94\'95\'aa\par
+\pard\tx2540 POLE_NUM    3\par
+\par
+\par
+\par
+\'83\'51\'81\'5b\'83\'80\'82\'aa\'83\'4e\'83\'8a\'83\'41\'82\'b3\'82\'ea\'82\'bd\'82\'a9\'82\'c7\'82\'a4\'82\'a9\par
+g_GameClear\par
+\par
+\par
+\par
+}
+</content>
+<chapter>System
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22 // \'93\'fc\'97\'cd\par
+Input g_Input\par
+\par
+\par
+// \'8f\'6f\'97\'cd\par
+Drawer g_Drawer\par
+\par
+}
+</content>
+</group>

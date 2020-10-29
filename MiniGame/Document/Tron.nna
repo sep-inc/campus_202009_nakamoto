@@ -1,0 +1,233 @@
+<chapter>Memo
+<attribute>-1,1,0
+<content>
+</content>
+<chapter>Tron
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22\'81\'9c\'8e\'64\'97\'6c\par
+\tab\par
+\par
+\par
+\'81\'9c\'8f\'9f\'97\'98\'8f\'f0\'8c\'8f\par
+\tab\'81\'45\'90\'b6\'82\'ab\'8e\'63\'82\'e9\par
+\par
+\'81\'9c\'94\'73\'96\'6b\'8f\'f0\'8c\'8f\par
+\tab\'81\'45\'95\'c7\'82\'c9\'93\'96\'82\'bd\'82\'e9\par
+\tab\'81\'45\'88\'da\'93\'ae\'82\'cc\'8b\'4f\'90\'d5\'82\'c9\'93\'96\'82\'bd\'82\'e9\par
+}
+</content>
+<group>
+<chapter>Object
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22\par
+}
+</content>
+<group>
+<chapter>Stage
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22\'8e\'af\'95\'ca m_Stage[\'8f\'63\'95\'9d][\'89\'a1\'95\'9d] \par
+\'8e\'af\'95\'ca m_BlankStage[\'8f\'63\'95\'9d][\'89\'a1\'95\'9d] \par
+\par
+\'83\'52\'83\'93\'83\'58\'83\'67\'83\'89\'83\'4e\'83\'5e\par
+m_BlankStage\'82\'f0\'8f\'89\'8a\'fa\'89\'bb\'82\'b7\'82\'e9\par
+void Stage()\{\par
+for(int i = 0; i <\'89\'a1\'95\'9d; ++i )\par
+m_BlankStage[0][i] = \'95\'c7\par
+m_BlankStage[\'8f\'63\'95\'9d - 1][i] = \'95\'c7\par
+\par
+for(int i = 0; i < \'8f\'63\'95\'9d; ++i)\par
+m_BlankStage[i][0] = \'95\'c7\par
+m_BlankStage[i][\'89\'a1\'95\'9d - 1] = \'95\'c7\par
+\}\par
+\par
+void Init()\par
+\par
+\par
+bool Set(int8 x, int8 y, type)\par
+\'82\'e0\'82\'b5\'8b\'f3\'82\'c8\'82\'e7\'81\'41\'88\'da\'93\'ae\'82\'c5\'82\'ab\'82\'e9\'81\'42\par
+if (m_Stage[y][x] == TYPE_EMPTY)\{\par
+\pard\tx2540 m_Stage[y][x] = type;\par
+reutrun true;\par
+\pard\}\par
+return false\par
+\par
+======================================================\par
+Draw\par
+\par
+\'95\'c7\'8a\'dc\'82\'df\'83\'7d\'83\'58\'96\'da\'82\'cc\'8f\'ee\'95\'f1\'82\'f0\'95\'b6\'8e\'9a\'97\'f1\'82\'c9\'8a\'69\'94\'5b\'82\'b5\'82\'c4\'82\'a2\'82\'ab\'95\'60\'89\'e6\'83\'4e\'83\'89\'83\'58\'82\'c9\'93\'6e\'82\'b7\'81\'42\par
+}
+</content>
+<chapter>Global
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22 Stage g_Stage\par
+}
+</content>
+<chapter>Definition
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22\'83\'76\'83\'8c\'83\'43\'83\'84\'81\'5b\'82\'cc\'8f\'89\'8a\'fa\'8d\'c0\'95\'57X\par
+\'83\'76\'83\'8c\'83\'43\'83\'84\'81\'5b\'82\'cc\'8f\'89\'8a\'fa\'8d\'c0\'95\'57Y\par
+\par
+\'83\'47\'83\'6c\'83\'7e\'81\'5b\'82\'cc\'8f\'89\'8a\'fa\'8d\'c0\'95\'57X\par
+\'83\'47\'83\'6c\'83\'7e\'81\'5b\'82\'cc\'8f\'89\'8a\'fa\'8d\'c0\'95\'57Y\par
+\par
+\'83\'58\'83\'65\'81\'5b\'83\'57\'82\'cc\'89\'a1\'95\'9d\par
+\'83\'58\'83\'65\'81\'5b\'83\'57\'82\'cc\'8f\'63\'95\'9d\par
+\par
+enum \'8e\'af\'95\'ca\par
+TYPE_EMPTY\par
+TYPE_PLAYER\par
+TYPE_ENEMY\par
+TYPE_WALL\par
+}
+</content>
+<chapter>CharacterBase
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22\par
+}
+</content>
+<group>
+<chapter>Player
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22 Step1\par
+\'8f\'89\'8a\'fa\'89\'bb\par
+\'81\'45\par
+\par
+Step2\par
+\'8d\'58\'90\'56\par
+\'81\'45\'88\'da\'93\'ae\par
+\tab\'81\'45\'8c\'fc\'82\'a2\'82\'c4\'82\'a2\'82\'e9\'83\'78\'83\'4e\'83\'67\'83\'8b\'82\'c9\'90\'69\'82\'de\par
+\tab\'81\'45\'93\'fc\'97\'cd\'82\'b3\'82\'ea\'82\'bd\'83\'4c\'81\'5b\'82\'c9\'90\'69\'82\'de\par
+\par
+\par
+\'81\'45\'88\'da\'93\'ae\'82\'b5\'82\'bd\'82\'e7stage\'82\'c9\'8d\'c0\'95\'57\'82\'f0\'91\'97\'82\'e9\par
+\tab false\'82\'c8\'82\'e7\'93\'47\'82\'cc\'8f\'9f\'97\'98\par
+\par
+\par
+\par
+Step3\par
+\'89\'f0\'95\'fa\par
+}
+</content>
+<chapter>Enemy
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22 Step1\par
+\'8f\'89\'8a\'fa\'89\'bb\par
+\'81\'45\par
+\par
+\par
+Step2\par
+\'8d\'58\'90\'56\par
+\par
+\'81\'45\'88\'da\'93\'ae\par
+\tab\'88\'da\'93\'ae\'82\'c5\'82\'ab\'82\'e9\'83\'8b\'81\'5b\'83\'67\'82\'cc\'90\'94\'82\'f0\'8f\'6f\'82\'b5\'82\'c4\'81\'41\'82\'bb\'82\'cc\'82\'a4\'82\'bf\'82\'cc\'82\'c7\'82\'ea\'82\'a9\'82\'c9\'88\'da\'93\'ae\'82\'b7\'82\'e9\par
+\par
+\tab\'8f\'e3->1 :  \'89\'ba->2 :  \'89\'45->3 :  \'8d\'b6->4 :  \'82\'c6\'82\'b7\'82\'e9\par
+\tab 3 \'97\'76\'91\'66\'82\'ccint8\'8c\'5e\'94\'7a\'97\'f1\'82\'f0\'97\'70\'88\'d3\'82\'b7\'82\'e9(\'8e\'a9\'95\'aa\'82\'aa\'82\'a2\'82\'e9\'95\'fb\'8c\'fc\'82\'c9\'82\'cd\'90\'69\'82\'df\'82\'c8\'82\'a2\'82\'bd\'82\'df)\par
+\tab int8 count = 0\par
+\tab move_direction[3]\par
+\tab\'8f\'e3\'82\'c9\'88\'da\'93\'ae\'82\'c5\'82\'ab\'82\'e9\'82\'a9\'81\'48 move_direction[count] = 1;  count++;\par
+\tab\'89\'ba\'82\'c9\'88\'da\'93\'ae\'82\'c5\'82\'ab\'82\'e9\'82\'a9\'81\'48 move_direction[count] = 2;  count++;\par
+\tab\'89\'45\'82\'c9\'88\'da\'93\'ae\'82\'c5\'82\'ab\'82\'e9\'82\'a9\'81\'48 move_direction[count] = 3;  count++;\par
+\tab\'8d\'b6\'82\'c9\'88\'da\'93\'ae\'82\'c5\'82\'ab\'82\'e9\'82\'a9\'81\'48 move_direction[count] = 4;  count++;\par
+\par
+\tab rand() % count \'82\'c5\'88\'da\'93\'ae\'82\'b7\'82\'e9\'8f\'ea\'8f\'8a\'82\'f0\'91\'49\'82\'f1\'82\'c5\'88\'da\'93\'ae\'82\'b7\'82\'e9\par
+\par
+\par
+\'81\'45\'88\'da\'93\'ae\'8c\'e3Stage\'82\'c9\'91\'97\'82\'e9\par
+\tab\'82\'e0\'82\'b5false\'82\'c8\'82\'e7Player\'82\'cc\'8f\'9f\'97\'98\par
+\par
+Step3\par
+\'89\'f0\'95\'fa\par
+}
+</content>
+</group>
+</group>
+<chapter>System
+<attribute>-1,1,0
+<content>
+</content>
+<group>
+<chapter>Drawer
+<attribute>-1,1,1
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22 char* m_DrawBuffer\par
+\par
+void SetBuffer( const char* resouce )\par
+m_DrawBuffer\'82\'c9\'95\'60\'82\'ab\'82\'e0\'82\'de\par
+\par
+void ClearBuffer()\par
+m_DrawBuffer\'82\'f0\'83\'4e\'83\'8a\'83\'41\'82\'b7\'82\'e9\par
+\'83\'52\'83\'93\'83\'5c\'81\'5b\'83\'8b\'89\'e6\'96\'ca\'82\'f0\'83\'4e\'83\'8a\'83\'41\'82\'b7\'82\'e9\par
+\par
+\par
+void DrawBuffer()\par
+\'83\'6f\'83\'62\'83\'74\'83\'40\'82\'f0\'8f\'6f\'97\'cd\'82\'b7\'82\'e9\par
+printf("%s\\n", m_DrawBuffer)\par
+}
+</content>
+<chapter>Input
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22\par
+}
+</content>
+</group>
+<chapter>GameTron
+<attribute>-1,1,0
+<content>
+{\rtf1\ansi\ansicpg932\deff0\deflang1033\deflangfe1041{\fonttbl{\f0\fnil\fcharset128 \'82\'6c\'82\'72 \'82\'6f\'83\'53\'83\'56\'83\'62\'83\'4e;}}
+\viewkind4\uc1\pard\lang1041\f0\fs22 m_Plyaer\par
+m_Enemy\par
+\par
+Step1\par
+\'8f\'89\'8a\'fa\'89\'bb\par
+\par
+\'83\'58\'83\'65\'83\'62\'83\'76\'82\'f0\'82\'b7\'82\'b7\'82\'df\'82\'e9\par
+break\par
+Step2\par
+\'8d\'58\'90\'56\par
+\par
+m_Player.Update\par
+m_Enemy.Update\par
+\par
+if ( \'83\'51\'81\'5b\'83\'80\'82\'aa\'8f\'49\'97\'b9\'82\'b5\'82\'c4\'82\'a2\'82\'bd\'82\'e7 ) \par
+\{\par
+\'83\'58\'83\'65\'83\'62\'83\'76\'82\'f0\'90\'69\'82\'df\'82\'e9\par
+return \par
+\}\par
+\par
+break\par
+Step3\par
+\'89\'f0\'95\'fa\par
+\par
+\'8c\'8b\'89\'ca\'82\'f0\'8f\'6f\'97\'cd\'82\'b5\'82\'c4\'82\'e0\'82\'a4\'88\'ea\'93\'78\'97\'56\'82\'d4\'82\'a9\'82\'f0\'8c\'88\'82\'df\'82\'e9\par
+\par
+break\par
+===================================================\par
+Draw\par
+g_Stage.Draw\par
+}
+</content>
+<chapter>
+<attribute>-1,1,0
+<content>
+</content>
+</group>
