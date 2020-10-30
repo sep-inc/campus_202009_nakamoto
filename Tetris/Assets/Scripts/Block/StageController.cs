@@ -72,7 +72,10 @@ public class StageController : MonoBehaviour
 
         foreach (GameObject element in block_)
         {
+            if (element.transform.position.x >= STAGE_WIDTH) continue;
+            else if (element.transform.position.x < 0) continue;
             if (element.transform.position.y >= STAGE_HEIGHT) continue;
+            else if (element.transform.position.y < 0) continue;
 
             if (!element) continue;
             OnStageBlockData[stage_height - (int)element.transform.position.y, (int)element.transform.position.x] = element;
@@ -129,6 +132,9 @@ public class StageController : MonoBehaviour
             {
                 for (int x = 0; x < STAGE_WIDTH; ++x)
                 {
+                    if (y >= STAGE_HEIGHT || y < 0) continue;
+                    if (x >= STAGE_WIDTH  || x < 0) continue;
+                        
                     OnStageBlockData[y + 1, x] = OnStageBlockData[y, x];
                     if (OnStageBlockData[y, x]) OnStageBlockData[y, x].transform.Translate(0, -1, 0, Space.World);
                 }

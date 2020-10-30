@@ -126,16 +126,6 @@ public class Block : MonoBehaviour
             }
         }
 
-        // 落下処理
-        // タイマーを進める
-        FallTimer += Input.GetKey(KeyCode.DownArrow) ? Time.deltaTime * FastFallMagnification : Time.deltaTime;
-        // 一定時間たったら落下
-        if (FallTimer > FallIntervalTime)
-        {
-            Fall();
-            FallTimer = 0;
-        }
-        
         // もしEキーが押されたら右回転
         if (Input.GetKeyDown(KeyCode.E)) RightRotation();
 
@@ -147,6 +137,17 @@ public class Block : MonoBehaviour
 
         // もし左キーが押されたら左に移動する
         else if (Input.GetKeyDown(KeyCode.LeftArrow)) MoveLeft();
+
+        // 落下処理
+        // タイマーを進める
+        FallTimer += Input.GetKey(KeyCode.DownArrow) ? Time.deltaTime * FastFallMagnification : Time.deltaTime;
+        // 一定時間たったら落下
+        if (FallTimer > FallIntervalTime)
+        {
+            Fall();
+            FallTimer = 0;
+        }
+
 
     }
 
@@ -232,10 +233,10 @@ public class Block : MonoBehaviour
             // 現在の座標から左右に2マス進んだ座標を作成
             Vector3[] vector = new Vector3[4]
             {
-                    new Vector3(pos.x + 1,pos.y,0),
-                    new Vector3(pos.x + 2,pos.y,0),
-                    new Vector3(pos.x - 1,pos.y,0),
-                    new Vector3(pos.x - 2,pos.y,0),
+                    new Vector3(pos.x + 1,pos.y,pos.z),
+                    new Vector3(pos.x + 2,pos.y,pos.z),
+                    new Vector3(pos.x - 1,pos.y,pos.z),
+                    new Vector3(pos.x - 2,pos.y,pos.z),
             };
 
             // 順番に移動できるかを調べる
@@ -290,10 +291,10 @@ public class Block : MonoBehaviour
             // 現在の座標から左右に2マス進んだ座標を作成
             Vector3[] vector = new Vector3[4]
             {
-                    new Vector3(pos.x + 1,pos.y,0),
-                    new Vector3(pos.x + 2,pos.y,0),
-                    new Vector3(pos.x - 1,pos.y,0),
-                    new Vector3(pos.x - 2,pos.y,0),
+                    new Vector3(pos.x + 1,pos.y,pos.z),
+                    new Vector3(pos.x + 2,pos.y,pos.z),
+                    new Vector3(pos.x - 1,pos.y,pos.z),
+                    new Vector3(pos.x - 2,pos.y,pos.z),
             };
 
             // 順番に移動できるかを調べる
