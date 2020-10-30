@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ShapeLine : Shape2D
 {
+    [SerializeField] private GameObject line_start = default;
     [SerializeField] private GameObject line_end   = default;
 
+    public Vector2 StartPos => line_start.transform.position;
     public Vector2 EndPos => line_end.transform.position;
 
     public override bool IsJudgable(Shape2DList shape_)
@@ -61,14 +63,14 @@ public class ShapeLine : Shape2D
     public bool HitTest(ShapeLine other)
     {
         // 始点から終点までのベクトルを算出
-        Vector2 start_to_end         = new Vector2(line_end.transform.position.x - transform.position.x, line_end.transform.position.y - transform.position.y);
+        Vector2 start_to_end         = EndPos - StartPos;
 
         // 自身の始点から相手の始点までのベクトルを算出
-        Vector2 start_to_othre_start = new Vector2(other.transform.position.x - transform.position.x, other.transform.position.y - transform.position.y);
+        Vector2 start_to_othre_start = other.StartPos - StartPos;
 
         // 自身の始点から相手の終点までのベクトルを算出
-        Vector2 start_to_othre_end   = new Vector2(other.line_end.transform.position.x - transform.position.x, other.line_end.transform.position.y - transform.position.y);
-
+        Vector2 start_to_othre_end   = other.EndPos - StartPos;
+        
         float dot1 = MyMath.Vec2Cross(start_to_end, start_to_othre_start);
         float dot2 = MyMath.Vec2Cross(start_to_end, start_to_othre_end);
 
@@ -78,9 +80,10 @@ public class ShapeLine : Shape2D
             return false;
         }
 
-        start_to_end         = new Vector2(other.line_end.transform.position.x - other.transform.position.x, other.line_end.transform.position.y - other.transform.position.y);
-        start_to_othre_start = new Vector2(transform.position.x - other.transform.position.x, transform.position.y - other.transform.position.y);
-        start_to_othre_end   = new Vector2(line_end.transform.position.x - other.transform.position.x, line_end.transform.position.y - other.transform.position.y);
+        // 相手側からも調べる
+        start_to_end         = other.EndPos - other.StartPos;
+        start_to_othre_start = StartPos - other.StartPos;
+        start_to_othre_end   = EndPos - other.StartPos;
 
         dot1 = MyMath.Vec2Cross(start_to_end, start_to_othre_start);
         dot2 = MyMath.Vec2Cross(start_to_end, start_to_othre_end);
@@ -98,8 +101,8 @@ public class ShapeLine : Shape2D
     {
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, 0.1f);
+        Gizmos.DrawWireSphere(line_start.transform.position, 0.1f);
         Gizmos.DrawWireSphere(line_end.transform.position, 0.1f);
-        Gizmos.DrawLine(transform.position, line_end.transform.position);
+        Gizmos.DrawLine(line_start.transform.position, line_end.transform.position);
     }
 }

@@ -85,8 +85,11 @@ public class ShapeCircle : Shape2D
     public bool HitTest(ShapeCircle other)
     {
         Vector2 to_other_vec = other.transform.position - transform.position;
+        
+        float c = (to_other_vec.x * to_other_vec.x) + (to_other_vec.y * to_other_vec.y);
+        float sum_radius = radius + other.radius;
 
-        if (to_other_vec.magnitude <= radius + other.radius)
+        if (c <= sum_radius * sum_radius)
         {
             return true;
         }

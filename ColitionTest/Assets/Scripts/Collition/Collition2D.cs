@@ -40,24 +40,79 @@ namespace My
 
         public static bool CheckCircleLine(ShapeCircle circle_, ShapeLine line_)
         {
-            float distance = MyMath.CalcPointLineDist(circle_.transform.position, line_.transform.position, line_.EndPos);
+            // 線の原点から終点までのベクトル
+            Vector2 start_to_end    = line_.EndPos - line_.StartPos;
+            // 線の原点から円の中心点までのベクトル
+            Vector2 start_to_center = (Vector2)circle_.transform.position - line_.StartPos;
+            // 線の終点から円の中心点までのベクトル
+            Vector2 end_to_center   = (Vector2)circle_.transform.position - line_.EndPos;
+            // 線の原点から終点までのベクトルを正規化したベクトル
+            Vector2 normal_start_to_end = start_to_end.normalized;
 
-            if (distance < circle_.Radius)
+            // 点の中心から線に向けて射影した長さを算出
+            float distance_projection = MyMath.Vec2Cross(start_to_center, normal_start_to_end);
+            
+            // 射影した長さが半径を超えていたら当たっていない
+            if (Mathf.Abs(distance_projection) > circle_.Radius) return false;
+
+
+            // 線を起点とした線の原点から円の中心点の角度と線の終点から円の中心点の角度が、
+            // 鋭角と鈍角ともに存在していた場合あたっている
+            if (Vector2.Dot(start_to_center, start_to_end) * Vector2.Dot(end_to_center, start_to_end) <= 0f)
             {
                 return true;
+            }
+            else
+            {
+                // 線の原点から円の中心点の長さが円の半径よりも短かったら当たり
+                // もしくは線の終点から円の中心点の長さが円の半径よりも短かったら当たり
+                if (start_to_center.magnitude < circle_.Radius ||
+                    end_to_center.magnitude < circle_.Radius)
+                {
+                    return true;
+                }
             }
 
             return false;
         }
 
 
+        // 円のカプセルの当たり判定
         public static bool CheckCircleCapsule(ShapeCircle circle_, ShapeCapsule capsule_)
         {
-            float distance = MyMath.CalcPointLineDist(circle_.transform.position, capsule_.transform.position, capsule_.EndPos);
+            // 線の原点から終点までのベクトル
+            Vector2 start_to_end = capsule_.EndPos - capsule_.StartPos;
+            // 線の原点から円の中心点までのベクトル
+            Vector2 start_to_center = (Vector2)circle_.transform.position - capsule_.StartPos;
+            // 線の終点から円の中心点までのベクトル
+            Vector2 end_to_center = (Vector2)circle_.transform.position - capsule_.EndPos;
+            // 線の原点から終点までのベクトルを正規化したベクトル
+            Vector2 normal_start_to_end = start_to_end.normalized;
+            // 円の半径とカプセルの半径を足した値
+            float sum_radius = circle_.Radius + capsule_.Radius;
 
-            if (distance < circle_.Radius + capsule_.Radius)
+            // 点の中心から線に向けて射影した長さを算出
+            float distance_projection = MyMath.Vec2Cross(start_to_center, normal_start_to_end);
+
+            // 射影した長さが円とカプセルの半径を足したものを超えていたら当たっていない
+            if (Mathf.Abs(distance_projection) > sum_radius) return false;
+
+
+            // 線を起点とした線の原点から円の中心点の角度と線の終点から円の中心点の角度が、
+            // 鋭角と鈍角ともに存在していた場合あたっている
+            if (Vector2.Dot(start_to_center, start_to_end) * Vector2.Dot(end_to_center, start_to_end) <= 0f)
             {
                 return true;
+            }
+            else
+            {
+                // 線の原点から円の中心点の長さが円とカプセルの半径を足したものよりも短かったら当たり
+                // もしくは線の終点から円の中心点の長さが円とカプセルの半径を足したものよりも短かったら当たり
+                if (start_to_center.magnitude < sum_radius ||
+                    end_to_center.magnitude < sum_radius)
+                {
+                    return true;
+                }
             }
 
             return false;

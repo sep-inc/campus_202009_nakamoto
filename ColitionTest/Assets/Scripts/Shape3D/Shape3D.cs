@@ -13,9 +13,12 @@ public abstract class Shape3D : MonoBehaviour
         SHAPE_SEGMENT,      // 線3D
     }
 
+    // 形を返す関数
     abstract public Shape3DList GetShape();
 
+    // 当たり判定を行う関数
     abstract public bool HitTest(Shape3D shape_);
 
+    // 当たり判定を行うかどうかを決める関数
     abstract public bool IsJudgable(Shape3DList shape_);
 }

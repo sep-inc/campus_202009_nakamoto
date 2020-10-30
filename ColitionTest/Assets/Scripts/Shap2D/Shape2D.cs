@@ -13,9 +13,12 @@ public abstract class Shape2D : MonoBehaviour
         SHAPE_LINE,         // 線2D
     }
 
+    // 形を返す関数
     abstract public Shape2DList GetShape();
 
+    // 当たり判定を行う関数
     abstract public bool HitTest(Shape2D shape_);
 
+    // 当たり判定を行うかどうかを決める関数
     abstract public bool IsJudgable(Shape2DList shape_);
 }

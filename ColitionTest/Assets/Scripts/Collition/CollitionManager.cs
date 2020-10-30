@@ -8,7 +8,6 @@ public class CollitionManager : MonoBehaviour
     [SerializeField] Shape3D[] shape3D_list = default;
 
 
-
     private void OnDrawGizmos()
     {
         // 2Dのオブジェクト同士の当たり判定

@@ -39,7 +39,7 @@ namespace My
         {
             float distance = MyMath.CalcPointLineDist(sphere_.transform.position, segment_.transform.position, segment_.EndPos);
 
-            if (distance < sphere_.Radius)
+            if (distance <= sphere_.Radius)
             {
                 return true;
             }

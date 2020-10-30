@@ -66,15 +66,23 @@ public class ShapeCapsule3D : Shape3D
 
     public bool HitTest(ShapeCapsule3D other)
     {
-
+        // 自分の原点から相手の原点から終点までの線の最短距離を算出
         float A_CD = MyMath.CalcPointLineDist(transform.position, other.transform.position, other.line_end.transform.position);
+        // 自分の終点から相手の原点から終点までの線の最短距離を算出
         float B_CD = MyMath.CalcPointLineDist(line_end.transform.position, other.transform.position, other.line_end.transform.position);
+        // 相手の原点から自分の原点から終点までの線の最短距離を算出
         float C_AB = MyMath.CalcPointLineDist(other.transform.position, transform.position, line_end.transform.position);
+        // 相手の原点から自分の原点から終点までの線の最短距離を算出
         float D_AB = MyMath.CalcPointLineDist(other.line_end.transform.position, transform.position, line_end.transform.position);
 
+        // 一番距離が短いのを採用する
         float min_distance = Mathf.Min(A_CD, B_CD, C_AB, D_AB);
-        float distance = radius + other.radius;
-        if (min_distance <= distance)
+
+        // お互いの半径を足したものを算出
+        float sum_radius = radius + other.radius;
+
+        // 一番距離が短い線がお互いの半径を足したもの以下なら当たり
+        if (min_distance <= sum_radius)
         {
             return true;
         }
