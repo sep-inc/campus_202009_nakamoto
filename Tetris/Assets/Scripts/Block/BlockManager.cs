@@ -88,8 +88,13 @@ public class BlockManager : MonoBehaviour
         }
 
 
-        // ストック
-        Stock();
+        // Sキーが押されたらブロックをストックする
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            // ストック
+            Stock();
+        }
+
 
     }
 
@@ -113,8 +118,6 @@ public class BlockManager : MonoBehaviour
     // ブロックのストック
     private void Stock()
     {
-        if (Input.GetKeyDown(KeyCode.S) == false) return;
-
         // ストックが空かどうかを調べる
         if (StockBlock == null) {
             // 空の場合ストックに入れて操作中ブロックをストックに保存する
