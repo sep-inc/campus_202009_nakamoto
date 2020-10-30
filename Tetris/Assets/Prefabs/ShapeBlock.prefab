@@ -43,4 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869c1a5aca9389642804e813935e8e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StageControllerObj: {fileID: 0}
   BlockCell: {fileID: 3781831554898398116, guid: aaba42108f7f08145acfeca97a3a2b3a, type: 3}
+  FallIntervalTime: 1
+  FastFallMagnification: 15

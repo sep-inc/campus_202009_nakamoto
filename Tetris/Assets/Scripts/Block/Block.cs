@@ -14,9 +14,11 @@ public class Block : MonoBehaviour
     private GameObject[] BlockObject;
     private int[,] BlockData;
     private Color BlockColor;
+    private const int BlockDataSquareSize = 5;
 
     private float FallTimer = 0f;
-    private float FallInterval = 1f;
+    [SerializeField] float FallIntervalTime = 1f;
+    [SerializeField] float FastFallMagnification = 2f;
 
     // ブロック着地したかどうかを保存する変数
     private bool isLanding = false;
@@ -70,16 +72,17 @@ public class Block : MonoBehaviour
         }
 
 
+        const int center_pos = 2;
         int create_count = 0;
-        for (int y = 0; y < 5; ++y)
+        for (int y = 0; y < BlockDataSquareSize; ++y)
         {
-            for (int x = 0; x < 5; ++x)
+            for (int x = 0; x < BlockDataSquareSize; ++x)
             {
                 if (BlockData[y, x] == 1)
                 {
                     Vector3 to_center_vec = Vector3.zero;
-                    to_center_vec.x = x - 2;
-                    to_center_vec.y = y - 2;
+                    to_center_vec.x = x - center_pos;
+                    to_center_vec.y = y - center_pos;
 
                     to_center_vec.y = -to_center_vec.y;
 
@@ -124,8 +127,15 @@ public class Block : MonoBehaviour
         }
 
         // 落下処理
-        Fall();
-
+        // タイマーを進める
+        FallTimer += Input.GetKey(KeyCode.DownArrow) ? Time.deltaTime * FastFallMagnification : Time.deltaTime;
+        // 一定時間たったら落下
+        if (FallTimer > FallIntervalTime)
+        {
+            Fall();
+            FallTimer = 0;
+        }
+        
         // もしEキーが押されたら右回転
         if (Input.GetKeyDown(KeyCode.E)) RightRotation();
 
@@ -143,36 +153,23 @@ public class Block : MonoBehaviour
     // 落下処理
     private void Fall()
     {
-        // タイマーを進める
-        FallTimer += Time.deltaTime;
+         // 次に落ちる座標を算出する
+         Vector3 next_pos = transform.position;
+         next_pos.y--;
 
-        // 下キーが押されていたら落下間隔を短くする
-        FallInterval = Input.GetKey(KeyCode.DownArrow) ? .05f : 1f;
+         // 落ちた先にが移動できるかどうかを調べる
+         if (StageControllerScript.AbleMove(ref next_pos, ref BlockData) == false)
+         {
+             // 移動できない場合
+             // 着地フラグをtrueにする
+             isLanding = true;
 
-     
-        if (FallTimer > FallInterval)
-        {
-            // 次に落ちる座標を算出する
-            Vector3 next_pos = transform.position;
-            next_pos.y--;
-
-            // 落ちた先にが移動できるかどうかを調べる
-            if (StageControllerScript.AbleMove(ref next_pos, ref BlockData) == false)
-            {
-                // 移動できない場合
-                // 着地フラグをtrueにする
-                isLanding = true;
-
-                StageControllerScript.SetBlock(BlockObject);
-                Destroy(gameObject);
-            }
-
-            // 移動できる場合
-            // タイマーを初期化
-            FallTimer = 0;
-            // 移動する
-            transform.Translate(0, -1, 0, Space.World);
-        }
+             StageControllerScript.SetBlock(BlockObject);
+             Destroy(gameObject);
+         }
+         
+         // 移動する
+         transform.Translate(Vector3.down, Space.World);
     }
 
 
@@ -184,7 +181,7 @@ public class Block : MonoBehaviour
 
         if (StageControllerScript.AbleMove(ref next_pos, ref BlockData))
         {
-            transform.Translate(1, 0, 0, Space.World);
+            transform.Translate(Vector3.right, Space.World);
         }
     }
 
@@ -196,7 +193,7 @@ public class Block : MonoBehaviour
 
         if (StageControllerScript.AbleMove(ref next_pos, ref BlockData))
         {
-            transform.Translate(-1, 0, 0, Space.World);
+            transform.Translate(Vector3.left, Space.World);
         }
     }
 
@@ -205,15 +202,15 @@ public class Block : MonoBehaviour
     private void RightRotation()
     {
         // 回転後のブロックの情報を保存する変数
-        int[,] new_block_data = new int[5, 5];
+        int[,] new_block_data = new int[BlockDataSquareSize, BlockDataSquareSize];
 
         // 右回り
         // 配列を並べ替える
-        for (int y = 0; y < 5; ++y)
+        for (int y = 0; y < BlockDataSquareSize; ++y)
         {
-            for (int x = 0; x < 5; ++x)
+            for (int x = 0; x < BlockDataSquareSize; ++x)
             {
-                new_block_data[y, x] = BlockData[4 - x, y];
+                new_block_data[y, x] = BlockData[(BlockDataSquareSize - 1) - x, y];
             }
         }
 
@@ -263,15 +260,15 @@ public class Block : MonoBehaviour
     private void LeftRotation()
     {
         // 回転後のブロックの情報を保存する変数
-        int[,] new_block_data = new int[5, 5];
+        int[,] new_block_data = new int[BlockDataSquareSize, BlockDataSquareSize];
 
         // 左回り
         // 配列を並べ替える
-        for (int y = 0; y < 5; ++y)
+        for (int y = 0; y < BlockDataSquareSize; ++y)
         {
-            for (int x = 0; x < 5; ++x)
+            for (int x = 0; x < BlockDataSquareSize; ++x)
             {
-                new_block_data[y, x] = BlockData[x, 4 - y];
+                new_block_data[y, x] = BlockData[x, (BlockDataSquareSize - 1) - y];
             }
         }
 
@@ -328,9 +325,9 @@ public class Block : MonoBehaviour
         // ブロックの生成された数をカウントする変数
         int create_count = 0;
 
-        for (int y = 0; y < 5; ++y)
+        for (int y = 0; y < BlockDataSquareSize; ++y)
         {
-            for (int x = 0; x < 5; ++x)
+            for (int x = 0; x < BlockDataSquareSize; ++x)
             {
                 if (BlockData[y, x] == 1)
                 {

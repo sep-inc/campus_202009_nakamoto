@@ -27,7 +27,7 @@ public class BlockManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        NextBlock = new GameObject[3];
+        NextBlock = new GameObject[NextBlockPoint.Length];
 
         // 次に生成されるオブジェクトの初期化
         for (int i = 0; i < NextBlockPoint.Length; ++i)
@@ -63,16 +63,15 @@ public class BlockManager : MonoBehaviour
         // 次に落ちてくるブロックの1番目が空なら
         if (NextBlock[0] == null)
         {
-            // 1番目に2番目を入れる
-            NextBlock[0] = NextBlock[1];
-            NextBlock[0].transform.position = NextBlockPoint[0].transform.position;
+            for(int i = 0; i < NextBlock.Length - 1; ++i)
+            { 
+                // 上にずらす
+                NextBlock[i] = NextBlock[i + 1];
+                NextBlock[i].transform.position = NextBlockPoint[i].transform.position;
+            }
 
-            // 2番目に3番目を入れる
-            NextBlock[1] = NextBlock[2];
-            NextBlock[1].transform.position = NextBlockPoint[1].transform.position;
-
-            // 3番目のブロックを生成する
-            NextBlock[2] = CreateBlock(NextBlockPoint[2].transform.position);
+            // 最後のブロックを生成する
+            NextBlock[NextBlock.Length - 1] = CreateBlock(NextBlockPoint[NextBlock.Length - 1].transform.position);
 
         }
 
