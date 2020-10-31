@@ -23,6 +23,7 @@ public class BlockManager : MonoBehaviour
     // ストック中のブロックの場所を保存する変数
     [SerializeField] GameObject StockBlockPoint = null;
 
+    public bool cannotCreate { get; private set; } = false;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +45,8 @@ public class BlockManager : MonoBehaviour
         {
             if (OperationBlockScript.CannotMove() == true)
             {
-                SceneController.LoadNextScene();
+                cannotCreate = true;
+                return;
             }
         }
 

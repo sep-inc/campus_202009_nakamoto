@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleScenecontroller : MonoBehaviour
+public class TitleScenecontroller : SceneControllerBase
 {
     // Update is called once per frame
     void Update()
@@ -10,7 +10,12 @@ public class TitleScenecontroller : MonoBehaviour
         // 左クリックが押されたらシーンを遷移する
         if (Input.GetMouseButtonDown(0))
         {
-            SceneController.LoadNextScene();
+            ChangeScene();
         }
+    }
+
+    public override void ChangeScene()
+    {
+        SceneController.LoadNextScene();
     }
 }
