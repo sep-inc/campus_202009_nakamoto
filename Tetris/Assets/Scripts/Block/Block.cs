@@ -14,7 +14,6 @@ public class Block : MonoBehaviour
     private GameObject[] BlockObject;
     private int[,] BlockData;
     private Color BlockColor;
-    private const int BlockDataSquareSize = 5;
 
     private float FallTimer = 0f;
     [SerializeField] float FallIntervalTime = 1f;
@@ -74,9 +73,9 @@ public class Block : MonoBehaviour
 
         const int center_pos = 2;
         int create_count = 0;
-        for (int y = 0; y < BlockDataSquareSize; ++y)
+        for (int y = 0; y < BlocksDefinition.BLOCK_DATA_HEIGHT; ++y)
         {
-            for (int x = 0; x < BlockDataSquareSize; ++x)
+            for (int x = 0; x < BlocksDefinition.BLOCK_DATA_WIDTH; ++x)
             {
                 if (BlockData[y, x] == 1)
                 {
@@ -203,15 +202,15 @@ public class Block : MonoBehaviour
     private void RightRotation()
     {
         // 回転後のブロックの情報を保存する変数
-        int[,] new_block_data = new int[BlockDataSquareSize, BlockDataSquareSize];
+        int[,] new_block_data = new int[BlocksDefinition.BLOCK_DATA_HEIGHT, BlocksDefinition.BLOCK_DATA_WIDTH];
 
         // 右回り
         // 配列を並べ替える
-        for (int y = 0; y < BlockDataSquareSize; ++y)
+        for (int y = 0; y < BlocksDefinition.BLOCK_DATA_HEIGHT; ++y)
         {
-            for (int x = 0; x < BlockDataSquareSize; ++x)
+            for (int x = 0; x < BlocksDefinition.BLOCK_DATA_WIDTH; ++x)
             {
-                new_block_data[y, x] = BlockData[(BlockDataSquareSize - 1) - x, y];
+                new_block_data[y, x] = BlockData[(BlocksDefinition.BLOCK_DATA_HEIGHT - 1) - x, y];
             }
         }
 
@@ -261,15 +260,15 @@ public class Block : MonoBehaviour
     private void LeftRotation()
     {
         // 回転後のブロックの情報を保存する変数
-        int[,] new_block_data = new int[BlockDataSquareSize, BlockDataSquareSize];
+        int[,] new_block_data = new int[BlocksDefinition.BLOCK_DATA_HEIGHT, BlocksDefinition.BLOCK_DATA_WIDTH];
 
         // 左回り
         // 配列を並べ替える
-        for (int y = 0; y < BlockDataSquareSize; ++y)
+        for (int y = 0; y < BlocksDefinition.BLOCK_DATA_HEIGHT; ++y)
         {
-            for (int x = 0; x < BlockDataSquareSize; ++x)
+            for (int x = 0; x < BlocksDefinition.BLOCK_DATA_WIDTH; ++x)
             {
-                new_block_data[y, x] = BlockData[x, (BlockDataSquareSize - 1) - y];
+                new_block_data[y, x] = BlockData[x, (BlocksDefinition.BLOCK_DATA_WIDTH - 1) - y];
             }
         }
 
@@ -326,9 +325,9 @@ public class Block : MonoBehaviour
         // ブロックの生成された数をカウントする変数
         int create_count = 0;
 
-        for (int y = 0; y < BlockDataSquareSize; ++y)
+        for (int y = 0; y < BlocksDefinition.BLOCK_DATA_HEIGHT; ++y)
         {
-            for (int x = 0; x < BlockDataSquareSize; ++x)
+            for (int x = 0; x < BlocksDefinition.BLOCK_DATA_WIDTH; ++x)
             {
                 if (BlockData[y, x] == 1)
                 {

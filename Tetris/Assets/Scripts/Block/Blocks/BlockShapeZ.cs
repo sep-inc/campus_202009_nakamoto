@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class BlockShapeZ
 {
-    private static int[,] BlockParam = new int[5, 5]
+    private static int[,] BlockData = new int[BlocksDefinition.BLOCK_DATA_HEIGHT, BlocksDefinition.BLOCK_DATA_WIDTH]
     {
         { 0,0,0,0,0},
         { 0,1,1,0,0},
@@ -14,7 +14,7 @@ public static class BlockShapeZ
     };
     // ブロックシェイプクラスの作成
 
-    public static int[,] GetBlockData() { return BlockParam; }
+    public static int[,] GetBlockData() { return BlockData; }
 
     public static Color GetBlockColor() { return Color.red; }
 }

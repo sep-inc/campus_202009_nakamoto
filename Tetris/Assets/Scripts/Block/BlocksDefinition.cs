@@ -16,5 +16,7 @@ public class BlocksDefinition
         BLOCK_Z,
         BLOCK_NUM,
     };
-    
+
+    public const int BLOCK_DATA_WIDTH  = 5;
+    public const int BLOCK_DATA_HEIGHT = 5;
 }

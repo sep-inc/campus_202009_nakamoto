@@ -22,24 +22,22 @@ public class StageController : MonoBehaviour
     {
 
         const int block_num = 4;
-        const int block_data_square_size = 5;
         const int block_square_center_pos = 2;
-        const int stage_height = STAGE_HEIGHT - 1;
 
         // 検索要素を算出
         Vector2[] search_index = new Vector2[block_num];
         int count = 0;
        
-        for (int y = 0; y < block_data_square_size; ++y)
+        for (int y = 0; y < BlocksDefinition.BLOCK_DATA_HEIGHT; ++y)
         {
-            for(int x = 0; x < block_data_square_size; ++x)
+            for(int x = 0; x < BlocksDefinition.BLOCK_DATA_WIDTH; ++x)
             {
                 if (blockData_[y,x] == 1)
                 {
                     search_index[count] = new Vector2(pos_.x + (x - block_square_center_pos), pos_.y + -(y - block_square_center_pos));
 
                     // 配列に変換
-                    search_index[count].y = stage_height - search_index[count].y;
+                    search_index[count].y = (STAGE_HEIGHT - 1) - search_index[count].y;
                     
                     count++;
                 }

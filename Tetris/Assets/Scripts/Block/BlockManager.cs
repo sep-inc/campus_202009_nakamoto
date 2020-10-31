@@ -108,7 +108,7 @@ public class BlockManager : MonoBehaviour
         Block block = gameObject.GetComponent<Block>();
 
         // ブロックの初期化
-        block.Create((BlocksDefinition.BlockList)Random.Range(0, 7), StagecontrollerObject);
+        block.Create((BlocksDefinition.BlockList)Random.Range(0, (int)BlocksDefinition.BlockList.BLOCK_NUM), StagecontrollerObject);
 
         return gameObject;
     }
