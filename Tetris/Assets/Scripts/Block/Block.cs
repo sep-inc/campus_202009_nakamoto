@@ -12,7 +12,7 @@ public class Block : MonoBehaviour
 
     [SerializeField] GameObject BlockCell = null;
     private GameObject[] BlockObject;
-    private int[,] BlockData;
+    private int[,] blockData;
     private Color BlockColor;
 
     private float FallTimer = 0f;
@@ -28,6 +28,8 @@ public class Block : MonoBehaviour
     private bool cannotMove = false;
 
 
+    public int[,] BlockData => blockData;
+
     /*
         ブロック初期化関数
         生成時に1度だけ呼ぶ
@@ -39,31 +41,31 @@ public class Block : MonoBehaviour
         switch (block_)
         {
             case BlocksDefinition.BlockList.BLOCK_I:
-                BlockData = BlockShapeI.GetBlockData();
+                blockData = BlockShapeI.GetBlockData();
                 BlockColor = BlockShapeI.GetBlockColor();
                 break;
             case BlocksDefinition.BlockList.BLOCK_J:
-                BlockData = BlockShapeJ.GetBlockData();
+                blockData = BlockShapeJ.GetBlockData();
                 BlockColor = BlockShapeJ.GetBlockColor();
                 break;
             case BlocksDefinition.BlockList.BLOCK_L:
-                BlockData = BlockShapeL.GetBlockData();
+                blockData = BlockShapeL.GetBlockData();
                 BlockColor = BlockShapeL.GetBlockColor();
                 break;
             case BlocksDefinition.BlockList.BLOCK_O:
-                BlockData = BlockShapeO.GetBlockData();
+                blockData = BlockShapeO.GetBlockData();
                 BlockColor = BlockShapeO.GetBlockColor();
                 break;
             case BlocksDefinition.BlockList.BLOCK_S:
-                BlockData = BlockShapeS.GetBlockData();
+                blockData = BlockShapeS.GetBlockData();
                 BlockColor = BlockShapeS.GetBlockColor();
                 break;
             case BlocksDefinition.BlockList.BLOCK_T:
-                BlockData = BlockShapeT.GetBlockData();
+                blockData = BlockShapeT.GetBlockData();
                 BlockColor = BlockShapeT.GetBlockColor();
                 break;
             case BlocksDefinition.BlockList.BLOCK_Z:
-                BlockData = BlockShapeZ.GetBlockData();
+                blockData = BlockShapeZ.GetBlockData();
                 BlockColor = BlockShapeZ.GetBlockColor();
                 break;
             default:
@@ -118,7 +120,7 @@ public class Block : MonoBehaviour
 
             if (StageControllerScript)
             {
-                if (StageControllerScript.AbleMove(ref pos, ref BlockData) == false)
+                if (StageControllerScript.AbleMove(ref pos, ref blockData) == false)
                 {
                     cannotMove = true;
                 }
@@ -158,7 +160,7 @@ public class Block : MonoBehaviour
          next_pos.y--;
 
          // 落ちた先にが移動できるかどうかを調べる
-         if (StageControllerScript.AbleMove(ref next_pos, ref BlockData) == false)
+         if (StageControllerScript.AbleMove(ref next_pos, ref blockData) == false)
          {
              // 移動できない場合
              // 着地フラグをtrueにする
@@ -179,7 +181,7 @@ public class Block : MonoBehaviour
         Vector3 next_pos = transform.position;
         next_pos.x++;
 
-        if (StageControllerScript.AbleMove(ref next_pos, ref BlockData))
+        if (StageControllerScript.AbleMove(ref next_pos, ref blockData))
         {
             transform.Translate(Vector3.right, Space.World);
         }
@@ -191,7 +193,7 @@ public class Block : MonoBehaviour
         Vector3 next_pos = transform.position;
         next_pos.x--;
 
-        if (StageControllerScript.AbleMove(ref next_pos, ref BlockData))
+        if (StageControllerScript.AbleMove(ref next_pos, ref blockData))
         {
             transform.Translate(Vector3.left, Space.World);
         }
@@ -221,7 +223,7 @@ public class Block : MonoBehaviour
         if (StageControllerScript.AbleMove(ref pos, ref new_block_data) == true)
         {
             // もし回転できるなら回転後のブロックのデータを保存する
-            BlockData = new_block_data;
+            blockData = new_block_data;
 
             // ブロックを再構築
             Reloading();
@@ -246,7 +248,7 @@ public class Block : MonoBehaviour
                 {
                     // 移動可能な場合移動させ回転情報も保存する
                     transform.position = around_pos;
-                    BlockData = new_block_data;
+                    blockData = new_block_data;
 
                     // ブロックを再構築
                     Reloading();
@@ -279,7 +281,7 @@ public class Block : MonoBehaviour
         if (StageControllerScript.AbleMove(ref pos, ref new_block_data) == true)
         {
             // もし回転できるなら回転後のブロックのデータを保存する
-            BlockData = new_block_data;
+            blockData = new_block_data;
 
             // ブロックを再構築
             Reloading();
@@ -304,7 +306,7 @@ public class Block : MonoBehaviour
                 {
                     // 移動可能な場合移動させ回転情報も保存する
                     transform.position = around_pos;
-                    BlockData = new_block_data;
+                    blockData = new_block_data;
 
                     // ブロックを再構築
                     Reloading();

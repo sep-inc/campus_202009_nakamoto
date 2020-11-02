@@ -8,13 +8,14 @@ using UnityEngine.UIElements;
 public class StageController : MonoBehaviour
 { 
     [SerializeField] GameObject Stage = null;
-    private GameObject[,] OnStageBlockData = null;
-    const int STAGE_WIDTH  = 10;
-    const int STAGE_HEIGHT = 20;
+    public const int STAGE_WIDTH  = 10;
+    public const int STAGE_HEIGHT = 20;
+
+    public GameObject[,] StageBlockData { get; private set; } = null;
 
     private void Start()
     {
-        OnStageBlockData = new GameObject[STAGE_HEIGHT, STAGE_WIDTH];
+        StageBlockData = new GameObject[STAGE_HEIGHT, STAGE_WIDTH];
     }
     
     // 移動可能かどうかを判定する関数
@@ -56,7 +57,7 @@ public class StageController : MonoBehaviour
             if (element.y < 0) continue;
 
             // ステージのブロックと重なっている場合
-            if (OnStageBlockData[(int)element.y, (int)element.x] != null) return false;
+            if (StageBlockData[(int)element.y, (int)element.x] != null) return false;
         }
 
         // すべての条件に入らなければ移動可能
@@ -76,7 +77,7 @@ public class StageController : MonoBehaviour
             else if (element.transform.position.y < 0) continue;
 
             if (!element) continue;
-            OnStageBlockData[stage_height - (int)element.transform.position.y, (int)element.transform.position.x] = element;
+            StageBlockData[stage_height - (int)element.transform.position.y, (int)element.transform.position.x] = element;
             element.transform.parent = Stage.transform;
         }
         
@@ -96,7 +97,7 @@ public class StageController : MonoBehaviour
             for(int x = 0; x < STAGE_WIDTH; ++x)
             {
                 //1つでもnullのオブジェクトがあれば次の行を調べる
-                if (OnStageBlockData[y, x] == null) break;
+                if (StageBlockData[y, x] == null) break;
 
                 // 1行すべてにブロックがあった場合その列をリストに追加
                 if (x == STAGE_WIDTH - 1)
@@ -121,7 +122,7 @@ public class StageController : MonoBehaviour
             // オブジェクトを1行消す
             for(int i = 0; i < STAGE_WIDTH; ++i)
             {
-                Destroy(OnStageBlockData[line, i]);
+                Destroy(StageBlockData[line, i]);
             }
             
             
@@ -133,8 +134,8 @@ public class StageController : MonoBehaviour
                     if (y >= STAGE_HEIGHT || y < 0) continue;
                     if (x >= STAGE_WIDTH  || x < 0) continue;
                         
-                    OnStageBlockData[y + 1, x] = OnStageBlockData[y, x];
-                    if (OnStageBlockData[y, x]) OnStageBlockData[y, x].transform.Translate(0, -1, 0, Space.World);
+                    StageBlockData[y + 1, x] = StageBlockData[y, x];
+                    if (StageBlockData[y, x]) StageBlockData[y, x].transform.Translate(0, -1, 0, Space.World);
                 }
             }
             
