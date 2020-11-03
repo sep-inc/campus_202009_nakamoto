@@ -174,6 +174,11 @@ public class Block : MonoBehaviour
          transform.Translate(Vector3.down, Space.World);
     }
 
+    public void FastFall()
+    {
+        FallTimer += Time.deltaTime * FastFallMagnification;
+    }
+    
 
     // 右に移動する処理
     public void MoveRight()

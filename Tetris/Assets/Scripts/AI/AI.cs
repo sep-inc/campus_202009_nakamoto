@@ -92,6 +92,10 @@ public class AI : MonoBehaviour
             if (block.transform.position.x > destinationPosX) blockScript.MoveLeft();
             else if (block.transform.position.x < destinationPosX) blockScript.MoveRight();
         }
+        else
+        {
+            blockScript.FastFall();
+        }
 
 
     }
