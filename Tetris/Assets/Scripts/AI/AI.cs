@@ -6,36 +6,105 @@ using UnityEngine;
 
 public class AI : MonoBehaviour
 {
-    [SerializeField] GameObject stageControllerObject;
-    [SerializeField] GameObject blockManager;
+    // ステージ管理クラス
+    [SerializeField] GameObject stageControllerObject = null;
+    private StageController stageScript = null;
+    
+    // ブロック管理クラス
+    [SerializeField] GameObject blockManager = null;
+    private BlockManager blockManagerScript = null;
+    
+    // ブロッククラス(操作中)
+    private GameObject block = null;
+    private Block blockScript = null;
 
-    private GameObject[,] stageData;
-    private StageController stageScript;
-    private GameObject block;
-    private Block blockScript;
+    // 目的地x座標
+    float destinationPosX = 0f;
+    // 回転する回数
+    int rotationNum = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        stageScript = stageControllerObject.GetComponent<StageController>();
+        blockManagerScript = blockManager.GetComponent<BlockManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // 操作中のブロックが無ければ、ブロック管理クラスから操作中のブロックの情報をもらう
+        if (block == null)
+        {
+            block = blockManagerScript.OperationBlock;
+            if (block)
+            {
+                blockScript = block.GetComponent<Block>();
+                int score = -1;
+
+                int[,] block_data = blockScript.BlockData;
+
+                for(int i = 0; i < 4; ++i)
+                {
+
+                    List<Vector3> able_pos = FindAbleMove(block_data);
+
+                    foreach (Vector3 pos in able_pos)
+                    {
+                        int tmp_score = BlockEvaluation(pos, block_data);
+
+                        // 一番スコアの高い場所のX軸を保存する
+                        if (tmp_score > score)
+                        {
+                            score = tmp_score;
+                            destinationPosX = pos.x;
+                            rotationNum = i;
+                        }
+
+                    }
+
+                    int[,] new_block_data = new int[BlocksDefinition.BLOCK_DATA_HEIGHT, BlocksDefinition.BLOCK_DATA_WIDTH];
+                    for (int y = 0; y < BlocksDefinition.BLOCK_DATA_HEIGHT; ++y)
+                    {
+                        for (int x = 0; x < BlocksDefinition.BLOCK_DATA_WIDTH; ++x)
+                        {
+                            new_block_data[y, x] = block_data[(BlocksDefinition.BLOCK_DATA_HEIGHT - 1) - x, y];
+                        }
+                    }
+                    block_data = new_block_data;
+                }
+            }
+        }
+
+        if (block == null) return;
         
+
+        if (rotationNum != 0)
+        {
+            blockScript.RightRotation();
+            rotationNum--;
+        }
+
+        
+        if (block.transform.position.x != destinationPosX)
+        {
+
+            if (block.transform.position.x > destinationPosX) blockScript.MoveLeft();
+            else if (block.transform.position.x < destinationPosX) blockScript.MoveRight();
+        }
+
+
     }
 
 
-
     // おける場所を検索する
-    private List<Vector3>　FindAbleMove()
+    private List<Vector3>　FindAbleMove(int[,] blockData_)
     {
         // 戻り値用
         List<Vector3> ret_vector = new List<Vector3>();
 
         // ブロックの当たりデータを取得
-        int[,] block_data = blockScript.BlockData;
+        int[,] block_data = blockData_;
 
         int min_x = 0;
         int max_x = 0;
@@ -57,6 +126,7 @@ public class AI : MonoBehaviour
             if (find) break;
         }
 
+        find = false;
         // X軸検索範囲の右端
         for (int x = BlocksDefinition.BLOCK_DATA_WIDTH - 1; x >= 0; --x)
         {
@@ -75,19 +145,23 @@ public class AI : MonoBehaviour
 
 
         // 横一列を検索する
-        for (int x = min_x; x <= max_x; ++x)
+        for (int x = min_x; x < max_x; ++x)
         {
-            for(int y = StageController.STAGE_HEIGHT - 1; y >= 0; --y)
+            for(int y = StageController.STAGE_HEIGHT - 1; y >= -1; --y)
             {
                 Vector3 pos = new Vector3(x, y, 0);
                 if (stageScript.AbleMove(ref pos, ref block_data) == false)
                 {
+                    // Yがステージの高さを超えていた時の処理
+                    if (pos.y + 1 >= StageController.STAGE_HEIGHT) continue;
+
                     // いけなかった一つ上の段を保存する
-                    ret_vector.Add(new Vector3(x, y + 1, 0));
+                    ret_vector.Add(new Vector3(pos.x, pos.y + 1, 0));
 
                     break;
                 }
             }
+
         }
 
         return ret_vector;
@@ -108,15 +182,25 @@ public class AI : MonoBehaviour
 
         int num = 0;
         // ブロックの座標を算出
-        for(int y = 0; y < BlocksDefinition.BLOCK_DATA_HEIGHT; ++y)
+        for (int y = 0; y < BlocksDefinition.BLOCK_DATA_HEIGHT; ++y)
         {
-            for(int x = 0; x < BlocksDefinition.BLOCK_DATA_WIDTH; ++y)
+            for (int x = 0; x < BlocksDefinition.BLOCK_DATA_WIDTH; ++x)
             {
-                if (blockData_[y,x] == 1)
+                if (blockData_[y, x] == 1)
                 {
-                    // 中心からのベクトル
-                    Vector3 center_to_pos = new Vector3(x - center_pos, y - center_pos, 0);
-                    blocks_pos[num] = pos_ + center_to_pos;
+                    Vector3 to_center_vec = Vector3.zero;
+                    to_center_vec.x = x - center_pos;
+                    to_center_vec.y = y - center_pos;
+
+                    to_center_vec.y = -to_center_vec.y;
+
+                    Vector3 pos = pos_;
+                    pos.x += to_center_vec.x;
+                    pos.y += to_center_vec.y;
+                    pos.y = (StageController.STAGE_HEIGHT - 1) - pos.y;
+                    pos.z = 0;
+                    blocks_pos[num] = pos;
+                    num++;
                 }
             }
         }
@@ -144,7 +228,10 @@ public class AI : MonoBehaviour
         // 仮のステージに保存する
         foreach (Vector3 block_pos in blocks_pos)
         {
-            stage_data[(StageController.STAGE_HEIGHT - 1) - (int)block_pos.y, (int)block_pos.x] = 1;
+            if (block_pos.x < 0 || block_pos.x >= StageController.STAGE_WIDTH)  continue;
+            if (block_pos.y < 0 || block_pos.y >= StageController.STAGE_HEIGHT) continue;
+            
+            stage_data[(int)block_pos.y, (int)block_pos.x] = 1;
         }
 
 
@@ -154,7 +241,7 @@ public class AI : MonoBehaviour
             for (int x = 0; x < StageController.STAGE_WIDTH; ++x)
             {
                 //1つでもnullのオブジェクトがあれば次の行を調べる
-                if (stage_data[y, x] == 1) break;
+                if (stage_data[y, x] == 0) break;
 
                 // 1行すべてにブロックがあった場合その列をリストに追加
                 if (x == StageController.STAGE_WIDTH - 1)
@@ -183,7 +270,7 @@ public class AI : MonoBehaviour
         // 自身の下にブロックがなかった場合
         foreach (Vector3 block_pos in blocks_pos)
         {
-            if (block_pos.x + 1 >= StageController.STAGE_HEIGHT) continue;
+            if (block_pos.y + 1 >= StageController.STAGE_HEIGHT) continue;
             if (stage_data[(int)block_pos.y + 1, (int)block_pos.x] == 0)
             {
                 ret_score -= 50;

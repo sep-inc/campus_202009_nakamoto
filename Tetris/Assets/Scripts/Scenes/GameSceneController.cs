@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameSceneController : SceneControllerBase
 {
-    [SerializeField] GameObject blockManager;
-    BlockManager blockManagerScript;
+    [SerializeField] GameObject blockManager = null;
+    BlockManager blockManagerScript = null;
 
     private void Start()
     {

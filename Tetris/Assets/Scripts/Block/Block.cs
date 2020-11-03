@@ -176,7 +176,7 @@ public class Block : MonoBehaviour
 
 
     // 右に移動する処理
-    private void MoveRight()
+    public void MoveRight()
     {
         Vector3 next_pos = transform.position;
         next_pos.x++;
@@ -188,7 +188,7 @@ public class Block : MonoBehaviour
     }
 
     // 左に移動する処理
-    private void MoveLeft()
+    public void MoveLeft()
     {
         Vector3 next_pos = transform.position;
         next_pos.x--;
@@ -201,7 +201,7 @@ public class Block : MonoBehaviour
 
 
     // 右回転処理
-    private void RightRotation()
+    public void RightRotation()
     {
         // 回転後のブロックの情報を保存する変数
         int[,] new_block_data = new int[BlocksDefinition.BLOCK_DATA_HEIGHT, BlocksDefinition.BLOCK_DATA_WIDTH];
@@ -259,7 +259,7 @@ public class Block : MonoBehaviour
     }
 
     // 左回転処理
-    private void LeftRotation()
+    public void LeftRotation()
     {
         // 回転後のブロックの情報を保存する変数
         int[,] new_block_data = new int[BlocksDefinition.BLOCK_DATA_HEIGHT, BlocksDefinition.BLOCK_DATA_WIDTH];

@@ -8,8 +8,9 @@ public class BlockManager : MonoBehaviour
     [SerializeField] GameObject StagecontrollerObject = null;
 
     // 操作中のブロックを保存する変数
-    private GameObject OperationBlock = null;
+    public GameObject OperationBlock { get; private set; } = null;
     private Block OperationBlockScript = null;
+
     // 操作するブロックの最初の場所を保存する変数
     [SerializeField] GameObject StartBlockPoint = null;
 
@@ -24,6 +25,8 @@ public class BlockManager : MonoBehaviour
     [SerializeField] GameObject StockBlockPoint = null;
 
     public bool cannotCreate { get; private set; } = false;
+
+
 
     // Start is called before the first frame update
     void Start()
