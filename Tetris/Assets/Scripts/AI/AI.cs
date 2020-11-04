@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.Collections.LowLevel.Unsafe;
+using UnityEditor.Experimental.TerrainAPI;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class AI : MonoBehaviour
 {
+    [SerializeField] bool on = true;
+    [SerializeField] int fallMagnification = 1;
+
     // ステージ管理クラス
     [SerializeField] GameObject stageControllerObject = null;
     private StageController stageScript = null;
@@ -19,9 +24,11 @@ public class AI : MonoBehaviour
     private Block blockScript = null;
 
     // 目的地x座標
-    float destinationPosX = 0f;
+    private float destinationPosX = 0f;
     // 回転する回数
-    int rotationNum = 0;
+    private int rotationNum = 0;
+    // ストックするかどうか
+    private bool isStockBlock = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +40,8 @@ public class AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!on) return;
+
         // 操作中のブロックが無ければ、ブロック管理クラスから操作中のブロックの情報をもらう
         if (block == null)
         {
@@ -42,61 +51,108 @@ public class AI : MonoBehaviour
                 blockScript = block.GetComponent<Block>();
                 int score = -10000;
 
+                // 操作中のブロックの当たりデータを取得
                 int[,] block_data = blockScript.BlockData;
 
-                for(int i = 0; i < 4; ++i)
+                SelectBlock(ref score, block_data);
+
+
+                // ストックのブロックを取得する
+                GameObject stock_block = blockManagerScript.StockBlock;
+
+                // 取得できなければ、次に操作できるブロックを取得
+                if (stock_block == null)
                 {
+                    stock_block = blockManagerScript.NextBlock;
 
-                    List<Vector3> able_pos = FindAbleMove(block_data);
+                    if (stock_block == null) return;
+                }
 
-                    foreach (Vector3 pos in able_pos)
-                    {
-                        int tmp_score = BlockEvaluation(pos, block_data);
+                Block block_script = stock_block.GetComponent<Block>();
 
-                        // 一番スコアの高い場所のX軸を保存する
-                        if (tmp_score > score)
-                        {
-                            score = tmp_score;
-                            destinationPosX = pos.x;
-                            rotationNum = i;
-                        }
-
-                    }
-
-                    int[,] new_block_data = new int[BlocksDefinition.BLOCK_DATA_HEIGHT, BlocksDefinition.BLOCK_DATA_WIDTH];
-                    for (int y = 0; y < BlocksDefinition.BLOCK_DATA_HEIGHT; ++y)
-                    {
-                        for (int x = 0; x < BlocksDefinition.BLOCK_DATA_WIDTH; ++x)
-                        {
-                            new_block_data[y, x] = block_data[(BlocksDefinition.BLOCK_DATA_HEIGHT - 1) - x, y];
-                        }
-                    }
-                    block_data = new_block_data;
+                // 操作中のブロックの当たりデータを取得
+                block_data = block_script.BlockData;
+                int temp_score = score;
+                SelectBlock(ref score, block_data);
+                if (temp_score < score)
+                {
+                    isStockBlock = true;
                 }
             }
         }
 
+        // ブロックの情報がなければ返す
         if (block == null) return;
-        
 
-        if (rotationNum != 0)
+        // もしストックのフラグが立っていたら
+        if (isStockBlock == true)
+        {
+            // ブロックをストックする
+            blockManagerScript.Stock();
+
+            // 交換した後のブロックの情報をもらう
+            block = blockManagerScript.OperationBlock;
+
+            // ブロックスクリプトの取得
+            blockScript = block.GetComponent<Block>();
+
+            // フラグをオフにする
+            isStockBlock = false;
+        }
+        
+        // 回転が0より上なら右に回転してカウントを減らす
+        if (rotationNum > 0)
         {
             blockScript.RightRotation();
             rotationNum--;
         }
 
         
+        // 自身のX軸が目的地のX軸と違った場合目的地のX軸の方向に移動する
         if (block.transform.position.x != destinationPosX)
         {
 
             if (block.transform.position.x > destinationPosX) blockScript.MoveLeft();
             else if (block.transform.position.x < destinationPosX) blockScript.MoveRight();
         }
+        // もしX軸が目的地なら高速落下させる
         else
         {
-            blockScript.FastFall();
+            for(int i = 0; i < fallMagnification; ++i) blockScript.FastFall();
         }
+    }
 
+  
+    private void SelectBlock(ref int score_, int[,] blockData_)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            // 移動可能な場所を探す
+            List<Vector3> able_pos = FindAbleMove(blockData_);
+
+            // 移動可能な場所で一番評価が高い場所を選ぶ
+            foreach (Vector3 pos in able_pos)
+            {
+                int tmp_score = BlockEvaluation(pos, blockData_);
+
+                // 一番スコアの高い場所のX軸を保存する
+                if (tmp_score > score_)
+                {
+                    // スコアを保存する
+                    score_ = tmp_score;
+
+                    // 目的地のX座標を保存する
+                    destinationPosX = pos.x;
+
+                    // 右に何回回転するかを保存する
+                    rotationNum = i;
+                }
+
+            }
+
+            // 当たりデータを右に90度回転する
+            ArrayRotate.RightRotate(ref blockData_, BlocksDefinition.BLOCK_DATA_WIDTH, BlocksDefinition.BLOCK_DATA_HEIGHT);
+        }
 
     }
 
@@ -357,7 +413,7 @@ public class AI : MonoBehaviour
                         // 下二つが空なら3段の穴ができるので得点を下げる
                         if (i == 2)
                         {
-                            ret_score -= 100;
+                            ret_score -= 150;
                         }
                     }
 

@@ -15,28 +15,28 @@ public class BlockManager : MonoBehaviour
     [SerializeField] GameObject StartBlockPoint = null;
 
     // 次に落ちてくるブロックを保存する変数
-    private GameObject[] NextBlock = null;
+    private GameObject[] nextBlocks = null;
     // 次に落ちてくるブロックの場所を保存する変数
     [SerializeField] GameObject[] NextBlockPoint = null;
 
     // ストック中のブロックを保存する変数
-    private GameObject StockBlock = null;
+    public GameObject StockBlock { get; private set; } = null;
     // ストック中のブロックの場所を保存する変数
     [SerializeField] GameObject StockBlockPoint = null;
 
     public bool cannotCreate { get; private set; } = false;
 
-
+    public GameObject NextBlock => nextBlocks[0];
 
     // Start is called before the first frame update
     void Start()
     {
-        NextBlock = new GameObject[NextBlockPoint.Length];
+        nextBlocks = new GameObject[NextBlockPoint.Length];
 
         // 次に生成されるオブジェクトの初期化
         for (int i = 0; i < NextBlockPoint.Length; ++i)
         {
-            NextBlock[i] = this.CreateBlock(NextBlockPoint[i].transform.position);
+            nextBlocks[i] = this.CreateBlock(NextBlockPoint[i].transform.position);
         }
     }
 
@@ -57,26 +57,26 @@ public class BlockManager : MonoBehaviour
         if (OperationBlock == null)
         {
             // 次に落ちてくるブロックの1番目を持ってくる
-            OperationBlock = NextBlock[0];
+            OperationBlock = nextBlocks[0];
             OperationBlock.transform.position = StartBlockPoint.transform.position;
-            NextBlock[0] = null;
+            nextBlocks[0] = null;
 
             // コンポーネントを取得しておく
             OperationBlockScript = OperationBlock.GetComponent<Block>();
         }
 
         // 次に落ちてくるブロックの1番目が空なら
-        if (NextBlock[0] == null)
+        if (nextBlocks[0] == null)
         {
-            for(int i = 0; i < NextBlock.Length - 1; ++i)
-            { 
+            for(int i = 0; i < nextBlocks.Length - 1; ++i)
+            {
                 // 上にずらす
-                NextBlock[i] = NextBlock[i + 1];
-                NextBlock[i].transform.position = NextBlockPoint[i].transform.position;
+                nextBlocks[i] = nextBlocks[i + 1];
+                nextBlocks[i].transform.position = NextBlockPoint[i].transform.position;
             }
 
             // 最後のブロックを生成する
-            NextBlock[NextBlock.Length - 1] = CreateBlock(NextBlockPoint[NextBlock.Length - 1].transform.position);
+            nextBlocks[nextBlocks.Length - 1] = CreateBlock(NextBlockPoint[nextBlocks.Length - 1].transform.position);
 
         }
 
@@ -120,16 +120,20 @@ public class BlockManager : MonoBehaviour
 
 
     // ブロックのストック
-    private void Stock()
+    public void Stock()
     {
         // ストックが空かどうかを調べる
         if (StockBlock == null) {
             // 空の場合ストックに入れて操作中ブロックをストックに保存する
             StockBlock = OperationBlock;
             StockBlock.transform.position = StockBlockPoint.transform.position;
+            
+            OperationBlock = nextBlocks[0];
+            OperationBlock.transform.position = StartBlockPoint.transform.position;
+            nextBlocks[0] = null;
 
-            OperationBlock = null;
-            OperationBlockScript = null;
+            // コンポーネントを取得しておく
+            OperationBlockScript = OperationBlock.GetComponent<Block>();
         }
         else
         {
