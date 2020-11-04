@@ -40,7 +40,7 @@ public class AI : MonoBehaviour
             if (block)
             {
                 blockScript = block.GetComponent<Block>();
-                int score = -1;
+                int score = -10000;
 
                 int[,] block_data = blockScript.BlockData;
 
@@ -149,6 +149,7 @@ public class AI : MonoBehaviour
 
 
         // 横一列を検索する
+        bool tmp = false;
         for (int x = min_x; x < max_x; ++x)
         {
             for(int y = StageController.STAGE_HEIGHT - 1; y >= -1; --y)
@@ -159,10 +160,16 @@ public class AI : MonoBehaviour
                     // Yがステージの高さを超えていた時の処理
                     if (pos.y + 1 >= StageController.STAGE_HEIGHT) continue;
 
+                    if (tmp == false) break;
+
                     // いけなかった一つ上の段を保存する
                     ret_vector.Add(new Vector3(pos.x, pos.y + 1, 0));
 
                     break;
+                }
+                else
+                {
+                    tmp = true;
                 }
             }
 
@@ -265,7 +272,7 @@ public class AI : MonoBehaviour
             ret_score += (int)Mathf.Abs(block_pos.x - stage_center_pos);
         }
 
-        // ステージの下のほうにあればあるほど得点が上がるa
+        // ステージの下のほうにあればあるほど得点が上がる
         foreach (Vector3 block_pos in blocks_pos)
         {
             ret_score += (int)block_pos.y;
@@ -277,8 +284,86 @@ public class AI : MonoBehaviour
             if (block_pos.y + 1 >= StageController.STAGE_HEIGHT) continue;
             if (stage_data[(int)block_pos.y + 1, (int)block_pos.x] == 0)
             {
-                ret_score -= 50;
+                ret_score -= 150;
             }
+        }
+
+        // 縦3マスの穴ができないか
+        foreach (Vector3 block_pos in blocks_pos)
+        {
+            Vector3 right_pos = new Vector3(block_pos.x + 1, block_pos.y, block_pos.z);
+
+            // もし右が壁かブロックの場合continue
+            if (right_pos.x >= StageController.STAGE_WIDTH
+                || stage_data[(int)right_pos.y, (int)right_pos.x] == 1)
+            {
+                continue;
+            }
+            // 何もなければ
+            else
+            {
+                // さらにその右を見て、壁かブロックなら
+                if (right_pos.x + 1 >= StageController.STAGE_WIDTH
+                 || stage_data[(int)right_pos.y, (int)right_pos.x + 1] == 1)
+                {
+                    
+                    // 下二つが空か確かめる
+                    for(int i = 1; i < 3; ++i)
+                    {
+                        // もし壁かブロックがあるなら終了
+                        if (right_pos.y + i >= StageController.STAGE_HEIGHT
+                            || stage_data[(int)right_pos.y + i, (int)right_pos.x] == 1)
+                        {
+                            break;
+                        }
+
+                        // 下二つが空なら3段の穴ができるので得点を下げる
+                        if (i == 2)
+                        {
+                            ret_score -= 100;
+                        }
+                    }
+
+                }
+            }
+
+
+            Vector3 left_pos = new Vector3(block_pos.x - 1, block_pos.y, block_pos.z);
+
+            // もし左が壁かブロックの場合continue
+            if (left_pos.x < 0
+                || stage_data[(int)left_pos.y, (int)left_pos.x] == 1)
+            {
+                continue;
+            }
+            // 何もなければ
+            else
+            {
+                // さらにその左を見て、壁かブロックなら
+                if ((left_pos.x - 1) < 0
+                 || stage_data[(int)left_pos.y, (int)left_pos.x - 1] == 1)
+                {
+
+                    // 下二つが空か確かめる
+                    for (int i = 1; i < 3; ++i)
+                    {
+                        // もし壁かブロックがあるなら終了
+                        if (left_pos.y + i >= StageController.STAGE_HEIGHT
+                            || stage_data[(int)left_pos.y + i, (int)left_pos.x] == 1)
+                        {
+                            break;
+                        }
+
+                        // 下二つが空なら3段の穴ができるので得点を下げる
+                        if (i == 2)
+                        {
+                            ret_score -= 100;
+                        }
+                    }
+
+                }
+            }
+
         }
 
 
