@@ -6,6 +6,7 @@ public class BlockManager : MonoBehaviour
 {
     [SerializeField] GameObject BlockPrefab = null;
     [SerializeField] GameObject StagecontrollerObject = null;
+    private StageController stageControllerScript = null;
 
     // 操作中のブロックを保存する変数
     public GameObject OperationBlock { get; private set; } = null;
@@ -28,6 +29,12 @@ public class BlockManager : MonoBehaviour
 
     public GameObject NextBlock => nextBlocks[0];
 
+    // ブロックの影
+    [SerializeField] GameObject shadowObject = null;
+    private const int SHADOW_BLOCK_NUM = 4;
+    private GameObject[] blockShadow = null;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +44,15 @@ public class BlockManager : MonoBehaviour
         for (int i = 0; i < NextBlockPoint.Length; ++i)
         {
             nextBlocks[i] = this.CreateBlock(NextBlockPoint[i].transform.position);
+        }
+
+        stageControllerScript = StagecontrollerObject.GetComponent<StageController>();
+
+        blockShadow = new GameObject[SHADOW_BLOCK_NUM];
+        // 影オブジェクトの生成
+        for (int i = 0; i < SHADOW_BLOCK_NUM; ++i)
+        {
+            blockShadow[i] = Instantiate(shadowObject, Vector3.zero, Quaternion.identity, transform);
         }
     }
 
@@ -91,6 +107,68 @@ public class BlockManager : MonoBehaviour
             OperationBlockScript = null;
         }
 
+        
+        // 操作しているブロックがある場合落下地点に影を付ける
+        if (OperationBlock != null)
+        {
+
+            // 現在のブロックデータを取得する
+            int[,] block_data = OperationBlockScript.BlockData;
+            Vector3 pos = OperationBlock.transform.position;
+            const int center_pos = 2;
+
+            // 現在の位置からの落下地点を予測する
+            //bool tmp = false;
+            for(int y = (int)pos.y; y >= 0; --y)
+            {
+                pos.y = y;
+
+                // Yがステージの高さを超えていた時の処理
+                if (pos.y >= StageController.STAGE_HEIGHT) continue;
+
+                // 移動できなくなったら
+                if (stageControllerScript.AbleMove(ref pos, ref block_data) == false)
+                {
+                    // 1つ前の座標を保存する
+                    pos.y += 1;
+                    break;
+                }
+            }
+
+            // 落下地点でのブロックの座標を求める
+            Vector3[] blocks_pos = new Vector3[4];
+            int num = 0;
+
+            for (int y = 0; y < BlocksDefinition.BLOCK_DATA_HEIGHT; ++y)
+            {
+                for (int x = 0; x < BlocksDefinition.BLOCK_DATA_WIDTH; ++x)
+                {
+                    if (block_data[y, x] == 1)
+                    {
+                        Vector3 to_center_vec = Vector3.zero;
+                        to_center_vec.x = x - center_pos;
+                        to_center_vec.y = y - center_pos;
+
+                        to_center_vec.y = -to_center_vec.y;
+
+                        Vector3 tem_pos = pos;
+                        tem_pos.x += to_center_vec.x;
+                        tem_pos.y += to_center_vec.y;
+                        tem_pos.z = pos.z;
+                        blocks_pos[num] = tem_pos;
+                        num++;
+                    }
+                }
+            }
+
+            int count = 0;
+            foreach(Vector3 block_pos in blocks_pos)
+            {
+                blockShadow[count].transform.position = block_pos;
+                count++;
+            }
+
+        }
 
         // Sキーが押されたらブロックをストックする
         if (Input.GetKeyDown(KeyCode.S))
