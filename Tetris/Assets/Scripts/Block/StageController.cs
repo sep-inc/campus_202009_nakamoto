@@ -11,11 +11,19 @@ public class StageController : MonoBehaviour
     public const int STAGE_WIDTH  = 10;
     public const int STAGE_HEIGHT = 20;
 
+    // サウンド
+    private AudioSource audioSource;
+
+    // 落下サウンド
+    [SerializeField] AudioClip fallSound;
+
     public GameObject[,] StageBlockData { get; private set; } = null;
 
     private void Start()
     {
         StageBlockData = new GameObject[STAGE_HEIGHT, STAGE_WIDTH];
+
+        audioSource = GetComponent<AudioSource>();
     }
     
     // 移動可能かどうかを判定する関数
@@ -141,7 +149,9 @@ public class StageController : MonoBehaviour
             
             // 消した行をリストから削除 
             erace_line.RemoveAt(0);
-        }            
+        }
+
+        audioSource.PlayOneShot(fallSound);
     }
 
 

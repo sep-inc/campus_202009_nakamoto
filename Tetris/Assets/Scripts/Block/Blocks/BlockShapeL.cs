@@ -15,5 +15,9 @@ public static class BlockShapeL
 
     public static int[,] GetBlockData() { return BlockData; }
 
-    public static Color GetBlockColor() { return Color.white; }
+    public static Color GetBlockColor()
+    {
+        Color color = new Color(1f, 0.6f, 0f);
+        return color;
+    }
 }

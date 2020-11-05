@@ -27,8 +27,21 @@ public class Block : MonoBehaviour
     // 生成されたときに既に動けない場合trueになる変数
     private bool cannotMove = false;
 
+    // サウンド
+    private AudioSource audioSource = null;
+
+    // 回転、移動サウンド
+    [SerializeField] AudioClip sound1 = null;
+
+    // 落下サウンド
+    //[SerializeField] AudioClip sound2 = null;
+
 
     public int[,] BlockData => blockData;
+
+    // 着地したかどうかを返す関数
+    public bool IsLanding() { return isLanding; }
+    public bool CannotMove() { return cannotMove; }
 
     /*
         ブロック初期化関数
@@ -103,10 +116,9 @@ public class Block : MonoBehaviour
         StageControllerObj = stageController_;
         StageControllerScript = StageControllerObj.GetComponent<StageController>();
 
+        audioSource = GetComponent<AudioSource>();
     }
-    // 着地したかどうかを返す関数
-    public bool IsLanding() { return isLanding; }
-    public bool CannotMove() { return cannotMove; }
+
 
 
     public void MyUpdate()
@@ -162,12 +174,13 @@ public class Block : MonoBehaviour
          // 落ちた先にが移動できるかどうかを調べる
          if (StageControllerScript.AbleMove(ref next_pos, ref blockData) == false)
          {
-             // 移動できない場合
-             // 着地フラグをtrueにする
-             isLanding = true;
+            // 移動できない場合
+            // 着地フラグをtrueにする
+            isLanding = true;
 
-             StageControllerScript.SetBlock(BlockObject);
-             Destroy(gameObject);
+            StageControllerScript.SetBlock(BlockObject);
+            audioSource.PlayOneShot(sound1);
+            Destroy(gameObject);
          }
          
          // 移動する
@@ -188,6 +201,7 @@ public class Block : MonoBehaviour
 
         if (StageControllerScript.AbleMove(ref next_pos, ref blockData))
         {
+            audioSource.PlayOneShot(sound1);
             transform.Translate(Vector3.right, Space.World);
         }
     }
@@ -200,6 +214,7 @@ public class Block : MonoBehaviour
 
         if (StageControllerScript.AbleMove(ref next_pos, ref blockData))
         {
+            audioSource.PlayOneShot(sound1);
             transform.Translate(Vector3.left, Space.World);
         }
     }
@@ -208,6 +223,8 @@ public class Block : MonoBehaviour
     // 右回転処理
     public void RightRotation()
     {
+        bool rotated = false;
+
         // 回転後のブロックの情報を保存する変数
         int[,] new_block_data = new int[BlocksDefinition.BLOCK_DATA_HEIGHT, BlocksDefinition.BLOCK_DATA_WIDTH];
 
@@ -232,6 +249,8 @@ public class Block : MonoBehaviour
 
             // ブロックを再構築
             Reloading();
+
+            rotated = true;
         }
         // もし回転できなかった場合左右にずらせるかを調べる
         else
@@ -257,8 +276,14 @@ public class Block : MonoBehaviour
 
                     // ブロックを再構築
                     Reloading();
+                    rotated = true;
                     break;
                 }
+            }
+
+            if (rotated)
+            {
+                audioSource.PlayOneShot(sound1);
             }
         }
     }
@@ -266,6 +291,8 @@ public class Block : MonoBehaviour
     // 左回転処理
     public void LeftRotation()
     {
+        bool rotated = false;
+
         // 回転後のブロックの情報を保存する変数
         int[,] new_block_data = new int[BlocksDefinition.BLOCK_DATA_HEIGHT, BlocksDefinition.BLOCK_DATA_WIDTH];
 
@@ -290,6 +317,8 @@ public class Block : MonoBehaviour
 
             // ブロックを再構築
             Reloading();
+
+            rotated = true;
         }
         // もし回転できなかった場合左右にずらせるかを調べる
         else
@@ -315,9 +344,16 @@ public class Block : MonoBehaviour
 
                     // ブロックを再構築
                     Reloading();
+
+                    rotated = true;
                     break;
                 }
             }
+        }
+
+        if (rotated)
+        {
+            audioSource.PlayOneShot(sound1);
         }
     }
 
