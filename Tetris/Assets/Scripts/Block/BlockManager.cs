@@ -34,6 +34,8 @@ public class BlockManager : MonoBehaviour
     private const int SHADOW_BLOCK_NUM = 4;
     private GameObject[] blockShadow = null;
 
+    private bool gameStarted = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +61,8 @@ public class BlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameStarted == false) return;
+
         // もしブロック生成したときに動けなかった場合ゲームオーバー
         if (OperationBlockScript)
         {
@@ -227,5 +231,10 @@ public class BlockManager : MonoBehaviour
             OperationBlockScript = OperationBlock.GetComponent<Block>();
         }
 
+    }
+
+    public void NoticeGameStart()
+    {
+        gameStarted = true;
     }
 }

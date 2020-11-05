@@ -12,10 +12,10 @@ public class StageController : MonoBehaviour
     public const int STAGE_HEIGHT = 20;
 
     // サウンド
-    private AudioSource audioSource;
+    private AudioSource audioSource = null;
 
     // 落下サウンド
-    [SerializeField] AudioClip fallSound;
+    [SerializeField] AudioClip fallSound = null;
 
     public GameObject[,] StageBlockData { get; private set; } = null;
 

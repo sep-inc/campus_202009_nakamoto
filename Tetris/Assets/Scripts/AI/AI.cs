@@ -8,7 +8,8 @@ using UnityEngine;
 
 public class AI : MonoBehaviour
 {
-    [SerializeField] bool on = true;
+    public bool On { get; private set; } = false;
+    
     [SerializeField] int fallMagnification = 1;
 
     // ステージ管理クラス
@@ -40,7 +41,12 @@ public class AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!on) return;
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            On = !On;
+        }
+
+        if (!On) return;
 
         // 操作中のブロックが無ければ、ブロック管理クラスから操作中のブロックの情報をもらう
         if (block == null)

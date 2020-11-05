@@ -54,7 +54,7 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    public void QuitGame()
+    public static void QuitGame()
     {
         UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();

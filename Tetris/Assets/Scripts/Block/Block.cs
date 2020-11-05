@@ -280,11 +280,10 @@ public class Block : MonoBehaviour
                     break;
                 }
             }
-
-            if (rotated)
-            {
-                audioSource.PlayOneShot(sound1);
-            }
+        }
+        if (rotated)
+        {
+            audioSource.PlayOneShot(sound1);
         }
     }
 
