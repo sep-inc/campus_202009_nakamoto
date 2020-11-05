@@ -33,9 +33,6 @@ public class Block : MonoBehaviour
     // 回転、移動サウンド
     [SerializeField] AudioClip sound1 = null;
 
-    // 落下サウンド
-    //[SerializeField] AudioClip sound2 = null;
-
 
     public int[,] BlockData => blockData;
 
@@ -179,7 +176,6 @@ public class Block : MonoBehaviour
             isLanding = true;
 
             StageControllerScript.SetBlock(BlockObject);
-            audioSource.PlayOneShot(sound1);
             Destroy(gameObject);
          }
          
