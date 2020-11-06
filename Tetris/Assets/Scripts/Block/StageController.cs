@@ -7,9 +7,13 @@ using UnityEngine.UIElements;
 
 public class StageController : MonoBehaviour
 { 
-    [SerializeField] GameObject Stage = null;
     public const int STAGE_WIDTH  = 10;
     public const int STAGE_HEIGHT = 20;
+
+    [SerializeField] GameObject Stage = null;
+
+    [SerializeField] GameObject blockManager = null;
+    private BlockManager BlockManagerScript = null;
 
     // サウンド
     private AudioSource audioSource = null;
@@ -19,13 +23,49 @@ public class StageController : MonoBehaviour
 
     public GameObject[,] StageBlockData { get; private set; } = null;
 
+    [SerializeField] float eraceTime = 2f;
+    float timer = 0f;
+
+    // ブロックを消せるかどうかを保存する変数
+    private bool canEraseBlock = false;
+    // 消す行を保存する変数
+    private List<int> eraceLines = null;
+
     private void Start()
     {
         StageBlockData = new GameObject[STAGE_HEIGHT, STAGE_WIDTH];
 
         audioSource = GetComponent<AudioSource>();
+
+        BlockManagerScript = blockManager.GetComponent<BlockManager>();
     }
-    
+
+    private void Update()
+    {
+        if (canEraseBlock == true)
+        {
+            timer += Time.deltaTime;
+
+            if (timer >= eraceTime)
+            {
+                // 消された行を詰める
+                foreach (int erace_line in eraceLines)
+                {
+                    LowerBlock(erace_line);
+                }
+                canEraseBlock = false;
+                BlockManagerScript.NoticeBlockCreate();
+                timer = 0f;
+            }
+        }
+        else
+        {
+            BlockManagerScript.NoticeBlockCreate();
+        }
+
+        
+    }
+
     // 移動可能かどうかを判定する関数
     public bool AbleMove(ref Vector3 pos_, ref int[,] blockData_)
     {
@@ -88,13 +128,15 @@ public class StageController : MonoBehaviour
             StageBlockData[stage_height - (int)element.transform.position.y, (int)element.transform.position.x] = element;
             element.transform.parent = Stage.transform;
         }
-        
+
         // 消せるかどうかの判定
-        CheckErase();
+        canEraseBlock = CheckErase(out eraceLines);
     }
 
 
-    private void CheckErase()
+    // 消せるかを調べて消せる行があるなら消す
+    // 消した行を返す
+    private bool CheckErase(out List<int> eraceList_)
     {
         // 削除する行を保存する変数
         List<int> erace_line = new List<int>();
@@ -115,12 +157,18 @@ public class StageController : MonoBehaviour
             }
         }
 
-        // もし消せる行があった場合
-        if (erace_line.Count == 0) return;
+        // もし消せる行がなかったらnullを入れる
+        if (erace_line.Count == 0)
+        {
+            eraceList_ = null;
+            return false;
+        }
 
         // 昇順でソートする
         erace_line.Sort();
-        
+
+        eraceList_ = new List<int>(erace_line);
+
         // erace_line.Sort();
         while (erace_line.Count != 0)
         {
@@ -132,27 +180,31 @@ public class StageController : MonoBehaviour
             {
                 Destroy(StageBlockData[line, i]);
             }
-            
-            
-            // 消した行より上の行を一段さげる
-            for (int y = line - 1; y >= 0; --y)
-            {
-                for (int x = 0; x < STAGE_WIDTH; ++x)
-                {
-                    if (y >= STAGE_HEIGHT || y < 0) continue;
-                    if (x >= STAGE_WIDTH  || x < 0) continue;
-                        
-                    StageBlockData[y + 1, x] = StageBlockData[y, x];
-                    if (StageBlockData[y, x]) StageBlockData[y, x].transform.Translate(0, -1, 0, Space.World);
-                }
-            }
-            
-            // 消した行をリストから削除 
             erace_line.RemoveAt(0);
         }
 
         audioSource.PlayOneShot(fallSound);
+        return true;
     }
 
+
+    // 消された行を詰める関数
+    private void LowerBlock(int eracedLine_)
+    {
+        if (eracedLine_ < 0 || eracedLine_ >= STAGE_HEIGHT) return;
+
+        // 消した行より上の行を一段さげる
+        for (int y = eracedLine_ - 1; y >= 0; --y)
+        {
+            for (int x = 0; x < STAGE_WIDTH; ++x)
+            {
+                if (y >= STAGE_HEIGHT || y < 0) continue;
+                if (x >= STAGE_WIDTH || x < 0) continue;
+
+                StageBlockData[y + 1, x] = StageBlockData[y, x];
+                if (StageBlockData[y, x]) StageBlockData[y, x].transform.Translate(0, -1, 0, Space.World);
+            }
+        }
+    }
 
 }

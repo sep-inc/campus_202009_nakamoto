@@ -31,6 +31,14 @@ public class AI : MonoBehaviour
     // ストックするかどうか
     private bool isStockBlock = false;
 
+    // 一列消した時の評価得点
+    [SerializeField] int eraseOneLineScore   = 0;
+    // 埋められない穴ができた時の評価得点
+    [SerializeField] int unfilledHolesScore  = 0;
+    // 縦3マスの穴ができた時の評価得点
+    [SerializeField] int vertical3HolesScore = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -316,10 +324,10 @@ public class AI : MonoBehaviour
                 //1つでもnullのオブジェクトがあれば次の行を調べる
                 if (stage_data[y, x] == 0) break;
 
-                // 1行すべてにブロックがあった場合その列をリストに追加
+                // 1行すべてにブロックがあった場合
                 if (x == StageController.STAGE_WIDTH - 1)
                 {
-                    ret_score += 100;
+                    ret_score += eraseOneLineScore;
                 }
             }
         }
@@ -346,7 +354,7 @@ public class AI : MonoBehaviour
             if (block_pos.y + 1 >= StageController.STAGE_HEIGHT) continue;
             if (stage_data[(int)block_pos.y + 1, (int)block_pos.x] == 0)
             {
-                ret_score -= 150;
+                ret_score += unfilledHolesScore;
             }
         }
 
@@ -382,7 +390,7 @@ public class AI : MonoBehaviour
                         // 下二つが空なら3段の穴ができるので得点を下げる
                         if (i == 2)
                         {
-                            ret_score -= 100;
+                            ret_score += vertical3HolesScore;
                         }
                     }
 
@@ -419,7 +427,7 @@ public class AI : MonoBehaviour
                         // 下二つが空なら3段の穴ができるので得点を下げる
                         if (i == 2)
                         {
-                            ret_score -= 150;
+                            ret_score += vertical3HolesScore;
                         }
                     }
 

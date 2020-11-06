@@ -27,6 +27,11 @@ public class BlockManager : MonoBehaviour
 
     public bool cannotCreate { get; private set; } = false;
 
+    // 生成フラグ
+    private bool CanCreateBlock = true;
+
+
+
     public GameObject NextBlock => nextBlocks[0];
 
     // ブロックの影
@@ -74,7 +79,7 @@ public class BlockManager : MonoBehaviour
         }
 
         // 操作しているブロックがなかった場合
-        if (OperationBlock == null)
+        if (OperationBlock == null && CanCreateBlock == true)
         {
             // 次に落ちてくるブロックの1番目を持ってくる
             OperationBlock = nextBlocks[0];
@@ -109,6 +114,7 @@ public class BlockManager : MonoBehaviour
         {
             OperationBlock = null;
             OperationBlockScript = null;
+            CanCreateBlock = false;
         }
 
         
@@ -231,6 +237,11 @@ public class BlockManager : MonoBehaviour
             OperationBlockScript = OperationBlock.GetComponent<Block>();
         }
 
+    }
+
+    public void NoticeBlockCreate()
+    {
+        CanCreateBlock = true;
     }
 
     public void NoticeGameStart()
