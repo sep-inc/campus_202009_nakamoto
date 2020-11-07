@@ -7,11 +7,7 @@ using UnityEditorInternal;
 using UnityEngine;
 
 public class AI : MonoBehaviour
-{
-    public bool On { get; private set; } = false;
-    
-    [SerializeField] int fallMagnification = 1;
-
+{    
     // ステージ管理クラス
     [SerializeField] GameObject stageControllerObject = null;
     private StageController stageScript = null;
@@ -25,19 +21,24 @@ public class AI : MonoBehaviour
     private Block blockScript = null;
 
 
-    // 目的地
+    // 目的地までの経路
     List<Vector3> destinationPos = null;
     // 回転する回数
     private int rotationNum = 0;
     // ストックするかどうか
     private bool isStockBlock = false;
 
+    // 落下速度倍率
+    [SerializeField] int fallMagnification = 1;
+    
     // 一列消した時の評価得点
     [SerializeField] int eraseOneLineScore   = 0;
     // 埋められない穴ができた時の評価得点
     [SerializeField] int unfilledHolesScore  = 0;
     // 縦3マスの穴ができた時の評価得点
     [SerializeField] int vertical3HolesScore = 0;
+    // 上にブロックがあるかどうか(隙間を埋められるか)
+    [SerializeField] int fillSpaceScore      = 0;
 
 
     // Start is called before the first frame update
@@ -49,29 +50,26 @@ public class AI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void MyUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            On = !On;
-        }
-
-        if (!On) return;
-
         // 操作中のブロックが無ければ、ブロック管理クラスから操作中のブロックの情報をもらう
         if (block == null)
         {
             block = blockManagerScript.OperationBlock;
+
+            // 取得できた場合、移動先を決める
             if (block)
             {
                 blockScript = block.GetComponent<Block>();
+
+                // スコア変数
                 int score = -10000;
 
                 // 操作中のブロックの当たりデータを取得
                 int[,] block_data = blockScript.BlockData;
 
-                SelectBlock(ref score, block_data);
-
+                // 当たりデータから移動する場所を決める
+                SelectMove(ref score, block_data);
 
                 // ストックのブロックを取得する
                 GameObject stock_block = blockManagerScript.StockBlock;
@@ -88,8 +86,11 @@ public class AI : MonoBehaviour
 
                 // 操作中のブロックの当たりデータを取得
                 block_data = block_script.BlockData;
+                // 現在のスコアを保存
                 int temp_score = score;
-                SelectBlock(ref score, block_data);
+                // 移動先を決める
+                SelectMove(ref score, block_data);
+                // もしストックのブロックのほうがスコアが高ければストックフラグをOnにする
                 if (temp_score < score)
                 {
                     isStockBlock = true;
@@ -123,32 +124,31 @@ public class AI : MonoBehaviour
             rotationNum--;
         }
 
-        if (destinationPos.Count == 0) { return; }
-
         // ブロックのX軸が目的地のX軸と違った場合目的地のX軸の方向に移動する
-        if (block.transform.position.x != destinationPos[0].x)
+        if (block.transform.position.x != destinationPos[destinationPos.Count - 1].x)
         {
-            if (block.transform.position.x > destinationPos[0].x) blockScript.MoveLeft();
-            else if (block.transform.position.x < destinationPos[0].x) blockScript.MoveRight();
+            if (block.transform.position.x > destinationPos[destinationPos.Count - 1].x) blockScript.MoveLeft();
+            else if (block.transform.position.x < destinationPos[destinationPos.Count - 1].x) blockScript.MoveRight();
         }
+
         // もしX軸が目的地なら高速落下させる
-        if (block.transform.position.x == destinationPos[0].x)
+        if (block.transform.position.x == destinationPos[destinationPos.Count - 1].x)
         {
             for (int i = 0; i < fallMagnification; ++i) blockScript.FastFall();
         }
 
-        // もし目的地なら戦闘の目的地を削除
-        if (block.transform.position.x == destinationPos[0].x
-            && block.transform.position.y == destinationPos[0].y
+        // もし目的地かつ複数の目的地がある場合末尾を削除
+        if (block.transform.position.x == destinationPos[destinationPos.Count - 1].x
+            && block.transform.position.y == destinationPos[destinationPos.Count - 1].y
             && destinationPos.Count != 1)
         {
-            destinationPos.RemoveAt(0);
+            destinationPos.RemoveAt(destinationPos.Count - 1);
         }
 
     }
 
   
-    private void SelectBlock(ref int score_, int[,] blockData_)
+    private void SelectMove(ref int score_, int[,] blockData_)
     {
         for (int i = 0; i < 4; ++i)
         {
@@ -229,11 +229,10 @@ public class AI : MonoBehaviour
         }
 
 
-        // 横一列を検索する
-        //bool tmp = false;
-      
+        // 横一列を検索する      
         for (int x = min_x; x < max_x; ++x)
         {
+            // 追加できる状態かどうかを保存する
             bool can_add = true;
 
             for (int y = 0; y < StageController.STAGE_HEIGHT; ++y)
@@ -245,6 +244,8 @@ public class AI : MonoBehaviour
                     if (can_add == false) continue;
                     
                     ret_vector.Add(new Vector3(pos.x, pos.y, 0));
+
+                    // 連続で追加できないようにフラグをoffにする
                     can_add = false;
                 }
                 // もし移動できなかったら追加可能状態にする
@@ -267,10 +268,10 @@ public class AI : MonoBehaviour
         int ret_score = 0;
 
         const int center_pos = 2;
-        const int block_num = 4;
+        const int block_num  = 4;
 
+        // ブロックの座標を保存する変数
         Vector3[] blocks_pos = new Vector3[block_num];
-
 
         int num = 0;
         // ブロックの座標を算出
@@ -298,7 +299,10 @@ public class AI : MonoBehaviour
         }
 
 
+        // ステージの情報を取得する
         GameObject[,] tmp_stage_data = stageScript.StageBlockData;
+
+        // ステージの情報をint型で保存するための変数
         int[,] stage_data = new int[StageController.STAGE_HEIGHT, StageController.STAGE_WIDTH];
 
         // ステージの情報をint型に変換
@@ -317,7 +321,9 @@ public class AI : MonoBehaviour
             }
         }
 
-        // 自身の上にブロックがあるかどうかを調べる
+         
+        //自身の上にブロックがあるかどうかを調べる
+        // ブロックをステージに保存する前に判定
         foreach (Vector3 block_pos in blocks_pos)
         {
             if (block_pos.x >= StageController.STAGE_WIDTH
@@ -334,7 +340,7 @@ public class AI : MonoBehaviour
 
             if (stage_data[(int)block_pos.y - 1, (int)block_pos.x] == 1)
             {
-                ret_score += 500;
+                ret_score += fillSpaceScore;
             }
         }
 
@@ -490,14 +496,18 @@ public class AI : MonoBehaviour
     }
 
 
+    // 目的地まで移動可能かどうか
     private bool CanMove(Vector3 pos_, int[,] blockData_)
     {
-        int block_width = 0;
+
         List<Vector3> destination_pos = new List<Vector3>();
+        int block_width = 0;
+        Vector3 pos = pos_;
 
         // 目的地を追加
         destination_pos.Add(pos_);
 
+        // ブロックの横幅を算出
         for (int x = 0; x < BlocksDefinition.BLOCK_DATA_HEIGHT; ++x)
         {
             for(int y = 0; y < BlocksDefinition.BLOCK_DATA_WIDTH; ++y)
@@ -510,16 +520,16 @@ public class AI : MonoBehaviour
             }
         }
 
-        Vector3 pos = pos_;
-
-        // 着地地点から上にいけるか
+        // 現在の位置から上にいけるか
         for (int i = 0; i < StageController.STAGE_HEIGHT - (int)pos_.y; ++i)
         {
             pos.y++;
             // もし真上に動けない場合
             if (stageScript.AbleMove(ref pos, ref blockData_) == false)
             {
+                // 上のブロックを避けられるかどうかを保存する変数
                 bool can_avoided = false;
+
                 // ブロックの左右に移動できるか調べる
                 for (int j = 1; j <= block_width; ++j)
                 {
@@ -527,19 +537,21 @@ public class AI : MonoBehaviour
                     Vector3 left_pos = pos;
 
                     right_pos.x += j;
+                    // もし避けられる場合
                     if (stageScript.AbleMove(ref right_pos, ref blockData_) == true)
                     {
                         pos = right_pos;
-                        destination_pos.Insert(0, pos);
+                        destination_pos.Add(new Vector3(pos.x, (pos.y - 1), pos.z));
                         can_avoided = true;
                         break;
                     }
 
                     left_pos.x -= j;
+                    // もし避けられる場合
                     if (stageScript.AbleMove(ref left_pos, ref blockData_) == true)
                     {
                         pos = left_pos;
-                        destination_pos.Insert(0, pos);
+                        destination_pos.Add(new Vector3(pos.x, (pos.y - 1), pos.z));
                         can_avoided = true;
                         break;
                     }
@@ -550,7 +562,8 @@ public class AI : MonoBehaviour
 
         }
 
-        destinationPos = new List<Vector3>(destination_pos);
+        // 目的地までの経路を保存する
+        destinationPos = destination_pos;
         return true;
     }
 

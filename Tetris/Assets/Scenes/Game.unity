@@ -1915,6 +1915,7 @@ MonoBehaviour:
   eraseOneLineScore: 100
   unfilledHolesScore: -150
   vertical3HolesScore: -150
+  fillSpaceScore: 500
 --- !u!4 &1312171466
 Transform:
   m_ObjectHideFlags: 0

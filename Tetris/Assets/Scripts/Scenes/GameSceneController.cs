@@ -19,10 +19,10 @@ public class GameSceneController : SceneControllerBase
 
     [SerializeField] GameObject aiObject = null;
     private AI aiScript = null;
+    [SerializeField] bool AIOn = false;
 
     [SerializeField] GameObject modeTextObject = null;
     private Text modeText = null;
-    
 
     private void Start()
     {
@@ -36,29 +36,48 @@ public class GameSceneController : SceneControllerBase
 
         aiScript = aiObject.GetComponent<AI>();
         modeText = modeTextObject.GetComponent<Text>();
+
+        modeText.text = AIOn ? "自動" : "手動";
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (!gameStarted)
-        {
-            if (StartDirecting() == true)
-            {
-                gameStarted = true;
-                blockgroundFilm.SetActive(false);
-                numberTextObject.SetActive(false);
-                blockManagerScript.NoticeGameStart();
-            }
-        }
-
+        // 生成できなくなったらシーンを変える
         if (blockManagerScript.cannotCreate == true)
         {
             ChangeScene();
         }
 
-        modeText.text = aiScript.On ? "自動" : "手動";
+        // ゲームが始まっていなかったら
+        if (!gameStarted)
+        {
+            // スタートの演出を行い終了したら
+            if (StartDirecting() == true)
+            {
+                // スタートフラグをonoに
+                gameStarted = true;
+
+                // 演出用オブジェクトの破棄
+                Destroy(blockgroundFilm);
+                Destroy(numberTextObject);
+
+                // 通知
+                blockManagerScript.NoticeGameStart();
+            }
+        }
+
+        // Aキーで操作モード切替
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            AIOn = !AIOn;
+            modeText.text = AIOn ? "自動" : "手動";
+        }
+
+        if (AIOn)
+        {
+            aiScript.MyUpdate();
+        }
     }
 
     public override void ChangeScene()
